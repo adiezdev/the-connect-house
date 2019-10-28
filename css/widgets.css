@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/*Boton submit*/
+
+.button {
+    border: none;
+    border-radius: 5%;
+    padding: 7px;
+    font-size: 12pt;
+    color: #ffffff;
+    background-color: #aac759;
+}
+
+.button:hover {
+    background-color: #558264;
+}
+
+.button img {
+    width: 15px;
+}
+
+
+/*Estilos box pisos/habitaciones*/
+
+.box-pisos-habitacones {
+    display: inline-block;
+    cursor: pointer;
+    width: 320px;
+    height: 380px;
+    -webkit-box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.55);
+    box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.55);
+    margin: 20px;
+}
+
+.box-pisos-habitacones img {
+    width: 320px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.box-pisos-habitacones .descripcion {
+    padding-left: 20px;
+}
+
+.box-pisos-habitacones .precio {
+    color: #558264;
+}
+
+.box-pisos-habitacones button {
+    cursor: pointer;
+    left: 32%;
+}
+
+
+/*Estilos box ciudades*/
+
+.box-ciudades {
+    display: inline-block;
+    height: 300px;
+    -webkit-box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.55);
+    box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.55);
+    border-radius: 5px;
+    margin-right: 35px;
+    cursor: pointer;
+}
+
+.box-ciudades img {
+    width: 450px;
+    border-radius: 5px;
+}
+
+.box-ciudades .descripcion {
+    position: absolute;
+}
+
+.box-ciudades .descripcion h1 {
+    color: #ffffff;
+    text-shadow: 2px 1px #000000;
+}
+
+.box-ciudades button {
+    position: absolute;
+    width: 250px;
+    transform: translate(-115%, 627%);
+    -webkit-transform: translate(-115%, 627%);
+    -moz-transform: translate(-115%, 627%);
+    -ms-transform: translate(-115%, 627%);
+}
+
+
+/*Estilos box mas visitados*/
+
+.box-mas-visitados {
+    display: inline-block;
+    margin: 10px;
+    width: 630px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.40);
+    box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.40);
+    cursor: pointer;
+    transition: .2s ease;
+    -webkit-transition: .2s ease;
+    -moz-transition: .2s ease;
+    -ms-transition: .2s ease;
+    -o-transition: .2s ease;
+}
+
+.box-mas-visitados:hover {
+    transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    -moz-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    -o-transform: scale(1.03);
+}
+
+.box-mas-visitados img {
+    float: left;
+    width: 290px;
+    border-radius: 5px;
+}
+
+.box-mas-visitados .descripcion {
+    display: inline;
+    text-align: left;
+}
+
+.box-mas-visitados .descripcion img {
+    width: 25px;
+    margin-left: 8px;
+    margin-right: 12px;
+}
+
+.box-mas-visitados .datos p {
+    float: left;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.box-mas-visitados .datos img {
+    width: 25px;
+    margin-left: 12px;
+    margin-right: 12px;
+}
