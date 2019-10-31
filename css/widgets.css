@@ -3,6 +3,19 @@
     font-family: 'Poppins', sans-serif;
 }
 
+a {
+    color: #aac759;
+    font-weight: bold;
+}
+
+.title {
+    margin: 20px;
+}
+
+svg {
+    width: 30px;
+}
+
 
 /*Boton submit*/
 
@@ -21,6 +34,18 @@
 
 .button img {
     width: 15px;
+}
+
+
+/*Buscador*/
+
+#search {
+    -webkit-appearance: none;
+    width: 80%;
+    padding: 8px;
+    border: solid 1px #dbdbdb;
+    margin: 15px 15px 0 20px;
+    font-size: 10pt;
 }
 
 
@@ -143,4 +168,8 @@
     width: 25px;
     margin-left: 12px;
     margin-right: 12px;
+}
+
+#mapid {
+    height: 180px;
 }

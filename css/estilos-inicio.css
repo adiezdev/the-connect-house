@@ -1,8 +1,3 @@
-    * {
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-    }
-    
     .img-fondo {
         width: 100%;
     }
@@ -72,16 +67,6 @@
         border-radius: 5px;
         background-color: #ffffff;
     }
-    /*Buscador*/
-    
-    #search {
-        -webkit-appearance: none;
-        width: 80%;
-        padding: 8px;
-        border: solid 1px #dbdbdb;
-        margin: 15px 15px 0 20px;
-        font-size: 10pt;
-    }
     
     .seccion {
         text-align: center;
@@ -103,7 +88,7 @@
     
     @media screen and ( max-width: 658px) {
         .buscador {
-            width: 94%;
+            width: 91%;
             transform: none;
             left: 0;
         }
