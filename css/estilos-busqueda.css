@@ -40,16 +40,6 @@
     margin: 50px 40px 0px 50px;
 }
 
-.into-izquierdo #perfil {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.into-izquierdo #user {
-    width: 120px;
-    border-radius: 500px;
-}
-
 .into-izquierdo ul li {
     list-style: none;
     margin-bottom: 10px;
