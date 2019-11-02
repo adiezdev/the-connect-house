@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/slider-images.css">
-    <link rel="stylesheet" href="css/widgets.css">
-    <link rel="stylesheet" href="css/estilos-piso.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</head>
-
+<?php
+require_once(__DIR__."/includes/header.php");
+require_once(__DIR__."/includes/constantes.php");
+require_once(__DIR__.'/includes/carrusel-de-img.php');
+$a = array(
+    "widgets" => "widgets",
+    "login" => "estilos-piso",
+    "slider" =>"slider-images"
+);
+$objects = json_decode(json_encode($a), FALSE);
+cabecera(TITULO_LOGIN,$objects,true);
+?>
 <body>
      <?php
-        require_once(__DIR__.'/includes/carrusel-de-img.php');
         $a = array(
             "uno" => "img/img-inicio.jpg",
             "uno2" => "img/img-modelo.jpg" 

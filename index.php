@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bienvenido a CHouseRoom</title>
-    <link rel="stylesheet" href="css/widgets.css">
-    <link rel="stylesheet" href="css/estilos-inicio.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</head>
-
+<?php
+require_once(__DIR__."/includes/header.php");
+require_once(__DIR__."/includes/constantes.php");
+$a = array(
+    "widgets" => "widgets",
+    "incio" => "estilos-inicio" 
+);
+$objects = json_decode(json_encode($a), FALSE);
+cabecera(TITULO_INDEX,$objects,false);
+?>
 <body>
     <nav>
 

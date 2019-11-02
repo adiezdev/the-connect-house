@@ -1,24 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Resultados de busqueda</title>
-    <link rel="stylesheet" href="css/widgets.css">
-    <link rel="stylesheet" href="css/estilos-busqueda.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-   crossorigin=""/>
-   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-   crossorigin=""></script>
-</head>
-
+<?php
+require_once(__DIR__."/includes/header.php");
+require_once(__DIR__."/includes/constantes.php");
+$a = array(
+    "widgets" => "widgets",
+    "login" => "estilos-busqueda" 
+);
+$objects = json_decode(json_encode($a), FALSE);
+cabecera(TITULO_BUSQUEDA,$objects,true);
+?>
 <body>
     <div class="contenedor-izquierdo">
         <div class="into-izquierdo">

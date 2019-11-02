@@ -1,0 +1,26 @@
+.contenedor-izquierdo,
+.contenedor-derecho {
+    position: absolute;
+}
+
+.contenedor-izquierdo {
+    top: 0px;
+    width: 500px;
+    bottom: 0px;
+    -webkit-box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);
+    -moz-box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);
+    box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);
+}
+
+.into-contenedor {
+    margin: 200px 160px;
+}
+
+#marca svg {
+    width: 237px;
+    height: 100px;
+}
+
+#credential {
+    height: 35px;
+}
