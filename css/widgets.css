@@ -49,6 +49,22 @@ svg {
 }
 
 
+/*Estilos selector*/
+
+#selector {
+    margin-right: 5px;
+    height: 35px;
+    font-size: 11pt;
+    color: #558264;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.seccion {
+    text-align: center;
+}
+
+
 /*Estilos box pisos/habitaciones*/
 
 .box-pisos-habitacones {
@@ -168,6 +184,13 @@ svg {
     width: 25px;
     margin-left: 12px;
     margin-right: 12px;
+}
+
+
+/*Campo obligatiorio*/
+
+.spanred {
+    color: red;
 }
 
 #mapid {
