@@ -16,7 +16,8 @@ class Usuario extends Conexion{
     public function getAll()
     {
       $aUsuarios = array();
-      $oResultado = $this->query('SELECT * FROM '.$this->sTabla);
+      $cSql = 'SELECT * FROM '.$this->sTabla;
+      $oResultado = $this->query( $cSql );
       while ($oRecord = $oResult->fetch_object()) {
         array_push($aUsuarios, $oRecord);
       }
@@ -32,7 +33,8 @@ class Usuario extends Conexion{
     public function getById( $nIdUsuario )
     {
         $aUsuariosPorId = array();
-        $oResultado = $this->query('SELECT * FROM '.$this->sTabla .' WHERE idUsuario = '.$nIdUsuario);
+        $cSql = 'SELECT * FROM '.$this->sTabla .' WHERE idUsuario = '.$nIdUsuario;
+        $oResultado = $this->query( $cSql );
         while( $oRecord = $oResultado->fetch_object()) 
         {
             array_push($aUsuariosPorId , $oRecord);
@@ -47,11 +49,12 @@ class Usuario extends Conexion{
      * 
      * @return array $aCuenta
      */
-    public function getLogin( $sUsuario , $sPassword)
+    public function getLogin( $sCorreo , $sPassword)
     {
        $aCuenta = array();
        $ePassword = md5($sPassword);
-       $oResultado = $this->query('SELECT idUsuario FROM '.$this->sTabla.' WHERE Correo = '.$sUsuario.' AND Password = '.$ePassword);
+       $cSql = 'SELECT idUsuario FROM '.$this->sTabla.' WHERE Correo = '.$sCorreo.' AND Password = '.$ePassword;
+       $oResultado = $this->query( $cSql );
        if(!$oResultado)
        {
            return $aCuenta; //Devuelve el array vacío sino existe
@@ -63,12 +66,46 @@ class Usuario extends Conexion{
        return $aCuenta;
     }  
     /**
-     *  
+     * Actualiza los campos del usuario
      * 
-    */
+     * @param string $nIdUsuario
+     * @param string $sCorreo
+     * @param string $sNombre
+     * @param string $sApellidos
+     * @param string $sDescripcion
+     * 
+     * @return array $aCuenta
+     */
     public function updateUsuario( $nIdUsuario, $sCorreo, $sNombre, $sApellidos, $sDescripcion) 
     {
-        
+        $aCuenta = array();
+        $cSql = 'UPDATE '.$this->sTabla.' SET Correo = '.$sCorreo.', Nombre = '.$sNombre.', Apellidos = '.$sApellidos.', Descripciion = '.$sDescripcion.' WHERE idUsuario = '.$nIdUsuario;
+        $oResultado = $this->query( $cSql );
+        while( $oRecord = $oResultado->fetch_object()) 
+        {
+            array_push($aCuenta , $oRecord);
+        }
+        return $aCuenta;
+    }
+    /**
+     * Elimina el usuario por su id
+     * 
+     * @param string $nIdUsuario
+     * 
+     * @return boolean 
+     */
+    public function deleteUsuario( $nIdUsuario )
+    {
+        $cSql = 'DELETE FROM'.$this->sTabla.' WHERE idUsuario = '.$nIdUsuario;
+        $oResultado = $this->query( $cSql );
+        if(!$oResult)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
 

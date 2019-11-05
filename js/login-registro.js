@@ -10,17 +10,17 @@ $(function() {
         $("#login").fadeOut(100);
         $("#registro").delay(100).fadeIn(100);
     });
-    $('#registro').submit(function(e) {
-        if (validarCampos(e) == true) {
-
-        }
+    $('#registro').click(function(e) {
+        validarCamposRegistro(e);
     });
-    s
+    $('#bnLogin').click(function(e) {
+        validarCamposLogin(e);
+    });
 });
 /**
  * @param  {} e
  */
-function validarCampos(e) {
+function validarCamposRegistro(e) {
     var nombre = $('#registro #nombre').val().trim();
     var apellidos = $('#registro #apellidos').val().trim();
     var correo = $('#registro #email').val().trim();
@@ -43,7 +43,7 @@ function validarCampos(e) {
     }
     //Correo
     if (correo == '' || correo.indexOf(" ") > -1) {
-        alert("Indica los Apellidos");
+        alert("Indica el correo");
         e.preventDefault();
         correo.focus();
         return false;
@@ -56,7 +56,7 @@ function validarCampos(e) {
         return false;
     }
     //Contraseña
-    if (contrasena == '' || contrasena2 == '') {
+    if (contrasena == '' || contrasena == '') {
         alert("No puedes dejar el campo vacío");
         e.preventDefault();
         return false;
@@ -83,4 +83,40 @@ function validarCampos(e) {
         }
     }
     return true;
+}
+
+function validarCamposLogin(e) {
+    var sCorreo = $('#login #email').val().trim();
+    var sContrasena = $('#login #pass').val().trim();
+    //Correo
+    if (sCorreo == '' || sCorreo.indexOf(" ") > -1) {
+        alert("Por favor indica el correo");
+        e.preventDefault();
+        return false;
+    }
+    if (sContrasena == '' || sContrasena == '') {
+        alert("Por favor introduce una contraseña");
+        e.preventDefault();
+        return false;
+    }
+    //Formamos el array
+    var oDatosJson = {
+        Correo: sCorreo,
+        Password: sContrasena
+    };
+    //
+    //Procesamos los datos
+    $.ajax({
+            url: '/the-conect-house/ajax/aloginUsuario.php',
+            type: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify(oDatosJson),
+        })
+        .fail(function(oJson) {
+            console.log("Error");
+        })
+        .done(function(oJson) {
+            console.log(oJson);
+            alert(oJson);
+        });
 }

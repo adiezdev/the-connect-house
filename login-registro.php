@@ -1,11 +1,15 @@
 <?php
 require_once(__DIR__."/includes/header.php");
 require_once(__DIR__."/includes/constantes.php");
+require_once(__DIR__."/bd/db_usuario.php");
+//
 $a = array(
     "widgets" => "widgets",
     "login" => "estilos-login" 
 );
+//
 $objects = json_decode(json_encode($a), FALSE);
+//
 cabecera(TITULO_LOGIN,$objects,false);
 ?>
 
@@ -14,13 +18,13 @@ cabecera(TITULO_LOGIN,$objects,false);
             <div class="into-contenedor">
                 <?php echo '<div id="marca">'.file_get_contents("img/marca/banner.svg").'</div>'; ?>
                 <!--Login-->
-                <form action="" method="get" id="login">
+                <form action="" method="post" id="login">
                     <label for="email">Correo electrónico</label><br>
-                    <input type="email" name="email" class="credential" placeholder="Correo electronico"><br>
+                    <input type="email" id="email" name="email" class="credential" placeholder="Correo electronico"><br>
                     <label for="pass">Contraseña</label><br>
-                    <input type="password" name="pass" class="credential" placeholder="Contraseña"><br><br>
+                    <input type="password" id="pass" name="pass" class="credential" placeholder="Contraseña"><br><br>
                     <div id="acciones">
-                        <input type="submit" value="Entrar" class="button">
+                        <input type="submit" id="bnLogin" value="Entrar" class="button">
                         <span id="registrarse">Resgistrarse</span>
                     </div>
                 </form>
@@ -54,5 +58,5 @@ cabecera(TITULO_LOGIN,$objects,false);
         </div>
         <script src="js/login-registro.js"></script>
     </body>
-
+    <script>
     </html>

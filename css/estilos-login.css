@@ -36,5 +36,7 @@
 }
 
 .credential {
-    height: 35px;
+    height: 45px;
+    width: 130%;
+    font-size: 12pt;
 }
