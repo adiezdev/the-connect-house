@@ -104,19 +104,23 @@ function validarCamposLogin(e) {
         Correo: sCorreo,
         Password: sContrasena
     };
+
     //
     //Procesamos los datos
     $.ajax({
-            url: '/the-conect-house/ajax/aloginUsuario.php',
+            url: '/the-connect-house/ajax/aloginUsuario.php',
             type: 'POST',
-            contentType: "application/json",
             data: JSON.stringify(oDatosJson),
         })
         .fail(function(oJson) {
             console.log("Error");
         })
         .done(function(oJson) {
-            console.log(oJson);
-            alert(oJson);
+            var oRespuesta = JSON.parse(oJson);
+            if (oRespuesta.Estado == "OK") {
+                window.open("../index.php", "_self");
+            } else {
+                alert(oRespuesta.Mensaje);
+            }
         });
 }

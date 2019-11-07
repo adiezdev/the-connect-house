@@ -24,8 +24,11 @@ class Conexion{
         $this->oConexion = new mysqli($this->sHostremote, $this->sUsuarioremote, $this->sPasswordremote, $this->sDb_remote, $this->sPuerto);
     }
      
-    public function query($sql) {
-        return $this->oConexion->query($sql);
+    public function prepare($sql) {
+        return $this->oConexion->prepare($sql);
+    }
+    public function execute() {
+        return $this->oConexion->execute();
     }
 }
 ?>

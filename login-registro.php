@@ -18,18 +18,18 @@ cabecera(TITULO_LOGIN,$objects,false);
             <div class="into-contenedor">
                 <?php echo '<div id="marca">'.file_get_contents("img/marca/banner.svg").'</div>'; ?>
                 <!--Login-->
-                <form action="" method="post" id="login">
+                <form  method="post" id="login">
                     <label for="email">Correo electrónico</label><br>
                     <input type="email" id="email" name="email" class="credential" placeholder="Correo electronico"><br>
                     <label for="pass">Contraseña</label><br>
                     <input type="password" id="pass" name="pass" class="credential" placeholder="Contraseña"><br><br>
                     <div id="acciones">
-                        <input type="submit" id="bnLogin" value="Entrar" class="button">
+                        <input type="button" id="bnLogin" value="Entrar" class="button">
                         <span id="registrarse">Resgistrarse</span>
                     </div>
                 </form>
                 <!--Registro-->
-                <form action="" method="get" id="registro">
+                <form action="" method="post" id="registro">
                     <label for="nombre">Nombre <span class="spanred">*</span></label><br>
                     <input type="text" name="nombre" id="nombre" class="credential" placeholder="Nombre"><br>
                     <label for="apellidos">Apellidos <span class="spanred">*</span></label>

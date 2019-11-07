@@ -18,8 +18,8 @@ class Usuario extends Conexion{
       $aUsuarios = array();
       $cSql = 'SELECT * FROM '.$this->sTabla;
       $oResultado = $this->query( $cSql );
-      while ($oRecord = $oResult->fetch_object()) {
-        array_push($aUsuarios, $oRecord);
+      while ($oRecord = $oResultado->fetch_object()) {
+        $aUsuarios[] = $oRecord;
       }
       return $aUsuarios;
     }
@@ -33,7 +33,7 @@ class Usuario extends Conexion{
     public function getById( $nIdUsuario )
     {
         $aUsuariosPorId = array();
-        $cSql = 'SELECT * FROM '.$this->sTabla .' WHERE idUsuario = '.$nIdUsuario;
+        $cSql = 'SELECT * FROM '.$this->sTabla.' WHERE idUsuario = '.$nIdUsuario;
         $oResultado = $this->query( $cSql );
         while( $oRecord = $oResultado->fetch_object()) 
         {
@@ -52,16 +52,14 @@ class Usuario extends Conexion{
     public function getLogin( $sCorreo , $sPassword)
     {
        $aCuenta = array();
-       $ePassword = md5($sPassword);
-       $cSql = 'SELECT idUsuario FROM '.$this->sTabla.' WHERE Correo = '.$sCorreo.' AND Password = '.$ePassword;
-       $oResultado = $this->query( $cSql );
-       if(!$oResultado)
-       {
-           return $aCuenta; //Devuelve el array vacío sino existe
-       }
+       $cSql = 'SELECT idUsuario FROM '.$this->sTabla.' WHERE Correo = ? AND Password = ?';
+       $stmt = $this->prepare($cSql);
+       $stmt->bind_param('ss', $sCorreo, $sPassword);
+       $stmt->execute();
+       $oResultado = $stmt->get_result();
        while( $oRecord = $oResultado->fetch_object()) 
        {
-           array_push($aCuenta , $oRecord);
+         $aCuenta[] = $oRecord;
        }
        return $aCuenta;
     }  
