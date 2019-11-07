@@ -118,9 +118,10 @@ function validarCamposLogin(e) {
         .done(function(oJson) {
             var oRespuesta = JSON.parse(oJson);
             if (oRespuesta.Estado == "OK") {
-                window.open("../index.php", "_self");
+                window.open("/the-connect-house/index.php", "_self");
             } else {
                 alert(oRespuesta.Mensaje);
             }
+            //console.log(oJson);
         });
 }

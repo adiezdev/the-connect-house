@@ -19,9 +19,9 @@ require_once(__DIR__.'/../bd/db_usuario.php');
    }
    else{
     $oRespuesta->Estado = "OK";
-    $oRespuesta->Mensaje = "Usuario no encontrado";
+    $oRespuesta->Mensaje = "Usuario encontrado";
    }
    //
    //Enviamos la respuesta
-   echo $oRespuesta;
+   echo json_encode($oRespuesta);
 ?>
