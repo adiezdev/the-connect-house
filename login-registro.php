@@ -1,7 +1,6 @@
 <?php
 require_once(__DIR__."/includes/header.php");
 require_once(__DIR__."/includes/constantes.php");
-require_once(__DIR__."/bd/db_usuario.php");
 //
 $a = array(
     "widgets" => "widgets",
@@ -48,7 +47,7 @@ cabecera(TITULO_LOGIN,$objects,false);
                     <input type="password" name="password2" id="password2" class="credential" placeholder="Contraseña"><br><br>
                     <div id="acciones">
                         <span id="atras">Atrás</span>
-                        <input type="submit" value="Registrarse" class="button">
+                        <input type="button" id="bnRegistro" value="Registrarse" class="button">
                     </div>
                 </form>
             </div>

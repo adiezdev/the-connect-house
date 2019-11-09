@@ -1,6 +1,9 @@
 //Nicializamos la pantalla de login
 $("#registro").css("display", "none");
-
+/**
+ * Acciones para mostrar os campos del registro o login
+ * y los botone de login y regiistro
+ */
 $(function() {
     $('#atras').click(function(e) {
         $("#registro").fadeOut(100);
@@ -10,7 +13,7 @@ $(function() {
         $("#login").fadeOut(100);
         $("#registro").delay(100).fadeIn(100);
     });
-    $('#registro').click(function(e) {
+    $('#bnRegistro').click(function(e) {
         validarCamposRegistro(e);
     });
     $('#bnLogin').click(function(e) {
@@ -18,41 +21,40 @@ $(function() {
     });
 });
 /**
- * @param  {} e
+ * Validamos los campos del registro
+ *
+ * @param e
+ * @returns {boolean}
  */
 function validarCamposRegistro(e) {
     var nombre = $('#registro #nombre').val().trim();
-    var apellidos = $('#registro #apellidos').val().trim();
+    var apellidos = $('#registro #apellidos').val();
     var correo = $('#registro #email').val().trim();
-    var selector = $('#registro #email').val();
+    var selector = $('#registro #selector').val();
     var contrasena = $('#registro #password').val().trim();
     var contrasena2 = $('#registro #password2').val().trim();
     //Nombre
     if (nombre == '' || nombre.indexOf(" ") > -1) {
         alert("Indica el nombre");
         e.preventDefault();
-        nombre.focus();
         return false;
     }
     //Apellidos
     if (apellidos == '') {
         alert("Indica los Apellidos");
         e.preventDefault();
-        apellidos.focus();
         return false;
     }
     //Correo
     if (correo == '' || correo.indexOf(" ") > -1) {
         alert("Indica el correo");
         e.preventDefault();
-        correo.focus();
         return false;
     }
     //Sexo
     if (selector == null) {
         alert("Indica los Apellidos");
         e.preventDefault();
-        correo.focus();
         return false;
     }
     //Contraseña
@@ -64,7 +66,6 @@ function validarCamposRegistro(e) {
     if (contrasena.length < 8) {
         alert("Tiene que constar con mas de 8 caracteres");
         e.preventDefault();
-        contrasena.focus();
         return false;
     }
     if (contrasena.indexOf(" ") > -1) {
@@ -76,15 +77,43 @@ function validarCamposRegistro(e) {
         if (contrasena != contrasena2) {
             alert("Los dos campos no coinciden");
             e.preventDefault();
-            contrasena.focus();
             return false;
         } else {
 
         }
     }
-    return true;
+    //Formamos el array
+    var oDatosJson = {
+        Nombre: nombre,
+        Apellidos: apellidos,
+        Correo: correo,
+        Sexo: selector,
+        Password: contrasena,
+    }
+    //
+    //Procesamos los datos
+    $.ajax({
+        url: '/the-connect-house/ajax/a_UsuarioRegistro.php',
+        type: 'POST',
+        data: JSON.stringify(oDatosJson)
+        })
+        .done(function(oJson) {
+        var oRespuesta = JSON.parse(oJson);
+        if (oRespuesta.Estado == "OK") {
+            window.open("/the-connect-house/index.php", "_self");
+        } else {
+            alert(oRespuesta.Mensaje);
+        }
+        //console.log(oJson); //Debug
+    });;
 }
 
+/**
+ * Validamos los campos del Login
+ *
+ * @param e
+ * @returns {boolean}
+ */
 function validarCamposLogin(e) {
     var sCorreo = $('#login #email').val().trim();
     var sContrasena = $('#login #pass').val().trim();
@@ -104,16 +133,12 @@ function validarCamposLogin(e) {
         Correo: sCorreo,
         Password: sContrasena
     };
-
     //
     //Procesamos los datos
     $.ajax({
-            url: '/the-connect-house/ajax/aloginUsuario.php',
+            url: '/the-connect-house/ajax/a_UsuarioLogin.php',
             type: 'POST',
-            data: JSON.stringify(oDatosJson),
-        })
-        .fail(function(oJson) {
-            console.log("Error");
+            data: JSON.stringify(oDatosJson)
         })
         .done(function(oJson) {
             var oRespuesta = JSON.parse(oJson);

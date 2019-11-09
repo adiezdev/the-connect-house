@@ -7,53 +7,57 @@ class Usuario extends Conexion{
     //Nombre de la tabla
     private $sTabla = 'usuarios';
     /**
-     * Devuel todos los usuarios de la base de datos
-     * 
-     * @param string $sId
-     * 
-     * @return array $aUsuarios
+     * Devuelve todos los usuario con sus campos
+     *
+     * @return array
      */
     public function getAll()
     {
       $aUsuarios = array();
       $cSql = 'SELECT * FROM '.$this->sTabla;
-      $oResultado = $this->query( $cSql );
+      $stmt = $this->prepare($cSql);
+      $stmt->execute();
+      $oResultado = $stmt->get_result();
       while ($oRecord = $oResultado->fetch_object()) {
         $aUsuarios[] = $oRecord;
       }
       return $aUsuarios;
     }
+
     /**
-     * Devuelve todos los datos de un suario por su Id
+     * Devuelve todos los campos de un usuario por su ID
      *
-     * @param string $sId
-     * 
-     * @return array $aUsuariosPorId
+     * @param $nIdUsuario
+     * @return array
      */
     public function getById( $nIdUsuario )
     {
         $aUsuariosPorId = array();
-        $cSql = 'SELECT * FROM '.$this->sTabla.' WHERE idUsuario = '.$nIdUsuario;
-        $oResultado = $this->query( $cSql );
+        $cSql = 'SELECT * FROM '.$this->sTabla.' WHERE idUsuario = ?';
+        $stmt = $this->prepare($cSql);
+        $stmt->bind_param('i', $nIdUsuario );
+        $stmt->execute();
+        $oResultado = $stmt->get_result();
         while( $oRecord = $oResultado->fetch_object()) 
         {
-            array_push($aUsuariosPorId , $oRecord);
+            $aUsuariosPorId[] =  $oRecord;
         }
         return $aUsuariosPorId;
     }
+
     /**
-     * Comprueba si el usuario existe. Si es así devuelve el idUsuario
-     * 
-     * @param string $sUsuario
-     * @param string $sPassword
-     * 
-     * @return array $aCuenta
+     * Loguemos el usuario
+     *
+     * @param $sCorreo
+     * @param $sPassword
+     *
+     * @return array
      */
     public function getLogin( $sCorreo , $sPassword)
     {
        $aCuenta = array();
        $cSql = 'SELECT idUsuario FROM '.$this->sTabla.' WHERE Correo = ? AND Password = ?';
-       $stmt = $this->prepare($cSql);
+       $stmt = $this->prepare( $cSql );
        $stmt->bind_param('ss', $sCorreo, $sPassword);
        $stmt->execute();
        $oResultado = $stmt->get_result();
@@ -62,41 +66,69 @@ class Usuario extends Conexion{
          $aCuenta[] = $oRecord;
        }
        return $aCuenta;
-    }  
+    }
+
     /**
-     * Actualiza los campos del usuario
-     * 
-     * @param string $nIdUsuario
-     * @param string $sCorreo
-     * @param string $sNombre
-     * @param string $sApellidos
-     * @param string $sDescripcion
-     * 
-     * @return array $aCuenta
+     * Añadimos un nuevo usuario
+     *
+     * @param $sCorreo
+     * @param $sPassword
+     * @param $sNombre
+     * @param $sApellidos
+     * @param $sSexo
+     * @param $sDescripncion
+     *
+     * @return bool
+     */
+    public function addUsuario( $sCorreo, $sPassword, $sNombre , $sApellidos, $sSexo)
+    {
+        $cSql = 'INSERT INTO usuarios (Correo, Password, Nombre, Apellidos, Sexo) VALUES ( ?, ?, ?, ?, ?)';
+        $stmt = $this->prepare( $cSql );
+        $stmt->bind_param( 'sssss' , $sCorreo, $sPassword, $sNombre , $sApellidos, $sSexo);
+        $stmt->execute();
+        printf("%d Row inserted.\n", $stmt->affected_rows);
+    }
+
+    /**
+     * Actualiza los datos de un usuario
+     *
+     * @param $nIdUsuario
+     * @param $sCorreo
+     * @param $sNombre
+     * @param $sApellidos
+     * @param $sDescripcion
+     *
+     * @return array
      */
     public function updateUsuario( $nIdUsuario, $sCorreo, $sNombre, $sApellidos, $sDescripcion) 
     {
         $aCuenta = array();
-        $cSql = 'UPDATE '.$this->sTabla.' SET Correo = '.$sCorreo.', Nombre = '.$sNombre.', Apellidos = '.$sApellidos.', Descripciion = '.$sDescripcion.' WHERE idUsuario = '.$nIdUsuario;
-        $oResultado = $this->query( $cSql );
+        $cSql = 'UPDATE '.$this->sTabla.' SET Correo = ?, Nombre = ?, Apellidos = ?, Descripciion = ? WHERE idUsuario = ?';
+        $stmt = $this->prepare($cSql);
+        $stmt->bind_param('ssssi', $sCorreo, $sNombre, $sApellidos, $sDescripcion , $nIdUsuario);
+        $stmt->execute();
+        $oResultado = $stmt->get_result();
         while( $oRecord = $oResultado->fetch_object()) 
         {
             array_push($aCuenta , $oRecord);
         }
         return $aCuenta;
     }
+
     /**
-     * Elimina el usuario por su id
-     * 
-     * @param string $nIdUsuario
-     * 
-     * @return boolean 
+     * Elimina un usuarip
+     *
+     * @param $nIdUsuario
+     *
+     * @return bool
      */
     public function deleteUsuario( $nIdUsuario )
     {
-        $cSql = 'DELETE FROM'.$this->sTabla.' WHERE idUsuario = '.$nIdUsuario;
-        $oResultado = $this->query( $cSql );
-        if(!$oResult)
+        $cSql = 'DELETE FROM '.$this->sTabla.' WHERE idUsuario = ?';
+        $stmt = $this->prepare($cSql);
+        $stmt->bind_param('i' , $nIdUsuario);
+        $bResultado = $stmt->execute();
+        if(!$bResultado)
         {
             return false;
         }
