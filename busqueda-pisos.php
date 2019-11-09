@@ -1,24 +1,37 @@
 <?php
 require_once(__DIR__."/includes/header.php");
 require_once(__DIR__."/includes/constantes.php");
+require_once(__DIR__."/includes/sesion.php");
+require_once(__DIR__."/bd/db_usuario.php");
+//
+// Llamamos a los estilos que necesitamos
 $a = array(
     "widgets" => "widgets",
-    "login" => "estilos-busqueda" 
+    "busqueda" => "estilos-busqueda"
 );
+//Codificamos los objetos
 $objects = json_decode(json_encode($a), FALSE);
+//
+//Se lo envíamos al metodo
 cabecera(TITULO_BUSQUEDA,$objects,true);
+//
+//Extraemos los datos del usuario por si id
+$dbUsuario = new Usuario();
+
 ?>
 <body>
     <div class="contenedor-izquierdo">
         <div class="into-izquierdo">
             <div id="perfil">
                 <img id="user" src="img/isset/isset-user.png" alt="imgen-perfil" srcset="">
-                <h3>Nombre</h3>
+                <h3><?php echo $_SESSION['idUsuario'] ?></h3>
             </div>
             <ul>
                 <li><a>Inicio</a></li>
                 <li><a>Cofiguración</a></li>
                 <li><a>Favoritos</a></li>
+                <li><a>Perfil</a></li>
+                <li><a>Buscar...</a></li>
             </ul>
         </div>
 

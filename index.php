@@ -6,7 +6,11 @@ $a = array(
     "widgets" => "widgets",
     "incio" => "estilos-inicio" 
 );
+//
+//Codificamos los objetos
 $objects = json_decode(json_encode($a), FALSE);
+//
+//Se lo envíamos al metodo
 cabecera(TITULO_INDEX,$objects,false);
 ?>
 <body>

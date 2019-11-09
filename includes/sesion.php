@@ -10,7 +10,7 @@ if( !isset( $_SESSION['idUsuario'] ))
 {
     //
     // No logueado
-    header( "location:/../login-registro.php" );
+    header( "location:/the-connect-house/login-registro.php" );
     return;
 }
 //
@@ -28,4 +28,4 @@ if( !isset( $_SESSION['idUsuario'] ))
 }*/
 //
 // Actualizamos la hora de último acceso.
-updateSession();
+//updateSession();

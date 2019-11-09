@@ -11,7 +11,10 @@ a {
 .title {
     margin: 20px;
 }
-
+.titleciudad
+{
+    color: #aac759;
+}
 svg {
     width: 30px;
 }
