@@ -3,8 +3,8 @@ require_once(__DIR__."/includes/header.php");
 require_once(__DIR__."/includes/constantes.php");
 //
 $a = array(
-    "widgets" => "widgets",
-    "login" => "estilos-login" 
+    "widgets" => ESTILOS_WIDGETS,
+    "login" => ESTILOS_LOGIN
 );
 //
 $objects = json_decode(json_encode($a), FALSE);

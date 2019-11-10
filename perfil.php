@@ -1,10 +1,11 @@
 <?php
 require_once(__DIR__."/includes/header.php");
 require_once(__DIR__."/includes/constantes.php");
+require_once(__DIR__."/includes/sesion.php");
 //
 $a = array(
-    "widgets" => "widgets",
-    "busqueda" => "estilos-perfil"
+    "widgets" => ESTILOS_WIDGETS,
+    "perfil" => ESTILOS_PERFIL
 );
 //
 //Codificamos los objetos

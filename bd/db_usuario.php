@@ -44,7 +44,6 @@ class Usuario extends Conexion{
         }
         return $aUsuariosPorId;
     }
-
     /**
      * Loguemos el usuario
      *
@@ -67,7 +66,6 @@ class Usuario extends Conexion{
        }
        return $aCuenta;
     }
-
     /**
      * Añadimos un nuevo usuario
      *
@@ -80,15 +78,21 @@ class Usuario extends Conexion{
      *
      * @return bool
      */
-    public function addUsuario( $sCorreo, $sPassword, $sNombre , $sApellidos, $sSexo)
+    public function addUsuario( $sCorreo, $sPassword, $sNombre , $sApellidos, $sCiudad, $sSexo)
     {
-        $cSql = 'INSERT INTO usuarios (Correo, Password, Nombre, Apellidos, Sexo) VALUES ( ?, ?, ?, ?, ?)';
+        $cSql = 'INSERT INTO usuarios (Correo, Password, Nombre, Apellidos, Ciudad, Sexo) VALUES ( ?, ?, ?, ?, ?, ?)';
         $stmt = $this->prepare( $cSql );
-        $stmt->bind_param( 'sssss' , $sCorreo, $sPassword, $sNombre , $sApellidos, $sSexo);
-        $stmt->execute();
-        printf("%d Row inserted.\n", $stmt->affected_rows);
+        $stmt->bind_param( 'ssssss' , $sCorreo, $sPassword, $sNombre , $sApellidos, $sCiudad, $sSexo);
+        $bResultado = $stmt->execute();
+        if(!$bResultado)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
-
     /**
      * Actualiza los datos de un usuario
      *
@@ -115,6 +119,28 @@ class Usuario extends Conexion{
         return $aCuenta;
     }
 
+    /**
+     * Actualiza la descripcion y la imagen
+     *
+     * @param $sDescripcion
+     * @param string $UrlIMG
+     *
+     * @return array
+     */
+    public function updateCampos( $sCorreo, $sDescripcion , $UrlIMG = 'img/isset/isset-user.png')
+    {
+        $aCuenta = array();
+        $cSql = 'UPDATE '.$this->sTabla.' Descripciion = ? , Imgperfil = ? WHERE Correo = ?';
+        $stmt = $this->prepare($cSql);
+        $stmt->bind_param('sss', $sDescripcion, $UrlIMG , $sCorreo);
+        $stmt->execute();
+        $oResultado = $stmt->get_result();
+        while( $oRecord = $oResultado->fetch_object())
+        {
+            array_push($aCuenta , $oRecord);
+        }
+        return $aCuenta;
+    }
     /**
      * Elimina un usuarip
      *

@@ -3,9 +3,9 @@ require_once(__DIR__."/includes/header.php");
 require_once(__DIR__."/includes/constantes.php");
 require_once(__DIR__.'/includes/carrusel-de-img.php');
 $a = array(
-    "widgets" => "widgets",
-    "login" => "estilos-piso",
-    "slider" =>"slider-images"
+    "widgets" => ESTILOS_WIDGETS,
+    "login" => ESTILOS_PISO,
+    "slider" => INCLUD_SLIDE
 );
 $objects = json_decode(json_encode($a), FALSE);
 cabecera(TITULO_LOGIN,$objects,true);

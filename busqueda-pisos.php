@@ -6,8 +6,8 @@ require_once(__DIR__."/bd/db_usuario.php");
 //
 // Llamamos a los estilos que necesitamos
 $a = array(
-    "widgets" => "widgets",
-    "busqueda" => "estilos-busqueda"
+    "widgets" => ESTILOS_WIDGETS,
+    "busqueda" => ESTILOS_BUSQUEDA
 );
 //Codificamos los objetos
 $objects = json_decode(json_encode($a), FALSE);
