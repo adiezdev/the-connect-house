@@ -23,7 +23,10 @@ svg {
     width: 30px;
 }
 
-
+#imgperfil{
+    width: 120px;
+    border-radius: 500px;
+}
 /*Boton submit*/
 
 .button {
@@ -42,7 +45,6 @@ svg {
 .button img {
     width: 15px;
 }
-
 
 /*Buscador*/
 

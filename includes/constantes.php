@@ -11,6 +11,7 @@
     define("ESTILOS_PERFIL","estilos-perfil");
     define("ESTILOS_PISO","estilos-piso");
     define("ESTILOS_BUSQUEDA","estilos-busqueda");
+    define("ESTILOS_CASI","estilos-completa");
     //
     define("INCLUD_SLIDE","slider-images");
 ?>
