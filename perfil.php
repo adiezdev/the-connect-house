@@ -36,12 +36,12 @@ cabecera(TITULO_INDEX,$objects,false);
                 <img src="img/img-modelo.jpg" alt="habitación">
                 <h2>Calle</h2>
                 <div class="descripcion">
-                    <p><img src="img/iconos-materiales/bandera.png" alt="habitación"> Ubicación</p><br>
-                    <p><img src="img/iconos-materiales/visitas.png" alt="habitación"> Ubicación</p><br>
+                    <p><i class="fas fa-map-marker-alt"></i> Ubicación</p><br>
+                    <p><i class="fas fa-eye"></i> Ubicación</p><br>
                 </div>
                 <div class="datos">
-                    <p><img src="img/iconos-materiales/cama.png" alt="habitación"> Habitaciones |</p>
-                    <p><img src="img/iconos-materiales/shower.png" alt="habitación"> Baños</p>
+                    <p><i class="fas fa-bed"></i> Habitaciones |</p>
+                    <p<i class="fas fa-bath"></i> Baños</p>
                 </div>
             </div>
         </div>
