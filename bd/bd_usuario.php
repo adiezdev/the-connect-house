@@ -1,5 +1,5 @@
 <?php 
-require_once(__DIR__.'/db_conexion.php');
+require_once( __DIR__.'/bd_conexion.php' );
 //
 //
 class Usuario extends Conexion{
