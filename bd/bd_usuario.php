@@ -129,17 +129,22 @@ class Usuario extends Conexion{
      */
     public function updateCampos( $sCorreo, $sDescripcion , $UrlIMG = 'img/isset/isset-user.png')
     {
-        $aCuenta = array();
-        $cSql = 'UPDATE '.$this->sTabla.' Descripciion = ? , Imgperfil = ? WHERE Correo = ?';
+        $cSql = 'UPDATE '.$this->sTabla.' SET 
+                    Descripcion = ? , 
+                    Imgperfil = ? 
+                    WHERE Correo = ?';
+        //
         $stmt = $this->prepare($cSql);
         $stmt->bind_param('sss', $sDescripcion, $UrlIMG , $sCorreo);
-        $stmt->execute();
-        $oResultado = $stmt->get_result();
-        while( $oRecord = $oResultado->fetch_object())
+        $bResultado = $stmt->execute();
+        if(!$bResultado)
         {
-            array_push($aCuenta , $oRecord);
+            return false;
         }
-        return $aCuenta;
+        else
+        {
+            return true;
+        }
     }
     /**
      * Elimina un usuarip

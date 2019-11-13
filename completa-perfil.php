@@ -27,13 +27,14 @@ cabecera(TITULO_INDEX, $objects, false);
         <img src="img/hand-cell.png" title="movil">
     </div>
     <div class="contenedor-centro">
-        <label for="imgperfil">Imagen de perfil:</label><br><br>
+        <label for="imgperfil">Imagen de perfil (opcional):</label><br><br>
         <img id="imgperfil" src="img/isset/isset-user.png"><br><br>
-        <input type="file" name="archivos" id="archivos"/><br><br>
-        <label for="">Descripción:</label><br><br>
-        <textarea rows="25" cols="40" name="comment" form="campos-isset" placeholder="Inserta una descripción sobre tí..."></textarea>
-        <form id="campos-isset" action="get" >
-            <input type="submit" value="Seguiente">
+        <label for="inputperfil">Subir Imagen</label> <input type="file" name="archivos" id="inputperfil"/><br><br>
+        <label for="">Descripción (opcional):</label><br><br>
+        <textarea rows="15" cols="40" name="descripcion" form="campos-isset" placeholder="Inserta una descripción sobre tí..."></textarea>
+        <form id="campos-isset" action="peticiones/rest/post_completaperfil.php" method="POST" >
+            <div id="hiddens"></div>
+            <input type="submit" value="Siguiente" name="siguiente" class="button">
         </form>
     </div>
 <script src="js/precarga-imagen.js"></script>

@@ -16,7 +16,7 @@ $objects = json_decode(json_encode($a), FALSE);
 cabecera(TITULO_BUSQUEDA,$objects,true);
 //
 //Extraemos los datos del usuario por si id
-$dbUsuario = new Usuario();
+$bdUsuario = new Usuario();
 
 ?>
 <body>
@@ -24,7 +24,7 @@ $dbUsuario = new Usuario();
         <div class="into-izquierdo">
             <div id="perfil">
                 <img id="user" src="img/isset/isset-user.png" alt="imgen-perfil" srcset="">
-                <h3><?php echo $_SESSION['idUsuario'] ?></h3>
+                <h3><?php echo $_SESSION['correo'] ?></h3>
             </div>
             <ul>
                 <li><a>Inicio</a></li>

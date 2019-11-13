@@ -33,4 +33,4 @@ function precarfarImagen(evt) {
     }
 }
 
-document.getElementById('archivos').addEventListener('change', precarfarImagen, false);
+document.getElementById('inputperfil').addEventListener('change', precarfarImagen, false);
