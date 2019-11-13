@@ -9,16 +9,17 @@ require_once( __DIR__.'/../bd/bd_usuario.php' );
     $oRespuesta = new stdClass();
     //
     // Obtenemos los datos JSON
-    $oDatosJson = json_decode( file_get_contents( "php://input"), true);
+    $oDatosJson = json_decode( file_get_contents( "php://input" ), true);
     //
     $sNombre = $oDatosJson["Nombre"];
     $sApellidos = $oDatosJson["Apellidos"];
+    $sCiudad = $oDatosJson["Ciudad"];
     $sCorreo = $oDatosJson["Correo"];
     $sSexo = $oDatosJson["Sexo"];
     $sPassword =  md5($oDatosJson["Password"]) ; //Encryptamos la contraseña
     //
     $oDbUsuario = new Usuario();
-    $lResultado = $oDbUsuario->addUsuario($sCorreo, $sPassword, $sNombre , $sApellidos, $sSexo);
+    $lResultado = $oDbUsuario->addUsuario($sCorreo, $sPassword, $sNombre , $sApellidos, $sCiudad , $sSexo);
     //
     if(!$lResultado)
     {
