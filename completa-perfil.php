@@ -31,7 +31,7 @@ cabecera(TITULO_INDEX, $objects, false);
         <img id="imgperfil" src="img/isset/isset-user.png"><br><br>
         <input type="file" name="archivos" id="archivos"/><br><br>
         <label for="">Descripción:</label><br><br>
-        <textarea rows="10" cols="30" name="comment" form="campos-isset" placeholder="Inserta una descripción sobre tí..."></textarea>
+        <textarea rows="25" cols="40" name="comment" form="campos-isset" placeholder="Inserta una descripción sobre tí..."></textarea>
         <form id="campos-isset" action="get" >
             <input type="submit" value="Seguiente">
         </form>

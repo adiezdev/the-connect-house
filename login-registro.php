@@ -55,7 +55,7 @@ cabecera(TITULO_LOGIN,$objects,false);
         <div class="contenedor-centro">
             <img src="img/img-modelo.jpg" alt="Habitacion" srcset="">
         </div>
-        <script src="js/login-registro.js"></script>
+        <script src="js/validaciones/login-registro.js"></script>
     </body>
     <script>
     </html>
