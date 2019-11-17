@@ -1,7 +1,20 @@
 <?php
-	require_once( __DIR__."/includes/header.php" );
-	require_once( __DIR__."/includes/constantes.php" );
-	require_once( __DIR__.'/includes/carrusel-de-img.php' );
+//error_reporting( E_ALL );
+//ini_set( 'display_errors' , true );
+//ini_set( 'display_startup_errors' , true );
+/*
+    -------------------------------------
+    Archivo de: Alejandro Díez
+    GitHub: @adilosa95
+    Proyecto: the-connect-house
+    Nombre del archivo: piso.php
+    -------------------------------------
+*/
+	require_once(__DIR__."/includes/header.php" );
+	require_once(__DIR__."/includes/constantes.php" );
+	require_once(__DIR__."/includes/carrusel-de-img.php");
+	require_once(__DIR__."/includes/sesion.php");
+	//
 	$a = array(
 		"widgets" => ESTILOS_WIDGETS ,
 		"login" => ESTILOS_PISO ,
@@ -19,7 +32,7 @@
 	$objects = json_decode( json_encode( $a ) , false );
 	foreach( $objects as $object )
 	{
-		print_r( getCarrusel( $object , $a ) );
+		echo getCarrusel( $object ) ;
 	}
 ?>
 <div class="contenedor-izquierdo">

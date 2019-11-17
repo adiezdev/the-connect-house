@@ -2,7 +2,7 @@
     //error_reporting( E_ALL );
     //ini_set( 'display_errors' , true );
     //ini_set( 'display_startup_errors' , true );
-    require_once(__DIR__ . '/../bd/bd_usuario.php');
+    require_once(__DIR__ . '/../../bd/bd_usuario.php');
     //
     session_start();
     //
@@ -31,7 +31,7 @@
   {
       //Si es correto asignamos la sesion
       $_SESSION['idUsuario'] = $idUser;
-      $_SESSION['correo'] = $sCorreo;
+      $_SESSION['correo'] = '';
       //
       $oRespuesta->Estado = "OK";
       $oRespuesta->Mensaje = "Usuario encontrado";
@@ -39,4 +39,3 @@
    //
    //Enviamos la respuesta
    echo json_encode($oRespuesta);
-?>

@@ -1,8 +1,20 @@
-<?php 
+<?php
+//error_reporting( E_ALL );
+//ini_set( 'display_errors' , true );
+//ini_set( 'display_startup_errors' , true );
+/*
+    -------------------------------------
+    Archivo de: Alejandro Díez
+    GitHub: @adilosa95
+    Proyecto: the-connect-house
+    Nombre del archivo: bd_usuario.php
+    -------------------------------------
+*/
 require_once( __DIR__.'/bd_conexion.php' );
 //
 //
-class Usuario extends Conexion{
+class Usuario extends Conexion
+{
     //
     //Nombre de la tabla
     private $sTabla = 'usuarios';
@@ -43,6 +55,20 @@ class Usuario extends Conexion{
             $aUsuariosPorId[] =  $oRecord;
         }
         return $aUsuariosPorId;
+    }
+    public function getByCorreo( $sCorreo )
+    {
+        $aUsuariosPorC = array();
+        $cSql = 'SELECT * FROM '.$this->sTabla.' WHERE Correo = ?';
+        $stmt = $this->prepare($cSql);
+        $stmt->bind_param('s', $sCorreo );
+        $stmt->execute();
+        $oResultado = $stmt->get_result();
+        while( $oRecord = $oResultado->fetch_object())
+        {
+            $aUsuariosPorC[] =  $oRecord;
+        }
+        return $aUsuariosPorC;
     }
     /**
      * Loguemos el usuario
@@ -93,6 +119,7 @@ class Usuario extends Conexion{
             return true;
         }
     }
+
     /**
      * Actualiza los datos de un usuario
      *
@@ -102,21 +129,22 @@ class Usuario extends Conexion{
      * @param $sApellidos
      * @param $sDescripcion
      *
-     * @return array
+     * @return bool
      */
     public function updateUsuario( $nIdUsuario, $sCorreo, $sNombre, $sApellidos, $sDescripcion) 
     {
-        $aCuenta = array();
         $cSql = 'UPDATE '.$this->sTabla.' SET Correo = ?, Nombre = ?, Apellidos = ?, Descripciion = ? WHERE idUsuario = ?';
         $stmt = $this->prepare($cSql);
         $stmt->bind_param('ssssi', $sCorreo, $sNombre, $sApellidos, $sDescripcion , $nIdUsuario);
-        $stmt->execute();
-        $oResultado = $stmt->get_result();
-        while( $oRecord = $oResultado->fetch_object()) 
+        $bResultado = $stmt->execute();
+        if(!$bResultado)
         {
-            array_push($aCuenta , $oRecord);
+            return false;
         }
-        return $aCuenta;
+        else
+        {
+            return true;
+        }
     }
 
     /**
@@ -125,7 +153,7 @@ class Usuario extends Conexion{
      * @param $sDescripcion
      * @param string $UrlIMG
      *
-     * @return array
+     * @return bool
      */
     public function updateCampos( $sCorreo, $sDescripcion , $UrlIMG = 'img/isset/isset-user.png')
     {

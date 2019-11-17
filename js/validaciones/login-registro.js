@@ -93,14 +93,14 @@ function validarCamposRegistro(e) {
     //
     //Procesamos los datos
     $.ajax({
-        url: '/the-connect-house/ajax/a_UsuarioRegistro.php',
+        url: '/the-connect-house/peticiones/ajax/a_UsuarioRegistro.php',
         type: 'POST',
         data: JSON.stringify(oDatosJson)
         })
         .done(function(oJson) {
         var oRespuesta = JSON.parse(oJson);
         if (oRespuesta.Estado == "OK") {
-            window.open("/the-connect-house/index.php", "_self");
+            window.open("/the-connect-house/completa-perfil.php", "_self");
         } else {
             alert(oRespuesta.Mensaje);
         }
@@ -136,14 +136,14 @@ function validarCamposLogin(e) {
     //
     //Procesamos los datos
     $.ajax({
-            url: '/the-connect-house/ajax/a_UsuarioLogin.php',
+            url: '/the-connect-house/peticiones/ajax/a_UsuarioLogin.php',
             type: 'POST',
             data: JSON.stringify(oDatosJson)
         })
         .done(function(oJson) {
             var oRespuesta = JSON.parse(oJson);
             if (oRespuesta.Estado == "OK") {
-                window.open("/the-connect-house/index.php", "_self");
+                window.open("/the-connect-house/perfil.php", "_self");
             } else {
                 alert(oRespuesta.Mensaje);
             }

@@ -10,7 +10,7 @@
     Nombre del archivo: post_completaperfil.php
     -------------------------------------
 */
-    require_once(__DIR__ . '/../bd/bd_usuario.php');
+    require_once(__DIR__ . '/../../bd/bd_usuario.php');
     //
     session_start();
     //
@@ -18,22 +18,32 @@
     {
         $dbUsuario = new Usuario();
         //
+        //Debug
         //echo $value . "<br />";
+        //Cojo la iimagen
         $value = $_POST['imagen'];
+        if(isset($_POST['imagen']))
+        {
+            $datos = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $value));
+            $nom = md5(rand());
+            //Marco la ruta
+            $filepathsql = "uploads/".$nom.".jpg";
+            $archivoRuta = __DIR__ ."/../../".$filepathsql;
+            //Paso la imagen a la ruta
+            file_put_contents( $archivoRuta , $datos);
+            //Permisos al archivo
+            chmod($archivoRuta, 0777);
+        }
         $sDescripcion = $_POST['descripcion'];
-        $datos = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $value));
-        $nom = md5(rand());
-        $filepath = "uploads/".$nom.".jpg";
-        file_put_contents($filepath,$datos);
         //
         $sCorreo = $_SESSION['correo'];
-        $lResult = $dbUsuario->updateCampos( $sCorreo , $sDescripcion , $filepath);
+        $lResult = $dbUsuario->updateCampos( $sCorreo , $sDescripcion , $filepathsql);
         if(!$lResult)
         {
-            header("Location: ../login-registro.php");
+            header("Location: ../../perfil.php");
         }
         else
         {
-            header("Location: ../login-registro.php");
+            header("Location: ../../perfil.php");
         }
     }

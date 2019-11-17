@@ -27,6 +27,10 @@ svg {
     width: 120px;
     border-radius: 300%;
 }
+.habitacion
+{
+    margin-right: 3px;
+}
 /*Boton submit*/
 
 .button {
