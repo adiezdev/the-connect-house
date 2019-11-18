@@ -21,6 +21,8 @@
     $oDbUsuario = new Usuario();
     $lResultado = $oDbUsuario->addUsuario($sCorreo, $sPassword, $sNombre , $sApellidos, $sCiudad , $sSexo);
     //
+    $nIdelUsuario = $oDbUsuario->getLastID();
+    //
     if(!$lResultado)
     {
         $oRespuesta->Estado = "KO";
@@ -28,9 +30,11 @@
     }
     else
     {
+        foreach ( $nIdelUsuario as $nIdelUsuari)
+        {
+            $_SESSION['idUsuario'] = $nIdelUsuari->idUsuario;
+        }
         //Si es correto asignamos la sesion
-        $_SESSION['idUsuario'] = -1;
-        $_SESSION['correo'] = $sCorreo;
         //
         $oRespuesta->Estado = "OK";
         $oRespuesta->Mensaje = "Usuario encontrado";

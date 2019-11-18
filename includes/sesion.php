@@ -13,11 +13,6 @@ if( !isset( $_SESSION['idUsuario'] ))
     header( "location:/the-connect-house/login-registro.php" );
     return;
 }
-elseif (!isset( $_SESSION['correo'] ))
-{
-    header( "location:/the-connect-house/login-registro.php" );
-    return;
-}
 //
 // Comprobar que la sesión no haya caducado
 /*if( isset( $_SESSION['UltimoAcceso'] ) )

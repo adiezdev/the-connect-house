@@ -13,7 +13,10 @@
     require_once(__DIR__."/includes/header.php");
     require_once(__DIR__."/includes/constantes.php");
     require_once(__DIR__."/includes/sesion.php");
+    //
+    //Acceso a datos
     require_once(__DIR__."/bd/bd_usuario.php");
+    require_once(__DIR__."/bd/bd_pisos.php");
     //
     $a = array(
         "widgets" => ESTILOS_WIDGETS,
@@ -27,6 +30,7 @@
     cabecera(TITULO_INDEX,$objects,false);
     //
     //
+    //Sacar los datos del usuario
     $aDbUsuario = new Usuario();
     $oDatosUsuario = '';
     $idUsuario = '';
@@ -34,12 +38,11 @@
     {
         $oDatosUsuario = $aDbUsuario->getById($_SESSION['idUsuario']);
     }
-    elseif(isset($_SESSION['correo']) || $_SESSION['correo'] != '')
-    {
-        $oDatosUsuario = $aDbUsuario->getByCorreo($_SESSION['correo']);
-        $_SESSION['correo'] = '';
-    }
     //
+    //
+    //Sacar los pisos/Habitaciones del usuario
+    $aDbPisosHabitaciones = new PisosHabitaciones();
+    $aPisosHabitaciones = $aDbPisosHabitaciones->getByUsuario( $_SESSION['idUsuario'] );
 ?>
 <body>
     <div class="contenedor-izquierdo">
@@ -47,17 +50,17 @@
             <div id="perfil">
 
                 <?php
-                foreach ( $oDatosUsuario as $oDatoUsuario )
-                {
-                    $idUsuario = $oDatoUsuario->idUsuario;
-                    $Html = '<img id="user" src="'.$oDatoUsuario->Imgperfil.'" alt="imgen-perfil" srcset="">';
-                    $Html .= '<h3>'.$oDatoUsuario->Nombre.' '.$oDatoUsuario->Apellidos.'</h3><br>';
-                    $Html .= '<div class="titleciudad"><p><i class="fas fa-map-pin"></i>'.$oDatoUsuario->Ciudad.'</p></div><br>';
-                    $Html .= '<fieldset><legend>Descripción :</legend>';
-                    $Html .= '<div id="descripcion"><p>'.$oDatoUsuario->Descripcion.'</p></div><br>';
-                    $Html .= '</fieldset>';
-                    echo $Html;
-                }
+                  foreach ( $oDatosUsuario as $oDatoUsuario )
+                    {
+                        $idUsuario = $oDatoUsuario->idUsuario;
+                        $Html = '<img id="user" src="'.$oDatoUsuario->Imgperfil.'" alt="imgen-perfil" srcset="">';
+                        $Html .= '<h3>'.$oDatoUsuario->Nombre.' '.$oDatoUsuario->Apellidos.'</h3><br>';
+                        $Html .= '<div class="titleciudad"><p><i class="fas fa-map-pin"></i>'.$oDatoUsuario->Ciudad.'</p></div><br>';
+                        $Html .= '<fieldset><legend>Descripción :</legend>';
+                        $Html .= '<div id="descripcion"><p>'.$oDatoUsuario->Descripcion.'</p></div><br>';
+                        $Html .= '</fieldset>';
+                        echo $Html;
+                    }
                 ?>
             </div>
             <h2>Secciones:</h2>
@@ -69,22 +72,33 @@
     </div>
     <div class="contenedor-centro">
         <div class="into-centro">
-
             <h1>Tus pisos y habitaciones</h1>
-            <div class="box-mas-visitados">
-                <img src="img/img-modelo.jpg" alt="habitación" class="habitacion">
-                <div class="datospiso">
-                    <h2>Calle</h2>
-                    <div class="descripcion">
-                        <p><i class="fas fa-map-marker-alt"></i> Ubicación</p><br>
-                        <p><i class="fas fa-eye"></i> Ubicación</p><br>
-                    </div>
-                    <div class="datos">
-                        <p><i class="fas fa-bed"></i> Habitaciones |</p>
-                        <p><i class="fas fa-bath"></i> Baños</p>
-                    </div>
-                </div>
-            </div>
+            <?php
+            if(empty($aPisosHabitaciones))
+            {
+
+            }else
+            {
+                foreach ( $aPisosHabitaciones as $aPisoHabitacion)
+                {
+                    $Html  = '<div class="box-mas-visitados">';
+                    $Html .= '<img src="img/img-modelo.jpg" alt="habitación" class="habitacion">';
+                    $Html .= '<div class="datospiso">';
+                    $Html .= '<h2>Calle</h2>';
+                    $Html .= '<div class="descripcion">';
+                    $Html .=    '<p><i class="fas fa-map-marker-alt"></i> Ubicación</p><br>';
+                    $Html .=    '<p><i class="fas fa-eye"></i> Ubicación</p><br>';
+                    $Html .= '</div>';
+                    $Html .= '<div class="datos">';
+                    $Html .=    '<p><i class="fas fa-bed"></i> Habitaciones |</p>';
+                    $Html .=    '<p><i class="fas fa-bath"></i> Baños</p>';
+                    $Html .= '</div>';
+                    $Html .=' </div>
+                            </div>';
+                    echo $Html;
+                }
+            }
+            ?>
         </div>
     </div>
 </body>

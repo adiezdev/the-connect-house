@@ -56,6 +56,11 @@ class Usuario extends Conexion
         }
         return $aUsuariosPorId;
     }
+    /**
+     * Devuelve los campos por su correo
+     * @param $sCorreo
+     * @return array
+     */
     public function getByCorreo( $sCorreo )
     {
         $aUsuariosPorC = array();
@@ -119,7 +124,25 @@ class Usuario extends Conexion
             return true;
         }
     }
+    /**
+     * Devuelve la ultima ID de ultimo usuario
+     *
+     * @return array
+     */
+    public function getLastID()
+    {
+        $aUltimaID = array();
+        $cSql = 'SELECT idUsuario FROM '.$this->sTabla.' ORDER BY idUsuario DESC LIMIT 1';
+        $stmt = $this->prepare( $cSql );
+        $bResultado = $stmt->execute();
+        $oResultado = $stmt->get_result();
+        while( $oRecord = $oResultado->fetch_object())
+        {
+            $aUltimaID[] = $oRecord;
+        }
+        return $aUltimaID;
 
+    }
     /**
      * Actualiza los datos de un usuario
      *

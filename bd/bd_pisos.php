@@ -17,7 +17,7 @@ class Pisos extends Conexion
 {
     //
     //Nombre de la tabla
-    private $sTabla = 'pisos-habitaciones';
+    private $sTabla = '`pisos-habitaciones`';
     /**
      * Devuelve todos los pisos con sus campos
      *
@@ -65,9 +65,9 @@ class Pisos extends Conexion
     public function getByUsuario( $nIdUsuario )
     {
         $aPisoHabitacion = array();
-        $cSql = 'SELECT * FROM '.$this->sTabla.' WHERE idUsuario = ?';
+        $cSql = 'SELECT * FROM '.$this->sTabla.' WHERE idUsuario = ? ';
         $stmt = $this->prepare($cSql);
-        $stmt->bind_param('s', $nIdUsuario );
+        $stmt->bind_param('i', $nIdUsuario );
         $stmt->execute();
         $oResultado = $stmt->get_result();
         while( $oRecord = $oResultado->fetch_object())
@@ -96,7 +96,7 @@ class Pisos extends Conexion
      * @return bool
      */
     public function addPisoHabitacion( $nHabitaciones , $nToiles , $fMetros , $sCalle , $nNumero , $nCp , $sCiudad , $sDescripcion
-    , $fLatitud , $fLogintud , $fPrecio , $nVisitas , $nTipo , $nIdUsuario )
+        , $fLatitud , $fLogintud , $fPrecio , $nVisitas , $nTipo , $nIdUsuario )
     {
         $cSql = 'INSERT INTO '.$this->sTabla.' ( NHabitaciones, NBanos, Metros, Calle, Numero, CP, Ciudad, Descripcion, Latitud, Longitud, Precio, Visitas, Tipo, idUsuario)
                 VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
