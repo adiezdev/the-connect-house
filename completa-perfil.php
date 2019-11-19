@@ -10,20 +10,17 @@
     Nombre del archivo: completa-perfil.php
     -------------------------------------
 */
-require_once(__DIR__."/includes/header.php");
-require_once(__DIR__."/includes/constantes.php");
-require_once(__DIR__."/includes/sesion.php");
-//
-$a = array(
-    "widgets" => ESTILOS_WIDGETS,
-    "casi" => ESTILOS_CASI
-);
-//
-//Codificamos los objetos
-$objects = json_decode(json_encode($a), FALSE);
-//
-//Se lo envíamos al metodo
-cabecera(TITULO_INDEX, $objects, false);
+    require_once(__DIR__."/includes/header.php");
+    require_once(__DIR__."/includes/constantes.php");
+    require_once(__DIR__."/includes/sesion.php");
+    //
+    $a = array(
+        ESTILOS_WIDGETS,
+        ESTILOS_CASI
+    );
+    //
+    //Se lo envíamos al metodo
+    cabecera(TITULO_INDEX, $objects, false);
 ?>
 <body>
     <div class="contenedor-izquierdo">

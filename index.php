@@ -10,19 +10,17 @@
     Nombre del archivo: index.php
     -------------------------------------
 */
-require_once(__DIR__."/includes/header.php");
-require_once(__DIR__."/includes/constantes.php");
-//
-$a = array(
-    "widgets" => ESTILOS_WIDGETS,
-    "incio" => ESTILOS_IDEX
-);
-//
-//Codificamos los objetos
-$objects = json_decode(json_encode($a), FALSE);
-//
-//Se lo envíamos al metodo
-cabecera(TITULO_INDEX,$objects,false);
+    require_once(__DIR__."/includes/header.php");
+    require_once(__DIR__."/includes/constantes.php");
+    //
+    //Configuramos los estilos que necesitamos
+    $estilos = array(
+            ESTILOS_WIDGETS,
+            ESTILOS_IDEX
+    );
+    //
+    //Generamos la cabecera
+    cabecera(TITULO_INDEX , $estilos ,false);
 ?>
 <body>
     <nav>

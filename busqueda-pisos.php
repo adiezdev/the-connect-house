@@ -10,25 +10,22 @@
     Nombre del archivo: busqueda-pisos.php
     -------------------------------------
 */
-require_once(__DIR__."/includes/header.php");
-require_once(__DIR__."/includes/constantes.php");
-require_once(__DIR__."/includes/sesion.php");
-require_once(__DIR__."/bd/bd_usuario.php" );
-//
-// Llamamos a los estilos que necesitamos
-$a = array(
-    "widgets" => ESTILOS_WIDGETS,
-    "busqueda" => ESTILOS_BUSQUEDA
-);
-//Codificamos los objetos
-$objects = json_decode(json_encode($a), FALSE);
-//
-//Se lo envíamos al metodo
-cabecera(TITULO_BUSQUEDA,$objects,true);
-//
-//Extraemos los datos del usuario por si id
-$bdUsuario = new Usuario();
-
+    require_once(__DIR__."/includes/header.php");
+    require_once(__DIR__."/includes/constantes.php");
+    require_once(__DIR__."/includes/sesion.php");
+    require_once(__DIR__."/bd/bd_usuario.php" );
+    //
+    //Configuramos los estilos que necesitamos
+    $estilos = array(
+        ESTILOS_WIDGETS,
+        ESTILOS_BUSQUEDA
+    );
+    //
+    //Generamos la cabecera
+    cabecera(TITULO_BUSQUEDA , $estilos ,true);
+    //
+    //Extraemos los datos del usuario por si id
+    $bdUsuario = new Usuario();
 ?>
 <body>
     <div class="contenedor-izquierdo">

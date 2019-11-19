@@ -10,16 +10,17 @@
     Nombre del archivo: login-registro.php
     -------------------------------------
 */
-require_once(__DIR__."/includes/header.php");
-require_once(__DIR__."/includes/constantes.php");
-//
-$a = array(
-    "widgets" => ESTILOS_WIDGETS,
-    "login" => ESTILOS_LOGIN
-);
-//
-$objects = json_decode(json_encode($a), FALSE);
-cabecera(TITULO_LOGIN,$objects,false);
+    require_once(__DIR__."/includes/header.php");
+    require_once(__DIR__."/includes/constantes.php");
+    //
+    //Configuramos los estilos que necesitamos
+    $estilos = array(
+        ESTILOS_WIDGETS,
+        ESTILOS_LOGIN
+    );
+    //
+    //Generamos la cabecera
+    cabecera(TITULO_LOGIN , $estilos ,false);
 ?>
 
     <body>

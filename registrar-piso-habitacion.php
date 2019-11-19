@@ -10,18 +10,18 @@
     Nombre del archivo: registrar-piso-habitacion.php
     -------------------------------------
 */
-require_once(__DIR__."/includes/header.php" );
-require_once(__DIR__."/includes/constantes.php" );
-require_once(__DIR__."/includes/sesion.php");
-//
-$a = array(
-    "widgets" => ESTILOS_WIDGETS ,
-    "registrar" => ESTILOS_REGISTRAR_PISO ,
-);
-//
-$objects = json_decode( json_encode( $a ) , false );
-
-cabecera( $titulo , $objects , true );
+    require_once(__DIR__."/includes/header.php" );
+    require_once(__DIR__."/includes/constantes.php" );
+    require_once(__DIR__."/includes/sesion.php");
+    //
+    //Configuramos los estilos que necesitamos
+    $estilos = array(
+        ESTILOS_WIDGETS ,
+        ESTILOS_REGISTRAR_PISO ,
+    );
+    //
+    //Generamos la cabecera
+    cabecera( '$titulo' , $estilos , true );
 
 ?>
 <body>

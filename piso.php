@@ -14,25 +14,31 @@
 	require_once(__DIR__."/includes/constantes.php" );
 	require_once(__DIR__."/includes/carrusel-de-img.php");
 	require_once(__DIR__."/includes/sesion.php");
-	//
-	$a = array(
-		"widgets" => ESTILOS_WIDGETS ,
-		"login" => ESTILOS_PISO ,
-		"slider" => INCLUD_SLIDE
+    //
+    //Configuramos los estilos que necesitamos
+    $estilos = array(
+		 ESTILOS_WIDGETS ,
+		 ESTILOS_PISO ,
+		 INCLUD_SLIDE
 	);
-	$objects = json_decode( json_encode( $a ) , false );
-	cabecera( TITULO_LOGIN , $objects , true );
+    //
+    //Generamos la cabecera
+	cabecera( TITULO_LOGIN , $estilos , true );
 ?>
 <body>
 <?php
-	$a = array(
-		"uno" => "img/img-inicio.jpg" ,
-		"uno2" => "img/img-modelo.jpg"
+    //
+    //Formamos un array con las imagenes del piso
+	$imagenes = array(
+		 "img/img-inicio.jpg" ,
+		 "img/img-modelo.jpg"
 	);
-	$objects = json_decode( json_encode( $a ) , false );
-	foreach( $objects as $object )
+	//
+    // las codifiicamnos
+	//$objects = json_decode( json_encode( $a ) , false );
+	foreach( $imagenes as $imagene )
 	{
-		echo getCarrusel( $object ) ;
+		 getCarrusel( $imagene ) ;
 	}
 ?>
 <div class="contenedor-izquierdo">

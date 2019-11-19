@@ -13,21 +13,21 @@
     require_once(__DIR__."/includes/header.php");
     require_once(__DIR__."/includes/constantes.php");
     require_once(__DIR__."/includes/sesion.php");
+    require_once(__DIR__."/includes/crearventana.php");
     //
     //Acceso a datos
     require_once(__DIR__."/bd/bd_usuario.php");
     require_once(__DIR__."/bd/bd_pisos.php");
     //
-    $a = array(
-        "widgets" => ESTILOS_WIDGETS,
-        "perfil" => ESTILOS_PERFIL
+    //Configuramos los estilos que necesitamos
+    $estilos = array(
+         ESTILOS_WIDGETS,
+         ESTILOS_PERFIL,
+        ESTILOS_VENTANA
     );
     //
-    //Codificamos los objetos
-    $objects = json_decode(json_encode($a), FALSE);
-    //
-    //Se lo envíamos al metodo
-    cabecera(TITULO_INDEX,$objects,false);
+    //Generamos la cabecera
+    cabecera(TITULO_PERFIIL , $estilos , false);
     //
     //
     //Sacar los datos del usuario
@@ -41,7 +41,7 @@
     //
     //
     //Sacar los pisos/Habitaciones del usuario
-    $aDbPisosHabitaciones = new PisosHabitaciones();
+    $aDbPisosHabitaciones = new Pisos();
     $aPisosHabitaciones = $aDbPisosHabitaciones->getByUsuario( $_SESSION['idUsuario'] );
 ?>
 <body>
@@ -72,16 +72,37 @@
     </div>
     <div class="contenedor-centro">
         <div class="into-centro">
-            <h1>Tus pisos y habitaciones</h1>
+
             <?php
+            //
+            //Si no tenemos piso en la base de datos , te aparecerá para agregarlo
             if(empty($aPisosHabitaciones))
             {
+                $Html  = '<div id="vacio">';
+                $Html .= '<img src="img/key.png" alt="llaves" style="width: 40%">';
+                $Html .= '<h2>A parte de buscar piso o habitación</h2><br>';
+                $Html .= '<h2>Puesdes alquilar tú habitación o piso</h2>';
+                $Html .= '<button class="button" id="buttonVentana" >Empezar</button>';
+                $Html .= '</div>';
+                echo $Html;
+                //
+                //Array botones que aparecen
+                $btones = array(
+                        "Añadir Habitación",
+                        "Añadir Piso"
+                );
 
+                //
+                //Generamos la ventana
+                getVentana( FRASE_ADD_REGISTRO , $btones);
             }else
             {
+                //
+                //Si tenemos pisos y habitaciones aparecerán
                 foreach ( $aPisosHabitaciones as $aPisoHabitacion)
                 {
-                    $Html  = '<div class="box-mas-visitados">';
+                    $Html = '<h1>Tus pisos y habitaciones</h1>';
+                    $Html.= '<div class="box-mas-visitados">';
                     $Html .= '<img src="img/img-modelo.jpg" alt="habitación" class="habitacion">';
                     $Html .= '<div class="datospiso">';
                     $Html .= '<h2>Calle</h2>';
@@ -101,4 +122,5 @@
             ?>
         </div>
     </div>
+    <script src="js/scriptventana.js"></script>
 </body>

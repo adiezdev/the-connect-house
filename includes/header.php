@@ -9,7 +9,7 @@
  * Función para construir la cabecera
  * 
  * @param string $stitulo
- * @param string $sCss
+ * @param array $sCss
  * @param boolean $bMapa
  * 
  */

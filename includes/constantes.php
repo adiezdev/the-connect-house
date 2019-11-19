@@ -14,6 +14,8 @@
     define("ESTILOS_BUSQUEDA","estilos-busqueda");
     define("ESTILOS_CASI","estilos-completa");
     define("ESTILOS_REGISTRAR_PISO","estilos-registrar-piso-habitacion");
+    define("ESTILOS_VENTANA","ventana");
     //
     define("INCLUD_SLIDE","slider-images");
+    define("FRASE_ADD_REGISTRO","Elige que vas a querar añadir")
 ?>
