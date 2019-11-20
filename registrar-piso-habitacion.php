@@ -13,6 +13,10 @@
     require_once(__DIR__."/includes/header.php" );
     require_once(__DIR__."/includes/constantes.php" );
     require_once(__DIR__."/includes/sesion.php");
+	//
+	//Acceso a datos
+    require_once(__DIR__."/bd/bd_pisos.php");
+    require_once(__DIR__."/bd/bd_secciones.php");
     //
     //Configuramos los estilos que necesitamos
     $estilos = array(
@@ -20,9 +24,43 @@
         ESTILOS_REGISTRAR_PISO ,
     );
     //
+    //Lo cogemos el tipò que vamos añadir
+	$titulo = '';
+    if($_GET)
+    {
+        $nTipo = $_GET['Tipo'];
+    }
+    //
+    //Titulo depencidendo de lo que sea
+    if( $nTipo == 1)
+    {
+        $titulo = 'Añadir Piso';
+    }
+    else
+    {
+        $titulo = 'Añadir Habitacion';
+    }
+    //
     //Generamos la cabecera
-    cabecera( '$titulo' , $estilos , true );
-
+    cabecera( $titulo , $estilos , true );
+    //
+    //
 ?>
 <body>
+    <!--Seccion1-->
+    <div class="seccion">
+        
+    </div>
+    <!--Seccion2-->
+    <div class="seccion">
+
+    </div>
+    <!--Seccion3-->
+    <div class="seccion">
+
+    </div>
+    <!--Seccion4-->
+    <div class="seccion">
+
+    </div>
 </body>

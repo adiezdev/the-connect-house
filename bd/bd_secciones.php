@@ -7,13 +7,13 @@
     Archivo de: Alejandro Díez
     GitHub: @adilosa95
     Proyecto: the-connect-house
-    Nombre del archivo: bd_comodidades.php
+    Nombre del archivo: bd_secciones.php
     -------------------------------------
 */
 require_once( __DIR__.'/bd_conexion.php' );
 //
 //
-class Comodidades extends Conexion
+class Secciones extends Conexion
 {
     private $sTabla;
     private $sTablaIntermedia;

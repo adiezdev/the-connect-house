@@ -17,5 +17,9 @@
     define("ESTILOS_VENTANA","ventana");
     //
     define("INCLUD_SLIDE","slider-images");
-    define("FRASE_ADD_REGISTRO","Elige que vas a querar añadir")
+    define("FRASE_ADD_REGISTRO","Elige que vas a querar añadir");
+	//
+	//Acceder a la tabla
+	define("TIPO_NORMAS", 2 );
+	define("TIPO_COMODIDADES" , 1)
 ?>

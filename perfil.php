@@ -127,9 +127,14 @@
     </div>
     <script src="js/scriptventana.js"></script>
     <script>
+		/**
+         * Función para ir a registrar tu piso o habitacion
+         *
+		 * @param tipo
+		 */
 		function addPisoHabitacion( tipo )
 		{
-            window.open('registrar-piso-habitacion.php?','_self');
+            window.open('/registrar-piso-habitacion.php?Tipo='+tipo,'_self');
 		}
     </script>
 </body>
