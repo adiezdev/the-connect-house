@@ -91,7 +91,10 @@
                         "Añadir Habitación",
                         "Añadir Piso"
                 );
-
+                $btonesfuncion = array(
+                        "addPisoHabitacion(2)",
+                        "addPisoHabitacion(1)"
+                );
                 //
                 //Generamos la ventana
                 getVentana( FRASE_ADD_REGISTRO , $btones);
@@ -123,4 +126,10 @@
         </div>
     </div>
     <script src="js/scriptventana.js"></script>
+    <script>
+		function addPisoHabitacion( tipo )
+		{
+            window.open('registrar-piso-habitacion.php?','_self');
+		}
+    </script>
 </body>

@@ -102,7 +102,7 @@ class Pisos extends Conexion
                 VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $stmt = $this->prepare( $cSql );
         $stmt->bind_param('iidssissdddiii' ,  $nHabitaciones , $nToiles , $fMetros , $sCalle , $nNumero , $nCp , $sCiudad , $sDescripcion
-            , $fLatitud , $fLogintud , $fPrecio , $nVisitas , $nTipo , $nIUsuario );
+            , $fLatitud , $fLogintud , $fPrecio , $nVisitas , $nTipo , $nIdUsuario );
         $bResultado = $stmt->execute();
         if(!$bResultado)
         {

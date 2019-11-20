@@ -12,8 +12,9 @@
  *
  * @param string $frase
  * @param array null $arraybtons
+ * @param array null $funcionalidades
  */
-function getVentana( $frase , $arraybtons = null)
+function getVentana( $frase , $arraybtons = null , $funcionalidades)
 {
     $Ventana = '<div id="miVentana" class="ventana">';
     $Ventana .= '<div class="ventana-content">';
@@ -21,9 +22,9 @@ function getVentana( $frase , $arraybtons = null)
     $Ventana .= '<h3>'.$frase.'</h3>';
     if( $arraybtons != null )
     {
-        foreach ($arraybtons as $arraybton)
+        foreach (array_combine($arraybtons , $funcionalidades) as $arraybton => $funcionalidad)
         {
-            $Ventana .='<button class="button">'.$arraybton.'</button>';
+            $Ventana .='<button class="button" onclick="'.$funcionalidad.'">'.$arraybton.'</button>';
         }
     }
     $Ventana .='</div>
