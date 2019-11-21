@@ -1,0 +1,22 @@
+.seccion{
+    width: 90%;
+    height: 500px;
+    -webkit-box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.40);
+    box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.40);
+}
+.credential
+{
+    height: 45px;
+    font-size: 12pt;
+    margin-right: 10px;
+    margin-top: 80px;
+}
+label{
+    color: #aac759;
+}
+input[type="checkbox"]{
+    display: none;
+}
+#descripcion{
+    vertical-align: top;
+}

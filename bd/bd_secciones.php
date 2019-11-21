@@ -26,6 +26,9 @@ class Secciones extends Conexion
      */
     public function __construct( $nTipo )
     {
+        //Construtor de la conexion
+        parent::__construct();
+        //
         if( $nTipo == 1)
         {
             $this->sTabla = 'comodidades';
@@ -63,7 +66,7 @@ class Secciones extends Conexion
      *
      * @return array
      */
-    public function getById()
+    public function getById( $nIdPiso )
     {
         $aPisosId = array();
         $cSql = 'SELECT * FROM '.$this->sTabla.' WHERE '.$this->idSeccion.' = ?';

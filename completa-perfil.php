@@ -14,13 +14,14 @@
     require_once(__DIR__."/includes/constantes.php");
     require_once(__DIR__."/includes/sesion.php");
     //
-    $a = array(
+    //Cogemos los estilos
+    $estilos = array(
         ESTILOS_WIDGETS,
         ESTILOS_CASI
     );
     //
     //Se lo envíamos al metodo
-    cabecera(TITULO_INDEX, $objects, false);
+    cabecera(TITULO_INDEX, $estilos, false);
 ?>
 <body>
     <div class="contenedor-izquierdo">

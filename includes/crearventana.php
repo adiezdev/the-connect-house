@@ -14,7 +14,7 @@
  * @param array null $arraybtons
  * @param array null $funcionalidades
  */
-function getVentana( $frase , $arraybtons = null , $funcionalidades)
+function getVentana( $frase , $arraybtons , $funcionalidades)
 {
     $Ventana = '<div id="miVentana" class="ventana">';
     $Ventana .= '<div class="ventana-content">';

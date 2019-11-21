@@ -42,6 +42,7 @@
     //
     //Sacar los pisos/Habitaciones del usuario
     $aDbPisosHabitaciones = new Pisos();
+
     $aPisosHabitaciones = $aDbPisosHabitaciones->getByUsuario( $_SESSION['idUsuario'] );
 ?>
 <body>
@@ -97,7 +98,7 @@
                 );
                 //
                 //Generamos la ventana
-                getVentana( FRASE_ADD_REGISTRO , $btones);
+                getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
             }else
             {
                 //
@@ -134,7 +135,7 @@
 		 */
 		function addPisoHabitacion( tipo )
 		{
-            window.open('/registrar-piso-habitacion.php?Tipo='+tipo,'_self');
+            window.open('/the-connect-house/registrar-piso-habitacion.php?Tipo='+tipo,'_self');
 		}
     </script>
 </body>
