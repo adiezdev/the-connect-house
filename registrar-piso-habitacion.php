@@ -53,22 +53,25 @@
     $oNormas = $odbComodidades->getAll();
 ?>
 <body>
-    <h1 class="title"><?php echo $titulo; ?></h1><br>
-        <table>
+    <h1 class="title" style="text-align: center"><?php echo $titulo; ?></h1><br>
+
                 <!--Seccion1 -->
             <form method="post">
-            <tbody class="seccion">
-                <h2>¿Dónde está?</h2>
+                <table style="">
+            <tbody class="seccion 1">
+            <tr>
+                <th colspan="6" ><h2>¿Dónde está?</h2></th>
+            </tr>
                 <tr>
                     <td><label for="calle">Calle: </label></td>
                     <td><input type="text" name="calle" class="credential"  placeholder="Calle donde está..."></td>
                     <td><label for="numero">Portal Nº: </label></td>
-                    <td><input type="text" name="numero" class="credential" placeholder="Número..." style="width: 10%"></td>
+                    <td><input type="text" name="numero" class="credential" placeholder="Número..."></td>
                     <td><label for="cp">CP: </label></td>
-                    <td><input type="text" name="cp" class="credential" placeholder="Codigo Postal..." style="width: 10%"></td>
+                    <td><input type="text" name="cp" class="credential" placeholder="Codigo Postal..." ></td>
                 </tr>
                 <tr>
-                    <td><label for="ciudad">Ciudad: </label></td>
+                    <td ><label for="ciudad">Ciudad: </label></td>
                     <td>
                         <select name="ciudad" id="selector" class="credential">
                             <option value="León">León</option>
@@ -76,16 +79,20 @@
                         </select>
                     </td>
                     <td><label for="descripcion">Descripción: </label></td>
-                    <td><textarea class="credential" id="descripcion" cols="28" rows="35" name="user_post_textarea" maxlength="320" placeholder="Pon una descripción" style="height: 125px !important;">
+                    <td colspan="2"><textarea class="credential" id="descripcion" cols="30" rows="36" name="user_post_textarea" maxlength="320" placeholder="Pon una descripción" style="height: 125px !important;">
                     </textarea><br><p>320\<span id="contador"> 320</span></p>
                     </td>
                 </tr>
             </tbody>
+                </table>
                 <!--Seccion2-->
-            <tbody class="seccion">
-            <h2>¿Cómo es?</h2>
+                <table>
+            <tbody class="seccion2">
+            <tr>
+                <th colspan="5" ><h2>¿Cómo es?</h2></th>
+            </tr>
                 <tr>
-                    <td> <td><label for="metros">Metro del piso: </label></td></td>
+                    <td><label for="metros">Metro del piso: </label></td>
                     <td><input type="text" name="metros" class="credential"  placeholder="Cuantos metros tiene el piso"></td>
                     <td><label for="precio">Precio: </label></td>
                     <td><input type="text" name="precio" class="credential"  placeholder="¿Qué precio tiene?">€</td>
@@ -97,33 +104,36 @@
                     <td> <input type="text" name="habitaciones" class="credential"  placeholder="numero de habitaciones"></td>
                 </tr>
             </tbody>
-            <tbody class="seccion">
-            <h2>Comodidades</h2>
+                </table>
+                <table>
+            <tbody class="seccion3">
+            <tr>
+                <th colspan="6" ><h2 style="color: #aac759">Comodidiades</h2></th>
+            </tr>
                 <tr>
 	                <?php
 		                //Mostramos todos los registros
 		                foreach ($oComodidades as $comodidad)
 		                {
-			                $cSecciones  = '<td><label class="checkeable">';
+			                $cSecciones  = '<td colspan="1"><label class="checkeable">';
 			                $cSecciones .= '<input type="checkbox" id="comodidad" name="comodidad" value="'.$comodidad->idComodidad.'"/>';
 			                $cSecciones .= '<img id="cimagen" src="'.$comodidad->Imagen.'" >';
-			                $cSecciones .= $comodidad->Nombre;
 			                $cSecciones .= '</label></td>';
 			                echo $cSecciones;
 		                }
-
 	                ?>
                 </tr>
-            <h2>Normas</h2><br>
+            <tr>
+                <th colspan="6" ><h2 style="color: #aac759">Normas</h2></th>
+            </tr>
                 <tr>
 	                <?php
 		                //Mostramos todos los registros
 		                foreach ($oNormas as $oNorma)
 		                {
-			                $cSecciones  = '<td><label class="checkeable">';
+			                $cSecciones  = '<td colspan="2"><label class="checkeable">';
 			                $cSecciones .= '<input type="checkbox" id="comodidad" name="comodidad" value="'.$oNorma->idNorma.'"/>';
 			                $cSecciones .= '<img id="cimagen" src="'.$oNorma->Imagen.'" >';
-			                $cSecciones .= $oNorma->Nombre;
 			                $cSecciones .= '</label></td>';
 			                echo $cSecciones;
 		                }
@@ -131,20 +141,23 @@
 	                ?>
                 </tr>
             </tbody>
-            <!--Seccion3-->
-            <tbody class="seccion">
-
-            </tbody>
-            <!--Seccion4-->
-            <tbody class="seccion">
-            <h2>¿Donde se encuentra en el mapa?</h2>
-            </tbody>
-                <!--Seccion5-->
-                <tbody class="seccion">
-                <h2>Sube imagenes</h2>
-                </tbody>
+                </table>
+                <table>
+                    <tbody class="seccion4">
+                    <tr>
+                        <th><h2>Donde se encuentra en el mapa</h2></th>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--Seccion6-->
+               <table>
+                   <tbody class="seccion5">
+                   <tr>
+                       <th><h2>¿Cómo es?</h2></th>
+                   </tr>
+                   </tbody>
+               </table>
             </form>
-        </table>
 <script>
     $(document).ready(function(){
         //Máixmo de caracteres en la descripción

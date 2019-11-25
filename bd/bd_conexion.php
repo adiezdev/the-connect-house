@@ -23,8 +23,8 @@ class Conexion{
     public function __construct() {
         $this->oConexion = new mysqli($this->sHostremote, $this->sUsuarioremote, $this->sPasswordremote, $this->sDb_remote, $this->sPuerto);
     }
-     
-    public function prepare($sql) {
+
+    public function prepare($sql){
         return $this->oConexion->prepare($sql);
     }
     public function execute() {
