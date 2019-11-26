@@ -10,18 +10,19 @@
     Nombre del archivo: registrar-piso-habitacion.php
     -------------------------------------
 */
-    require_once( __DIR__."/../../../includes/header.php" );
-    require_once( __DIR__."/../../../includes/constantes.php" );
-    require_once( __DIR__."/../../../includes/sesion.php" );
+    require_once(__DIR__ . "/../includes/header.php");
+    require_once(__DIR__ . "/../includes/constantes.php");
+    require_once(__DIR__ . "/../includes/sesion.php");
 	//
 	//Acceso a datos
-    require_once( __DIR__."/../../../bd/bd_pisos.php" );
-    require_once( __DIR__."/../../../bd/bd_secciones.php" );
+    require_once(__DIR__ . "/../bd/bd_pisos.php");
+    require_once(__DIR__ . "/../bd/bd_secciones.php");
     //
     //Configuramos los estilos que necesitamos
     $estilos = array(
         ESTILOS_WIDGETS ,
         ESTILOS_REGISTRAR_PISO ,
+
     );
     //
     //Lo cogemos el tipò que vamos añadir
@@ -66,6 +67,7 @@
                 <!--Seccion5-->
 	                <?php include("includes/seccion-5.php"); ?>
             </form>
+    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
 <script>
     $(document).ready(function(){
         //Máixmo de caracteres en la descripción
@@ -104,6 +106,23 @@
                 idimg.attr('src', imgsrcrem );
             }
         });
+        //Select
+        $( "select" ).change(function() {
+                    //Capturamos cual está seleccionado
+                  var seleccinado = $( "select option:selected" ).text();
+                    //Si es León
+                    if(seleccinado === "León")
+                    {
+                        mymap.panTo([42.6036359 , -5.5949009]) //El mapa se situa en León
+                    }
+                    else //Si no
+                    {
+                        mymap.panTo([42.5498528 , -6.6148307]); //El mapa se situa en Ponferrada
+                    }
+            })
+            .trigger( "change" );
+        //Desactivamos en el mapa el zoom con el scroll del ratón
+        mymap.scrollWheelZoom.disable();
     });
 </script>
 </body>

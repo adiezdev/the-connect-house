@@ -1,3 +1,12 @@
+<?php
+/*
+-------------------------------------
+Archivo de: Alejandro Díez
+GitHub: @adilosa95
+Proyecto: the-connect-house
+Nombre del archivo: seccion-2.php
+-------------------------------------
+*/?>
 <table>
 	<tbody class="seccion2">
 	<tr>

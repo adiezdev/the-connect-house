@@ -135,7 +135,7 @@
 		 */
 		function addPisoHabitacion( tipo )
 		{
-            window.open('/the-connect-house/secciones/piso-habitacion/registrar-piso-habitacion.php?Tipo='+tipo,'_self');
+            window.open('/the-connect-house/piso-habitacion/registrar-piso-habitacion.php?Tipo='+tipo,'_self');
 		}
     </script>
 </body>

@@ -19,7 +19,7 @@
         $cabecera = '<title>'.$stitulo.'</title>';
         foreach( $sCss as $css)
         {
-            $cabecera .= '<link rel="stylesheet" href="'.$m_cGetTheConnect.'css/'.$css.'.css">';
+            $cabecera .= '<link rel="stylesheet" href="'.$m_cGetTheConnect.'/the-connect-house/css/'.$css.'.css">';
         }
         //Si le pasamos un true agregamos las dependencia del mapa
         if($bMapa == true)

@@ -1,3 +1,12 @@
+<?php
+/*
+-------------------------------------
+Archivo de: Alejandro Díez
+GitHub: @adilosa95
+Proyecto: the-connect-house
+Nombre del archivo: seccion-1.php
+-------------------------------------
+*/?>
 <table style="">
 	<tbody class="seccion 1">
 	<tr>
@@ -15,8 +24,8 @@
 		<td ><label for="ciudad">Ciudad: </label></td>
 		<td>
 			<select name="ciudad" id="selector" class="credential">
-				<option value="León">León</option>
-				<option value="Ponferrada">Ponferrada</option>
+				<option value="Leon" selected>León</option>
+				<option value="Ponferrada" >Ponferrada</option>
 			</select>
 		</td>
 		<td><label for="descripcion">Descripción: </label></td>
@@ -26,3 +35,6 @@
 	</tr>
 	</tbody>
 </table>
+<script>
+
+</script>
