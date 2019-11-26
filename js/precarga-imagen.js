@@ -3,7 +3,7 @@
  *
  * @param evt
  */
-function precarfarImagen(evt) {
+function precarfarImagenPerfil(evt) {
     var files = evt.target.files;
 
     for (var i = 0, f; f = files[i]; i++) {
@@ -33,4 +33,4 @@ function precarfarImagen(evt) {
     }
 }
 
-document.getElementById('inputperfil').addEventListener('change', precarfarImagen, false);
+document.getElementById('inputperfil').addEventListener('change', precarfarImagenPerfil, false);
