@@ -1,16 +1,14 @@
-table
-{
-    width: 95%;
-    height: 500px !important;
-    padding: 40px;
-}
 label
 {
     color: #aac759;
     margin-left: 20px;
 }
-tbody[class^="seccion"]
+table[class^="seccion"]
 {
+
+    width: 95%;
+    line-height: 90px !important;
+    padding: 40px;
     -webkit-box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.40);
     box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.40);
 }
@@ -27,10 +25,16 @@ input[type="checkbox"]{
 /*Tamaño imagenes checbox*/
 #cimagen
 {
-  width: 70px;
+  width: 80px;
 }
 /*Mapa*/
 #mapid
 {
     height: 650px !important;
+}
+/**/
+.contenedor{
+    width: 280px;
+    height: 350px;
+    object-fit: cover;
 }

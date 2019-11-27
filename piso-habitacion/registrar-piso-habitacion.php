@@ -55,6 +55,7 @@
 ?>
 <body>
     <h1 class="title" style="text-align: center"><?php echo $titulo; ?></h1><br>
+    <div id="todassecciones"></div>
             <form method="post">
                 <!--Seccion1 -->
                     <?php include("includes/seccion-1.php"); ?>
@@ -68,6 +69,8 @@
 	                <?php include("includes/seccion-5.php"); ?>
             </form>
     <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
+    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/precarga-imagenes.js"></script>
+    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
 <script>
     $(document).ready(function(){
         //Máixmo de caracteres en la descripción

@@ -17,9 +17,8 @@ function precarfarImagenPerfil(evt) {
 
         reader.onload = (function(theFile) {
             return function(e) {
-                if (theFile.size <= 16000000) {
-                    //console.log(theFile.size);
-
+                if (theFile.size <= 16000000)
+                {
                     document.getElementById("imgperfil").src =  e.target.result;
                     document.getElementById('hiddens').innerHTML += '<input type="hidden" name="imagen" id=' + theFile.name + ' value = ' + e.target.result + '>';
                 } else {

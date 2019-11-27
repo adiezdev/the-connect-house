@@ -7,8 +7,8 @@ Proyecto: the-connect-house
 Nombre del archivo: seccion-3.php
 -------------------------------------
 */?>
-<table>
-	<tbody class="seccion3">
+<table class="seccion 3">
+	<tbody >
 	<tr>
 		<th colspan="6" ><h2 style="color: #aac759">Comodidiades</h2></th>
 	</tr>
