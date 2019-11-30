@@ -1,13 +1,11 @@
-.contenedor-izquierdo{
-    position: fixed;
-}
 .contenedor-centro{
     position: absolute;
 }
 .contenedor-izquierdo {
     top: 0px;
-    width: 620px;
     bottom: 0px;
+    width: 620px;
+    height: 95vh;
     -webkit-box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);
     -moz-box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);
     box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);

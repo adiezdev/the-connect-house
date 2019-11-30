@@ -28,6 +28,7 @@
     $bdUsuario = new Usuario();
 ?>
 <body>
+  <div class="content">
     <div class="contenedor-izquierdo">
         <div class="into-izquierdo">
             <div id="perfil">
@@ -44,14 +45,13 @@
         </div>
 
     </div>
-    <div class="contenedor-centro">
+      <div class="contenedor-centro">
         <div class="into-centro">
             <form>
                 <input type="search" name="search" id="search" placeholder="Buscar...">
             </form>
             <h2 class="title">Resultados</h2>
             <div class="box-mas-visitados">
-                
                 <?php echo '<div class="likeit">'.file_get_contents("img/iconos-materiales/like.svg").'</div>'; ?>
                 <img src="img/img-modelo.jpg" alt="habitación">
                 <h2>Calle</h2>
@@ -105,10 +105,14 @@
             </div>
         </div>
     </div>
-    <div class="contenedor-derecho">
-    <div id="mapid"></div>
-    </div>
+      <div class="contenedor-derecho">
+        <div id="mapid"></div>
+        </div>
+
+
+  </div>
+  <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
-<script src="js/like.js"></script>
-<script src="js/mapa.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/like.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
 </html>

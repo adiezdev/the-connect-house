@@ -1,0 +1,13 @@
+.content
+{
+    min-height: calc(100vh - 70px);
+}
+footer
+{
+    background: #aac759;
+    flex-shrink: 0;
+    height: 230px;
+}
+#marca  {
+    width: 35%;
+}

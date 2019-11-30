@@ -33,7 +33,20 @@
     cursor: pointer;
     color: #ffffff;
 }
-
+#todassecciones
+{
+    margin-left: 15%;
+    margin-bottom: 5px;
+}
+.secciones
+{
+    font-size: 14pt;
+    padding: 30px;
+    margin-right: 5%;
+    background: #aac759;
+    border-radius: 30px;
+    cursor: pointer;
+}
 @media screen and ( max-width: 740px) {
     .imgSlides {
         height: auto;

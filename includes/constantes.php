@@ -9,14 +9,13 @@
     define("ESTILOS_WIDGETS","widgets");
     define("ESTILOS_IDEX","estilos-inicio" );
     define("ESTILOS_LOGIN","estilos-login");
-    define("ESTILOS_PERFIL","estilos-perfil");
     define("ESTILOS_PISO","estilos-piso");
-    define("ESTILOS_BUSQUEDA","estilos-busqueda");
+    define("ESTILOS_BUSQUEDA","estilos-main");
     define("ESTILOS_CASI","estilos-completa");
     define("ESTILOS_REGISTRAR_PISO","estilos-registrar-piso-habitacion");
     define("ESTILOS_VENTANA","ventana");
     //
-    define("INCLUD_SLIDE","slider-images");
+    define("INCLUD_SLIDE","slider");
     define("FRASE_ADD_REGISTRO","Elige que vas a querar añadir");
 	//
 	//Acceder a la tabla

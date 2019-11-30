@@ -22,24 +22,29 @@
     $estilos = array(
         ESTILOS_WIDGETS ,
         ESTILOS_REGISTRAR_PISO ,
-
+        INCLUD_SLIDE
     );
     //
-    //Lo cogemos el tipò que vamos añadir
+    //Lo cogemos el tipo que vamos añadir
 	$titulo = '';
     if($_GET)
     {
         $nTipo = $_GET['Tipo'];
     }
     //
-    //Titulo depencidendo de lo que sea
+    //Titulo dependiendo de lo que sea
     if( $nTipo == 1)
     {
         $titulo = 'Y el piso ¿Cómo es?';
     }
-    else
+    else if($nTipo == 2)
     {
         $titulo = 'Y la habitación ¿Cómo es? ';
+    }
+    else //Sino está inicializamo vuelve al perfil
+    {
+        header( "location:/the-connect-house/perfil.php" );
+        return;
     }
     //
     //Generamos la cabecera
@@ -49,28 +54,32 @@
     $odbComodidades = new Secciones(1);
     //Sacamos todos los registros
     $oComodidades = $odbComodidades->getAll();
-    //Saca os las normas
+    //Sacamos las normas
     $odbComodidades = new Secciones(2);
     $oNormas = $odbComodidades->getAll();
 ?>
 <body>
-    <h1 class="title" style="text-align: center"><?php echo $titulo; ?></h1><br>
-    <div id="todassecciones"></div>
-            <form method="post">
-                <!--Seccion1 -->
-                    <?php include("includes/seccion-1.php"); ?>
-                <!--Seccion2-->
-	                <?php include("includes/seccion-2.php"); ?>
-                <!--Seccion3-->
-	                <?php include("includes/seccion-3.php"); ?>
-                <!--Seccion4-->
-	                <?php include("includes/seccion-4.php"); ?>
-                <!--Seccion5-->
-	                <?php include("includes/seccion-5.php"); ?>
-            </form>
-    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
-    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/precarga-imagenes.js"></script>
-    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
+    <div class="content">
+        <h1 class="title" style="text-align: center"><?php echo $titulo; ?></h1><br>
+        <div id="todassecciones"></div>
+        <form method="post">
+            <!--Seccion1 -->
+            <?php include("includes/seccion-1.php"); ?>
+            <!--Seccion2-->
+            <?php include("includes/seccion-2.php"); ?>
+            <!--Seccion3-->
+            <?php include("includes/seccion-3.php"); ?>
+            <!--Seccion4-->
+            <?php include("includes/seccion-4.php"); ?>
+            <!--Seccion5-->
+            <?php include("includes/seccion-5.php"); ?>
+        </form>
+    </div>
+    <?php require_once(__DIR__."/../includes/footer.php"); ?>
+</body>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/precarga-imagenes.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
 <script>
     $(document).ready(function(){
         //Máixmo de caracteres en la descripción
@@ -111,21 +120,20 @@
         });
         //Select
         $( "select" ).change(function() {
-                    //Capturamos cual está seleccionado
-                  var seleccinado = $( "select option:selected" ).text();
-                    //Si es León
-                    if(seleccinado === "León")
-                    {
-                        mymap.panTo([42.6036359 , -5.5949009]) //El mapa se situa en León
-                    }
-                    else //Si no
-                    {
-                        mymap.panTo([42.5498528 , -6.6148307]); //El mapa se situa en Ponferrada
-                    }
-            })
+            //Capturamos cual está seleccionado
+            var seleccinado = $( "select option:selected" ).text();
+            //Si es León
+            if(seleccinado === "León")
+            {
+                mymap.panTo([42.6036359 , -5.5949009]) //El mapa se situa en León
+            }
+            else //Si no
+            {
+                mymap.panTo([42.5498528 , -6.6148307]); //El mapa se situa en Ponferrada
+            }
+        })
             .trigger( "change" );
         //Desactivamos en el mapa el zoom con el scroll del ratón
         mymap.scrollWheelZoom.disable();
     });
 </script>
-</body>

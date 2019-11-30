@@ -17,6 +17,7 @@
     {
         $m_cGetTheConnect = get_root_uri();
         $cabecera = '<title>'.$stitulo.'</title>';
+        $cabecera .= '<link rel="stylesheet" href="/the-connect-house/css/footer.css">'; //Siempre va estar el footer
         foreach( $sCss as $css)
         {
             $cabecera .= '<link rel="stylesheet" href="'.$m_cGetTheConnect.'/the-connect-house/css/'.$css.'.css">';
