@@ -34,7 +34,7 @@ Nombre del archivo: seccion-3.php
 			foreach ($oNormas as $oNorma)
 			{
 				$cSecciones  = '<td colspan="2"><label class="checkeable">';
-				$cSecciones .= '<input type="checkbox" id="comodidad" name="comodidad" value="'.$oNorma->idNorma.'"/>';
+				$cSecciones .= '<input type="checkbox" id="norma" name="norma" value="'.$oNorma->idNorma.'"/>';
 				$cSecciones .= '<img id="cimagen" src="'.$oNorma->Imagen.'" >';
 				$cSecciones .= '</label></td>';
 				echo $cSecciones;

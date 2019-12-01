@@ -24,4 +24,6 @@ Nombre del archivo: seccion-5.php
     </tr>
 	</tbody>
 </table>
-<div id="hiddens"></div>
+<div id="hiddens">
+
+</div>

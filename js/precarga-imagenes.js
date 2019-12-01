@@ -28,7 +28,7 @@ function precarfarImagens(evt) {
                     console.log(theFile.size);
 
                     document.getElementById('gallery').insertBefore(span, null);
-                    document.getElementById('hiddens').innerHTML += '<input type="hidden" name="imagenes[]" id=' + theFile.name + ' value = ' + e.target.result + '>';
+                    document.getElementById('hiddens').innerHTML += '<input type="hidden" name="imagenes" id=' + theFile.name + ' value = ' + e.target.result + '>';
                 } else {
                     alert("No pueden pesar mas de 16mb")
                 }

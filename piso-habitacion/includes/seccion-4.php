@@ -22,6 +22,3 @@
 </table>
 <input type="hidden" name="latitud" id="latitud">
 <input type="hidden" name="longitud" id="longitud">
-<script>
-
-</script>

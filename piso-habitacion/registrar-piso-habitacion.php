@@ -62,7 +62,7 @@
     <div class="content">
         <h1 class="title" style="text-align: center"><?php echo $titulo; ?></h1><br>
         <div id="todassecciones"></div>
-        <form method="post">
+        <form method="post" >
             <!--Seccion1 -->
             <?php include("includes/seccion-1.php"); ?>
             <!--Seccion2-->
@@ -82,6 +82,9 @@
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
 <script>
     $(document).ready(function(){
+        //
+        //FUNCIÓN PARA MOSTRAR LOS CARACTERES DE LA DESCRIPCIÓN
+        //
         //Máixmo de caracteres en la descripción
         var maximo = 320;
         //Si detecta el teclado
@@ -94,6 +97,8 @@
             //lo mostramos
             $('#contador').html(restantes);
         });
+        //
+        // FUNCIIÓN PARA SELECCIONAR COMODIDADES Y NORMAS
         //
         //Entramos al label checkeable de las comodidades
         $('.checkeable').change( ':checked' , function ()
@@ -111,6 +116,12 @@
                 imgsrcrem = imgsrc.replace("808080", "000000");
                 idimg.attr('src', imgsrcrem );
             }
+            else if ( $(this).find('#norma').is(":checked"))
+            {
+                //Si lo está cambiamos la imagen
+                imgsrcrem = imgsrc.replace("808080", "000000");
+                idimg.attr('src', imgsrcrem );
+            }
             else //Revertimos el check
             {
                 //Si revertimos el check mostramos la imagen anterios
@@ -118,7 +129,9 @@
                 idimg.attr('src', imgsrcrem );
             }
         });
-        //Select
+        //
+        //FUNCIÓN AL SELECCIONAR UNA CIUDAD QUE APAREZCA EN EL MAPA
+        //
         $( "select" ).change(function() {
             //Capturamos cual está seleccionado
             var seleccinado = $( "select option:selected" ).text();
@@ -135,5 +148,6 @@
             .trigger( "change" );
         //Desactivamos en el mapa el zoom con el scroll del ratón
         mymap.scrollWheelZoom.disable();
+
     });
 </script>

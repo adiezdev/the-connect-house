@@ -14,11 +14,11 @@ Nombre del archivo: seccion-1.php
 	</tr>
 	<tr>
 		<td><label for="calle">Calle (*): </label></td>
-		<td><input type="text" name="calle" class="credential"  placeholder="Calle donde está..."></td>
+		<td><input type="text" id="calle" name="calle" class="credential"  placeholder="Calle donde está..."></td>
 		<td><label for="numero">Portal Nº (*): </label></td>
-		<td><input type="text" name="numero" class="credential" placeholder="Número..."></td>
+		<td><input type="text" id="numero" name="numero" class="credential" placeholder="Número..."></td>
 		<td><label for="cp">CP (*): </label></td>
-		<td><input type="text" name="cp" class="credential" placeholder="Codigo Postal..." ></td>
+		<td><input type="text" id="cp" name="cp" class="credential" placeholder="Codigo Postal..." ></td>
 	</tr>
 	<tr>
 		<td ><label for="ciudad">Ciudad (*): </label></td>
