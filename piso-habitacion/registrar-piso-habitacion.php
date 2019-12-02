@@ -56,6 +56,7 @@
     $oComodidades = $odbComodidades->getAll();
     //Sacamos las normas
     $odbComodidades = new Secciones(2);
+	//Sacamos todos los registros
     $oNormas = $odbComodidades->getAll();
 ?>
 <body>
@@ -75,8 +76,9 @@
             <?php include("includes/seccion-5.php"); ?>
         </form>
     </div>
-    <?php require_once(__DIR__."/../includes/footer.php"); ?>
+    <?php require_once(__DIR__ . "/../includes/footer.php"); ?>
 </body>
+<!-- Scripts necesarios -->
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/precarga-imagenes.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
@@ -98,7 +100,7 @@
             $('#contador').html(restantes);
         });
         //
-        // FUNCIIÓN PARA SELECCIONAR COMODIDADES Y NORMAS
+        // FUNCIÓN PARA SELECCIONAR COMODIDADES Y NORMAS
         //
         //Entramos al label checkeable de las comodidades
         $('.checkeable').change( ':checked' , function ()
@@ -131,7 +133,7 @@
         });
         //
         //FUNCIÓN AL SELECCIONAR UNA CIUDAD QUE APAREZCA EN EL MAPA
-        //
+        //DEPENDIENDO DE LA ELEGIDA EN EL SELECTOR
         $( "select" ).change(function() {
             //Capturamos cual está seleccionado
             var seleccinado = $( "select option:selected" ).text();

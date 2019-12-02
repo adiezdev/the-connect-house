@@ -14,24 +14,27 @@
     //
    $sCorreo = $oDatosJson["Correo"];
    $sPassword = md5($oDatosJson["Password"]); //Encryptamos la contraseña
-   //
+	//
+	//Accedemos a la base de datos
    $oDbUsuario = new Usuario();
+   //
+   //Buscamos el ususario
    $lResultados = $oDbUsuario->getLogin( $sCorreo , $sPassword);
-   $idUser = '';
-   foreach ($lResultados as $lResultado)
-   {
-    $idUser = $lResultado->idUsuario; //Extraemos el idUsuario que nos devuelve
-   }
+   //
+   //Si el usuario no lo hemos encontrado no devuelve un error
    if(!$lResultados)
    {
        $oRespuesta->Estado = "KO";
        $oRespuesta->Mensaje = "Usuario no encontrado";
+	   json_encode( $oRespuesta );
    }
   else
   {
-      //Si es correto asignamos la sesion
-      $_SESSION['idUsuario'] = $idUser;
-      $_SESSION['correo'] = '';
+	  foreach ($lResultados as $lResultado)
+	  {
+		  $_SESSION['idUsuario']  = $lResultado->idUsuario; //Extraemos el idUsuario que nos devuelve, se lo damos a la sesión
+		  $_SESSION['Carpeta'] = $lResultado->Carpeta.'/'; //Gaurdamos la carpeta del usuario la necesitaremos
+	  }
       //
       $oRespuesta->Estado = "OK";
       $oRespuesta->Mensaje = "Usuario encontrado";

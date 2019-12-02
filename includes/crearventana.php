@@ -18,12 +18,15 @@ function getVentana( $frase , $arraybtons , $funcionalidades = null )
 {
     $Ventana = '<div id="miVentana" class="ventana">';
     $Ventana .= '<div class="ventana-content">';
-    $Ventana .= '<span class="close">&times;</span>';
-    $Ventana .= '<h3>'.$frase.'</h3>';
+    $Ventana .= '<span class="close">&times;</span>';// La X para cerrar la ventana
+    $Ventana .= '<h3>'.$frase.'</h3>';//False de la ventana
+    //Comptovamos si le pasamos para crear botones, es decir diferente a nulo
     if( $arraybtons != null )
     {
+    	//Combinamos el array del nombre del botón con el nombre del método al hacer click
         foreach (array_combine($arraybtons , $funcionalidades) as $arraybton => $funcionalidad)
         {
+        	//Generamos los botones
             $Ventana .='<button class="button" onclick="'.$funcionalidad.'">'.$arraybton.'</button>';
         }
     }

@@ -1,4 +1,6 @@
+#No permitimos el acceso a directorios
 Options -Indexes
+#No mostramos la extensión de los archivos
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f

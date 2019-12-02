@@ -96,13 +96,15 @@ class Pisos extends Conexion
      * @return bool
      */
     public function addPisoHabitacion( $nHabitaciones , $nToiles , $fMetros , $sCalle , $nNumero , $nCp , $sCiudad , $sDescripcion
-        , $fLatitud , $fLogintud , $fPrecio , $nVisitas , $nTipo , $nIdUsuario )
+        , $fLatitud , $fLogintud , $fPrecio , $nVisitas , $nTipo  , $nIdUsuario )
     {
-        $cSql = 'INSERT INTO '.$this->sTabla.' ( NHabitaciones, NBanos, Metros, Calle, Numero, CP, Ciudad, Descripcion, Latitud, Longitud, Precio, Visitas, Tipo, idUsuario)
+    	$sFecha =  date( "Y-m-d" );
+    	//
+        $cSql = 'INSERT INTO '.$this->sTabla.' ( NHabitaciones, NBanos, Metros, Calle, Numero, CP, Ciudad, Descripcion, Latitud, Longitud, Precio, Visitas, Tipo, Fecha, idUsuario)
                 VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $stmt = $this->prepare( $cSql );
-        $stmt->bind_param('iidssissdddiii' ,  $nHabitaciones , $nToiles , $fMetros , $sCalle , $nNumero , $nCp , $sCiudad , $sDescripcion
-            , $fLatitud , $fLogintud , $fPrecio , $nVisitas , $nTipo , $nIdUsuario );
+	        $stmt->bind_param('iidssissdddiisi' ,  $nHabitaciones , $nToiles , $fMetros , $sCalle , $nNumero , $nCp , $sCiudad , $sDescripcion
+            , $fLatitud , $fLogintud , $fPrecio , $nVisitas , $nTipo, $sFecha , $nIdUsuario );
         $bResultado = $stmt->execute();
         if(!$bResultado)
         {

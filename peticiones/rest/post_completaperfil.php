@@ -21,10 +21,13 @@
         //Debug
         //echo $value . "<br />";
         //Cojo la iimagen
-        $value = $_POST['imagen'];
+        $value = $_POST['imagen'];//Cogemos la imagen
+	    //Comprobamos si está inicializado la variable
         if(isset($_POST['imagen']))
         {
+        	//Sacamos la imagen y la decodificamos
             $datos = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $value));
+           //generamos un nombre para la imagen
             $nom = md5(rand());
             //Marco la ruta
             $filepathsql = "uploads/".$nom.".jpg";
@@ -36,13 +39,11 @@
         }
         $sDescripcion = $_POST['descripcion'];
         //
-        $sCorreo = $_SESSION['correo'];
-        $lResult = $dbUsuario->updateCampos( $sCorreo , $sDescripcion , $filepathsql);
-        if(!$lResult)
-        {
-            header("Location: ../../perfil.php");
-        }
-        else
+	    $nId = $_SESSION['idUsuario'];
+	    //
+        $lResult = $dbUsuario->updateCampos( $nId , $sDescripcion , $filepathsql); //Actualizamos los campos
+        //
+        if($lResult)
         {
             header("Location: ../../perfil.php");
         }

@@ -142,7 +142,8 @@ function validarCamposLogin(e) {
         })
         .done(function(oJson) {
             var oRespuesta = JSON.parse(oJson);
-            if (oRespuesta.Estado == "OK") {
+            if (oRespuesta.Estado == "OK")
+            {
                 window.open("/the-connect-house/perfil.php", "_self");
             } else {
                 alert(oRespuesta.Mensaje);

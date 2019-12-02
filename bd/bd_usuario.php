@@ -105,15 +105,16 @@ class Usuario extends Conexion
      * @param $sNombre
      * @param $sApellidos
      * @param $sSexo
-     * @param $sDescripncion
+     * @param $sCarptea
      *
      * @return bool
      */
-    public function addUsuario( $sCorreo, $sPassword, $sNombre , $sApellidos, $sCiudad, $sSexo)
+    public function addUsuario( $sCorreo, $sPassword, $sNombre , $sApellidos, $sCiudad, $sSexo , $sCarptea )
     {
-        $cSql = 'INSERT INTO usuarios (Correo, Password, Nombre, Apellidos, Ciudad, Sexo) VALUES ( ?, ?, ?, ?, ?, ?)';
+	    $sFecha =  date( "Y-m-d" );
+        $cSql = 'INSERT INTO usuarios (Correo, Password, Nombre, Apellidos, Ciudad, Sexo , Carpeta , Fecha) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)';
         $stmt = $this->prepare( $cSql );
-        $stmt->bind_param( 'ssssss' , $sCorreo, $sPassword, $sNombre , $sApellidos, $sCiudad, $sSexo);
+        $stmt->bind_param( 'ssssssss' , $sCorreo, $sPassword, $sNombre , $sApellidos, $sCiudad, $sSexo , $sCarptea , $sFecha );
         $bResultado = $stmt->execute();
         if(!$bResultado)
         {
@@ -171,22 +172,22 @@ class Usuario extends Conexion
     }
 
     /**
-     * Actualiza la descripcion y la imagen
+     * Actualiza la descripcion y la imagen por su id
      *
      * @param $sDescripcion
      * @param string $UrlIMG
      *
      * @return bool
      */
-    public function updateCampos( $sCorreo, $sDescripcion , $UrlIMG = 'img/isset/isset-user.png')
+    public function updateCampos( $nId , $sDescripcion , $UrlIMG = 'img/isset/isset-user.png')
     {
         $cSql = 'UPDATE '.$this->sTabla.' SET 
                     Descripcion = ? , 
                     Imgperfil = ? 
-                    WHERE Correo = ?';
+                    WHERE idUsuario = ?';
         //
         $stmt = $this->prepare($cSql);
-        $stmt->bind_param('sss', $sDescripcion, $UrlIMG , $sCorreo);
+        $stmt->bind_param('ssi', $sDescripcion, $UrlIMG , $nId);
         $bResultado = $stmt->execute();
         if(!$bResultado)
         {
