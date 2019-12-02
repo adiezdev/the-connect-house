@@ -26,11 +26,13 @@ $(function() {
  * @param e
  * @returns {boolean}
  */
-function validarCamposRegistro(e) {
+function validarCamposRegistro(e)
+{
     var nombre = $('#registro #nombre').val().trim();
     var apellidos = $('#registro #apellidos').val();
     var correo = $('#registro #email').val().trim();
     var selector = $('#registro #selector').val();
+    var ciudad = $('#registro #selectorciudad').val();
     var contrasena = $('#registro #password').val().trim();
     var contrasena2 = $('#registro #password2').val().trim();
     //Nombre
@@ -53,7 +55,13 @@ function validarCamposRegistro(e) {
     }
     //Sexo
     if (selector == null) {
-        alert("Indica los Apellidos");
+        alert("Indica los el Sexo");
+        e.preventDefault();
+        return false;
+    }
+    //ciudad
+    if (ciudad == null) {
+        alert("Indica la ciudad");
         e.preventDefault();
         return false;
     }
@@ -89,6 +97,7 @@ function validarCamposRegistro(e) {
         Correo: correo,
         Sexo: selector,
         Password: contrasena,
+        Ciudad: ciudad
     }
     //
     //Procesamos los datos
@@ -98,13 +107,13 @@ function validarCamposRegistro(e) {
         data: JSON.stringify(oDatosJson)
         })
         .done(function(oJson) {
-        var oRespuesta = JSON.parse(oJson);
+            /*var oRespuesta = JSON.parse(oJson);
         if (oRespuesta.Estado == "OK") {
             window.open("/the-connect-house/completa-perfil.php", "_self");
         } else {
             alert(oRespuesta.Mensaje);
-        }
-        //console.log(oJson); //Debug
+        }*/
+        console.log(oJson); //Debug
     });;
 }
 

@@ -133,7 +133,7 @@ class Usuario extends Conexion
     public function getLastID()
     {
         $aUltimaID = array();
-        $cSql = 'SELECT idUsuario FROM '.$this->sTabla.' ORDER BY idUsuario DESC LIMIT 1';
+        $cSql = 'SELECT * FROM '.$this->sTabla.' ORDER BY idUsuario DESC LIMIT 1';
         $stmt = $this->prepare( $cSql );
         $bResultado = $stmt->execute();
         $oResultado = $stmt->get_result();

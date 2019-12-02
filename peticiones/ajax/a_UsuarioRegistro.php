@@ -18,22 +18,26 @@
     $sCorreo = $oDatosJson["Correo"];
     $sSexo = $oDatosJson["Sexo"];
     $sPassword =  md5($oDatosJson["Password"]) ; //Encryptamos la contraseña
+    //
+    //Accedemos a la base de datos
+    $oDbUsuario = new Usuario();
 	//
 	//Comporbamos si el usuario existe
-    if($oDbUsuario->getByCorreo( $sCorreo ) > 0)
+    $sComprobaciones = $oDbUsuario->getByCorreo( $sCorreo );
+    foreach ( $sComprobaciones as $sComprobacione)
     {
-	    $oRespuesta->Estado = "KO";
-	    $oRespuesta->Mensaje = "El usuario está registrado prueba con otro correo";
-	    json_encode($oRespuesta);
-	    return;
+        if($sComprobacione->idUsuario > 0)
+        {
+            $oRespuesta->Estado = "KO";
+            $oRespuesta->Mensaje = "El usuario está registrado prueba con otro correo";
+            echo json_encode($oRespuesta);
+            return;
+        }
     }
     //
 	//Creamos una carpeta dentro de upload asiganda a ese usario
-	$carpeta = md5(rand(10));
-	mkdir('uploads/'.$carpeta , 0777 );
-	//
-	//Accedemos a la base de datos
-    $oDbUsuario = new Usuario();
+	$carpeta = md5(rand( ));
+	mkdir(getcwd().'uploads/'.$carpeta , 0777 , true);
     //Añadimos usuario
     $lResultado = $oDbUsuario->addUsuario($sCorreo, $sPassword, $sNombre , $sApellidos, $sCiudad , $sSexo , 'uploads/'.$carpeta );
     //

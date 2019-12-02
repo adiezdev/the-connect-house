@@ -15,13 +15,13 @@
     //
     //Si estamos logueados nos redirige index
     session_start();
-    if(isset( $_SESSION['idUsuario'] ))
+   /* if(isset( $_SESSION['idUsuario'] ))
     {
         //
         // logueado
         header( "location:/the-connect-house/index.php" );
         return;
-    }
+    }*/
     //
     //Configuramos los estilos que necesitamos
     $estilos = array(
@@ -61,6 +61,12 @@
                          <option value="null">Seleccionar <span class="spanred">*</span></option>
                          <option value="m">Mujer</option>
                          <option value="h">Hombre</option>
+                     </select><br>
+                     <label for="ciudad">¿De donde eres <span class="spanred">*</span></label>
+                     <select name="ciudad" id="selectorciudad">
+                         <option value="null">Seleccionar <span class="spanred">*</span></option>
+                         <option value="Leon">León</option>
+                         <option value="Ponferrada">Ponferrada</option>
                      </select>
                      <label for="pass">Contraseña  <span class="spanred">*</span></label><br>
                      <input type="password" name="password" id="password" class="credential" placeholder="Contraseña"><br>

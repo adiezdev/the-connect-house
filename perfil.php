@@ -69,6 +69,7 @@
                 <ul>
                     <li><a>Favoritos</a></li>
                     <li><a>Buscar...</a></li>
+                    <li><a onclick="<?php session_abort(); ?>">Buscar...</a></li>
                 </ul>
             </div>
         </div>
