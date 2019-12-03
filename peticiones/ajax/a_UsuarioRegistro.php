@@ -37,7 +37,7 @@
     //
 	//Creamos una carpeta dentro de upload asiganda a ese usario
 	$carpeta = md5(rand( ));
-	mkdir(getcwd().'uploads/'.$carpeta , 0777 , true);
+	mkdir(getcwd().'uploads/'.$carpeta , 0755 , true);
     //Añadimos usuario
     $lResultado = $oDbUsuario->addUsuario($sCorreo, $sPassword, $sNombre , $sApellidos, $sCiudad , $sSexo , 'uploads/'.$carpeta );
     //

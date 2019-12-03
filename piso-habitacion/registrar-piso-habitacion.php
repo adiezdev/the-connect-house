@@ -64,6 +64,7 @@
         <h1 class="title" style="text-align: center"><?php echo $titulo; ?></h1><br>
         <div id="todassecciones"></div>
         <form method="post" >
+            <input type="hidden" value="<?php echo $nTipo ?>" id="Id">
             <!--Seccion1 -->
             <?php include("includes/seccion-1.php"); ?>
             <!--Seccion2-->
@@ -74,6 +75,9 @@
             <?php include("includes/seccion-4.php"); ?>
             <!--Seccion5-->
             <?php include("includes/seccion-5.php"); ?>
+            <!--Guardemos-->
+            <input type="button" value="Guardar" class="button" onclick="validarDatos()">
+            <button  class="button" >Cancelar</button>
         </form>
     </div>
     <?php require_once(__DIR__ . "/../includes/footer.php"); ?>
@@ -150,6 +154,5 @@
             .trigger( "change" );
         //Desactivamos en el mapa el zoom con el scroll del ratón
         mymap.scrollWheelZoom.disable();
-
     });
 </script>
