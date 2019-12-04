@@ -107,13 +107,13 @@ function validarCamposRegistro(e)
         data: JSON.stringify(oDatosJson)
         })
         .done(function(oJson) {
-            /*var oRespuesta = JSON.parse(oJson);
+            var oRespuesta = JSON.parse(oJson);
         if (oRespuesta.Estado == "OK") {
             window.open("/the-connect-house/completa-perfil.php", "_self");
         } else {
             alert(oRespuesta.Mensaje);
-        }*/
-        console.log(oJson); //Debug
+        }
+        //console.log(oJson); //Debug
     });;
 }
 

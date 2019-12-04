@@ -86,7 +86,7 @@ class Usuario extends Conexion
     public function getLogin( $sCorreo , $sPassword)
     {
        $aCuenta = array();
-       $cSql = 'SELECT idUsuario FROM '.$this->sTabla.' WHERE Correo = ? AND Password = ?';
+       $cSql = 'SELECT * FROM '.$this->sTabla.' WHERE Correo = ? AND Password = ?';
        $stmt = $this->prepare( $cSql );
        $stmt->bind_param('ss', $sCorreo, $sPassword);
        $stmt->execute();

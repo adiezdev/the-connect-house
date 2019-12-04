@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php
+
     /**
      * Función para construir la cabecera
      *
@@ -38,15 +39,5 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <?php
-	    /**
-         * Funcion que devuelve la URL del server
-	     * @return string
-	     */
-	    function get_root_uri()
-	    {
-		    $protocol = isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ? 'https://' : 'http://';
-		    return $protocol.$_SERVER['HTTP_HOST'];
-	    }
-    ?>
+    <?php require_once(__DIR__ . "/funciones.php"); ?>
 </head>

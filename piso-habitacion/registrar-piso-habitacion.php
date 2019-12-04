@@ -84,8 +84,9 @@
 </body>
 <!-- Scripts necesarios -->
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/precarga-imagenes.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/precarga-imagenes.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/validar-piso-habitacion.js"></script>
 <script>
     $(document).ready(function(){
         //
@@ -116,13 +117,13 @@
             var imgsrcrem = '';
             //
             //Comprueba si está quecheckeado
-            if ( $(this).find('#comodidad').is(":checked"))
+            if ( $(this).find('.comodidad').is(":checked"))
             {
                 //Si lo está cambiamos la imagen
                 imgsrcrem = imgsrc.replace("808080", "000000");
                 idimg.attr('src', imgsrcrem );
             }
-            else if ( $(this).find('#norma').is(":checked"))
+            else if ( $(this).find('.norma').is(":checked"))
             {
                 //Si lo está cambiamos la imagen
                 imgsrcrem = imgsrc.replace("808080", "000000");
@@ -135,6 +136,7 @@
                 idimg.attr('src', imgsrcrem );
             }
         });
+
         //
         //FUNCIÓN AL SELECCIONAR UNA CIUDAD QUE APAREZCA EN EL MAPA
         //DEPENDIENDO DE LA ELEGIDA EN EL SELECTOR

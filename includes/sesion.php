@@ -13,19 +13,12 @@ if( !isset( $_SESSION['idUsuario'] ))
     header( "location:/the-connect-house/login-registro.php" );
     return;
 }
-//
-// Comprobar que la sesión no haya caducado
-/*if( isset( $_SESSION['UltimoAcceso'] ) )
+//Comprobar la sesión
+if (time() - $_SESSION['tiempo'] > 12000)
 {
-    $dTime = $_SESSION['UltimoAcceso'];
-    if( $dTime + 60*60 < time() )
-    {
-        //
-        // Sesíón caducada
-        header( "location:/../login-registro.php" );
-        return;
-    }
-}*/
-//
-// Actualizamos la hora de último acceso.
-//updateSession();
+    //La sesión se destruye
+    session_destroy();
+
+    header("location:/the-connect-house/login-registro.php");
+    die();
+}

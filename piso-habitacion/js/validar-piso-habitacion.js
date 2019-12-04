@@ -11,33 +11,31 @@ function validarDatos() {
     var toilet = $('#toilet').val();
     var habitaciones = $('#habitaciones').val();
     //
+    metros = metros.replace(',','.');
+    precio = precio.replace(',','.');
+    //
+    //
     var comodididades = [];
     //
-    $("input[name^='comodidad']").change(function () {
-        if (this.checked) //Si hacemos check se agrega
+    var c = $('.comodidad');
+    for (var i = 0; i < c.length ; i++)
+    {
+        if ($(c[i]).prop('checked') == true)
         {
-            comodididades.push( $(this).val() );
-            //console.log(comodididades);
-        } else // si lo quitamos el chek lo quitamos del array
-        {
-            comodididades.splice(($(this).val() - 1), 1);
-            //console.log(comodididades);
+            comodididades.push($(c[i]).val());
         }
-    });
+    }
     //
     var normas = [];
     //
-    $("input[name^='norma']").change(function () {
-        if (this.checked) //Si hacemos check se agrega
+    var n = $('.norma');
+    for (var i = 0; i < n.length ; i++)
+    {
+        if ($(n[i]).prop('checked') == true)
         {
-            normas.push( $(this).val() );
-            //console.log(normas);
-        } else // si lo quitamos el chek lo quitamos del array
-        {
-            normas.splice(($(this).val() - 1), 1);
-            //console.log(normas);
+            normas.push($(n[i]).val());
         }
-    });
+    }
     //
     var latitud = $('#latitud').val();
     var longitud = $('#longitud').val();
@@ -48,46 +46,46 @@ function validarDatos() {
     imagenes.push( $( "input[name=imagenes]" ).val() );
     //
     //VALIDACIONES
-    if( calle.trim() == '')
+   if( calle.trim() == '')
     {
         alert("Indica por favor la calle donde está");
-        calle.focus();
+        $('#calle').focus();
         return false;
     }
     if( numero.trim() == '' )
     {
         alert("Indica por favor el numero del por tal");
-        numero.focus();
+        $('#numero').focus();
         return false;
     }
     if( cp.trim() == '' || isNaN(toilet) )
     {
         alert("Indica el codigo postal");
-        cp.focus();
+        $('#cp').focus();
         return false;
     }
     if( descripcion.trim() == '')
     {
         alert("Indica la descripción");
-        descripcion.focus();
+        $('#descripcion').focus();
         return false;
     }
     if( metros.trim() == '' || isNaN(metros))
     {
         alert("Metros cuadrados del piso que sea válidos");
-        metros.focus();
+        $('#metros').val();
         return false;
     }
     if( precio.trim() == '' || isNaN(precio))
     {
         alert("Indique un precio válido");
-        precio.focus();
+        $('#precio').val();
         return false;
     }
     if( toilet.trim() == '' || isNaN(toilet))
     {
         alert("Indique un precio válido");
-        precio.focus();
+        $('#toilet').val();
         return false;
     }
     //Formamos el JSON
@@ -110,4 +108,6 @@ function validarDatos() {
             Longitud: longitud ,
             Imagenes: imagenes
         };
+    //
+    console.log(DatosJson);
 }

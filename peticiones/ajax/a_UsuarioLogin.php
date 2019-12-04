@@ -27,6 +27,7 @@
        $oRespuesta->Estado = "KO";
        $oRespuesta->Mensaje = "Usuario no encontrado";
 	   json_encode( $oRespuesta );
+	   return false;
    }
   else
   {
@@ -35,9 +36,12 @@
 		  $_SESSION['idUsuario']  = $lResultado->idUsuario; //Extraemos el idUsuario que nos devuelve, se lo damos a la sesión
 		  $_SESSION['Carpeta'] = $lResultado->Carpeta.'/'; //Gaurdamos la carpeta del usuario la necesitaremos
 	  }
+      //Valor del tiempo
+      $_SESSION['tiempo']= time();
       //
       $oRespuesta->Estado = "OK";
       $oRespuesta->Mensaje = "Usuario encontrado";
+      json_encode($oRespuesta);
    }
    //
    //Enviamos la respuesta

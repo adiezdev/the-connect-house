@@ -29,7 +29,7 @@
         if($sComprobacione->idUsuario > 0)
         {
             $oRespuesta->Estado = "KO";
-            $oRespuesta->Mensaje = "El usuario está registrado prueba con otro correo";
+            $oRespuesta->Mensaje = "El usuario esta registrado prueba con otro correo";
             echo json_encode($oRespuesta);
             return;
         }
@@ -37,7 +37,10 @@
     //
 	//Creamos una carpeta dentro de upload asiganda a ese usario
 	$carpeta = md5(rand( ));
-	mkdir(getcwd().'uploads/'.$carpeta , 0755 , true);
+	mkdir( $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/uploads/'.$carpeta.'/' , 0755 , true);
+	//
+    //El método mkdir da errores con los permisos, pasamos la carpeta por chmod asi damos todos los permisos para porder guardar ahí
+    chmod($_SERVER['DOCUMENT_ROOT'].'/the-connect-house/uploads/'.$carpeta.'/' , 0777);
     //Añadimos usuario
     $lResultado = $oDbUsuario->addUsuario($sCorreo, $sPassword, $sNombre , $sApellidos, $sCiudad , $sSexo , 'uploads/'.$carpeta );
     //
@@ -60,6 +63,8 @@
 	        $_SESSION['idUsuario']  = $nIdelUsuari->idUsuario; //Extraemos el idUsuario que nos devuelve, se lo damos a la sesión
 	        $_SESSION['Carpeta'] = $nIdelUsuari->Carpeta.'/'; //Guardamos la carpeta del usuario la necesitaremos
         }
+        //Valor del tiempo
+        $_SESSION['tiempo']=time();
 	    //
         //Devolvemos una respuesta correcta
         $oRespuesta->Estado = "OK";

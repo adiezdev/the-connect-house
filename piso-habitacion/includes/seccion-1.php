@@ -29,7 +29,7 @@ Nombre del archivo: seccion-1.php
 			</select>
 		</td>
 		<td><label for="descripcion">Descripción (*): </label></td>
-		<td colspan="2"><textarea class="credential" id="descripcion" cols="30" rows="36" name="user_post_textarea" maxlength="320" placeholder="Pon una descripción" style="height: 125px !important;">
+		<td ><textarea class="credential" id="descripcion" name="user_post_textarea" maxlength="320" placeholder="Pon una descripción" style="height: 125px !important;">
                     </textarea><br><p>320\<span id="contador"> 320</span></p>
 		</td>
 	</tr>

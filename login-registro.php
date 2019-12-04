@@ -14,7 +14,6 @@
     require_once(__DIR__."/includes/constantes.php" );
     //
     //Si estamos logueados nos redirige index
-    session_start();
    /* if(isset( $_SESSION['idUsuario'] ))
     {
         //
