@@ -64,7 +64,7 @@
         <h1 class="title" style="text-align: center"><?php echo $titulo; ?></h1><br>
         <div id="todassecciones"></div>
         <form method="post" >
-            <input type="hidden" value="<?php echo $nTipo ?>" id="Id">
+            <input type="hidden" value="<?php echo $nTipo ?>" id="IdTipo">
             <!--Seccion1 -->
             <?php include("includes/seccion-1.php"); ?>
             <!--Seccion2-->

@@ -32,17 +32,15 @@
      */
     function verDiv(n)
     {
-        let i;//Incializamos el for
         //Cogemos las clases que tengan secciion
-        var x = document.getElementsByClassName("seccion");
+        var x = $('.seccion');
         //
         //Recorremos las secciones
-        for (i = 0; i < x.length; i++)
+        x.each(function(index)
         {
             //Las ocultamos
-            x[i].style.display = "none";
-        }
-
+            x[index].style.display = "none";
+        });
         x[n].style.display = "table"; //por defecto mostramos la primera seccion
     }
 

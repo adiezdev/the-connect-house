@@ -1,4 +1,11 @@
-function validarDatos() {
+/**
+ * Valida los campos deuna habitación o piso
+ *
+ * @returns {boolean}
+ */
+function validarDatos()
+{
+    var id = $('#IdTipo').val();
     var calle = $('#calle').val();
     var numero = $('#numero').val();
     var cp = $('#cp').val();
@@ -18,24 +25,24 @@ function validarDatos() {
     var comodididades = [];
     //
     var c = $('.comodidad');
-    for (var i = 0; i < c.length ; i++)
+    c.each(function(index)
     {
-        if ($(c[i]).prop('checked') == true)
+        if ($(c[index]).prop('checked') == true)
         {
-            comodididades.push($(c[i]).val());
+            comodididades.push($(c[index]).val());
         }
-    }
+    });
     //
     var normas = [];
     //
     var n = $('.norma');
-    for (var i = 0; i < n.length ; i++)
+    n.each(function(index)
     {
-        if ($(n[i]).prop('checked') == true)
+        if ($(n[index]).prop('checked') == true)
         {
-            normas.push($(n[i]).val());
+            normas.push($(n[index]).val());
         }
-    }
+    });
     //
     var latitud = $('#latitud').val();
     var longitud = $('#longitud').val();
@@ -43,7 +50,11 @@ function validarDatos() {
     var imagenes  = [];
     //
     //Guardamos las imagenes en un array
-    imagenes.push( $( "input[name=imagenes]" ).val() );
+    var imgs = $('input[name="imagenes[]"]');
+    imgs.each(function(index)
+    {
+        imagenes.push($(imgs[index]).val())
+    });
     //
     //VALIDACIONES
    if( calle.trim() == '')
@@ -88,9 +99,21 @@ function validarDatos() {
         $('#toilet').val();
         return false;
     }
+    if(latitud == '' || longitud == '')
+    {
+        alert("Indique donde está en el mapa");
+        return false;
+    }
+    if(imagenes == '' )
+    {
+        alert("Inserte alguna imagen");
+        return false;
+    }
+
     //Formamos el JSON
-    var DatosJson =
+    var oDatosJson =
         {
+            Tipo: id,
             Calle: calle ,
             Numero: numero ,
             Cp: cp ,
@@ -101,13 +124,29 @@ function validarDatos() {
             Chicos: chicos ,
             Chicas: chicas ,
             Toilet: toilet ,
-            Habotaciones: habitaciones ,
+            Habitaciones: habitaciones ,
             Comodidades: comodididades ,
             Normas: normas ,
             Latitud: latitud ,
             Longitud: longitud ,
             Imagenes: imagenes
         };
+    console.log(oDatosJson)
     //
-    console.log(DatosJson);
+    //Procesamos los datos
+    $.ajax({
+        url: '/the-connect-house/piso-habitacion/ajax/a_savePisoHabitacion.php',
+        type: 'POST',
+        data: JSON.stringify(oDatosJson)
+    })
+        .done(function(oJson) {
+            var oRespuesta = JSON.parse(oJson);
+            if (oRespuesta.Estado == "OK")
+            {
+                window.open("/the-connect-house/perfil.php", "_self");
+            } else {
+                alert(oRespuesta.Mensaje);
+            }
+            //console.log(oJson);
+        });
 }

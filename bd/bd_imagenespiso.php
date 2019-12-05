@@ -85,18 +85,19 @@ class Imagenes extends Conexion
      */
     public function addImg( $sURL , $idPiso )
     {
-        $cSql = 'INSERT INTO '.$this->sTabla.' ( Url , idPiso) VALUES ( ? , ? )';
+        $cSql = 'INSERT INTO '.$this->sTabla.' ( Url , idPiso) VALUES ( ?, ? )';
         $stmt = $this->prepare( $cSql );
         $stmt->bind_param('si', $sURL , $idPiso );
         $bResultado = $stmt->execute();
-        if(!$bResultado)
+        return $stmt->error;
+        /*if(!$bResultado)
         {
             return false;
         }
         else
         {
             return true;
-        }
+        }*/
     }
     /**
      * Elimina una imagen

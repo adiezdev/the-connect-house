@@ -42,7 +42,7 @@
     //El método mkdir da errores con los permisos, pasamos la carpeta por chmod asi damos todos los permisos para porder guardar ahí
     chmod($_SERVER['DOCUMENT_ROOT'].'/the-connect-house/uploads/'.$carpeta.'/' , 0777);
     //Añadimos usuario
-    $lResultado = $oDbUsuario->addUsuario($sCorreo, $sPassword, $sNombre , $sApellidos, $sCiudad , $sSexo , 'uploads/'.$carpeta );
+    $lResultado = $oDbUsuario->addUsuario($sCorreo, $sPassword, $sNombre , $sApellidos, $sCiudad , $sSexo , $carpeta );
     //
 	//Sacamos la últma sesión
     $nIdelUsuario = $oDbUsuario->getLastID();
@@ -52,7 +52,8 @@
     {
         $oRespuesta->Estado = "KO";
         $oRespuesta->Mensaje = "El usuario se ha registrado mal";
-	    json_encode( $oRespuesta );
+	    echo json_encode( $oRespuesta );
+	    return;
     }
     else
     {
@@ -61,7 +62,7 @@
         foreach ( $nIdelUsuario as $nIdelUsuari)
         {
 	        $_SESSION['idUsuario']  = $nIdelUsuari->idUsuario; //Extraemos el idUsuario que nos devuelve, se lo damos a la sesión
-	        $_SESSION['Carpeta'] = $nIdelUsuari->Carpeta.'/'; //Guardamos la carpeta del usuario la necesitaremos
+	        $_SESSION['Carpeta'] = $nIdelUsuari->Carpeta; //Guardamos la carpeta del usuario la necesitaremos
         }
         //Valor del tiempo
         $_SESSION['tiempo']=time();
@@ -69,7 +70,7 @@
         //Devolvemos una respuesta correcta
         $oRespuesta->Estado = "OK";
         $oRespuesta->Mensaje = "Usuario no encontrado";
-	    json_encode( $oRespuesta );
+	    echo json_encode( $oRespuesta );
     }
     //
     //Enviamos la respuesta

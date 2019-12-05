@@ -25,10 +25,10 @@ function showDiv(n) {
         indice = x.length
     }
     //Recorremos las clases
-    for (i = 0; i < x.length; i++)
+    x.forEach(function (index)
     {
-        x[i].style.display = "none"; //Las ocultamos
-    }
+        x[index].style.display = "none"; //Las ocultamos
+    })
     //Mostramos la primera imagen
     x[indice - 1].style.display = "block";
 }

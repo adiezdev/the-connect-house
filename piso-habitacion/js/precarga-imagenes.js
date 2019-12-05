@@ -23,8 +23,8 @@ function precarfarImagens(evt)
             //Retornamos la funcion
             return function(e)
             {
-                //El archivo tiene que ser menos de 16MB
-                if (theFile.size <= 16000000)
+                //El archivo tiene que ser menos de 7MB
+                if (theFile.size <= 7000000)
                 {
                     //Creamos una etiqueta span
                     var span = document.createElement('span');
@@ -40,10 +40,10 @@ function precarfarImagens(evt)
                     //Añadimos las imagenes cantes de acabar la etiqueta de gallery
                     document.getElementById('gallery').insertBefore(span, null);
                     //Añadimos un input para poder guardar en bbdd la URL de la imagen
-                    document.getElementById('hiddens').innerHTML += '<input type="hidden" name="imagenes" id=' + theFile.name + ' value = ' + e.target.result + '>';
+                    document.getElementById('hiddens').innerHTML += '<input type="hidden" name="imagenes[]" id=' + theFile.name + ' value = ' + e.target.result + '>';
                 } else
                     {
-                    alert("No pueden pesar mas de 16mb") //Si es mayor a 16 MB
+                    alert("No pueden pesar mas de 7MG") //Si es mayor a 16 MB
                 }
 
             };

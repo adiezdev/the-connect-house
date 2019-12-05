@@ -57,6 +57,25 @@ class Pisos extends Conexion
         return $aPisosId;
     }
     /**
+     * Devuelve la ultima ID de ultimo piso/habtiacion
+     *
+     * @return array
+     */
+    public function getLastID()
+    {
+        $aUltimaID = array();
+        $cSql = 'SELECT * FROM '.$this->sTabla.' ORDER BY idPiso DESC LIMIT 1';
+        $stmt = $this->prepare( $cSql );
+        $bResultado = $stmt->execute();
+        $oResultado = $stmt->get_result();
+        while( $oRecord = $oResultado->fetch_object())
+        {
+            $aUltimaID[] = $oRecord;
+        }
+        return $aUltimaID;
+
+    }
+    /**
      * Devuelve todos los pisos por el ID del Usuario
      *
      * @param $nIdUsuario
@@ -96,24 +115,25 @@ class Pisos extends Conexion
      * @return bool
      */
     public function addPisoHabitacion( $nHabitaciones , $nToiles , $fMetros , $sCalle , $nNumero , $nCp , $sCiudad , $sDescripcion
-        , $fLatitud , $fLogintud , $fPrecio , $nVisitas , $nTipo  , $nIdUsuario )
+        , $fLatitud , $fLogintud , $fPrecio  , $nTipo  , $sCarpeta, $nIdUsuario )
     {
     	$sFecha =  date( "Y-m-d" );
     	//
-        $cSql = 'INSERT INTO '.$this->sTabla.' ( NHabitaciones, NBanos, Metros, Calle, Numero, CP, Ciudad, Descripcion, Latitud, Longitud, Precio, Visitas, Tipo, Fecha, idUsuario)
-                VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+         $cSql = 'INSERT INTO '.$this->sTabla.' ( NHabitaciones, NBanos, Metros, Calle, Numero, CP, Ciudad, Descripcion, Latitud, Longitud, Precio, Tipo, Fecha, Carpeta, idUsuario)
+                VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $stmt = $this->prepare( $cSql );
-	        $stmt->bind_param('iidssissdddiisi' ,  $nHabitaciones , $nToiles , $fMetros , $sCalle , $nNumero , $nCp , $sCiudad , $sDescripcion
-            , $fLatitud , $fLogintud , $fPrecio , $nVisitas , $nTipo, $sFecha , $nIdUsuario );
-        $bResultado = $stmt->execute();
-        if(!$bResultado)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+         $stmt->bind_param('iidssissdddissi' ,  $nHabitaciones , $nToiles , $fMetros , $sCalle , $nNumero , $nCp , $sCiudad , $sDescripcion
+            , $fLatitud , $fLogintud , $fPrecio  , $nTipo, $sFecha , $sCarpeta , $nIdUsuario );
+	        $bResultado = $stmt->execute();
+        //$stmt->error;
+              if(!$bResultado)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
     }
     /**
      * Actualiza un nuevo piso o habitacion
