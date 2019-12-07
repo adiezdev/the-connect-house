@@ -18,17 +18,17 @@
     //Acceso a datos
     require_once(__DIR__."/bd/bd_usuario.php");
     require_once(__DIR__."/bd/bd_pisos.php");
+    require(__DIR__."/bd/bd_imagenespiso.php");
     //
     //Configuramos los estilos que necesitamos
     $estilos = array(
          ESTILOS_WIDGETS,
-         ESTILOS_BUSQUEDA,
+         ESTILOS_MAIN,
          ESTILOS_VENTANA
     );
     //
     //Generamos la cabecera
     cabecera(TITULO_PERFIIL , $estilos , false);
-    //
     //
     //Sacar los datos del usuario
     $aDbUsuario = new Usuario();
@@ -42,7 +42,6 @@
     //
     //Sacar los pisos/Habitaciones del usuario
     $aDbPisosHabitaciones = new Pisos();
-
     $aPisosHabitaciones = $aDbPisosHabitaciones->getByUsuario( $_SESSION['idUsuario'] );
 ?>
 <body>
@@ -65,17 +64,17 @@
                     }
                     ?>
                 </div>
-                <h2>Secciones:</h2>
                 <ul>
+                    <li><a>Inicio</a></li>
+                    <li><a>Cofiguración</a></li>
                     <li><a>Favoritos</a></li>
+                    <li><a>Perfil</a></li>
                     <li><a>Buscar...</a></li>
-                    <li><a onclick="<?php session_abort(); ?>">Buscar...</a></li>
                 </ul>
             </div>
         </div>
         <div class="contenedor-centro">
             <div class="into-centro">
-
                 <?php
                 //
                 //Si no tenemos piso en la base de datos , te aparecerá para agregarlo
@@ -89,7 +88,7 @@
                     $Html .= '</div>';
                     echo $Html;
                     //
-                    //Array botones que aparecen
+                    //Array botones que aparecen en la ventana
                     $btones = array(
                         "Añadir Habitación",
                         "Añadir Piso"
@@ -103,35 +102,68 @@
                     getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
                 }else
                 {
+                    //Llamamos pasa sacar la imagen del psio
+                    $aDbImagen = new Imagenes();
                     //
-                    //Si tenemos pisos y habitaciones aparecerán
                     foreach ( $aPisosHabitaciones as $aPisoHabitacion)
                     {
-                        $Html = '<h1>Tus pisos y habitaciones</h1>';
-                        $Html.= '<div class="box-mas-visitados">';
-                        $Html .= '<img src="img/img-modelo.jpg" alt="habitación" class="habitacion">';
-                        $Html .= '<div class="datospiso">';
-                        $Html .= '<h2>Calle</h2>';
-                        $Html .= '<div class="descripcion">';
-                        $Html .=    '<p><i class="fas fa-map-marker-alt"></i> Ubicación</p><br>';
-                        $Html .=    '<p><i class="fas fa-eye"></i> Ubicación</p><br>';
-                        $Html .= '</div>';
-                        $Html .= '<div class="datos">';
-                        $Html .=    '<p><i class="fas fa-bed"></i> Habitaciones |</p>';
-                        $Html .=    '<p><i class="fas fa-bath"></i> Baños</p>';
-                        $Html .= '</div>';
-                        $Html .=' </div>
+                        $Html1  = '<div class="box-mas-visitados" onclick="window.open(\'/the-connect-house/piso.php\');">';
+                        $ImagenDestacada =  $aDbImagen->getByIdPiso($aPisoHabitacion->idPiso);
+                        //
+                        foreach ($ImagenDestacada as $ImagenDestacad)
+                        {
+                            $Html1 .= '<img src="'.$ImagenDestacad->Url.'" alt="habitación">';
+                        }
+                        $Html1 .= '<div class="datospiso">';
+                        $Html1 .= '<h2 >'.$aPisoHabitacion->Calle.'</h2>';
+                        $Html1 .= '<div class="descripcion">';
+                        $Html1 .=    '<p><i class="fas fa-map-marker-alt"></i> '.$aPisoHabitacion->Ciudad.'</p><br>';
+                        $Html1 .=    '<p id="descripcionPH">'.$aPisoHabitacion->Descripcion.'</p><br>';
+                        $Html1 .= '</div>';
+                        $Html1 .= '<div class="datos">';
+                        $Html1 .=    '<p><i class="fas fa-bed"></i> Habitaciones '.$aPisoHabitacion->NHabitaciones.'  |</p>';
+                        $Html1 .=    '<p><i class="fas fa-bath"></i> Baños '.$aPisoHabitacion->NBanos.'</p>';
+                        $Html1 .= '</div>';
+                        $Html1 .=' </div>
                             </div>';
-                        echo $Html;
+                        echo $Html1;
                     }
+
                 }
                 ?>
             </div>
         </div>
+        <div class="contenedor-derecho">
+            <?php
+            if(!empty($aPisosHabitaciones))
+            {
+                $Html  = '<div id="vacio">';
+                $Html .= '<img src="img/key.png" alt="llaves" style="width: 40%">';
+                $Html .= '<h2>A parte de buscar piso o habitación</h2><br>';
+                $Html .= '<h2>Puesdes alquilar tú habitación o piso</h2>';
+                $Html .= '<button class="button" id="buttonVentana" >Empezar</button>';
+                $Html .= '</div>';
+                echo $Html;
+                //
+                //Array botones que aparecen en la ventana
+                $btones = array(
+                    "Añadir Habitación",
+                    "Añadir Piso"
+                );
+                $btonesfuncion = array(
+                    "addPisoHabitacion(2)",
+                    "addPisoHabitacion(1)"
+                );
+                //
+                //Generamos la ventana
+                getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
+            }
+            ?>
+        </div>
     </div>
     <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/scriptventana.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/crearventana.js"></script>
 <script>
     /**
      * Función para ir a registrar tu piso o habitacion

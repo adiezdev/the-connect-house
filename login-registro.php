@@ -14,13 +14,13 @@
     require_once(__DIR__."/includes/constantes.php" );
     //
     //Si estamos logueados nos redirige index
-   /* if(isset( $_SESSION['idUsuario'] ))
+    if(isset( $_SESSION['idUsuario'] ))
     {
         //
         // logueado
         header( "location:/the-connect-house/index.php" );
         return;
-    }*/
+    }
     //
     //Configuramos los estilos que necesitamos
     $estilos = array(
@@ -43,7 +43,7 @@
                      <label for="pass">Contraseña</label><br>
                      <input type="password" id="pass" name="pass" class="credential" placeholder="Contraseña"><br><br>
                      <div id="acciones">
-                         <input type="button" id="bnLogin" value="Entrar" class="button">
+                         <input type="button" id="bnLogin" value="Entrar" class="button" onclick="validarCamposLogin()">
                          <span id="registrarse">Resgistrarse</span>
                      </div>
                  </form>
@@ -73,7 +73,7 @@
                      <input type="password" name="password2" id="password2" class="credential" placeholder="Contraseña"><br><br>
                      <div id="acciones">
                          <span id="atras">Atrás</span>
-                         <input type="button" id="bnRegistro" value="Registrarse" class="button">
+                         <input type="button" id="bnRegistro" value="Registrarse" class="button" onclick="validarCamposRegistro()">
                      </div>
                  </form>
              </div>

@@ -94,8 +94,6 @@
             $('.contenedor-izquierdo').css('bottom', '');
             $('.contenedor-izquierdo').css('top', '');
         }
-
-
     });
 </script>
 </html>

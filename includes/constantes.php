@@ -10,7 +10,7 @@
     define("ESTILOS_IDEX","estilos-inicio" );
     define("ESTILOS_LOGIN","estilos-login");
     define("ESTILOS_PISO","estilos-piso");
-    define("ESTILOS_BUSQUEDA","estilos-main");
+    define("ESTILOS_MAIN","estilos-main");
     define("ESTILOS_CASI","estilos-completa");
     define("ESTILOS_REGISTRAR_PISO","estilos-registrar-piso-habitacion");
     define("ESTILOS_VENTANA","ventana");

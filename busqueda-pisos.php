@@ -18,22 +18,36 @@
     //Configuramos los estilos que necesitamos
     $estilos = array(
         ESTILOS_WIDGETS,
-        ESTILOS_BUSQUEDA
+        ESTILOS_MAIN
     );
     //
     //Generamos la cabecera
     cabecera(TITULO_BUSQUEDA , $estilos ,true);
     //
-    //Extraemos los datos del usuario por si id
-    $bdUsuario = new Usuario();
+    //Sacar los datos del usuario
+    $aDbUsuario = new Usuario();
+    $oDatosUsuario = '';
+    $idUsuario = '';
+    if(isset($_SESSION['idUsuario']) || $_SESSION['idUsuario'] > 0)
+    {
+        $oDatosUsuario = $aDbUsuario->getById($_SESSION['idUsuario']);
+    }
 ?>
 <body>
   <div class="content">
     <div class="contenedor-izquierdo">
         <div class="into-izquierdo">
             <div id="perfil">
-                <img id="user" src="img/isset/isset-user.png" alt="imgen-perfil" srcset="">
-                <h3><?php echo $_SESSION['correo'] ?></h3>
+                <?php
+                //Datos perfil
+                foreach ( $oDatosUsuario as $oDatoUsuario )
+                {
+                    $idUsuario = $oDatoUsuario->idUsuario;
+                    $Html = '<img id="user" src="'.$oDatoUsuario->Imgperfil.'" alt="imgen-perfil" srcset="">';
+                    $Html .= '<h3>'.$oDatoUsuario->Nombre.' '.$oDatoUsuario->Apellidos.'</h3><br>';
+                    echo $Html;
+                }
+                ?>
             </div>
             <ul>
                 <li><a>Inicio</a></li>
@@ -107,7 +121,7 @@
     </div>
       <div class="contenedor-derecho">
         <div id="mapid"></div>
-        </div>
+      </div>
 
 
   </div>

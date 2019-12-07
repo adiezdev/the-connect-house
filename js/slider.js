@@ -13,7 +13,7 @@ function thisImg(n) {
 function showDiv(n) {
     let i;
     //Cogemos todos los elementos con ésta clase
-    var x = document.getElementsByClassName("imgSlides");
+    var x = $('.imgSlides')
     //Si n es mayor que la longitud de x el indice vale 1
     if (n > x.length)
     {
@@ -25,7 +25,7 @@ function showDiv(n) {
         indice = x.length
     }
     //Recorremos las clases
-    x.forEach(function (index)
+    x.each(function (index)
     {
         x[index].style.display = "none"; //Las ocultamos
     })

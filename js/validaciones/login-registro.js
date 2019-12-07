@@ -1,32 +1,12 @@
 //Nicializamos la pantalla de login
 $("#registro").css("display", "none");
 /**
- * Acciones para mostrar os campos del registro o login
- * y los botone de login y regiistro
- */
-$(function() {
-    $('#atras').click(function(e) {
-        $("#registro").fadeOut(100);
-        $("#login").delay(100).fadeIn(100);
-    });
-    $('#registrarse').click(function(e) {
-        $("#login").fadeOut(100);
-        $("#registro").delay(100).fadeIn(100);
-    });
-    $('#bnRegistro').click(function(e) {
-        validarCamposRegistro(e);
-    });
-    $('#bnLogin').click(function(e) {
-        validarCamposLogin(e);
-    });
-});
-/**
  * Validamos los campos del registro
  *
  * @param e
  * @returns {boolean}
  */
-function validarCamposRegistro(e)
+function validarCamposRegistro()
 {
     var nombre = $('#registro #nombre').val().trim();
     var apellidos = $('#registro #apellidos').val();
@@ -38,37 +18,37 @@ function validarCamposRegistro(e)
     //Nombre
     if (nombre == '' || nombre.indexOf(" ") > -1) {
         alert("Indica el nombre");
-        e.preventDefault();
+        $('#registro #nombre').focus();
         return false;
     }
     //Apellidos
     if (apellidos == '') {
         alert("Indica los Apellidos");
-        e.preventDefault();
+        $('#registro #apellidos').focus();
         return false;
     }
     //Correo
     if (correo == '' || correo.indexOf(" ") > -1) {
         alert("Indica el correo");
-        e.preventDefault();
+        $('#registro #email').focus();
         return false;
     }
     //Sexo
     if (selector == null) {
         alert("Indica los el Sexo");
-        e.preventDefault();
+        $('#registro #selector').focus();
         return false;
     }
     //ciudad
     if (ciudad == null) {
         alert("Indica la ciudad");
-        e.preventDefault();
+        $('#registro #selectorciudad').focus();
         return false;
     }
     //Contraseña
     if (contrasena == '' || contrasena == '') {
         alert("No puedes dejar el campo vacío");
-        e.preventDefault();
+        $('#registro #password').focus();
         return false;
     }
     if (contrasena.length < 8) {
@@ -123,18 +103,18 @@ function validarCamposRegistro(e)
  * @param e
  * @returns {boolean}
  */
-function validarCamposLogin(e) {
+function validarCamposLogin() {
     var sCorreo = $('#login #email').val().trim();
     var sContrasena = $('#login #pass').val().trim();
     //Correo
     if (sCorreo == '' || sCorreo.indexOf(" ") > -1) {
         alert("Por favor indica el correo");
-        e.preventDefault();
+        $('#login #email').focus();
         return false;
     }
     if (sContrasena == '' || sContrasena == '') {
         alert("Por favor introduce una contraseña");
-        e.preventDefault();
+        $('#login #pass').focus();
         return false;
     }
     //Formamos el array
