@@ -93,7 +93,7 @@
         //FUNCIÓN PARA MOSTRAR LOS CARACTERES DE LA DESCRIPCIÓN
         //
         //Máixmo de caracteres en la descripción
-        var maximo = 320;
+        var maximo = 600;
         //Si detecta el teclado
         $('#descripcion').keyup(function()
         {

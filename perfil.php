@@ -18,7 +18,7 @@
     //Acceso a datos
     require_once(__DIR__."/bd/bd_usuario.php");
     require_once(__DIR__."/bd/bd_pisos.php");
-    require(__DIR__."/bd/bd_imagenespiso.php");
+    require_once(__DIR__."/bd/bd_imagenespiso.php");
     //
     //Configuramos los estilos que necesitamos
     $estilos = array(
@@ -102,13 +102,15 @@
                     getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
                 }else
                 {
-                    //Llamamos pasa sacar la imagen del psio
-                    $aDbImagen = new Imagenes();
                     //
                     foreach ( $aPisosHabitaciones as $aPisoHabitacion)
                     {
-                        $Html1  = '<div class="box-mas-visitados" onclick="window.open(\'/the-connect-house/piso.php\');">';
-                        $ImagenDestacada =  $aDbImagen->getByIdPiso($aPisoHabitacion->idPiso);
+                        //
+                        //Pasamos el id pero codificado
+                        $Html1  = '<div class="box-mas-visitados" onclick="window.open(\'/the-connect-house/piso.php?'.base64_encode('idPiso='.$aPisoHabitacion->idPiso).'\', \'_self\');">';
+                        //Llamamos pasa sacar la imagen del psio
+                        $aDbImagen = new Imagenes();
+                        $ImagenDestacada =  $aDbImagen->getByIdPisoPrimeraFoto($aPisoHabitacion->idPiso);
                         //
                         foreach ($ImagenDestacada as $ImagenDestacad)
                         {
@@ -122,7 +124,8 @@
                         $Html1 .= '</div>';
                         $Html1 .= '<div class="datos">';
                         $Html1 .=    '<p><i class="fas fa-bed"></i> Habitaciones '.$aPisoHabitacion->NHabitaciones.'  |</p>';
-                        $Html1 .=    '<p><i class="fas fa-bath"></i> Baños '.$aPisoHabitacion->NBanos.'</p>';
+                        $Html1 .=    '<p><i class="fas fa-bath"></i> Baños '.$aPisoHabitacion->NBanos.'</p><br>';
+                        $Html1 .=    '<span>'.$aPisoHabitacion->Precio.'€/mes</span>';
                         $Html1 .= '</div>';
                         $Html1 .=' </div>
                             </div>';
@@ -134,31 +137,32 @@
             </div>
         </div>
         <div class="contenedor-derecho">
-            <?php
-            if(!empty($aPisosHabitaciones))
-            {
-                $Html  = '<div id="vacio">';
-                $Html .= '<img src="img/key.png" alt="llaves" style="width: 40%">';
-                $Html .= '<h2>A parte de buscar piso o habitación</h2><br>';
-                $Html .= '<h2>Puesdes alquilar tú habitación o piso</h2>';
-                $Html .= '<button class="button" id="buttonVentana" >Empezar</button>';
-                $Html .= '</div>';
-                echo $Html;
-                //
-                //Array botones que aparecen en la ventana
-                $btones = array(
-                    "Añadir Habitación",
-                    "Añadir Piso"
-                );
-                $btonesfuncion = array(
-                    "addPisoHabitacion(2)",
-                    "addPisoHabitacion(1)"
-                );
-                //
-                //Generamos la ventana
-                getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
-            }
-            ?>
+            <div class="into-derecho">
+                <?php
+                if(!empty($aPisosHabitaciones))
+                {
+                    $Html  = '<div id="vacio">';
+                    $Html .= '<img src="img/key.png" alt="llaves" style="width: 40%">';
+                    $Html .= '<h2>Añade más pisos o habitaciones, que quieras alquilar</h2>';
+                    $Html .= '<button class="button" id="buttonVentana" >Empezar</button>';
+                    $Html .= '</div>';
+                    echo $Html;
+                    //
+                    //Array botones que aparecen en la ventana
+                    $btones = array(
+                        "Añadir Habitación",
+                        "Añadir Piso"
+                    );
+                    $btonesfuncion = array(
+                        "addPisoHabitacion(2)",
+                        "addPisoHabitacion(1)"
+                    );
+                    //
+                    //Generamos la ventana
+                    getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
+                }
+                ?>
+            </div>
         </div>
     </div>
     <?php  require_once(__DIR__."/includes/footer.php"); ?>

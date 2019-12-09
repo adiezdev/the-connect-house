@@ -154,7 +154,7 @@
 </body>
 <script>
     /**
-     * Función para mostrar valor del slider
+     * Función para mostrar valor del slider del precio
      */
     $(document).ready(function() {
         //Posiición incial

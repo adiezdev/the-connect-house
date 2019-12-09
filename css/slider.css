@@ -1,3 +1,4 @@
+/*Slider de imagenes*/
 .carrusel {
     position: relative;
     margin-left: auto;
@@ -49,6 +50,7 @@
 }
 @media screen and ( max-width: 740px) {
     .imgSlides {
-        height: auto;
+        height: 180px;
+        object-fit: cover;
     }
 }

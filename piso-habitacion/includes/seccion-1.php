@@ -30,7 +30,7 @@ Nombre del archivo: seccion-1.php
 		</td>
 		<td><label for="descripcion">Descripción (*): </label></td>
 		<td ><textarea class="credential" id="descripcion" name="user_post_textarea" maxlength="320" placeholder="Pon una descripción" style="height: 125px !important;">
-                    </textarea><br><p>320\<span id="contador"> 320</span></p>
+                    </textarea><br><p>600\<span id="contador"> 600</span></p>
 		</td>
 	</tr>
     <tr>

@@ -15,32 +15,73 @@
 	require_once(__DIR__."/includes/carrusel-de-img.php");
 	require_once(__DIR__."/includes/sesion.php");
     //
+    //Acceso a datos
+    require_once(__DIR__."/bd/bd_usuario.php");
+    require_once(__DIR__."/bd/bd_pisos.php");
+    require_once(__DIR__."/bd/bd_imagenespiso.php");
+    require_once(__DIR__."/bd/bd_secciones.php");
+    //
     //Configuramos los estilos que necesitamos
     $estilos = array(
 		 ESTILOS_WIDGETS ,
-		 ESTILOS_PISO ,
+		 ESTILOS_MAIN ,
 		 INCLUD_SLIDE
 	);
     //
     //Generamos la cabecera
 	cabecera( TITULO_LOGIN , $estilos , true );
+    if( $_GET )
+    {
+        //Decodificamos la URL
+        $urldecode = base64_decode( $_SERVER['REQUEST_URI'] );
+        //Sacar el valor de la ID
+        $get = explode( 'idPiso=', $urldecode );
+        $idPisoHabitacion = $get[1];
+    }
+    else
+    {
+        //
+        //Si intentamos entrar sin una petición get nos redirecciona
+        header( "location:/the-connect-house/perfil.php" );
+        return;
+    }
+    //
+    //Accedemos a los datos del piso o Habitacion
+    $oDbPisoHabitacion = new Pisos();
+    $aDatosPisosHabitaciones  = $oDbPisoHabitacion->getById($idPisoHabitacion);
+    //
+    //Accedemos al 1 que son las comodidades
+    $odbComodidades = new Secciones(1);
+    //Sacamos todos los registros
+    $oComodidades = $odbComodidades->getById($idPisoHabitacion);
+    //Sacamos las normas
+    $odbNormas = new Secciones(2);
+    //Sacamos todos los registros
+    $oNormas = $odbNormas->getById($idPisoHabitacion);
 ?>
+<style>
+    /*Para maquetar las caracteristicas del piso o habitacion*/
+    .contenedor-centro
+    {
+        margin: 0% 10% 0% 36%;
+    }
+</style>
 <body>
 <?php
     //
     //Formamos un array con las imagenes del piso
-	$imagenes = array(
-		 "img/img-inicio.jpg" ,
-		 "img/img-modelo.jpg"
-	);
+	$oDbImagenes = new Imagenes();
+	$aImagenesPiso = $oDbImagenes->getByIdPiso($idPisoHabitacion);
 	//
-    // las codifiicamnos
-	//$objects = json_decode( json_encode( $a ) , false );
-	foreach( $imagenes as $imagene )
+    //Pasamos las imagenes para el carrusel
+	foreach( $aImagenesPiso as $aImagenePiso )
 	{
-		 getCarrusel( $imagene ) ;
+		 getCarrusel( $aImagenePiso->Url ) ;
 	}
 ?>
+<div class="atras" onclick="javascript:window.history.back()">
+    <div class="flecha">&#8592; Atrás</div>
+</div>
     <div class="content">
         <div class="contenedor-izquierdo">
             <div id="perfil">
@@ -50,27 +91,43 @@
                 <button class="button">Hola</button>
             </div>
         </div>
-        <div class="contenedor-derecho">
-            <h1>Calle</h1>
-            <div class="caracteristicas">
-                <p><i class="fas fa-map-marker-alt"></i> León</p>
-                <p><i class="fas fa-bath"></i> Baños</p>
-                <p><i class="fas fa-bed"></i> Dormitorios</p>
+        <div class="contenedor-centro">
+            <div class="into-centro">
+                <?php
+                foreach ( $aDatosPisosHabitaciones as $aDatosPisosHabitacion) {
+                    $Html = ' <h1>'.$aDatosPisosHabitacion->Calle.'</h1>';
+                    $Html .= '<div class="caracteristicas">';
+                    $Html .= '<p><i class="fas fa-map-marker-alt"></i> '.$aDatosPisosHabitacion->Calle.'</p>';
+                    $Html .=  '<p><i class="fas fa-bath"></i>  '.$aDatosPisosHabitacion->NBanos.' Baños</p>';
+                    $Html .=  '<p><i class="fas fa-bed"></i> '.$aDatosPisosHabitacion->NHabitaciones.'  Habitaciones</p>';
+                    $Html .= '</div>';
+                    $Html .= '<br>';
+                    $Html .= '<p>'.$aDatosPisosHabitacion->Descripcion.'</p>';
+                    $Html .= '<h3 class="title">Comodidades</h3>';
+                    $Html .= '<div class="comodidad">';
+                    foreach ($oComodidades as $oComodidad)
+                    {
+                        $Html .= '<div class="comodidades">';
+                        $Html .= '<img src="'.$oComodidad->Imagen.'">';
+                        $Html .= '<p>'.$oComodidad->Nombre.'</p>';
+                        $Html .= '</div>';
+                    }
+                    $Html .= '</div>';
+                    $Html .= '<h3 class="title">Normas</h3>';
+                    $Html .= '<div class="norma">';
+                    foreach ($oNormas as $oNorma)
+                    {
+                        $Html .= '<div class="normas">';
+                        $Html .= '<img src="'.$oNorma->Imagen.'">';
+                        $Html .= '<p>'.$oNorma->Nombre.'</p>';
+                        $Html .= '</div>';
+                    }
+                    $Html .= '</div>';
+                    $Html .= '';
+                    echo $Html;
+                }
+                ?>
             </div>
-            <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dignissim, facilisi netus metus nisl suscipit nec praesent
-                scelerisque, justo porttitor fusce duis class id tempus. Mauris interdum orci pretium penatibus sociosqu vivamus
-                at posuere et metus pharetra taciti erat, placerat fusce class id massa facilisi dapibus fermentum cursus nullam
-                feugiat congue. Pharetra per elementum et feugiat vulputate mattis leo viverra mauris, duis lobortis tellus
-                aliquam fusce euismod natoque nisi, sed venenatis ad quam pulvinar dictumst cubilia dui.
-                Phasellus lectus eu vel mattis vitae nascetur hendrerit interdum, natoque vehicula euismod varius arcu nam nisi
-                montes a, maecenas porta cum dignissim integer felis hac. Non commodo blandit aliquam orci habitant dictumst
-                nibh iaculis magna pharetra, quis praesent cursus penatibus nisl magnis odio sociis ac, egestas leo tempus
-                mattis donec montes varius convallis fringilla. Faucibus duis facilisi tempus blandit at venenatis vivamus
-                elementum suscipit, taciti mus eget aliquet ultrices rhoncus orci proin non ullamcorper, cum odio iaculis
-                laoreet dignissim per vitae sed.</p>
-            <br>
-            <h3>Comodidades</h3>
         </div>
     </div>
 <?php  require_once(__DIR__."/includes/footer.php"); ?>
@@ -81,18 +138,18 @@
     $(document).scroll(function()
     {
         //Cuando el contenedor llega al footer queda quieto para no sobrepasarlo
-        if($('.contenedor-izquierdo').offset().top + $('.contenedor-izquierdo').height() - 50 > $('footer').offset().top )
+        if($('#perfil').offset().top + $('#perfil').height() > $('footer').offset().top )
         {
-            $('.contenedor-izquierdo').css('position', 'absolute');
-            $('.contenedor-izquierdo').css('bottom', '0');
-            $('.contenedor-izquierdo').css('top', '110%');
+            $('#perfil').css('position', 'absolute');
+            $('#perfil').css('left', '110px');
+            $('#perfil').css('top', '110%');
         }
         //Si la altura de la pantalla mas el scroll es menos que el footer el perfil y el presio se moverá
         if($(document).scrollTop() + window.innerHeight < $('footer').offset().top)
         {
-            $('.contenedor-izquierdo').css('position', 'fixed');
-            $('.contenedor-izquierdo').css('bottom', '');
-            $('.contenedor-izquierdo').css('top', '');
+            $('#perfil').css('position', 'fixed');
+            $('#perfil').css('left', '110px');
+            $('#perfil').css('top', '');
         }
     });
 </script>

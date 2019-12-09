@@ -1,72 +1,59 @@
-
+/*Contenido del lateral izquierdo*/
 .contenedor-izquierdo
 {
-    display: inline-block;
-    top: 0px;
-    bottom: 0px;
     width: 350px;
-    height: 95vh;
+    height: 91vh;
     float: left;
     -webkit-box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);
     -moz-box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);
     box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);
 }
-
-.contenedor-centro
+.contenedor-izquierdo .into-izquierdo
 {
-    top: -45px;
-    left: 500px;
-    right: 0;
-    bottom: 0px;
-    height: 95vh;
-    overflow-y: scroll;
-}
-
-.contenedor-derecho {
-    position: absolute;
-    top: 0px;
-    left: 1035px;
-    right: 0px;
-    bottom: 0px;
-    height: 95vh;
-    -webkit-box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);
-    -moz-box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);
-    box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);
-}
-
-
-/*Lateral izquierdo*/
-
-.contenedor-izquierdo .into-izquierdo {
     padding: 10px 40px 0px 50px;
 }
-
+/*Menu*/
 .into-izquierdo ul li {
     list-style: none;
     margin-bottom: 10px;
 }
-
-
+/*Contenido del centro*/
+.into-centro
+{
+    overflow-y: auto;
+    height: 91vh;
+}
+/*Like en el piso*/
 .likeit {
     margin: 4px;
     position: absolute;
 }
-
 .contenedor-centro .likeit svg {
     position: relative;
     stroke: #000;
     stroke-width: 2;
     fill: #f7f7f7;
 }
-
-.contenedor-centro #search {
+/*Buscador*/
+.contenedor-centro #search
+{
     width: 60%;
 }
-
-
-/*Derecha*/
-
-.contenedor-derecho #mapid {
+/*Contenido de la Derecha*/
+.contenedor-derecho
+{
+    position: absolute;
+    width: 350px;
+    height: 91vh;
+    top: 0;
+    right: 0;
+    bottom: 0px;
+    -webkit-box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);
+    -moz-box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);
+    box-shadow: 13px 1px 38px -1px rgba(0, 0, 0, 0.11);
+}
+.contenedor-derecho #mapid
+{
     height: 100%;
 }
 .contenedor-derecho #vacio
@@ -74,14 +61,19 @@
     margin-top: 30%;
     text-align: center;
 }
-.box-mas-visitados
-{
-    margin: 22px !important;
-}
+/*Derecha del perfil*/
 #vacio
 {
     text-align: center;
 }
+/*Previsualizacion del piso margenes*/
+.box-mas-visitados
+{
+    margin-left: 60px !important;
+    margin-top: 30px !important;
+    margin-bottom: 10px !important;
+}
+/*Pagina piso*/
 @media screen and ( max-width: 1180px) {}
 
 @media screen and ( max-width: 945px) {
@@ -100,10 +92,6 @@
     }
     .contenedor-centro {
         left: 20%;
-    }
-    .contenedor-centro {
-        left: 0;
-        margin-left: -15px;
     }
 }
 

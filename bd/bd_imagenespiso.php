@@ -57,13 +57,33 @@ class Imagenes extends Conexion
         return $aImgId;
     }
     /**
+     * Devuelve la primera fotografía
+     * @param $idPiso
+     * @return array
+     */
+    public function getByIdPisoPrimeraFoto( $idPiso )
+    {
+        $aImgId = array();
+        $cSql = 'SELECT Url FROM '.$this->sTabla.' WHERE idPiso = ? LIMIT 1';
+        $stmt = $this->prepare($cSql);
+        $stmt->bind_param('i', $idPiso );
+        $stmt->execute();
+        $oResultado = $stmt->get_result();
+        while( $oRecord = $oResultado->fetch_object())
+        {
+            $aImgId[] =  $oRecord;
+        }
+        return $aImgId;
+    }
+    /**
+     * Devuelve todas las imagenes de un piso
      * @param $idPiso
      * @return array
      */
     public function getByIdPiso( $idPiso )
     {
         $aImgId = array();
-        $cSql = 'SELECT Url FROM '.$this->sTabla.' WHERE idPiso = ? LIMIT 1';
+        $cSql = 'SELECT Url FROM '.$this->sTabla.' WHERE idPiso = ?';
         $stmt = $this->prepare($cSql);
         $stmt->bind_param('i', $idPiso );
         $stmt->execute();

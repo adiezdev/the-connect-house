@@ -1,4 +1,4 @@
-
+/*Cuando se genera una ventana*/
 .ventana {
     display: none;
     position: fixed;
@@ -23,7 +23,7 @@
 .close {
     color: #aaaaaa;
     float: right;
-    font-size: 28px;
+    font-size: 20pt;
     font-weight: bold;
 }
 .button

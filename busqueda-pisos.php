@@ -13,6 +13,8 @@
     require_once(__DIR__."/includes/header.php");
     require_once(__DIR__."/includes/constantes.php");
     require_once(__DIR__."/includes/sesion.php");
+    //
+    //Accedemos a datos
     require_once(__DIR__."/bd/bd_usuario.php" );
     //
     //Configuramos los estilos que necesitamos

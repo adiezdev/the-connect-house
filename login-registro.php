@@ -12,13 +12,14 @@
 */
     require_once(__DIR__."/includes/header.php" );
     require_once(__DIR__."/includes/constantes.php" );
+    session_start();
     //
     //Si estamos logueados nos redirige index
     if(isset( $_SESSION['idUsuario'] ))
     {
         //
         // logueado
-        header( "location:/the-connect-house/index.php" );
+        header( "location:/the-connect-house/perfil.php" );
         return;
     }
     //

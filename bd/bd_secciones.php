@@ -31,15 +31,15 @@ class Secciones extends Conexion
         //
         if( $nTipo == 1)
         {
-            $this->sTabla = 'comodidades';
+            $this->sTabla = '`comodidades`';
             $this->sTablaIntermedia = '`comodidades-piso`';
-            $this->idSeccion = 'idComodidad';
+            $this->idSeccion = '`idComodidad`';
         }
         else
         {
-            $this->sTabla = 'normas';
+            $this->sTabla = '`normas`';
             $this->sTablaIntermedia = '`normas-piso`';
-            $this->idSeccion = 'idNorma';
+            $this->idSeccion = '`idNorma`';
         }
     }
     /**
@@ -62,14 +62,18 @@ class Secciones extends Conexion
     }
 
     /**
-     * Devuelde los datos por su ID
+     * Devuelde los datos con la imagen de la comdidad o norma
      *
      * @return array
      */
     public function getById( $nIdPiso )
     {
         $aPisosId = array();
-        $cSql = 'SELECT * FROM '.$this->sTabla.' WHERE '.$this->idSeccion.' = ?';
+        //$cSql = 'SELECT * FROM '.$this->sTabla.' WHERE '.$this->idSeccion.' = ?';
+        $cSql = 'SELECT * FROM '.$this->sTablaIntermedia.' 
+                INNER JOIN '.$this->sTabla.' 
+                ON '.$this->sTablaIntermedia.'.'.$this->idSeccion.' = '.$this->sTabla.'.'.$this->idSeccion.' 
+                AND '.$this->sTablaIntermedia.'.`idPiso` = ?';
         $stmt = $this->prepare($cSql);
         $stmt->bind_param('i', $nIdPiso );
         $stmt->execute();
