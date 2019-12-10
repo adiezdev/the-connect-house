@@ -24,7 +24,7 @@ Nombre del archivo: seccion-1.php
 		<td ><label for="ciudad">Ciudad (*): </label></td>
 		<td>
 			<select name="ciudad" id="selector" class="credential">
-				<option value="Leon" selected>León</option>
+				<option value="León" selected>León</option>
 				<option value="Ponferrada" >Ponferrada</option>
 			</select>
 		</td>

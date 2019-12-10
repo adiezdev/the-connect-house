@@ -34,6 +34,9 @@
 ?>
     <body>
      <div class="content">
+         <div class="contenedor-centro">
+             <img src="img/img-modelo.jpg" alt="Habitacion" srcset="">
+         </div>
          <div class="contenedor-izquierdo">
              <div class="into-contenedor">
                  <?php echo '<div id="marca">'.file_get_contents("img/marca/banner.svg").'</div>'; ?>
@@ -78,9 +81,6 @@
                      </div>
                  </form>
              </div>
-         </div>
-         <div class="contenedor-centro">
-             <img src="img/img-modelo.jpg" alt="Habitacion" srcset="">
          </div>
      </div>
     <?php  require_once(__DIR__."/includes/footer.php" );?>

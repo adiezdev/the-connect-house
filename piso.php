@@ -58,6 +58,9 @@
     $odbNormas = new Secciones(2);
     //Sacamos todos los registros
     $oNormas = $odbNormas->getById($idPisoHabitacion);
+    //
+    //Sacamos el perfil del Vendedor
+
 ?>
 <style>
     /*Para maquetar las caracteristicas del piso o habitacion*/
@@ -66,6 +69,7 @@
         margin: 0% 10% 0% 36%;
     }
 </style>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
 <body>
 <?php
     //
@@ -97,36 +101,48 @@
                 foreach ( $aDatosPisosHabitaciones as $aDatosPisosHabitacion) {
                     $Html = ' <h1>'.$aDatosPisosHabitacion->Calle.'</h1>';
                     $Html .= '<div class="caracteristicas">';
-                    $Html .= '<p><i class="fas fa-map-marker-alt"></i> '.$aDatosPisosHabitacion->Calle.'</p>';
+                    $Html .= '<p><i class="fas fa-map-marker-alt"></i> '.$aDatosPisosHabitacion->Calle.','.$aDatosPisosHabitacion->Ciudad.'</p>';
                     $Html .=  '<p><i class="fas fa-bath"></i>  '.$aDatosPisosHabitacion->NBanos.' Baños</p>';
                     $Html .=  '<p><i class="fas fa-bed"></i> '.$aDatosPisosHabitacion->NHabitaciones.'  Habitaciones</p>';
                     $Html .= '</div>';
                     $Html .= '<br>';
+                    $Html .= '<h3 class="title">Descripción</h3>';
                     $Html .= '<p>'.$aDatosPisosHabitacion->Descripcion.'</p>';
-                    $Html .= '<h3 class="title">Comodidades</h3>';
-                    $Html .= '<div class="comodidad">';
-                    foreach ($oComodidades as $oComodidad)
+                    if($oComodidades != null)
                     {
-                        $Html .= '<div class="comodidades">';
-                        $Html .= '<img src="'.$oComodidad->Imagen.'">';
-                        $Html .= '<p>'.$oComodidad->Nombre.'</p>';
+                        $Html .= '<h3 class="title">Comodidades</h3>';
+                        $Html .= '<div class="comodidad">';
+                        foreach ($oComodidades as $oComodidad)
+                        {
+                            $Html .= '<div class="comodidades">';
+                            $Html .= '<img src="'.$oComodidad->Imagen.'">';
+                            $Html .= '<p>'.$oComodidad->Nombre.'</p>';
+                            $Html .= '</div>';
+                        }
                         $Html .= '</div>';
                     }
-                    $Html .= '</div>';
-                    $Html .= '<h3 class="title">Normas</h3>';
-                    $Html .= '<div class="norma">';
-                    foreach ($oNormas as $oNorma)
+                    if($oNormas != null)
                     {
-                        $Html .= '<div class="normas">';
-                        $Html .= '<img src="'.$oNorma->Imagen.'">';
-                        $Html .= '<p>'.$oNorma->Nombre.'</p>';
+                        $Html .= '<h3 class="title">Normas</h3>';
+                        $Html .= '<div class="norma">';
+                        foreach ($oNormas as $oNorma)
+                        {
+                            $Html .= '<div class="normas">';
+                            $Html .= '<img src="'.$oNorma->Imagen.'">';
+                            $Html .= '<p>'.$oNorma->Nombre.'</p>';
+                            $Html .= '</div>';
+                        }
                         $Html .= '</div>';
                     }
-                    $Html .= '</div>';
-                    $Html .= '';
+                    $Html .= '<div id="mapid"></div>';
+                    $Html .= '<script>
+                            //Llamamos al mapa
+                                llamarMapa(false , false , false  , '.$aDatosPisosHabitacion->Latitud.' , '.$aDatosPisosHabitacion->Longitud.' );
+                              </script>';
                     echo $Html;
                 }
                 ?>
+
             </div>
         </div>
     </div>

@@ -62,7 +62,7 @@
 
     </div>
       <div class="contenedor-centro">
-        <div class="into-centro">
+        <div class="into-centro busqueda">
             <form>
                 <input type="search" name="search" id="search" placeholder="Buscar...">
             </form>
@@ -124,11 +124,10 @@
       <div class="contenedor-derecho">
         <div id="mapid"></div>
       </div>
-
-
   </div>
   <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/like.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
+<script>llamarMapa(false , false , false);</script>
 </html>
