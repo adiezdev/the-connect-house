@@ -11,40 +11,44 @@
     -------------------------------------
 */
     require_once(__DIR__ . '/../../bd/bd_usuario.php');
+    require_once(__DIR__ . '/../../includes/sesion.php');
     //
     session_start();
     //
     if(isset($_POST['siguiente']))
     {
-        $dbUsuario = new Usuario();
-        //
-        //Debug
-        //echo $value . "<br />";
-        //Cojo la iimagen
-        $value = $_POST['imagen'];//Cogemos la imagen
-	    //Comprobamos si está inicializado la variable
-        if(isset($_POST['imagen']))
+        $nId = $_SESSION['idUsuario'];
+        $oDbUsuario = new Usuario();
+        $aUsuarios = $oDbUsuario->getById( $nId );
+        foreach ( $aUsuarios as $aUsuario)
         {
-        	//Sacamos la imagen y la decodificamos
-            $datos = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $value));
-           //generamos un nombre para la imagen
-            $nom = md5(rand());
-            //Marco la ruta
-            $filepathsql = "uploads/".$nom.".jpg";
-            $archivoRuta = __DIR__ ."/../../".$filepathsql;
-            //Paso la imagen a la ruta
-            file_put_contents( $archivoRuta , $datos);
-            //Permisos al archivo
-            chmod($archivoRuta, 0777);
-        }
-        $sDescripcion = $_POST['descripcion'];
-        //
-	    $nId = $_SESSION['idUsuario'];
-	    //
-        $lResult = $dbUsuario->updateCampos( $nId , $sDescripcion , $filepathsql); //Actualizamos los campos
-        //
-        if($lResult)
-        {
-            header("Location: ../../perfil.php");
+            //
+            //Debug
+            //echo $value . "<br />";
+            //Cojo la iimagen
+            $value = $_POST['imagen'];//Cogemos la imagen
+            //Comprobamos si está inicializado la variable
+            if(isset($_POST['imagen']))
+            {
+                //Sacamos la imagen y la decodificamos
+                $datos = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $value));
+                //generamos un nombre para la imagen
+                $nom = md5(rand());
+                //Marco la ruta
+                $filepathsql = "uploads/".$aUsuario->Carpeta."/".$nom.".jpg";
+                $archivoRuta = __DIR__ ."/../../".$filepathsql;
+                //Paso la imagen a la ruta
+                file_put_contents( $archivoRuta , $datos);
+                //Permisos al archivo
+                chmod($archivoRuta, 0777);
+            }
+            $sDescripcion = $_POST['descripcion'];
+            //
+            $lResult = $oDbUsuario->updateCampos( $nId , $sDescripcion , $filepathsql); //Actualizamos los campos
+            //
+            if($lResult)
+            {
+                header("Location: ../../perfil.php");
+            }
         }
     }
