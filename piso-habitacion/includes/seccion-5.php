@@ -14,7 +14,6 @@ Nombre del archivo: seccion-5.php
 	</tr>
     <tr>
         <td align="center"><label for="inputperfil">Subir Imagen</label><input type="file" name="archivos" id="inputperfil" multiple /></td>
-
     </tr>
     <tr>
         <td align="center">Preferiblemente horizontales</td>

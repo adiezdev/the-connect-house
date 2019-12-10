@@ -136,17 +136,17 @@
                 ?>
             </div>
         </div>
-        <div class="contenedor-derecho">
-            <div class="into-derecho">
                 <?php
                 if(!empty($aPisosHabitaciones))
                 {
-                    $Html  = '<div id="vacio">';
+                    $Html  = '<div class="contenedor-derecho">';
+                    $Html .= '<div class="into-derecho">';
+                    $Html .= '<div id="vacio">';
                     $Html .= '<img src="img/key.png" alt="llaves" style="width: 40%">';
                     $Html .= '<h2>Añade más pisos o habitaciones, que quieras alquilar</h2>';
                     $Html .= '<button class="button" id="buttonVentana" >Empezar</button>';
                     $Html .= '</div>';
-                    echo $Html;
+
                     //
                     //Array botones que aparecen en la ventana
                     $btones = array(
@@ -160,10 +160,12 @@
                     //
                     //Generamos la ventana
                     getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
+
+                    $Html .= '</div>
+                    </div>';
+                echo $Html;
                 }
                 ?>
-            </div>
-        </div>
     </div>
     <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>

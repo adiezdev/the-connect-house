@@ -26,8 +26,8 @@
    {
        $oRespuesta->Estado = "KO";
        $oRespuesta->Mensaje = "Usuario no encontrado";
-	   json_encode( $oRespuesta );
-	   return false;
+	   echo json_encode( $oRespuesta );
+	   return;
    }
   else
   {

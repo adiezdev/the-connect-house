@@ -1,5 +1,3 @@
-//Nicializamos la pantalla de login
-$("#registro").css("display", "none");
 /**
  * Validamos los campos del registro
  *

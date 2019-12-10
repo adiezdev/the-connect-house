@@ -52,7 +52,7 @@
     {
         $oRespuesta->Estado = "KO";
         $oRespuesta->Mensaje = "El usuario se ha registrado mal";
-	    echo json_encode( $oRespuesta );
+        echo json_encode( $oRespuesta );
 	    return;
     }
     else
@@ -70,7 +70,7 @@
         //Devolvemos una respuesta correcta
         $oRespuesta->Estado = "OK";
         $oRespuesta->Mensaje = "Usuario no encontrado";
-	    echo json_encode( $oRespuesta );
+        json_encode( $oRespuesta );
     }
     //
     //Enviamos la respuesta

@@ -32,6 +32,7 @@
         <div class="contenedor-centro">
             <label for="imgperfil">Imagen de perfil (opcional):</label><br><br>
             <img id="imgperfil" src="img/isset/isset-user.png"><br><br>
+            <label for="inputperfil">Subir Imagen</label>
             <input type="file" name="archivos" id="inputperfil"/><br><br>
             <label for="">Descripción (opcional):</label><br><br>
             <textarea rows="15" cols="40" name="descripcion" form="campos-isset" placeholder="Inserta una descripción sobre tí..."></textarea>

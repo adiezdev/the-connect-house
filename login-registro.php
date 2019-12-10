@@ -15,7 +15,7 @@
     session_start();
     //
     //Si estamos logueados nos redirige index
-    if(isset( $_SESSION['idUsuario'] ))
+   if(isset( $_SESSION['idUsuario'] ))
     {
         //
         // logueado
@@ -86,4 +86,18 @@
     <?php  require_once(__DIR__."/includes/footer.php" );?>
     </body>
     <script src="<?php echo get_root_uri() ?>/the-connect-house/js/validaciones/login-registro.js"></script>
+    <script>
+        //Nicializamos la pantalla de login
+        $("#registro").css("display", "none");
+        $('#registrarse').click(function ()
+        {
+            $("#login").fadeOut(100);
+            $("#registro").delay(100).fadeIn(100);
+        });
+        $('#atras').click(function ()
+        {
+            $("#registro").fadeOut(100);
+            $("#login").delay(100).fadeIn(100);
+        });
+    </script>
     </html>

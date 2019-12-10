@@ -135,7 +135,7 @@ class Usuario extends Conexion
         $aUltimaID = array();
         $cSql = 'SELECT * FROM '.$this->sTabla.' ORDER BY idUsuario DESC LIMIT 1';
         $stmt = $this->prepare( $cSql );
-        //$bResultado = $stmt->execute();
+        $stmt->execute();
         $oResultado = $stmt->get_result();
         while( $oRecord = $oResultado->fetch_object())
         {
