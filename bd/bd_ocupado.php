@@ -47,7 +47,7 @@
 		 *
 		 * @return array
 		 */
-		function getById( $nIdPsio )
+		function getById( $nIdPiso )
 		{
 			$aOcupado = array();
 			$cSql = 'SELECT * FROM '.$this->sTabla.' WHERE idPiso = ? ORDER BY Sexo';
