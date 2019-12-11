@@ -83,97 +83,114 @@
 		 getCarrusel( $aImagenePiso->Url ) ;
 	}
 ?>
-<div class="atras" onclick="javascript:window.history.back()">
-    <div class="flecha">&#8592; Atrás</div>
-</div>
     <div class="content">
-        <div class="contenedor-izquierdo muestrausuario">
-            <div id="perfil">
-                <img id="user" src="img/isset/isset-user.png" alt="">
-                <h3>Nombre</h3>
-                <h2>Precio</h2>
-                <button class="button">Hola</button>
-            </div>
+        <div class="atras" onclick="javascript:window.history.back()">
+            <div class="flecha">&#8592; Atrás</div>
         </div>
-        <div class="contenedor-centro">
-            <div class="into-centro">
                 <?php
                 foreach ( $aDatosPisosHabitaciones as $aDatosPisosHabitacion)
                 {
-                    $Html  = '<h1>'.$aDatosPisosHabitacion->Calle.'</h1>';
-                    $Html .= '<div class="caracteristicas">';
-                    $Html .= '<p><i class="fas fa-map-marker-alt"></i> '.$aDatosPisosHabitacion->Calle.','.$aDatosPisosHabitacion->Ciudad.'</p>';
-                    $Html .= '<p><i class="fas fa-bath"></i>  '.$aDatosPisosHabitacion->NBanos.' Baños</p>';
-                    $Html .= '<p><i class="fas fa-bed"></i> '.$aDatosPisosHabitacion->NHabitaciones.'  Habitaciones</p>';
-                    //
-                    //Si es una habitacion
-                    if( $aDatosPisosHabitacion->Tipo == 2)
+                    //Mostramos el usuario
+                    $oDbUsuarios = new Usuario();
+                    //Accedemos al usuario del piso
+                    $aDbUsuarios = $oDbUsuarios->getById($aDatosPisosHabitacion->idUsuario );
+                    //Recorremos sus datos
+                    foreach( $aDbUsuarios as $aDbUsuario)
                     {
-                        //Accedemos a lagente que tiene en el piso
-                        $odbOcupado = new Ocupado();
-                        $aOcupados = $odbOcupado->getById( $aDatosPisosHabitacion->idPiso );
-                        foreach( $aOcupados as $aOcupado)
-                        {
-                            $sSexo = '';
-                            if( $aOcupado->Num == 'M' )
-                            {
-	                            $sSexo = 'Chicos';
-                            }
-                            else
-                            {
-	                            $sSexo = 'Chicas';
-                            }
-                            //
-	                        $Html .= '<p><i class="fas fa-child"></i>'.$sSexo.' : '.$aOcupado->Num.'</p>';
-                        }
+	                    $Html = ' <div class="contenedor-izquierdo">';
+	                    $Html .= '<div id="perfil">';
+	                    $Html .= '<img id="user" src="'.$aDbUsuario->Imgperfil.'" alt="">';
+	                    $Html .= '<h3>'.$aDbUsuario->Nombre.'</h3>';
+	                    $Html .= '<h2>'.$aDatosPisosHabitacion->Precio.'</h2>';
+	                    $Html .= '<button class="button">Me interesa</button>';
+	                    $Html .= '</div>';
+	                    $Html .= '</div>';
                     }
-                    //
-                    $Html .= '</div>';
-                    $Html .= '<br>';
-                    $Html .= '<h3 class="title">Descripción</h3>';
-                    $Html .= '<p>'.$aDatosPisosHabitacion->Descripcion.'</p>';
-                    //Si hay comodidades asignadas
-                    if($oComodidades != null)
-                    {
-                        $Html .= '<h3 class="title">Comodidades</h3>';
-                        $Html .= '<div class="comodidad">';
-                        foreach ($oComodidades as $oComodidad)
+	                //
+                    //Datelles del piso
+                    $Html .= '<div class="contenedor-centro">';
+                        $Html .= '<div class="into-centro">';
+                        $Html .= '<h1>'.$aDatosPisosHabitacion->Calle.'</h1>';
+                        $Html .= '<div class="caracteristicas">';
+                        $Html .= '<p><i class="fas fa-map-marker-alt"></i> '.$aDatosPisosHabitacion->Calle.','.$aDatosPisosHabitacion->Ciudad.'</p>';
+                        $Html .= '<p><i class="fas fa-bath"></i>  '.$aDatosPisosHabitacion->NBanos.' Baños</p>';
+                        $Html .= '<p><i class="fas fa-bed"></i> '.$aDatosPisosHabitacion->NHabitaciones.'  Habitaciones</p>';
+                        //
+                        //Si es una habitacion
+                        if( $aDatosPisosHabitacion->Tipo == 2)
                         {
-                            $Html .= '<div class="comodidades">';
-                            $Html .= '<img src="'.$oComodidad->Imagen.'">';
-                            $Html .= '<p>'.$oComodidad->Nombre.'</p>';
+                            //Accedemos a lagente que tiene en el piso
+                            $odbOcupado = new Ocupado();
+                            $aOcupados = $odbOcupado->getById( $aDatosPisosHabitacion->idPiso );
+                            foreach( $aOcupados as $aOcupado)
+                            {
+                                $sSexo = '';
+                                if( $aOcupado->Num == 'M' )
+                                {
+                                    $sSexo = 'Chicos';
+                                }
+                                else
+                                {
+                                    $sSexo = 'Chicas';
+                                }
+                                //
+                                $Html .= '<p><i class="fas fa-child"></i>'.$sSexo.' : '.$aOcupado->Num.'</p>';
+                            }
+                        }
+                        //
+                        $Html .= '</div>';
+                        $Html .= '<br>';
+                        $Html .= '<h3 class="title">Descripción</h3>';
+                        $Html .= '<p>'.$aDatosPisosHabitacion->Descripcion.'</p>';
+                        //
+                        //Si hay comodidades asignadas
+                        if($oComodidades != null)
+                        {
+                            $Html .= '<h3 class="title">Comodidades</h3>';
+                            $Html .= '<div class="comodidad">';
+                            foreach ($oComodidades as $oComodidad)
+                            {
+                                $Html .= '<div class="comodidades">';
+                                $Html .= '<img src="'.$oComodidad->Imagen.'">';
+                                $Html .= '<p>'.$oComodidad->Nombre.'</p>';
+                                $Html .= '</div>';
+                            }
                             $Html .= '</div>';
                         }
-                        $Html .= '</div>';
-                    }
-                    //Si hay normas asignadas
-                    if($oNormas != null)
-                    {
-                        $Html .= '<h3 class="title">Normas</h3>';
-                        $Html .= '<div class="norma">';
-                        foreach ($oNormas as $oNorma)
+                        //
+                        //Si hay normas asignadas
+                        if($oNormas != null)
                         {
-                            $Html .= '<div class="normas">';
-                            $Html .= '<img src="'.$oNorma->Imagen.'">';
-                            $Html .= '<p>'.$oNorma->Nombre.'</p>';
+                            $Html .= '<h3 class="title">Normas</h3>';
+                            $Html .= '<div class="norma">';
+                            foreach ($oNormas as $oNorma)
+                            {
+                                $Html .= '<div class="normas">';
+                                $Html .= '<img src="'.$oNorma->Imagen.'">';
+                                $Html .= '<p>'.$oNorma->Nombre.'</p>';
+                                $Html .= '</div>';
+                            }
                             $Html .= '</div>';
                         }
+                        //
+                        //Asignamos el mapa
+                        $Html .= '<div id="mapid"></div>';
+                        //
+                        //Se hace aqui la llamada al mapa para así poder pasar la latitud y longitud de mapa
+                        $Html .= '<script>
+                                    llamarMapa(false , false , false , true  , '.$aDatosPisosHabitacion->Latitud.' , '.$aDatosPisosHabitacion->Longitud.' );
+                                  </script>';
                         $Html .= '</div>';
-                    }
-                    $Html .= '<div id="mapid"></div>';
-                    //Se hace aqui la llamada al mapa para así poder pasar la latitud y longitud de mapa
-                    $Html .= '<script>
-                                llamarMapa(false , false , false , true  , '.$aDatosPisosHabitacion->Latitud.' , '.$aDatosPisosHabitacion->Longitud.' );
-                              </script>';
+	                $Html .= '</div>';
+	                //
+                    //Mostramos todo
                     echo $Html;
                 }
                 ?>
-
-            </div>
-        </div>
     </div>
 <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
+<!-- Script necesarios -->
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider.js"></script>
 <script>
     //Scroll del vendedOr
