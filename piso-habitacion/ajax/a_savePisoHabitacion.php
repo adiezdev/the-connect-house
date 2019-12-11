@@ -88,12 +88,13 @@
 		//
 		//Accedemos a la tabla Ocupado
 		$oDbOcupado = new Ocupado();
+		echo $aOcupados;
 		//
 		//Recorremos los chicos y las chicas que hay en el piso
 		foreach($aOcupados as $aOcupado )
 		{
 			//Las guardamos
-			$lResult = $oDbOcupado->addOcupado( $aOcupado->Num , $aOcupado->Sexo , $ultimaId  );
+			$lResult = $oDbOcupado->addOcupado( $aOcupado["Num"] ,  $aOcupado["Sexo"] , $ultimaId[0]->idPiso  );
 			//Si da error
 			if(!$lResult)
 			{
@@ -125,7 +126,7 @@
             foreach($oDatosJson["Comodidades"] as $comodidad)
             {
                 //Guardamos las comodidades asignadas
-                $oDbComodidades->addSeccion( $ultimaId , $comodidad );
+                $oDbComodidades->addSeccion( $ultimaId[0]->idPiso , $comodidad );
             }
         }
         //Comprobamos si ha metido normas
@@ -137,7 +138,7 @@
             foreach($oDatosJson["Normas"] as $norma)
             {
                 //Guardamos las normas asignadas
-                $oDbNormas->addSeccion( $ultimaId , $norma );
+                $oDbNormas->addSeccion( $ultimaId[0]->idPiso , $norma );
             }
         }
         //
@@ -160,7 +161,7 @@
             $oDdImagenes = new Imagenes();
             //
 	        //Añadimos las imagenes a la Base de Datos
-            $lResult = $oDdImagenes->addImg( $filesave ,  $ultimaId );
+            $lResult = $oDdImagenes->addImg( $filesave ,  $ultimaId[0]->idPiso );
             //
 	        //Si es correcto
             if($lResult)

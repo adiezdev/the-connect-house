@@ -26,9 +26,9 @@
 		 */
 		function addOcupado( $Num , $Sexo , $idPiso )
 		{
-			$cSql = 'INSERT INTO '.$this->sTabla.'( Num , Sexo , idPsio ) VALUES (? , ? , ? )';
+			$cSql = 'INSERT INTO '.$this->sTabla.'( Num , Sexo , idPiso ) VALUES (? , ? , ? )';
 			$stmt = $this->prepare( $cSql );
-			$stmt->bind_param( 'isi' , $Num , $Sexo , $idPiso);
+			$stmt->bind_param( 'ssi' , $Num , $Sexo , $idPiso);
 			$bResultado = $stmt->execute();
 			//$stmt->error;
 			if(!$bResultado)

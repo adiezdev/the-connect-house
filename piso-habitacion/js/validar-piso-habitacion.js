@@ -93,6 +93,14 @@ function validarDatos()
         $('#precio').val();
         return false;
     }
+    if(id == 2)
+    {
+        if( chicos.trim() == '' || chicas.trim() == '')
+        {
+            alert("Indique si hay gente en el piso");
+            return false;
+        }
+    }
     if( toilet.trim() == '' || isNaN(toilet))
     {
         alert("Indique un precio válido");
@@ -108,14 +116,6 @@ function validarDatos()
     {
         alert("Inserte alguna imagen");
         return false;
-    }
-    if(id == 2)
-    {
-        if( chicos.trim() == '' || chicas.trim() == '')
-        {
-            alert("Indique si hay gente en el piso");
-            return false;
-        }
     }
     //Formamos el JSON
     var oDatosJson =
@@ -154,6 +154,6 @@ function validarDatos()
             } else {
                 alert(oRespuesta.Mensaje);
             }
-           // console.log(oJson);
+           //console.log(oJson);
         });
 }

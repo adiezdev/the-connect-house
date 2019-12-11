@@ -73,7 +73,6 @@ class Pisos extends Conexion
             $aUltimaID[] = $oRecord;
         }
         return $aUltimaID;
-
     }
     /**
      * Devuelve todos los pisos por el ID del Usuario

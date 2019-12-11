@@ -1,5 +1,4 @@
-function llamarMapa(touch , scroll, arrastrar , marca , lt = null, lg = null)
-{
+
     //
     //Creammos donde va estar el mapa
     var mymap = L.map('mapid').setView([ 42.599267 , -5.5696127], 14,5);
@@ -13,8 +12,7 @@ function llamarMapa(touch , scroll, arrastrar , marca , lt = null, lg = null)
     }).addTo(mymap);//Se añade el mapa
     //
     //Activar el añdir una marca en el mapa
-    if(touch == true)
-    {
+
         //
         //Marca en el mapa
         var theMarker = {};
@@ -34,34 +32,4 @@ function llamarMapa(touch , scroll, arrastrar , marca , lt = null, lg = null)
             document.getElementById("latitud").value = lat;
             document.getElementById("longitud").value = lon;
         });
-    }
-    //
-    //Situamos el mapa en un sitio
-    if(lt != null && lg != null)
-    {
-        //El mapa se visualiza en esas coordenadas
-        mymap.panTo([lt , lg]);
-        //Si necesito una marca en el mapa
-        if( marca == true)
-        {
-            L.marker([lt , lg]).addTo(mymap);
-        }
-    }
-    if (scroll == false)
-    {
-        //Si necesito desactivar su scroll
-        mymap.scrollWheelZoom.disable();
-    }
-    if (arrastrar == false)
-    {
-        //Si necesito desactivar el arrastre
-        mymap.dragging.disable();
-    }
-}
-//
-//Como necesitamos otras propiedades del mapa para hacer una busqueda ya que la API nos da conflictos
-function MapaDeBusqueda(  )
-{
-    
-}
 

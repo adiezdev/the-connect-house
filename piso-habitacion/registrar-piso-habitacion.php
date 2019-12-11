@@ -1,7 +1,7 @@
 <?php
 error_reporting( E_ALL );
 ini_set( 'display_errors' , true );
-ni_set( 'display_startup_errors' , true );
+ini_set( 'display_startup_errors' , true );
 /*
     -------------------------------------
     Archivo de: Alejandro Díez
@@ -76,13 +76,14 @@ ni_set( 'display_startup_errors' , true );
             <!--Seccion5-->
             <?php include("includes/seccion-5.php"); ?>
             <!--Guardemos-->
-            <input type="button" value="Guardar" class="button" onclick="validarDatos()">
-            <button  class="button" >Cancelar</button>
+            <input type="button"  class="button" value="Guardar"  onclick="validarDatos()">
+            <input type="button" class="button"  value="Cancelar" onclick="javascript:window.history.back()" >
         </form>
     </div>
     <?php require_once(__DIR__ . "/../includes/footer.php"); ?>
 </body>
 <!-- Scripts necesarios -->
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/precarga-imagenes.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/validar-piso-habitacion.js"></script>
@@ -152,14 +153,15 @@ ni_set( 'display_startup_errors' , true );
             {
             	//
                 //El mapa se situa en León
-				llamarMapa( true , true , true , false , 42.6036359 , -5.5949009);
+                mymap.panTo(['42.6036359' , '-5.5949009']);
             }
             else //Si no
             {
                 //
 				//El mapa se situa en Ponferrada
-				llamarMapa( true , true , true , false , 42.5498528 , -6.6148307);
+                mymap.panTo(['42.5498528' , '-6.6148307']);
             }
         }).trigger( "change" );
     });
+
 </script>

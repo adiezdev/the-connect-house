@@ -179,7 +179,10 @@ ini_set( 'display_startup_errors' , true );
                         //
                         //Se hace aqui la llamada al mapa para así poder pasar la latitud y longitud de mapa
                         $Html .= '<script>
-                                    llamarMapa(false , false , false , true  , '.$aDatosPisosHabitacion->Latitud.' , '.$aDatosPisosHabitacion->Longitud.' );
+                                        mymap.panTo(['.$aDatosPisosHabitacion->Latitud.' , '.$aDatosPisosHabitacion->Longitud.']);
+                                        L.marker(['.$aDatosPisosHabitacion->Latitud.' , '.$aDatosPisosHabitacion->Longitud.']).addTo(mymap);
+                                        mymap.scrollWheelZoom.disable();
+                                        mymap.dragging.disable();
                                   </script>';
                         $Html .= '</div>';
 	                $Html .= '</div>';
