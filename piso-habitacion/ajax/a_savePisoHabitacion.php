@@ -38,6 +38,7 @@
     $nChicos = '';
     $sChicos = 'M';
     //
+	//Si la varaible está inicializada
     if(isset($oDatosJson["Chicos"]))
     {
     	//Añadimos al array los chicos si hay
@@ -47,6 +48,8 @@
     //
     $nChicas = '';
 	$sChicas = 'S';
+	//
+	//Si la varaible está inicializada
     if(isset($oDatosJson["Chicas"]) )
     {
     	//Añadimos al array las chicas si hay
@@ -61,8 +64,9 @@
     $fLatitud = $oDatosJson["Latitud"];
     $fLongitud = $oDatosJson["Longitud"];
     //
-    //
+    //Creamos la carpeta
     $carpeta = md5(rand( ));
+    //Añadimos la carpeta
     mkdir( $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/uploads/'.$_SESSION['Carpeta'].'/'.$carpeta.'/' , 0755 , true);
     //
     //El método mkdir da errores con los permisos, pasamos la carpeta por chmod asi damos todos los permisos para porder guardar ahí
@@ -72,7 +76,6 @@
     $oDbPisosHabitaciones = new Pisos();
     //
     //Guardamos el Piso
-    $sFecha =  date( "Y-m-d" );
     $lResult = $oDbPisosHabitaciones->addPisoHabitacion( $nHabitaciones , $nToilet , $fMetros , $sCalle, $nNumero , $nCp , $sCiudad , $sDescripcion,
         $fLatitud, $fLongitud, $fPrecio, $nTipo, $carpeta, $_SESSION['idUsuario']);
     //
@@ -141,22 +144,28 @@
 	    //Recorremos las imagenes
         foreach($oDatosJson["Imagenes"] as $imagen=>$value)
         {
-            //Guardamos las normas del piso
-            //
+            //Decodificamos la imagen
             $datos = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $value));
             //
+	        //Generamso un nombre
             $nom = md5(rand());
+            //
+	        //URL que se guarda en la bbd
             $filesave = 'uploads/'.$_SESSION['Carpeta'].'/'.$carpeta.'/'.$nom.'.jpg';
             //
+	        //URL completa
             $root = $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/'.$filesave;
             //
             //Llamamos a las imagenes
             $oDdImagenes = new Imagenes();
             //
+	        //Añadimos las imagenes a la Base de Datos
             $lResult = $oDdImagenes->addImg( $filesave ,  $ultimaId );
             //
+	        //Si es correcto
             if($lResult)
             {
+            	//Guardamos la imagen en la ruta
                 file_put_contents($root , $datos);
             }
         }

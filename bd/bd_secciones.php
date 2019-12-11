@@ -69,7 +69,6 @@ class Secciones extends Conexion
     public function getById( $nIdPiso )
     {
         $aPisosId = array();
-        //$cSql = 'SELECT * FROM '.$this->sTabla.' WHERE '.$this->idSeccion.' = ?';
         $cSql = 'SELECT * FROM '.$this->sTablaIntermedia.' 
                 INNER JOIN '.$this->sTabla.' 
                 ON '.$this->sTablaIntermedia.'.'.$this->idSeccion.' = '.$this->sTabla.'.'.$this->idSeccion.' 

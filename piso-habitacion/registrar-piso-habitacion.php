@@ -1,7 +1,7 @@
 <?php
-//error_reporting( E_ALL );
-//ini_set( 'display_errors' , true );
-//ini_set( 'display_startup_errors' , true );
+error_reporting( E_ALL );
+ini_set( 'display_errors' , true );
+ni_set( 'display_startup_errors' , true );
 /*
     -------------------------------------
     Archivo de: Alejandro Díez
@@ -109,6 +109,7 @@
         //Entramos al label checkeable de las comodidades
         $('.checkeable').change( ':checked' , function ()
         {
+        	//
             //Buscamos dentro del label la imagem
             var idimg =  $(this).find('#cimagen');
             //Sacamos la url de la imagen
@@ -118,42 +119,47 @@
             //Comprueba si está quecheckeado
             if ( $(this).find('.comodidad').is(":checked"))
             {
+            	//
                 //Si lo está cambiamos la imagen
                 imgsrcrem = imgsrc.replace("808080", "000000");
                 idimg.attr('src', imgsrcrem );
             }
             else if ( $(this).find('.norma').is(":checked"))
             {
+            	//
                 //Si lo está cambiamos la imagen
                 imgsrcrem = imgsrc.replace("808080", "000000");
                 idimg.attr('src', imgsrcrem );
             }
             else //Revertimos el check
             {
+            	//
                 //Si revertimos el check mostramos la imagen anterios
                 imgsrcrem = imgsrc.replace("000000", "808080");
                 idimg.attr('src', imgsrcrem );
             }
         });
-
         //
         //FUNCIÓN AL SELECCIONAR UNA CIUDAD QUE APAREZCA EN EL MAPA
         //DEPENDIENDO DE LA ELEGIDA EN EL SELECTOR
         $( "select" ).change(function() {
+            //
             //Capturamos cual está seleccionado
             var seleccinado = $( "select option:selected" ).text();
+            //
             //Si es León
             if(seleccinado === "León")
             {
+            	//
                 //El mapa se situa en León
 				llamarMapa( true , true , true , false , 42.6036359 , -5.5949009);
             }
             else //Si no
             {
+                //
 				//El mapa se situa en Ponferrada
 				llamarMapa( true , true , true , false , 42.5498528 , -6.6148307);
             }
-        })
-            .trigger( "change" );
+        }).trigger( "change" );
     });
 </script>

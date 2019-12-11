@@ -1,7 +1,7 @@
 <?php
-//error_reporting( E_ALL );
-//ini_set( 'display_errors' , true );
-//ini_set( 'display_startup_errors' , true );
+error_reporting( E_ALL );
+ini_set( 'display_errors' , true );
+ini_set( 'display_startup_errors' , true );
 /*
     -------------------------------------
     Archivo de: Alejandro Díez
@@ -98,12 +98,12 @@
                     foreach( $aDbUsuarios as $aDbUsuario)
                     {
 	                    $Html = ' <div class="contenedor-izquierdo">';
-	                    $Html .= '<div id="perfil">';
-	                    $Html .= '<img id="user" src="'.$aDbUsuario->Imgperfil.'" alt="">';
-	                    $Html .= '<h3>'.$aDbUsuario->Nombre.'</h3>';
-	                    $Html .= '<h2>'.$aDatosPisosHabitacion->Precio.'</h2>';
-	                    $Html .= '<button class="button">Me interesa</button>';
-	                    $Html .= '</div>';
+	                    $Html .=    '<div id="perfil">';
+	                    $Html .=        '<img id="user" src="'.$aDbUsuario->Imgperfil.'" alt="">';
+	                    $Html .=        '<h3>'.$aDbUsuario->Nombre.'</h3>';
+	                    $Html .=        '<h2>'.$aDatosPisosHabitacion->Precio.'</h2>';
+	                    $Html .=        '<button class="button">Me interesa</button>';
+	                    $Html .=    '</div>';
 	                    $Html .= '</div>';
                     }
 	                //
@@ -134,6 +134,7 @@
                                     $sSexo = 'Chicas';
                                 }
                                 //
+                                //Muestra la gente
                                 $Html .= '<p><i class="fas fa-child"></i>'.$sSexo.' : '.$aOcupado->Num.'</p>';
                             }
                         }
@@ -183,7 +184,7 @@
                         $Html .= '</div>';
 	                $Html .= '</div>';
 	                //
-                    //Mostramos todo
+                    //Mostramos en pantalla los datos
                     echo $Html;
                 }
                 ?>
