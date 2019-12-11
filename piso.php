@@ -98,7 +98,8 @@
         <div class="contenedor-centro">
             <div class="into-centro">
                 <?php
-                foreach ( $aDatosPisosHabitaciones as $aDatosPisosHabitacion) {
+                foreach ( $aDatosPisosHabitaciones as $aDatosPisosHabitacion)
+                {
                     $Html  = '<h1>'.$aDatosPisosHabitacion->Calle.'</h1>';
                     $Html .= '<div class="caracteristicas">';
                     $Html .= '<p><i class="fas fa-map-marker-alt"></i> '.$aDatosPisosHabitacion->Calle.','.$aDatosPisosHabitacion->Ciudad.'</p>';
@@ -108,11 +109,22 @@
                     //Si es una habitacion
                     if( $aDatosPisosHabitacion->Tipo == 2)
                     {
+                        //Accedemos a lagente que tiene en el piso
                         $odbOcupado = new Ocupado();
                         $aOcupados = $odbOcupado->getById( $aDatosPisosHabitacion->idPiso );
                         foreach( $aOcupados as $aOcupado)
                         {
-	                        $Html .= '<p><i class="fas fa-child"></i> '.$aOcupado->Num.'</p>';
+                            $sSexo = '';
+                            if( $aOcupado->Num == 'M' )
+                            {
+	                            $sSexo = 'Chicos';
+                            }
+                            else
+                            {
+	                            $sSexo = 'Chicas';
+                            }
+                            //
+	                        $Html .= '<p><i class="fas fa-child"></i>'.$sSexo.' : '.$aOcupado->Num.'</p>';
                         }
                     }
                     //
@@ -120,6 +132,7 @@
                     $Html .= '<br>';
                     $Html .= '<h3 class="title">Descripción</h3>';
                     $Html .= '<p>'.$aDatosPisosHabitacion->Descripcion.'</p>';
+                    //Si hay comodidades asignadas
                     if($oComodidades != null)
                     {
                         $Html .= '<h3 class="title">Comodidades</h3>';
@@ -133,6 +146,7 @@
                         }
                         $Html .= '</div>';
                     }
+                    //Si hay normas asignadas
                     if($oNormas != null)
                     {
                         $Html .= '<h3 class="title">Normas</h3>';
