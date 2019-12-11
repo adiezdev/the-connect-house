@@ -37,7 +37,7 @@ svg {
     border: none;
     border-radius: 5%;
     padding: 7px;
-    font-size: 12pt;
+    font-size: 15pt;
     color: #ffffff;
     background-color: #aac759;
 }
@@ -301,4 +301,10 @@ label[for=inputperfil] {
     text-align: center;
     float: left;
     color: #aac759;
+}
+/*Delete de la imagenes*/
+.delete
+{
+    position: relative;
+    bottom: 162px;
 }

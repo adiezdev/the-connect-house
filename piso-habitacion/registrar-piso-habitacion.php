@@ -76,8 +76,10 @@ ini_set( 'display_startup_errors' , true );
             <!--Seccion5-->
             <?php include("includes/seccion-5.php"); ?>
             <!--Guardemos-->
-            <input type="button"  class="button" value="Guardar"  onclick="validarDatos()">
-            <input type="button" class="button"  value="Cancelar" onclick="javascript:window.history.back()" >
+            <div class="guardardatos">
+                <input type="button"  class="button" value="Guardar"  onclick="validarDatos()">
+                <input type="button"  class="button"  value="Cancelar" onclick="javascript:window.history.back()" >
+            </div>
         </form>
     </div>
     <?php require_once(__DIR__ . "/../includes/footer.php"); ?>

@@ -27,7 +27,7 @@ function precarfarImagens(evt)
                 if (theFile.size <= 7000000)
                 {
                     //Creamos una etiqueta span
-                    var span = document.createElement('span');
+                    var span = document.createElement('div');
                     //Añadimos la clase contenedor
                     span.setAttribute("class", "contenedor");
                     //Añadimos la imagen
@@ -35,7 +35,7 @@ function precarfarImagens(evt)
                         '<img style="width: 280px; margin: 5px" src="',
                         e.target.result,
                         '" title="', escape(theFile.name),
-                        '"/><span class="delete">&times;</span>'
+                        '"/><br><span class="delete">Eliminar</span>'
                     ].join('');
                     //Añadimos las imagenes cantes de acabar la etiqueta de gallery
                     document.getElementById('gallery').insertBefore(span, null);
