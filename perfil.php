@@ -29,20 +29,52 @@
     //
     //Generamos la cabecera
     cabecera(TITULO_PERFIIL , $estilos , false);
+    //Respuesta del GET
+    if( $_GET )
+    {
+        //Sacar el valor de la ID
+        $get = explode( 'correo=',  $_SERVER['REQUEST_URI'] );
+        $sCorreo = $get[1];
+    }
+    else
+    {
+        //
+        //Si intentamos entrar sin una petición get nos redirecciona
+        header( "location:/the-connect-house/index.php" );
+        return;
+    }
     //
     //Sacar los datos del usuario
     $aDbUsuario = new Usuario();
-    $oDatosUsuario = '';
-    $idUsuario = '';
+    //
+    //Incializamos Permisos
+    $Permiso = false;
     if(isset($_SESSION['idUsuario']) || $_SESSION['idUsuario'] > 0)
     {
-        $oDatosUsuario = $aDbUsuario->getById($_SESSION['idUsuario']);
+        //
+        //Accedemos a datos mediante el correo
+        $oDatosUsuario = $aDbUsuario->getByCorreo($sCorreo);
+        //
+        //Sino existe nos redirigimos al index
+        if(!$oDatosUsuario)
+        {
+            header( "location:/the-connect-house/index.php" );
+            return;
+        }
+    }
+    //
+    //Comprobamos si es el mismo usuario que la sesión
+    if($oDatosUsuario[0]->idUsuario == $_SESSION['idUsuario'])
+    {
+        //
+        //Concedemos el permiso de edición de perfil y pisos/habitaciones
+       $Permiso = true;
     }
     //
     //
     //Sacar los pisos/Habitaciones del usuario
     $aDbPisosHabitaciones = new Pisos();
-    $aPisosHabitaciones = $aDbPisosHabitaciones->getByUsuario( $_SESSION['idUsuario'] );
+    $aPisosHabitaciones = $aDbPisosHabitaciones->getByUsuario( $oDatosUsuario[0]->idUsuario );
 ?>
 <body>
     <div class="content">

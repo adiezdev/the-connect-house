@@ -259,11 +259,26 @@ label[for=inputperfil] {
 }
 .flecha
 {
-
     color: #ffffff;
     width: 218px;
     padding: 13px;
     font-size: 1.2em;
+}
+/*Line in piso*/
+.likein
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+.likeinpiso
+{
+    padding: 13px;
+}
+.likeinpiso svg
+{
+    width: 50px;
 }
 /*Comodidades*/
 .comodidad

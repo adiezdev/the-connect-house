@@ -31,6 +31,8 @@ ini_set( 'display_startup_errors' , true );
     //
     //Generamos la cabecera
 	cabecera( TITULO_LOGIN , $estilos , true );
+	//
+    //Respuesta del GET
     if( $_GET )
     {
         //Decodificamos la URL
@@ -65,6 +67,10 @@ ini_set( 'display_startup_errors' , true );
 ?>
 <style>
     /*Para maquetar las caracteristicas del piso o habitacion*/
+    .contenedor-izquierdo
+    {
+        height: 971px;
+    }
     .contenedor-centro
     {
         margin: 0% 10% 0% 36%;
@@ -87,9 +93,16 @@ ini_set( 'display_startup_errors' , true );
         <div class="atras" onclick="javascript:window.history.back()">
             <div class="flecha">&#8592; Atrás</div>
         </div>
+        <div class="likein">
+            <?php echo '<div class="likeinpiso">'.file_get_contents("img/iconos-materiales/like.svg").'</div>'; ?>
+        </div>
                 <?php
+                $lt = 0.00;
+                $lg = 0.00;
                 foreach ( $aDatosPisosHabitaciones as $aDatosPisosHabitacion)
                 {
+                    $lt = $aDatosPisosHabitacion->Latitud;
+                    $lg = $aDatosPisosHabitacion->Longitud;
                     //Mostramos el usuario
                     $oDbUsuarios = new Usuario();
                     //Accedemos al usuario del piso
@@ -101,7 +114,7 @@ ini_set( 'display_startup_errors' , true );
 	                    $Html .=    '<div id="perfil">';
 	                    $Html .=        '<img id="user" src="'.$aDbUsuario->Imgperfil.'" alt="">';
 	                    $Html .=        '<h3>'.$aDbUsuario->Nombre.'</h3>';
-	                    $Html .=        '<h2>'.$aDatosPisosHabitacion->Precio.'</h2>';
+	                    $Html .=        '<h2>'.$aDatosPisosHabitacion->Precio.' €/Mes</h2>';
 	                    $Html .=        '<button class="button">Me interesa</button>';
 	                    $Html .=    '</div>';
 	                    $Html .= '</div>';
@@ -111,8 +124,9 @@ ini_set( 'display_startup_errors' , true );
                     $Html .= '<div class="contenedor-centro">';
                         $Html .= '<div class="into-centro">';
                         $Html .= '<h1>'.$aDatosPisosHabitacion->Calle.'</h1>';
+                        $Html .= '<p><i class="fas fa-map-marker-alt"></i> '.$aDatosPisosHabitacion->Calle.','.$aDatosPisosHabitacion->Ciudad.'</p><br>';
                         $Html .= '<div class="caracteristicas">';
-                        $Html .= '<p><i class="fas fa-map-marker-alt"></i> '.$aDatosPisosHabitacion->Calle.','.$aDatosPisosHabitacion->Ciudad.'</p>';
+                        $Html .= '<h3> Características </h3>';
                         $Html .= '<p><i class="fas fa-bath"></i>  '.$aDatosPisosHabitacion->NBanos.' Baños</p>';
                         $Html .= '<p><i class="fas fa-bed"></i> '.$aDatosPisosHabitacion->NHabitaciones.'  Habitaciones</p>';
                         //
@@ -177,13 +191,6 @@ ini_set( 'display_startup_errors' , true );
                         //Asignamos el mapa
                         $Html .= '<div id="mapid"></div>';
                         //
-                        //Se hace aqui la llamada al mapa para así poder pasar la latitud y longitud de mapa
-                        $Html .= '<script>
-                                        mymap.panTo(['.$aDatosPisosHabitacion->Latitud.' , '.$aDatosPisosHabitacion->Longitud.']);
-                                        L.marker(['.$aDatosPisosHabitacion->Latitud.' , '.$aDatosPisosHabitacion->Longitud.']).addTo(mymap);
-                                        mymap.scrollWheelZoom.disable();
-                                        mymap.dragging.disable();
-                                  </script>';
                         $Html .= '</div>';
 	                $Html .= '</div>';
 	                //
@@ -196,6 +203,16 @@ ini_set( 'display_startup_errors' , true );
 </body>
 <!-- Script necesarios -->
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
+<script>
+    mymap.scrollWheelZoom.disable();
+    mymap.doubleClickZoom.disable();
+    mymap.dragging.disable();
+    mymap.off('click');
+    console.log(<?php echo $lt ?>);
+    mymap.panTo([<?php echo $lt ?> , <?php echo $lg ?>]);
+    L.marker([<?php echo $lt ?> , <?php echo $lg ?>]).addTo(mymap);
+</script>
 <script>
     //Scroll del vendedOr
     $(document).scroll(function()
@@ -214,6 +231,8 @@ ini_set( 'display_startup_errors' , true );
             $('#perfil').css('left', '110px');
             $('#perfil').css('top', '');
         }
+        var height = $(window).height();
+        $('#div2').height(height);
     });
 </script>
 </html>

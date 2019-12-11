@@ -20,5 +20,5 @@
 	//
 	//Acceder a la tabla
 	define("TIPO_NORMAS", 2 );
-	define("TIPO_COMODIDADES" , 1)
+	define("TIPO_COMODIDADES" , 1);
 ?>

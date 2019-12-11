@@ -48,7 +48,7 @@
             //
             if($lResult)
             {
-                header("Location: ../../perfil.php");
+                header("Location: ../../perfil.php?correo=".$aUsuario->Correo);
             }
         }
     }
