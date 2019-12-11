@@ -109,7 +109,14 @@ function validarDatos()
         alert("Inserte alguna imagen");
         return false;
     }
-
+    if(id == 2)
+    {
+        if( chicos.trim() == '' || chicas.trim() == '')
+        {
+            alert("Indique si hay gente en el piso");
+            return false;
+        }
+    }
     //Formamos el JSON
     var oDatosJson =
         {
@@ -131,7 +138,7 @@ function validarDatos()
             Longitud: longitud ,
             Imagenes: imagenes
         };
-    console.log(oDatosJson)
+    //console.log(oDatosJson);
     //
     //Procesamos los datos
     $.ajax({
@@ -140,13 +147,13 @@ function validarDatos()
         data: JSON.stringify(oDatosJson)
     })
         .done(function(oJson) {
-            /*var oRespuesta = JSON.parse(oJson);
+            var oRespuesta = JSON.parse(oJson);
             if (oRespuesta.Estado == "OK")
             {
                 window.open("/the-connect-house/perfil.php", "_self");
             } else {
                 alert(oRespuesta.Mensaje);
-            }*/
-            console.log(oJson);
+            }
+           // console.log(oJson);
         });
 }

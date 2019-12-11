@@ -15,6 +15,7 @@
     require_once(__DIR__ . '/../../bd/bd_pisos.php');
     require_once(__DIR__ . '/../../bd/bd_secciones.php');
     require_once(__DIR__ . '/../../bd/bd_imagenespiso.php');
+	require_once(__DIR__ . '/../../bd/bd_ocupado.php');
     //
     // Inicalizamos variables.
     $oRespuesta = new stdClass();
@@ -30,17 +31,27 @@
     $sDescripcion = $oDatosJson["Descripcion"];
     $fMetros = $oDatosJson["Metros"];
     $fPrecio = $oDatosJson["Precio"];
+    //
+	//Array ocupados
+	$aOcupados = array();
+	//
     $nChicos = '';
+    $sChicos = 'M';
     //
     if(isset($oDatosJson["Chicos"]))
     {
+    	//Añadimos al array los chicos si hay
         $nChicos = $oDatosJson["Chicos"];
+	    $aOcupados[] = array( 'Num' => $nChicos  , 'Sexo' => $sChicos );
     }
     //
     $nChicas = '';
-    if(isset($oDatosJson["Chicas"]))
+	$sChicas = 'S';
+    if(isset($oDatosJson["Chicas"]) )
     {
-        $nChicos = $oDatosJson["Chicas"];
+    	//Añadimos al array las chicas si hay
+        $nChicas = $oDatosJson["Chicas"];
+		$aOcupados[] = array( 'Num' => $nChicas  , 'Sexo' => $sChicas );
     }
     //
     $nToilet = $oDatosJson["Toilet"];
@@ -65,16 +76,42 @@
     $lResult = $oDbPisosHabitaciones->addPisoHabitacion( $nHabitaciones , $nToilet , $fMetros , $sCalle, $nNumero , $nCp , $sCiudad , $sDescripcion,
         $fLatitud, $fLongitud, $fPrecio, $nTipo, $carpeta, $_SESSION['idUsuario']);
     //
+	//Cogemos la ultima id registrada
+	$ultimaId = $oDbPisosHabitaciones->getLastID();
+    //
+	//Si es tipo habitacion
+	if( $nTipo == 2 )
+	{
+		//
+		//Accedemos a la tabla Ocupado
+		$oDbOcupado = new Ocupado();
+		//
+		//Recorremos los chicos y las chicas que hay en el piso
+		foreach($aOcupados as $aOcupado )
+		{
+			//Las guardamos
+			$lResult = $oDbOcupado->addOcupado( $aOcupado->Num , $aOcupado->Sexo , $ultimaId  );
+			//Si da error
+			if(!$lResult)
+			{
+				$oRespuesta->Estado = "KO";
+				$oRespuesta->Mensaje = "Por favor vuelve a intentarlo";
+				echo json_encode( $oRespuesta );
+				return;
+			}
+		}
+	}
+    //
+	//Si da error al guardarlo
     if(!$lResult)
     {
         $oRespuesta->Estado = "KO";
         $oRespuesta->Mensaje = "Por favor vuelve a intentarlo";
-        json_encode( $oRespuesta );
+        echo json_encode( $oRespuesta );
+        return;
     }
     else
     {
-        //Cogemos la ultima id registrada
-        $ultimaId = $oDbPisosHabitaciones->getLastID();
         //
         //Comprobamos si ha metido comodidades
         if(isset($oDatosJson["Comodidades"]))
@@ -100,6 +137,8 @@
                 $oDbNormas->addSeccion( $ultimaId , $norma );
             }
         }
+        //
+	    //Recorremos las imagenes
         foreach($oDatosJson["Imagenes"] as $imagen=>$value)
         {
             //Guardamos las normas del piso

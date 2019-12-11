@@ -68,7 +68,12 @@
     {
         margin: 0% 10% 0% 36%;
     }
+    .muestrausuario
+    {
+        height: 788px;
+    }
 </style>
+<!-- Script al mapa para hacer su llamada despues -->
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
 <body>
 <?php
@@ -87,7 +92,7 @@
     <div class="flecha">&#8592; Atrás</div>
 </div>
     <div class="content">
-        <div class="contenedor-izquierdo">
+        <div class="contenedor-izquierdo muestrausuario">
             <div id="perfil">
                 <img id="user" src="img/isset/isset-user.png" alt="">
                 <h3>Nombre</h3>
@@ -102,8 +107,15 @@
                     $Html = ' <h1>'.$aDatosPisosHabitacion->Calle.'</h1>';
                     $Html .= '<div class="caracteristicas">';
                     $Html .= '<p><i class="fas fa-map-marker-alt"></i> '.$aDatosPisosHabitacion->Calle.','.$aDatosPisosHabitacion->Ciudad.'</p>';
-                    $Html .=  '<p><i class="fas fa-bath"></i>  '.$aDatosPisosHabitacion->NBanos.' Baños</p>';
-                    $Html .=  '<p><i class="fas fa-bed"></i> '.$aDatosPisosHabitacion->NHabitaciones.'  Habitaciones</p>';
+                    $Html .= '<p><i class="fas fa-bath"></i>  '.$aDatosPisosHabitacion->NBanos.' Baños</p>';
+                    $Html .= '<p><i class="fas fa-bed"></i> '.$aDatosPisosHabitacion->NHabitaciones.'  Habitaciones</p>';
+                    //
+                    //Si es una habitacion
+                    if( $aDatosPisosHabitacion->Tipo == 2)
+                    {
+	                    $Html .= '<p><i class="fas fa-bed"></i> '.$aDatosPisosHabitacion->NHabitaciones.'  Habitaciones</p>';
+                    }
+                    //
                     $Html .= '</div>';
                     $Html .= '<br>';
                     $Html .= '<h3 class="title">Descripción</h3>';

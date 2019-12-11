@@ -64,7 +64,7 @@ class Pisos extends Conexion
     public function getLastID()
     {
         $aUltimaID = array();
-        $cSql = 'SELECT * FROM '.$this->sTabla.' ORDER BY idPiso  DESC LIMIT 1';
+        $cSql = 'SELECT * FROM '.$this->sTabla.' ORDER BY idPiso DESC LIMIT 1';
         $stmt = $this->prepare( $cSql );
         $stmt->execute();
         $oResultado = $stmt->get_result();
