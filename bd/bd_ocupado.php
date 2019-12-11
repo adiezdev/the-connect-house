@@ -15,7 +15,15 @@
 		//
 		//Nombre de la tabla
 		private $sTabla = '`ocupados`';
-		//
+		/**
+		 * Funcion añadir una ocupación
+		 *
+		 * @param $Num
+		 * @param $Sexo
+		 * @param $idPiso
+		 *
+		 * @return bool
+		 */
 		function addOcupado( $Num , $Sexo , $idPiso )
 		{
 			$cSql = 'INSERT INTO '.$this->sTabla.'( Num , Sexo , idPsio ) VALUES (? , ? , ? )';
@@ -31,5 +39,26 @@
 			{
 				return true;
 			}
+		}
+		/**
+		 * Devuelve la gente que hay en un piso por la ID
+		 *
+		 * @param $nIdPsio
+		 *
+		 * @return array
+		 */
+		function getById( $nIdPsio )
+		{
+			$aOcupado = array();
+			$cSql = 'SELECT * FROM '.$this->sTabla.' WHERE idPiso = ? ORDER BY Sexo';
+			$stmt = $this->prepare($cSql);
+			$stmt->bind_param('i', $nIdPiso );
+			$stmt->execute();
+			$oResultado = $stmt->get_result();
+			while( $oRecord = $oResultado->fetch_object())
+			{
+				$aOcupado[] = $oRecord;
+			}
+			return $aOcupado;
 		}
 	}

@@ -20,7 +20,8 @@
     require_once(__DIR__."/bd/bd_pisos.php");
     require_once(__DIR__."/bd/bd_imagenespiso.php");
     require_once(__DIR__."/bd/bd_secciones.php");
-    //
+	require_once(__DIR__."/bd/bd_ocupado.php");
+	//
     //Configuramos los estilos que necesitamos
     $estilos = array(
 		 ESTILOS_WIDGETS ,
@@ -98,7 +99,7 @@
             <div class="into-centro">
                 <?php
                 foreach ( $aDatosPisosHabitaciones as $aDatosPisosHabitacion) {
-                    $Html = ' <h1>'.$aDatosPisosHabitacion->Calle.'</h1>';
+                    $Html  = '<h1>'.$aDatosPisosHabitacion->Calle.'</h1>';
                     $Html .= '<div class="caracteristicas">';
                     $Html .= '<p><i class="fas fa-map-marker-alt"></i> '.$aDatosPisosHabitacion->Calle.','.$aDatosPisosHabitacion->Ciudad.'</p>';
                     $Html .= '<p><i class="fas fa-bath"></i>  '.$aDatosPisosHabitacion->NBanos.' Baños</p>';
@@ -107,7 +108,12 @@
                     //Si es una habitacion
                     if( $aDatosPisosHabitacion->Tipo == 2)
                     {
-	                    $Html .= '<p><i class="fas fa-bed"></i> '.$aDatosPisosHabitacion->NHabitaciones.'  Habitaciones</p>';
+                        $odbOcupado = new Ocupado();
+                        $aOcupados = $odbOcupado->getById( $aDatosPisosHabitacion->idPiso );
+                        foreach( $aOcupados as $aOcupado)
+                        {
+	                        $Html .= '<p><i class="fas fa-child"></i> '.$aOcupado->Num.'</p>';
+                        }
                     }
                     //
                     $Html .= '</div>';
