@@ -11,10 +11,10 @@
      *
      * @param string $stitulo
      * @param array $sCss
-     * @param boolean $bMapa
+     * @param boolean $apiMapa
      *
      */
-    function cabecera($stitulo, $sCss, $bMapa)
+    function cabecera($stitulo, $sCss, $apiMapa )
     {
         $m_cGetTheConnect = get_root_uri();
         $cabecera = '<title>'.$stitulo.'</title>';
@@ -24,7 +24,7 @@
             $cabecera .= '<link rel="stylesheet" href="'.$m_cGetTheConnect.'/the-connect-house/css/'.$css.'.css">';
         }
         //Si le pasamos un true agregamos las dependencia del mapa
-        if($bMapa == true)
+        if($apiMapa == true)
         {
             $cabecera .= '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
             integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
@@ -32,6 +32,7 @@
             $cabecera .= '<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
             integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
             crossorigin=""></script>';
+            $cabecera .= '<script src="/the-connect-house/js/mapa.js"></script>';
         }
         echo $cabecera;
     }

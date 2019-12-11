@@ -83,7 +83,6 @@
     <?php require_once(__DIR__ . "/../includes/footer.php"); ?>
 </body>
 <!-- Scripts necesarios -->
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/precarga-imagenes.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/validar-piso-habitacion.js"></script>
@@ -146,15 +145,15 @@
             //Si es León
             if(seleccinado === "León")
             {
-                mymap.panTo([42.6036359 , -5.5949009]) //El mapa se situa en León
+                //El mapa se situa en León
+				llamarMapa( true , true , true , false , 42.6036359 , -5.5949009);
             }
             else //Si no
             {
-                mymap.panTo([42.5498528 , -6.6148307]); //El mapa se situa en Ponferrada
+				//El mapa se situa en Ponferrada
+				llamarMapa( true , true , true , false , 42.5498528 , -6.6148307);
             }
         })
             .trigger( "change" );
-        //Desactivamos en el mapa el zoom con el scroll del ratón
-        mymap.scrollWheelZoom.disable();
     });
 </script>

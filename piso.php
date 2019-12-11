@@ -68,13 +68,7 @@
     {
         margin: 0% 10% 0% 36%;
     }
-    .muestrausuario
-    {
-        height: 788px;
-    }
 </style>
-<!-- Script al mapa para hacer su llamada despues -->
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
 <body>
 <?php
     //
@@ -147,9 +141,9 @@
                         $Html .= '</div>';
                     }
                     $Html .= '<div id="mapid"></div>';
+                    //Se hace aqui la llamada al mapa para así poder pasar la latitud y longitud de mapa
                     $Html .= '<script>
-                            //Llamamos al mapa
-                                llamarMapa(false , false , false  , '.$aDatosPisosHabitacion->Latitud.' , '.$aDatosPisosHabitacion->Longitud.' );
+                                llamarMapa(false , false , false , true  , '.$aDatosPisosHabitacion->Latitud.' , '.$aDatosPisosHabitacion->Longitud.' );
                               </script>';
                     echo $Html;
                 }
