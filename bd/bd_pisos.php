@@ -136,10 +136,11 @@ class Pisos extends Conexion
     }
     public function buscarPiso( $fPrecio = 0 , $nPisos = 0 , $nHabitaciones = 0 , $sCiudad = '' , $sCalle = '' )
     {
+    	$aPisoHabitacion = array();
+    	//
 	    $sFiltro = '';
     	$sParametros = 'i';
 	    $valores = array($fPrecio);
-
 		//
 	    if( $nPisos != 0 )
 	    {
@@ -182,8 +183,13 @@ class Pisos extends Conexion
 	    $refMethod = $refClass->getMethod("bind_param");
 	    $refMethod->invokeArgs($stmt , $bindArray);
 	    //
-	    $stmt->execute() or die("Error: ");
-	    return $stmt->store_result();
+	    $stmt->execute();
+	    $oResultado = $stmt->get_result();
+	    while( $oRecord = $oResultado->fetch_object())
+	    {
+		    $aPisoHabitacion[] =  $oRecord;
+	    }
+	    return $aPisoHabitacion;
     }
     /**
      * Actualiza un nuevo piso o habitacion
