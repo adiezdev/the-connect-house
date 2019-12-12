@@ -33,8 +33,7 @@
     if( $_GET )
     {
         //Sacar el valor del correo
-        $get = explode( 'correo=',  $_SERVER['REQUEST_URI'] );
-        $sCorreo = $get[1];
+	   $sCorreo =  $_GET["correo"];
     }
     else
     {
@@ -98,13 +97,6 @@
                     }
                     ?>
                 </div>
-                <ul>
-                    <li><a>Inicio</a></li>
-                    <li><a>Cofiguración</a></li>
-                    <li><a>Favoritos</a></li>
-                    <li><a>Perfil</a></li>
-                    <li><a>Buscar...</a></li>
-                </ul>
             </div>
         </div>
         <div class="contenedor-centro">

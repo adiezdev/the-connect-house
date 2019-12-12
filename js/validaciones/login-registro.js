@@ -131,7 +131,7 @@ function validarCamposLogin() {
             var oRespuesta = JSON.parse(oJson);
             if (oRespuesta.Estado == "OK")
             {
-                window.open("/the-connect-house/perfil.php", "_self");
+                window.open("/the-connect-house/perfil.php?correo="+sCorreo , "_self");
             } else {
                 alert(oRespuesta.Mensaje);
             }

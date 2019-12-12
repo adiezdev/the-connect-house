@@ -7,7 +7,7 @@
     Archivo de: Alejandro Díez
     GitHub: @adilosa95
     Proyecto: the-connect-house
-    Nombre del archivo: busqueda-pisos.php
+    Nombre del archivo: buscar.php
     -------------------------------------
 */
     require_once(__DIR__."/includes/header.php");
