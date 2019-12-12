@@ -76,6 +76,16 @@
     {
         $oDatosUsuario = $aDbUsuario->getById($_SESSION['idUsuario']);
     }
+
+    $oDbPisosHabitaciones = new Pisos();
+	try
+	{
+		$aDbPisosHabitaciones = $oDbPisosHabitaciones->buscarPiso( $sPrecio , $sPisos , $sHabitaciones , $sCiudad , $sBuscar );
+	}
+	catch( ReflectionException $e )
+	{
+	}
+	var_dump( $aDbPisosHabitaciones );
     //
     //Accedemos a la busqueda
 ?>
@@ -110,7 +120,6 @@
                 <li><a>Buscar...</a></li>
             </ul>
         </div>
-
     </div>
       <div class="contenedor-centro">
         <div class="into-centro busqueda">
@@ -180,5 +189,4 @@
 </body>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/like.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
-<script>llamarMapa(false , false , false);</script>
 </html>

@@ -134,12 +134,24 @@ class Pisos extends Conexion
                     return true;
                 }
     }
+	/**
+	 * Funcion por filtros
+	 *
+	 * @param int $fPrecio
+	 * @param int $nPisos
+	 * @param int $nHabitaciones
+	 * @param string $sCiudad
+	 * @param string $sCalle
+	 *
+	 * @return array
+	 * @throws ReflectionException
+	 */
     public function buscarPiso( $fPrecio = 0 , $nPisos = 0 , $nHabitaciones = 0 , $sCiudad = '' , $sCalle = '' )
     {
     	$aPisoHabitacion = array();
     	//
 	    $sFiltro = '';
-    	$sParametros = 'i';
+    	$sParametros = 'd';
 	    $valores = array($fPrecio);
 		//
 	    if( $nPisos != 0 )
