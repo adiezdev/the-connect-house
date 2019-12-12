@@ -32,7 +32,7 @@
     //Respuesta del GET
     if( $_GET )
     {
-        //Sacar el valor de la ID
+        //Sacar el valor del correo
         $get = explode( 'correo=',  $_SERVER['REQUEST_URI'] );
         $sCorreo = $get[1];
     }
@@ -49,18 +49,15 @@
     //
     //Incializamos Permisos
     $Permiso = false;
-    if(isset($_SESSION['idUsuario']) || $_SESSION['idUsuario'] > 0)
+    //
+    //Accedemos a datos mediante el correo
+    $oDatosUsuario = $aDbUsuario->getByCorreo($sCorreo);
+    //
+    //Sino existe nos redirigimos al index
+    if(!$oDatosUsuario)
     {
-        //
-        //Accedemos a datos mediante el correo
-        $oDatosUsuario = $aDbUsuario->getByCorreo($sCorreo);
-        //
-        //Sino existe nos redirigimos al index
-        if(!$oDatosUsuario)
-        {
-            header( "location:/the-connect-house/index.php" );
-            return;
-        }
+        header( "location:/the-connect-house/index.php" );
+        return;
     }
     //
     //Comprobamos si es el mismo usuario que la sesión
@@ -92,6 +89,11 @@
                         $Html .= '<fieldset><legend>Descripción :</legend>';
                         $Html .= '<div id="descripcion"><p>'.$oDatoUsuario->Descripcion.'</p></div><br>';
                         $Html .= '</fieldset>';
+	                    if( $Permiso == true)
+	                    {
+		                    $Html1 .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar Perfil</div>';
+
+	                    }
                         echo $Html;
                     }
                     ?>
@@ -112,26 +114,32 @@
                 //Si no tenemos piso en la base de datos , te aparecerá para agregarlo
                 if(empty($aPisosHabitaciones))
                 {
-                    $Html  = '<div id="vacio">';
-                    $Html .= '<img src="img/key.png" alt="llaves" style="width: 40%">';
-                    $Html .= '<h2>A parte de buscar piso o habitación</h2><br>';
-                    $Html .= '<h2>Puesdes alquilar tú habitación o piso</h2>';
-                    $Html .= '<button class="button" id="buttonVentana" >Empezar</button>';
-                    $Html .= '</div>';
-                    echo $Html;
-                    //
-                    //Array botones que aparecen en la ventana
-                    $btones = array(
-                        "Añadir Habitación",
-                        "Añadir Piso"
-                    );
-                    $btonesfuncion = array(
-                        "addPisoHabitacion(2)",
-                        "addPisoHabitacion(1)"
-                    );
-                    //
-                    //Generamos la ventana
-                    getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
+	                $Html  = '<div id="vacio">';
+	                if( $Permiso == true)
+	                {
+		                $Html .= '<img src="img/key.png" alt="llaves" style="width: 40%">';
+		                $Html .= '<h2>A parte de buscar piso o habitación</h2><br>';
+		                $Html .= '<h2>Puesdes alquilar tú habitación o piso</h2>';
+		                $Html .= '<button class="button" id="buttonVentana" >Empezar</button>';
+		                //
+		                //Array botones que aparecen en la ventana
+		                $btones = array(
+			                "Añadir Habitación",
+			                "Añadir Piso"
+		                );
+		                $btonesfuncion = array(
+			                "addPisoHabitacion(2)",
+			                "addPisoHabitacion(1)"
+		                );
+		                //
+		                //Generamos la ventana
+		                getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
+	                }
+	                else
+                    {
+	                    $Html .= '<h2>Este usuario no tiene ningún piso</h2><br>';
+                    }
+	                echo $Html;
                 }else
                 {
                     //
@@ -161,6 +169,11 @@
                         $Html1 .= '</div>';
                         $Html1 .=' </div>
                             </div>';
+	                    if( $Permiso == true)
+	                    {
+		                    $Html1 .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar</div>';
+
+                        }
                         echo $Html1;
                     }
 
@@ -169,6 +182,8 @@
             </div>
         </div>
                 <?php
+                    //
+                    //Contenedor de la derecha
                 if(!empty($aPisosHabitaciones))
                 {
                     $Html  = '<div class="contenedor-derecho">';
@@ -178,7 +193,6 @@
                     $Html .= '<h2>Añade más pisos o habitaciones, que quieras alquilar</h2>';
                     $Html .= '<button class="button" id="buttonVentana" >Empezar</button>';
                     $Html .= '</div>';
-
                     //
                     //Array botones que aparecen en la ventana
                     $btones = array(

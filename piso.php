@@ -48,6 +48,7 @@ ini_set( 'display_startup_errors' , true );
         header( "location:/the-connect-house/perfil.php" );
         return;
     }
+
     //
     //Accedemos a los datos del piso o Habitacion
     $oDbPisoHabitacion = new Pisos();
@@ -97,16 +98,26 @@ ini_set( 'display_startup_errors' , true );
             <?php echo '<div class="likeinpiso">'.file_get_contents("img/iconos-materiales/like.svg").'</div>'; ?>
         </div>
                 <?php
+                    //Incializamos estas varbles, necesitaremos la latitud y longitud fuera del foreach, para darselo al mapa
                 $lt = 0.00;
                 $lg = 0.00;
                 foreach ( $aDatosPisosHabitaciones as $aDatosPisosHabitacion)
                 {
+                    //Asignamos datos
                     $lt = $aDatosPisosHabitacion->Latitud;
                     $lg = $aDatosPisosHabitacion->Longitud;
                     //Mostramos el usuario
                     $oDbUsuarios = new Usuario();
                     //Accedemos al usuario del piso
-                    $aDbUsuarios = $oDbUsuarios->getById($aDatosPisosHabitacion->idUsuario );
+                    $aDbUsuarios = $oDbUsuarios->getById( $aDatosPisosHabitacion->idUsuario );
+                    //
+                    //Permiso de edición
+	                $Permiso = false;
+                    if($aDatosPisosHabitacion->idUsuario == $_SESSION['idUsuario'])
+                    {
+	                    $Permiso = true;
+                    }
+                    //
                     //Recorremos sus datos
                     foreach( $aDbUsuarios as $aDbUsuario)
                     {
@@ -116,6 +127,12 @@ ini_set( 'display_startup_errors' , true );
 	                    $Html .=        '<h3>'.$aDbUsuario->Nombre.'</h3>';
 	                    $Html .=        '<h2>'.$aDatosPisosHabitacion->Precio.' €/Mes</h2>';
 	                    $Html .=        '<button class="button">Me interesa</button>';
+	                    //
+                        //Si es true podemos editar el piso
+	                    if( $Permiso == true )
+                        {
+	                        $Html1 .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar</div>';
+                        }
 	                    $Html .=    '</div>';
 	                    $Html .= '</div>';
                     }
@@ -205,15 +222,19 @@ ini_set( 'display_startup_errors' , true );
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
 <script>
+    //Quitamos el scroll del mapa
     mymap.scrollWheelZoom.disable();
+    //Quitamos el doble click del mapa
     mymap.doubleClickZoom.disable();
+    //Quitamos el arrastrar del mapa
     mymap.dragging.disable();
+    //Quitamos el clikc en el mapa para que no agrege marcas
     mymap.off('click');
-    console.log(<?php echo $lt ?>);
+    //Visualizamos esas coordenadas en el mapa
     mymap.panTo([<?php echo $lt ?> , <?php echo $lg ?>]);
+    //Ponemos una marca en el mapa con las coordenadas
     L.marker([<?php echo $lt ?> , <?php echo $lg ?>]).addTo(mymap);
-</script>
-<script>
+    //
     //Scroll del vendedOr
     $(document).scroll(function()
     {
