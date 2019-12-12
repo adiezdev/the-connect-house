@@ -84,6 +84,7 @@
 	}
 	catch( ReflectionException $e )
 	{
+	    echo $e;
 	}
 	var_dump( $aDbPisosHabitaciones );
     //
