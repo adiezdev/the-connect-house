@@ -12,10 +12,11 @@
 */
     require_once(__DIR__."/includes/header.php");
     require_once(__DIR__."/includes/constantes.php");
-    require_once(__DIR__."/includes/sesion.php");
     //
     //Accedemos a datos
     require_once(__DIR__."/bd/bd_usuario.php" );
+	require_once(__DIR__."/bd/bd_pisos.php" );
+    session_start();
     //
     //Configuramos los estilos que necesitamos
     $estilos = array(
@@ -25,15 +26,58 @@
     //
     //Generamos la cabecera
     cabecera(TITULO_BUSQUEDA , $estilos ,true);
-    //
+	//Respuesta del GET
+	if( $_GET )
+	{
+	    if(!empty( $_GET["Pisos"] ))
+        {
+	        $sPisos = $_GET["Pisos"];
+        }
+	    else
+        {
+	        $sPisos = 0;
+        }
+		if(!empty( $_GET["Habitaciones"] ))
+		{
+			$sHabitaciones =  $_GET["Habitaciones"];
+		}
+		else
+        {
+	        $sHabitaciones = 0;
+        }
+		if(!empty( $_GET["Precio"] ))
+		{
+			$sPrecio = $_GET["Precio"];
+		}
+		else
+        {
+            $sPrecio = 0;
+        }
+		if(!empty( $_GET["Ciudad"] ))
+		{
+			$sCiudad = $_GET["Ciudad"];
+		}
+		else
+        {
+            $sCiudad = '';
+        }
+		if(!empty( $_GET["Buscar"] ))
+		{
+			$sBuscar = $_GET["Buscar"];
+		}
+		else
+        {
+	        $sBuscar = '';
+        }
+	}
     //Sacar los datos del usuario
     $aDbUsuario = new Usuario();
-    $oDatosUsuario = '';
-    $idUsuario = '';
     if(isset($_SESSION['idUsuario']) || $_SESSION['idUsuario'] > 0)
     {
         $oDatosUsuario = $aDbUsuario->getById($_SESSION['idUsuario']);
     }
+    //
+    //Accedemos a la busqueda
 ?>
 <body>
   <div class="content">
@@ -41,14 +85,21 @@
         <div class="into-izquierdo">
             <div id="perfil">
                 <?php
-                //Datos perfil
-                foreach ( $oDatosUsuario as $oDatoUsuario )
-                {
-                    $idUsuario = $oDatoUsuario->idUsuario;
-                    $Html = '<img id="user" src="'.$oDatoUsuario->Imgperfil.'" alt="imgen-perfil" srcset="">';
-                    $Html .= '<h3>'.$oDatoUsuario->Nombre.' '.$oDatoUsuario->Apellidos.'</h3><br>';
-                    echo $Html;
-                }
+                    if(!isset($_SESSION['idUsuario']))
+                    {
+                        $Html = '<input type="button" class="button" value="Iniciar Sesión" onclick="window.open(\'/the-connect-house/piso.php?\')">';
+                    }
+                    else
+                    {
+	                    //Datos perfil
+	                    foreach ( $oDatosUsuario as $oDatoUsuario )
+	                    {
+		                    $idUsuario = $oDatoUsuario->idUsuario;
+		                    $Html = '<img id="user" src="'.$oDatoUsuario->Imgperfil.'" alt="imgen-perfil" srcset="">';
+		                    $Html .= '<h3>'.$oDatoUsuario->Nombre.' '.$oDatoUsuario->Apellidos.'</h3><br>';
+		                    echo $Html;
+	                    }
+                    }
                 ?>
             </div>
             <ul>

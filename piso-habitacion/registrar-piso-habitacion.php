@@ -78,7 +78,7 @@ ini_set( 'display_startup_errors' , true );
             <!--Guardemos-->
             <div class="guardardatos">
                 <input type="button"  class="button" value="Guardar"  onclick="validarDatos()">
-                <input type="button"  class="button"  value="Cancelar" onclick="javascript:window.history.back()" >
+                <input type="button"  class="button"  value="Cancelar" onclick="window.history.back()" >
             </div>
         </form>
     </div>

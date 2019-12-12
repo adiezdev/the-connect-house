@@ -91,7 +91,7 @@
 	}
 ?>
     <div class="content">
-        <div class="atras" onclick="javascript:window.history.back()">
+        <div class="atras" onclick="window.history.back()">
             <div class="flecha">&#8592; Atrás</div>
         </div>
         <div class="likein">

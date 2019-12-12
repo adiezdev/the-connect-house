@@ -134,6 +134,57 @@ class Pisos extends Conexion
                     return true;
                 }
     }
+    public function buscarPiso( $fPrecio = 0 , $nPisos = 0 , $nHabitaciones = 0 , $sCiudad = '' , $sCalle = '' )
+    {
+	    $sFiltro = '';
+    	$sParametros = 'i';
+	    $valores = array($fPrecio);
+
+		//
+	    if( $nPisos != 0 )
+	    {
+		    $sParametros .= 'i';
+		    $sFiltro .= 'AND Tipo = ?';
+	    	$valores[] = $nPisos;
+	    }
+	    //
+	    if( $nHabitaciones != 0 )
+	    {
+		    $sParametros .= 'i';
+		    $sFiltro .= 'AND Tipo = ?';
+		    $valores[] = $nHabitaciones;
+	    }
+	    //
+	    if( $sCiudad  != '' )
+	    {
+		    $sParametros .= 's';
+		    $sFiltro .= 'AND Ciudad = ?';
+		    $valores[] = $sCiudad;
+	    }
+	    //
+	    if( $sCalle  != '' )
+	    {
+		    $sParametros .= 's';
+		    $sFiltro .= 'AND Calle = ?';
+		    $valores[] = $sCalle;
+	    }
+	    //
+	    $bindArray = array($sParametros);
+	    foreach( $valores as $valor)
+	    {
+	    	$bindArray[] = $valor;
+	    }
+	    $cSql = 'SELECT * FROM '.$this->sTabla.' WHERE Precio >= ? '.$sFiltro;
+	    //
+	    $stmt = $this->prepare( $cSql );
+		//
+	    $refClass = new ReflectionClass('mysqli_stmt');
+	    $refMethod = $refClass->getMethod("bind_param");
+	    $refMethod->invokeArgs($stmt , $bindArray);
+	    //
+	    $stmt->execute() or die("Error: ");
+	    return $stmt->store_result();
+    }
     /**
      * Actualiza un nuevo piso o habitacion
      *

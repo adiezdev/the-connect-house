@@ -35,19 +35,20 @@
     <img class="img-fondo" src="img/img-inicio.jpg" srcset="img/img-inicio.jpg 200w">
     <div class="buscador">
         <form action="buscar.php" method="get">
-            <input type="checkbox" name="Pisos" id="piso">
+            <input type="checkbox" name="Pisos" id="piso" value="1" >
             <label for="">Pisos</label>
-            <input type="checkbox" name="Habitaciones" id="piso">
+            <input type="checkbox" name="Habitaciones" id="piso" value="2" >
             <label for="">Habitaciones</label>
             <div class="slidercontenedor">
                 <h3>Precio: <span id="preciospan">0</span> €</h3>
-                <input type="range" name="precio" id="slider" min="0" max="1000" value="0" step="10">
+                <input type="range" name="Precio" id="slider" min="0" max="1000" value="0" step="10">
             </div>
-            <select name="ciudad" id="selector">
-                <option value="1">León</option>
-                <option value="2">Ponferrada</option>
+            <select name="ciudad" id="selector"
+                <option value="0">Seleccione una ciudad</option>>
+                <option value="León">León</option>
+                <option value="Ponferrada">Ponferrada</option>
             </select>
-            <input type="search" name="Buscar" id="search" placeholder="Buscas lo que quieras">
+            <input type="search" name="Buscar" id="search" placeholder="Busca la calle que deseas">
             <button class="button">Buscar <img src="img/iconos-materiales/lupa.png" alt="Buscar"></button>
         </form>
     </div>
@@ -75,14 +76,14 @@
         <h2 id="titulos">¿En qué ciudad buscas?</h2>
     </div>
     <div class="seccion">
-        <div class="box-ciudades" onclick="window.open('/the-connect-house/buscar.php?ciudad=León', '_self');">
+        <div class="box-ciudades" onclick="window.open('buscar.php?ciudad=León', '_self');">
             <div class="descripcion">
                 <h1>Léon</h1>
             </div>
             <img src="img/ciudades/catedral-leon.jpg" alt="" srcset="">
             <button class="button">Enseñame que hay</button>
         </div>
-        <div class="box-ciudades"  onclick="window.open('/the-connect-house/buscar.php?ciudad=Ponferrada', '_self');">
+        <div class="box-ciudades"  onclick="window.open('buscar.php?ciudad=Ponferrada', '_self');">
             <div class="descripcion">
                 <h1>Ponferrada</h1>
             </div>
