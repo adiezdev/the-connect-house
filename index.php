@@ -22,7 +22,7 @@
     //Configuramos los estilos que necesitamos
     $estilos = array(
             ESTILOS_WIDGETS,
-            ESTILOS_IDEX
+            ESTILOS_MAIN
     );
     //
     //Generamos la cabecera
@@ -77,19 +77,22 @@
     </div>
     <div class="seccion">
         <div class="box-ciudades" onclick="window.open('buscar.php?ciudad=León', '_self');">
+            <div>
+                <button class="button">Enseñame que hay</button>
+            </div>
             <div class="descripcion">
                 <h1>Léon</h1>
             </div>
             <img src="img/ciudades/catedral-leon.jpg" alt="" srcset="">
-            <button class="button">Enseñame que hay</button>
         </div>
         <div class="box-ciudades"  onclick="window.open('buscar.php?ciudad=Ponferrada', '_self');">
+            <div>
+                <button class="button">Enseñame que hay</button>
+            </div>
             <div class="descripcion">
                 <h1>Ponferrada</h1>
             </div>
             <img src="img/ciudades/castillo-ponferrada.jpg" alt="" srcset="">
-
-            <button class="button">Enseñame que hay</button>
         </div>
     </div>
     <?php  require_once(__DIR__."/includes/footer.php"); ?>
