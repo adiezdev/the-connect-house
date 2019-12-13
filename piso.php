@@ -220,6 +220,7 @@
 </body>
 <!-- Script necesarios -->
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider.js"></script>
+<script>var touch = false;</script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
 <script>
     //Quitamos el scroll del mapa
@@ -228,8 +229,6 @@
     mymap.doubleClickZoom.disable();
     //Quitamos el arrastrar del mapa
     mymap.dragging.disable();
-    //Quitamos el clikc en el mapa para que no agrege marcas
-    mymap.off('click');
     //Visualizamos esas coordenadas en el mapa
     mymap.panTo([<?php echo $lt ?> , <?php echo $lg ?>]);
     //Ponemos una marca en el mapa con las coordenadas

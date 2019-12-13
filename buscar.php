@@ -16,12 +16,14 @@
     //Accedemos a datos
     require_once(__DIR__."/bd/bd_usuario.php" );
 	require_once(__DIR__."/bd/bd_pisos.php" );
+    require_once(__DIR__."/bd/bd_imagenespiso.php");
     session_start();
     //
     //Configuramos los estilos que necesitamos
     $estilos = array(
         ESTILOS_WIDGETS,
-        ESTILOS_MAIN
+        ESTILOS_MAIN,
+        ESTILOS_MENU
     );
     //
     //Generamos la cabecera
@@ -72,122 +74,111 @@
 	}
     //Sacar los datos del usuario
     $aDbUsuario = new Usuario();
-    if(isset($_SESSION['idUsuario']) || $_SESSION['idUsuario'] > 0)
+    if(isset($_SESSION['idUsuario']))
     {
         $oDatosUsuario = $aDbUsuario->getById($_SESSION['idUsuario']);
     }
-
+    //
+    //Accedemos a la busqueda
     $oDbPisosHabitaciones = new Pisos();
 	try
 	{
-		$aDbPisosHabitaciones = $oDbPisosHabitaciones->buscarPiso( $sPrecio , $sPisos , $sHabitaciones , $sCiudad , $sBuscar );
+		$aDbPisosHabitaciones = $oDbPisosHabitaciones->buscarPiso( $sPrecio , $sBuscar , $sPisos , $sHabitaciones , $sCiudad );
 	}
 	catch( ReflectionException $e )
 	{
-	    echo $e;
+	     $e;
 	}
-	var_dump( $aDbPisosHabitaciones );
-    //
-    //Accedemos a la busqueda
 ?>
 <body>
+  <?php require_once(__DIR__ . '/includes/menu.php'); ?>
   <div class="content">
-    <div class="contenedor-izquierdo">
-        <div class="into-izquierdo">
-            <div id="perfil">
-                <?php
-                    if(!isset($_SESSION['idUsuario']))
-                    {
-                        $Html = '<input type="button" class="button" value="Iniciar Sesión" onclick="window.open(\'/the-connect-house/piso.php?\')">';
-                    }
-                    else
-                    {
-	                    //Datos perfil
-	                    foreach ( $oDatosUsuario as $oDatoUsuario )
-	                    {
-		                    $idUsuario = $oDatoUsuario->idUsuario;
-		                    $Html = '<img id="user" src="'.$oDatoUsuario->Imgperfil.'" alt="imgen-perfil" srcset="">';
-		                    $Html .= '<h3>'.$oDatoUsuario->Nombre.' '.$oDatoUsuario->Apellidos.'</h3><br>';
-		                    echo $Html;
-	                    }
-                    }
-                ?>
-            </div>
-            <ul>
-                <li><a>Inicio</a></li>
-                <li><a>Cofiguración</a></li>
-                <li><a>Favoritos</a></li>
-                <li><a>Perfil</a></li>
-                <li><a>Buscar...</a></li>
-            </ul>
-        </div>
-    </div>
       <div class="contenedor-centro">
         <div class="into-centro busqueda">
-            <form>
-                <input type="search" name="search" id="search" placeholder="Buscar...">
-            </form>
             <h2 class="title">Resultados</h2>
-            <div class="box-mas-visitados">
-                <?php echo '<div class="likeit">'.file_get_contents("img/iconos-materiales/like.svg").'</div>'; ?>
-                <img src="img/img-modelo.jpg" alt="habitación">
-                <h2>Calle</h2>
-                <div class="descripcion">
-                    <p><i class="fas fa-map-marker-alt"></i> Ubicación</p><br>
-                    <p><i class="fas fa-eye"></i> Ubicación</p><br>
-                </div>
-                <div class="datos">
-                    <p><i class="fas fa-bed"></i> Habitaciones |</p>
-                    <p><i class="fas fa-bath"></i> Baños</p>
-                </div>
-            </div>
-            <div class="box-mas-visitados">
-                <?php echo '<div class="likeit">'.file_get_contents("img/iconos-materiales/like.svg").'</div>'; ?>
-                <img src="img/img-modelo.jpg" alt="habitación">
-                <h2>Calle</h2>
-                <div class="descripcion">
-                    <p><i class="fas fa-map-marker-alt"></i> Ubicación</p><br>
-                    <p><i class="fas fa-eye"></i> Ubicación</p><br>
-                </div>
-                <div class="datos">
-                    <p><i class="fas fa-bed"></i> Habitaciones |</p>
-                    <p><i class="fas fa-bath"></i> Baños</p>
-                </div>
-            </div>
-            <div class="box-mas-visitados">
-                <?php echo '<div class="likeit">'.file_get_contents("img/iconos-materiales/like.svg").'</div>'; ?>
-                <img src="img/img-modelo.jpg" alt="habitación">
-                <h2>Calle</h2>
-                <div class="descripcion">
-                    <p><i class="fas fa-map-marker-alt"></i> Ubicación</p><br>
-                    <p><i class="fas fa-eye"></i>Ubicación</p><br>
-                </div>
-                <div class="datos">
-                    <p><i class="fas fa-bed"></i> Habitaciones |</p>
-                    <p><i class="fas fa-bath"></i> Baños</p>
-                </div>
-            </div>
-            <div class="box-mas-visitados">
-                <?php echo '<div class="likeit">'.file_get_contents("img/iconos-materiales/like.svg").'</div>'; ?>
-                <img src="img/img-modelo.jpg" alt="habitación">
-                <h2>Calle</h2>
-                <div class="descripcion">
-                    <p><i class="fas fa-map-marker-alt"></i> Ubicación</p><br>
-                    <p><i class="fas fa-eye"></i> Ubicación</p><br>
-                </div>
-                <div class="datos">
-                    <p><i class="fas fa-bed"></i> Habitaciones |</p>
-                    <p><i class="fas fa-bath"></i> Baños</p>
-                </div>
-            </div>
+            <?php
+                if($aDbPisosHabitaciones != null)
+                {
+                    $ltlgs = array();
+                    $ciudades = array();
+                    foreach ( $aDbPisosHabitaciones as $aDbPisosHabitacion )
+                    {
+                        //Guardamos la latitud y longitud en un array
+                        $ltlgs[] = array( "Latitud" => $aDbPisosHabitacion->Latitud , "Longitud" => $aDbPisosHabitacion->Longitud);
+                        $ciudades[] = array( $aDbPisosHabitacion->Ciudad);
+                        $Html  = '<div class="box-mas-visitados" id="buttonVentana" onclick="" >';
+                        $Html .= '<div class="likeit">'.file_get_contents("img/iconos-materiales/like.svg").'</div>';
+                        //
+                        //Accedemos a la imagen del piso
+                        $aDbImagen = new Imagenes();
+                        $ImagenDestacada =  $aDbImagen->getByIdPisoPrimeraFoto( $aDbPisosHabitacion->idPiso );
+                        //
+                        foreach ($ImagenDestacada as $ImagenDestacad)
+                        {
+                            $Html .= '<img src="'.$ImagenDestacad->Url.'" alt="habitación">';
+                        }
+                        $Html .= '<div class="contenido">';
+                        $Html .= '<h2 >'.$aDbPisosHabitacion->Calle.'</h2>';
+                        $Html .= '<div class="descripcion">';
+                        $Html .= '<p><i class="fas fa-map-marker-alt"></i><span id="ciudad">'.$aDbPisosHabitacion->Ciudad.'</span> , '.$aDbPisosHabitacion->Calle.'</p><br>';
+                        $Html .= '<p id="descripcionPH">'.$aDbPisosHabitacion->Descripcion.'</p><br>';
+                        $Html .= '</div>';
+                        $Html .= '<div class="datos">';
+                        $Html .= '<p><i class="fas fa-bed"></i> Habitaciones '.$aDbPisosHabitacion->NHabitaciones.' |</p>';
+                        $Html .= '<p><i class="fas fa-bath"></i> Baños '.$aDbPisosHabitacion->NBanos.'</p>';
+                        $Html .= '</div>';
+                        $Html .= '</div>';
+                        $Html .= '<div class="precio">'.$aDbPisosHabitacion->Precio.' €/mes</div>';
+                        //
+                        $Html .= '</div>';
+                        echo $Html;
+                    }
+                }
+            ?>
         </div>
     </div>
-      <div class="contenedor-derecho">
+      <div class="contenedor-derecho mapa">
         <div id="mapid"></div>
       </div>
   </div>
   <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/like.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/menu.js"></script>
+<script>var touch = false;</script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
+<script>
+    <?php
+            //Si hacemos filtro por ciudad
+            if(isset($_GET["Ciudad"]) == 'León'  )
+            {
+                echo "mymap.panTo(['42.598287' , '-5.567038']);";
+            }
+            else
+            {
+                echo "mymap.panTo(['42.550042' , ' -6.598184']);";
+            }
+            //
+            foreach ($ltlgs as $ltlg)
+            {
+                echo 'L.marker([  '.$ltlg['Latitud'].' ,  '.$ltlg['Longitud'].' ]).addTo(mymap).bindPopup("");';
+            }
+    ?>
+   var tarjetas = $('.box-mas-visitados');
+
+   tarjetas.each(function (index) {
+        $(tarjetas[index]).on( 'mouseenter', function () {
+            console.log($(this).find('#ciudad').text());
+
+            if ($(this).find('#ciudad').text() == 'Ponferrada')
+            {
+                mymap.panTo(['42.550042' , ' -6.598184']);
+            }
+            else
+            {
+                mymap.panTo(['42.598287' , '-5.567038']);
+            }
+        });
+       });
+</script>
 </html>

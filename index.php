@@ -43,8 +43,8 @@
                 <h3>Precio: <span id="preciospan">0</span> €</h3>
                 <input type="range" name="Precio" id="slider" min="0" max="1000" value="0" step="10">
             </div>
-            <select name="ciudad" id="selector"
-                <option value="0">Seleccione una ciudad</option>>
+            <select name="Ciudad" id="selector" >
+                <option value="0">¿Qué ciudad?</option>
                 <option value="León">León</option>
                 <option value="Ponferrada">Ponferrada</option>
             </select>
@@ -67,11 +67,11 @@
                 $Html .= '<p class="precio">Precio</p>';
                 $Html .= '</div>';
                 $Html .= '<button class="button">Me interesa</button>';
-                $Html .= '</div>
-                        </div>';
+                $Html .= '</div>';
                 echo $Html;
             }
         ?>
+    </div>
     <div class="titulos">
         <h2 id="titulos">¿En qué ciudad buscas?</h2>
     </div>
@@ -88,6 +88,7 @@
                 <h1>Ponferrada</h1>
             </div>
             <img src="img/ciudades/castillo-ponferrada.jpg" alt="" srcset="">
+
             <button class="button">Enseñame que hay</button>
         </div>
     </div>

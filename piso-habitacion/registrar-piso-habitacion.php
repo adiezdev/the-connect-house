@@ -85,6 +85,7 @@ ini_set( 'display_startup_errors' , true );
     <?php require_once(__DIR__ . "/../includes/footer.php"); ?>
 </body>
 <!-- Scripts necesarios -->
+<script>var touch = true;</script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/precarga-imagenes.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
@@ -155,13 +156,13 @@ ini_set( 'display_startup_errors' , true );
             {
             	//
                 //El mapa se situa en León
-                mymap.panTo(['42.6036359' , '-5.5949009']);
+                mymap.panTo(['42.598287' , '-5.567038']);
             }
             else //Si no
             {
                 //
 				//El mapa se situa en Ponferrada
-                mymap.panTo(['42.5498528' , '-6.6148307']);
+                mymap.panTo(['42.550042' , ' -6.598184']);
             }
         }).trigger( "change" );
     });

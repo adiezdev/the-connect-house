@@ -12,24 +12,25 @@
     }).addTo(mymap);//Se añade el mapa
     //
     //Activar el añdir una marca en el mapa
+        if(touch ==true )
+        {
+            //
+            //Marca en el mapa
+            var theMarker = {};
+            //Capturamos cuando hacemos click en el mapa
+            mymap.on('click', function(e) {
+                //Cogemos la latitud y logitud
+                lat = e.latlng.lat;
+                lon = e.latlng.lng;
+                //Eliminar marca si ya exites o la anterior
+                if (theMarker != undefined) {
+                    mymap.removeLayer(theMarker);
+                };
 
-        //
-        //Marca en el mapa
-        var theMarker = {};
-        //Capturamos cuando hacemos click en el mapa
-        mymap.on('click', function(e) {
-            //Cogemos la latitud y logitud
-            lat = e.latlng.lat;
-            lon = e.latlng.lng;
-            //Eliminar marca si ya exites o la anterior
-            if (theMarker != undefined) {
-                mymap.removeLayer(theMarker);
-            };
-
-            //Añadimos la marca en el mapa
-            theMarker = L.marker([lat, lon]).addTo(mymap);
-            //Damos los valores de la latitud y longitud a los hidden
-            document.getElementById("latitud").value = lat;
-            document.getElementById("longitud").value = lon;
-        });
-
+                //Añadimos la marca en el mapa
+                theMarker = L.marker([lat, lon]).addTo(mymap);
+                //Damos los valores de la latitud y longitud a los hidden
+                document.getElementById("latitud").value = lat;
+                document.getElementById("longitud").value = lon;
+            });
+        }

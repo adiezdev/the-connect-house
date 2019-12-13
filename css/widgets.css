@@ -20,7 +20,7 @@ a {
     color: #aac759;
 }
 svg {
-    width: 30px;
+    width: 40px;
 }
 
 #imgperfil{
@@ -54,10 +54,9 @@ svg {
 
 #search {
     -webkit-appearance: none;
-    width: 80%;
-    padding: 8px;
+    width: 32%;
+    padding: 5px;
     border: solid 1px #dbdbdb;
-    margin: 15px 15px 0 20px;
     font-size: 10pt;
 }
 
@@ -150,7 +149,7 @@ svg {
 .box-mas-visitados {
     display: inline-block;
     position: relative;
-    width: 630px;
+    width: 750px;
     border-radius: 5px;
     -webkit-box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.40);
     box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.40);
@@ -177,26 +176,22 @@ svg {
     border-radius: 5px;
     margin-right: 5px;
 }
-
-.box-mas-visitados .descripcion
+.box-mas-visitados .contenido
+{
+    height: 225px;
+    width: 280px;
+    float: left;
+}
+.box-mas-visitados .contenido .descripcion
 {
     display: inline;
     text-align: left;
 }
-.box-mas-visitados .datos p
+.box-mas-visitados .contenido .datos p
 {
     float: left;
     text-align: left;
     margin-top: 10px;
-}
-.box-mas-visitados .datos span
-{
-    float:right;
-    margin-right: 12px;
-    font-size: 22pt;
-    color: #ffffff;
-    border-radius: 5px;
-    background-color: #aac759;
 }
 .box-mas-visitados .descripcion #descripcionPH
 {
@@ -204,7 +199,19 @@ svg {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-
+.box-mas-visitados .precio
+{
+    color: #aac759;
+    text-align: center;
+    font-size: 16pt;
+    padding-top: 12%;
+}
+.box-mas-visitados .precio::before {
+    content: '';
+    padding-left: 5px;
+    border-left: 1px solid;
+    height: 50%;
+}
 /*Campo obligatiorio*/
 
 .spanred {
@@ -263,6 +270,13 @@ label[for=inputperfil] {
     width: 218px;
     padding: 13px;
     font-size: 1.2em;
+}
+/*Like en la tarjeta del piso*/
+.likeit {
+    margin: 4px;
+    right: 70px;
+    top: 15px;
+    position: absolute;
 }
 /*Line in piso*/
 .likein

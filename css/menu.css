@@ -1,0 +1,84 @@
+.navmovil {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #849f50;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+.navmovil a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s
+}
+
+.navmovil a:hover, .offcanvas a:focus{
+    color: #558264;
+}
+
+.navmovil .botoncerrar {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+.content
+{
+    transition: margin-left .5s;
+    overflow:hidden;
+    width:100%;
+}
+.menucabecera
+{
+    background-color: #aac759;
+    overflow: hidden;
+}
+
+.menucabecera div
+{
+    display: none;
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    cursor: pointer;
+}
+.menucabecera a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+.menucabecera #search
+{
+    margin: 10px;
+    width: 331px !important;
+}
+@media screen and (max-height: 450px)
+{
+    .navmovil {padding-top: 15px;}
+    .navmovil div {font-size: 18px;}
+    body {
+        overflow-x: hidden!important;
+    }
+}
+@media screen and ( max-width: 1180px) {
+    .menucabecera div
+    {
+        display: block;
+    }
+
+}
