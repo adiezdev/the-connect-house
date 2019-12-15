@@ -1,7 +1,7 @@
 label
 {
     color: #aac759;
-    margin-left: 50px;
+    margin-left: 10px;
 }
 div[class^="seccion"]
 {
@@ -23,7 +23,7 @@ input[type="checkbox"]{
 /*Tamaño imagenes checbox*/
 #cimagen
 {
-  width: 80px;
+  width: 100px;
 }
 /*Mapa*/
 #mapid

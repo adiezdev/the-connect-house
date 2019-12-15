@@ -42,5 +42,13 @@
             x[index].style.display = "none";
         });
         x[n].style.display = "block"; //por defecto mostramos la primera seccion
+        //
+        var y = $('.secciones');
+        y.each(function(index)
+        {
+            //Las ocultamos
+            y[index].style.color = "#000";
+        });
+        y[n].style.color = "#fff";
     }
 

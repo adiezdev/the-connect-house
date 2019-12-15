@@ -13,7 +13,7 @@ Nombre del archivo: seccion-2.php
         <div class="comodidades"><label for="metros">Metro del piso (*): </label></div>
         <div class="comodidades"><input type="text" id="metros" name="metros" class="credential"  placeholder="Cuantos metros tiene el piso"></div>
         <div class="comodidades"><label for="precio">Precio (*): </label></div>
-        <div class="comodidades"><input type="text" id="precio" name="precio" class="credential"  placeholder="¿Qué precio tiene?">€</div>
+        <div class="comodidades"><input type="text" id="precio" name="precio" class="credential"  placeholder="¿Qué precio tiene?">€/mes</div>
     </div>
     <div class="comodidad">
         <div class="comodidades"><label for="toilet">Baños (*): </label></div>

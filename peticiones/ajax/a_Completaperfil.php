@@ -2,26 +2,32 @@
 //error_reporting( E_ALL );
 //ini_set( 'display_errors' , true );
 //ini_set( 'display_startup_errors' , true );
-/*
-    -------------------------------------
-    Archivo de: Alejandro Díez
-    GitHub: @adilosa95
-    Proyecto: the-connect-house
-    Nombre del archivo: post_completaperfil.php
-    -------------------------------------
-*/
-    require_once(__DIR__ . '/../../bd/bd_usuario.php');
-    require_once(__DIR__ . '/../../includes/sesion.php');
-    //
+    /*
+        -------------------------------------
+        Archivo de: Alejandro Díez
+        GitHub: @adilosa95
+        Proyecto: the-connect-house
+        Nombre del archivo: a_Completaperfil.php
+        -------------------------------------
+    */
     session_start();
     //
-    if(isset($_POST['siguiente']))
+    require_once(__DIR__ . '/../../bd/bd_usuario.php');
+    require_once(__DIR__ . '/../../bd/bd_telefonos.php');
+    require_once(__DIR__ . '/../../includes/sesion.php');
+    //
+    $nId = $_SESSION['idUsuario'];
+    //
+    $oDatosJson = json_decode( file_get_contents( "php://input" ), true );
+    //
+    $Imagenes = $oDatosJson["img"];
+    $telefonos = $oDatosJson["telefono"];
+    $Imagenes = $oDatosJson["descripcion"];
+    //
+    $oDbUsuario = new Usuario();
+    $aUsuarios = $oDbUsuario->getById( $nId );
+    foreach ( $aUsuarios as $aUsuario)
     {
-        $nId = $_SESSION['idUsuario'];
-        $oDbUsuario = new Usuario();
-        $aUsuarios = $oDbUsuario->getById( $nId );
-        foreach ( $aUsuarios as $aUsuario)
-        {
             //
             //Debug
             //echo $value . "<br />";
@@ -36,7 +42,7 @@
                 $nom = md5(rand());
                 //Marco la ruta
                 $filepathsql = "uploads/".$aUsuario->Carpeta."/".$nom.".jpg";
-                $archivoRuta = __DIR__ ."/../../".$filepathsql;
+                $archivoRuta = __DIR__ . "/../the-connect-house/" .$filepathsql;
                 //Paso la imagen a la ruta
                 file_put_contents( $archivoRuta , $datos);
                 //Permisos al archivo
@@ -50,5 +56,5 @@
             {
                 header("Location: ../../perfil.php?correo=".$aUsuario->Correo);
             }
-        }
+
     }

@@ -44,6 +44,14 @@
 {
     margin: 0% 10% 0% 30%;
 }
+.into-centro.seccioncasi
+{
+    margin: 0% 10% 0% 60%;
+}
+.into-centro.seccioncasi label
+{
+    margin-left: 0 !important;
+}
 .into-centro.busqueda
 {
     height: 100vh;
