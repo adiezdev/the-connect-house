@@ -28,9 +28,11 @@
     //
     //Generamos la cabecera
     cabecera(TITULO_BUSQUEDA , $estilos ,true);
+    //
 	//Respuesta del GET
 	if( $_GET )
 	{
+	    //Si alguno de los datos está sin inicializar los incialiazamos
 	    if(!empty( $_GET["Pisos"] ))
         {
 	        $sPisos = $_GET["Pisos"];
@@ -71,52 +73,76 @@
         {
 	        $sBuscar = '';
         }
+        //
+        //Accedemos a la busqueda
+        $oDbPisosHabitaciones = new Pisos();
+		//Buscamos por filtro
+        try
+        {
+            $aDbPisosHabitaciones = $oDbPisosHabitaciones->buscarPiso( $sPrecio , $sBuscar , $sPisos , $sHabitaciones , $sCiudad );
+        }
+        catch( ReflectionException $e )
+        {
+            $e;
+        }
 	}
-    //Sacar los datos del usuario
-    $aDbUsuario = new Usuario();
+	//
+    //Comprobamos si la sesión está existe
     if(isset($_SESSION['idUsuario']))
     {
+        //
+        //Accedemos a la base de datos
+        $aDbUsuario = new Usuario();
+        //
+        //Accedemos a datos del usuario
         $oDatosUsuario = $aDbUsuario->getById($_SESSION['idUsuario']);
     }
-    //
-    //Accedemos a la busqueda
-    $oDbPisosHabitaciones = new Pisos();
-	try
-	{
-		$aDbPisosHabitaciones = $oDbPisosHabitaciones->buscarPiso( $sPrecio , $sBuscar , $sPisos , $sHabitaciones , $sCiudad );
-	}
-	catch( ReflectionException $e )
-	{
-	     $e;
-	}
 ?>
 <body>
+    <!--Menu-->
   <?php require_once(__DIR__ . '/includes/menu.php'); ?>
   <div class="content">
       <div class="contenedor-centro">
         <div class="into-centro busqueda">
             <h2 class="title">Resultados</h2>
             <?php
-                if($aDbPisosHabitaciones != null)
+                //Si el buscador está iniicializado
+                if(isset($aDbPisosHabitaciones))
                 {
+                    //Hacemos un array para la latiitud u longitus
                     $ltlgs = array();
+                    //Hacemos otro array para las ciudades de cada uno
                     $ciudades = array();
+                    //
+                    //Recorremos los datos de la petición
                     foreach ( $aDbPisosHabitaciones as $aDbPisosHabitacion )
                     {
                         //Guardamos la latitud y longitud en un array
-                        $ltlgs[] = array( "Latitud" => $aDbPisosHabitacion->Latitud , "Longitud" => $aDbPisosHabitacion->Longitud);
+                        $ltlgs[] = array( "Latitud" => $aDbPisosHabitacion->Latitud , "Longitud" => $aDbPisosHabitacion->Longitud , "Calle" => $aDbPisosHabitacion->Calle);
+                        //Guardamos las ciudades en un array
                         $ciudades[] = array( $aDbPisosHabitacion->Ciudad);
-                        $Html  = '<div class="box-mas-visitados" id="buttonVentana" onclick="" >';
-                        $Html .= '<div class="likeit">'.file_get_contents("img/iconos-materiales/like.svg").'</div>';
                         //
-                        //Accedemos a la imagen del piso
+                        //Formamos las tarjetas
+                        $Html  = '<div class="box-mas-visitados" onclick="" >';
+                        //
+                        //Comprobamos si el usuario del piso/habitación es diferen de la sesión
+                        if( $aDbPisosHabitacion->idUsuario != $_SESSION['idUsuario'])
+                        {
+                            //Si es así mostramos el like
+                            $Html .= '<div class="likeit">'.file_get_contents("img/iconos-materiales/like.svg").'</div>';
+                        }
+                        //
+                        //Accedemos a la imagen del piso/habitaciion
                         $aDbImagen = new Imagenes();
+                        //Sacamos los datos
                         $ImagenDestacada =  $aDbImagen->getByIdPisoPrimeraFoto( $aDbPisosHabitacion->idPiso );
                         //
+                        //Recorremos la respuesta
                         foreach ($ImagenDestacada as $ImagenDestacad)
                         {
                             $Html .= '<img src="'.$ImagenDestacad->Url.'" alt="habitación">';
                         }
+                        //Formamos las tarjetas
                         $Html .= '<div class="contenido">';
                         $Html .= '<h2 >'.$aDbPisosHabitacion->Calle.'</h2>';
                         $Html .= '<div class="descripcion">';
@@ -129,53 +155,56 @@
                         $Html .= '</div>';
                         $Html .= '</div>';
                         $Html .= '<div class="precio">'.$aDbPisosHabitacion->Precio.' €/mes</div>';
-                        //
                         $Html .= '</div>';
+                        //
+                        //Mostramos en pantalla
                         echo $Html;
                     }
                 }
             ?>
         </div>
     </div>
+      <!--Contenedor derecho mostramos el mapa-->
       <div class="contenedor-derecho mapa">
         <div id="mapid"></div>
       </div>
   </div>
+    <!--Footer-->
   <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
+<!--Scripts-->
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/like.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/menu.js"></script>
+<!--Inicializamos a false para no dejar hacer click en el mapa y añadir marca-->
 <script>var touch = false;</script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
 <script>
     <?php
-            //Si hacemos filtro por ciudad
-            if(isset($_GET["Ciudad"]) == 'León'  )
+            //Recorremos el array de latitud longitud
+            foreach ($ltlgs as $key=>$ltlg)
             {
-                echo "mymap.panTo(['42.598287' , '-5.567038']);";
-            }
-            else
-            {
-                echo "mymap.panTo(['42.550042' , ' -6.598184']);";
-            }
-            //
-            foreach ($ltlgs as $ltlg)
-            {
-                echo 'L.marker([  '.$ltlg['Latitud'].' ,  '.$ltlg['Longitud'].' ]).addTo(mymap).bindPopup("");';
+                //Creamos una marca con los datos
+                echo 'var i'.$key.' = L.marker([  '.$ltlg['Latitud'].' ,  '.$ltlg['Longitud'].' ]).addTo(mymap);';
+                echo 'i'.$key.'.bindPopup("'.$ltlg['Calle'].'" ,  {autoClose: false} ).openPopup();';;
             }
     ?>
+    //Cogemos la tarjeta del piso
    var tarjetas = $('.box-mas-visitados');
-
+    //Recorremos todos los pisos/habitaciones que se muestran
    tarjetas.each(function (index) {
+       //Capturamos la acción de entrar con el  ratón
         $(tarjetas[index]).on( 'mouseenter', function () {
-            console.log($(this).find('#ciudad').text());
-
+            //
+            //console.log($(this).find('#ciudad').text());
+            //Buscamos dentro de él, el texto de la ciudad
             if ($(this).find('#ciudad').text() == 'Ponferrada')
             {
+                //Mostramos la ciudad en el mapa
                 mymap.panTo(['42.550042' , ' -6.598184']);
             }
             else
             {
+                //Mostramos la ciudad en el mapa
                 mymap.panTo(['42.598287' , '-5.567038']);
             }
         });

@@ -19,21 +19,21 @@ class Pisos extends Conexion
     //Nombre de la tabla
     private $sTabla = '`pisos-habitaciones`';
     /**
-     * Devuelve todos los pisos con sus campos
+     * Devuelve todos los ultimos pisos añadidos de 3 en 3
      *
      * @return array
      */
-    public function getAll()
+    public function getPaginado( $p = 0)
     {
         $aPisos = array();
-        $cSql = 'SELECT * FROM '.$this->sTabla;
+        $cSql = 'SELECT * FROM '.$this->sTabla.'ORDER BY idPiso DESC LIMIT '.$p.' , 3';
         $stmt = $this->prepare($cSql);
         $stmt->execute();
         $oResultado = $stmt->get_result();
         while ($oRecord = $oResultado->fetch_object()) {
             $aPisos[] = $oRecord;
         }
-        return $aPisos;
+        return  $aPisos;
     }
     /**
      * Devuelve los datos de un piso por su ID

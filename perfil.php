@@ -24,6 +24,7 @@
     $estilos = array(
          ESTILOS_WIDGETS,
          ESTILOS_MAIN,
+         ESTILOS_MENU,
          ESTILOS_VENTANA
     );
     //
@@ -46,9 +47,6 @@
     //Sacar los datos del usuario
     $aDbUsuario = new Usuario();
     //
-    //Incializamos Permisos
-    $Permiso = false;
-    //
     //Accedemos a datos mediante el correo
     $oDatosUsuario = $aDbUsuario->getByCorreo($sCorreo);
     //
@@ -59,20 +57,13 @@
         return;
     }
     //
-    //Comprobamos si es el mismo usuario que la sesión
-    if($oDatosUsuario[0]->idUsuario == $_SESSION['idUsuario'])
-    {
-        //
-        //Concedemos el permiso de edición de perfil y pisos/habitaciones
-       $Permiso = true;
-    }
-    //
     //
     //Sacar los pisos/Habitaciones del usuario
     $aDbPisosHabitaciones = new Pisos();
-    $aPisosHabitaciones = $aDbPisosHabitaciones->getByUsuario( $oDatosUsuario[0]->idUsuario );
+    $aDbPisosHabitaciones = $aDbPisosHabitaciones->getByUsuario( $oDatosUsuario[0]->idUsuario );
 ?>
 <body>
+<?php require_once(__DIR__ . '/includes/menu.php'); ?>
     <div class="content">
         <div class="contenedor-izquierdo">
             <div class="into-izquierdo">
@@ -88,9 +79,9 @@
                         $Html .= '<fieldset><legend>Descripción :</legend>';
                         $Html .= '<div id="descripcion"><p>'.$oDatoUsuario->Descripcion.'</p></div><br>';
                         $Html .= '</fieldset>';
-	                    if( $Permiso == true)
+	                    if( $idUsuario == $_SESSION['idUsuario'])
 	                    {
-		                    $Html1 .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar Perfil</div>';
+		                    $Html .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar Perfil</div>';
 
 	                    }
                         echo $Html;
@@ -104,10 +95,10 @@
                 <?php
                 //
                 //Si no tenemos piso en la base de datos , te aparecerá para agregarlo
-                if(empty($aPisosHabitaciones))
+                if(!isset($aDbPisosHabitaciones))
                 {
 	                $Html  = '<div id="vacio">';
-	                if( $Permiso == true)
+	                if( $aDbPisosHabitaciones->idUsuario == $_SESSION['idUsuario'] )
 	                {
 		                $Html .= '<img src="img/key.png" alt="llaves" style="width: 40%">';
 		                $Html .= '<h2>A parte de buscar piso o habitación</h2><br>';
@@ -131,42 +122,47 @@
                     {
 	                    $Html .= '<h2>Este usuario no tiene ningún piso</h2><br>';
                     }
+                    $Html  = '</div>';
 	                echo $Html;
                 }else
                 {
-                    //
-                    foreach ( $aPisosHabitaciones as $aPisoHabitacion)
+                    foreach ( $aDbPisosHabitaciones as $aDbPisosHabitacion )
                     {
+                        $Html  = '<div class="box-mas-visitados" onclick="window.open(\'/the-connect-house/piso.php?'.base64_encode('idPiso='.$aDbPisosHabitacion->idPiso).'\', \'_self\');">';
                         //
-                        //Pasamos el id pero codificado
-                        $Html1  = '<div class="box-mas-visitados" onclick="window.open(\'/the-connect-house/piso.php?'.base64_encode('idPiso='.$aPisoHabitacion->idPiso).'\', \'_self\');">';
-                        //Llamamos pasa sacar la imagen del psio
+                        if(  $aDbPisosHabitacion->idUsuario != $_SESSION['idUsuario'] )
+                        {
+                        $Html .= '<div class="likeit">'.file_get_contents("img/iconos-materiales/like.svg").'</div>';
+                        }
+                        //
+                        //Accedemos a la imagen del piso
                         $aDbImagen = new Imagenes();
-                        $ImagenDestacada =  $aDbImagen->getByIdPisoPrimeraFoto($aPisoHabitacion->idPiso);
+                        $ImagenDestacada =  $aDbImagen->getByIdPisoPrimeraFoto( $aDbPisosHabitacion->idPiso );
                         //
                         foreach ($ImagenDestacada as $ImagenDestacad)
                         {
-                            $Html1 .= '<img src="'.$ImagenDestacad->Url.'" alt="habitación">';
+                            $Html .= '<img src="'.$ImagenDestacad->Url.'" alt="habitación">';
                         }
-                        $Html1 .= '<div class="datospiso">';
-                        $Html1 .= '<h2 >'.$aPisoHabitacion->Calle.'</h2>';
-                        $Html1 .= '<div class="descripcion">';
-                        $Html1 .=    '<p><i class="fas fa-map-marker-alt"></i> '.$aPisoHabitacion->Ciudad.'</p><br>';
-                        $Html1 .=    '<p id="descripcionPH">'.$aPisoHabitacion->Descripcion.'</p><br>';
-                        $Html1 .= '</div>';
-                        $Html1 .= '<div class="datos">';
-                        $Html1 .=    '<p><i class="fas fa-bed"></i> Habitaciones '.$aPisoHabitacion->NHabitaciones.'  |</p>';
-                        $Html1 .=    '<p><i class="fas fa-bath"></i> Baños '.$aPisoHabitacion->NBanos.'</p><br>';
-                        $Html1 .=    '<span>'.$aPisoHabitacion->Precio.'€/mes</span>';
-                        $Html1 .= '</div>';
-                        $Html1 .=' </div>
-                            </div>';
-	                    if( $Permiso == true)
-	                    {
-		                    $Html1 .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar</div>';
+                        $Html .= '<div class="contenido">';
+                        $Html .= '<h2 >'.$aDbPisosHabitacion->Calle.'</h2>';
+                        $Html .= '<div class="descripcion">';
+                        $Html .= '<p><i class="fas fa-map-marker-alt"></i><span id="ciudad">'.$aDbPisosHabitacion->Ciudad.'</span> , '.$aDbPisosHabitacion->Calle.'</p><br>';
+                        $Html .= '<p id="descripcionPH">'.$aDbPisosHabitacion->Descripcion.'</p><br>';
+                        $Html .= '</div>';
+                        $Html .= '<div class="datos">';
+                        $Html .= '<p><i class="fas fa-bed"></i> Habitaciones '.$aDbPisosHabitacion->NHabitaciones.' |</p>';
+                        $Html .= '<p><i class="fas fa-bath"></i> Baños '.$aDbPisosHabitacion->NBanos.'</p>';
+                        $Html .= '</div>';
+                        $Html .= '</div>';
+                        $Html .= '<div class="precio">'.$aDbPisosHabitacion->Precio.' €/mes</div>';
+                        //
+                        $Html .= '</div>';
+                        if(  $aDbPisosHabitacion->idUsuario == $_SESSION['idUsuario'])
+                        {
+                            $Html .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar</div>';
 
                         }
-                        echo $Html1;
+                        echo $Html;
                     }
 
                 }
@@ -176,7 +172,7 @@
                 <?php
                     //
                     //Contenedor de la derecha
-                if(!empty($aPisosHabitaciones))
+                if(!empty($aDbPisosHabitaciones))
                 {
                     $Html  = '<div class="contenedor-derecho">';
                     $Html .= '<div class="into-derecho">';
@@ -205,9 +201,11 @@
                 }
                 ?>
     </div>
+    <!--Footer-->
     <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/crearventana.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/menu.js"></script>
 <script>
     /**
      * Función para ir a registrar tu piso o habitacion

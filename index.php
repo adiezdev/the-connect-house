@@ -15,24 +15,35 @@
     //
     //Accedemos a datos
     require_once(__DIR__."/bd/bd_pisos.php");
+    require_once(__DIR__."/bd/bd_imagenespiso.php");
+    require_once(__DIR__."/bd/bd_usuario.php");
+    //
+    session_start();
+    //
+    $aDbUsuario = new Usuario();
+    $oDatosUsuario = $aDbUsuario->getById($_SESSION['idUsuario']);
     //
     $oDbPisosHabitaciones = new Pisos();
-    $aDbPisosHabitaciones = $oDbPisosHabitaciones->getAll();
+    $aDbPisosHabitaciones = $oDbPisosHabitaciones->getPaginado();
     //
     //Configuramos los estilos que necesitamos
     $estilos = array(
             ESTILOS_WIDGETS,
-            ESTILOS_MAIN
+            ESTILOS_MAIN,
+            ESTILOS_MENU,
+            ESTILOS_SLIDER_INICIO
     );
     //
     //Generamos la cabecera
     cabecera(TITULO_INDEX , $estilos ,false);
 ?>
 <body>
-    <nav>
-
-    </nav>
+<!--Menu-->
+<?php require_once(__DIR__ . '/includes/menu.php'); ?>
+    <div class="content">
+        <!--Imagen principal-->
     <img class="img-fondo" src="img/img-inicio.jpg" srcset="img/img-inicio.jpg 200w">
+        <!--Buscador-->
     <div class="buscador">
         <form action="buscar.php" method="get">
             <input type="checkbox" name="Pisos" id="piso" value="1" >
@@ -52,31 +63,53 @@
             <button class="button">Buscar <img src="img/iconos-materiales/lupa.png" alt="Buscar"></button>
         </form>
     </div>
+        <!--Pisos/habitaciones añadidos reciente mente solo se ven 9 ultimos-->
     <div class="titulos">
         <h2>Pisos y Habitaciones recientes</h2>
     </div>
     <div class="seccion">
         <?php
+            //
+            //Recorremos los datos de los pisos
             foreach( $aDbPisosHabitaciones as $aDbPisosHabitacion)
             {
                 $Html  = '<div class="box-pisos-habitacones">';
-                $Html .= '<img src="img/img-modelo.jpg" alt="Piso">';
+                //
+                //Accedemos a la imagen del piso
+                $aDbImagen = new Imagenes();
+                $ImagenDestacada =  $aDbImagen->getByIdPisoPrimeraFoto( $aDbPisosHabitacion->idPiso );
+                //
+                //Recorremos la imagen
+                foreach ($ImagenDestacada as $ImagenDestacad)
+                {
+                    $Html .= '<img src="'.$ImagenDestacad->Url.'" alt="habitación">';
+                }
+                //
                 $Html .= '<div class="descripcion">';
-                $Html .= '<h3>Descripcion</h3>';
-                $Html .= '<p><i class="fas fa-map-marker-alt"></i>Ubicación</p>';
-                $Html .= '<p class="precio">Precio</p>';
+                $Html .= '<h3>'.$aDbPisosHabitacion->Calle.'</h3>';
+                $Html .= '<p><i class="fas fa-map-marker-alt"></i>'.$aDbPisosHabitacion->Ciudad.'</p>';
+                $Html .= '<div class="precio">'.$aDbPisosHabitacion->Precio.' €/mes</div>';
                 $Html .= '</div>';
                 $Html .= '<button class="button">Me interesa</button>';
                 $Html .= '</div>';
+                //
+                //Lo mostramos
                 echo $Html;
             }
         ?>
+        <!--Flechas de siguientes y anteriores pisos/habitaciones-->
     </div>
+        <div class="flechas">
+            <input type="hidden" value="3" id="cont" name="cont">
+            <div class="izquierda" onclick="PaginadoAnterior()">&#10094;</div>
+            <div class="derecha" onclick="PaginadoSiguiente()">&#10095;</div>
+        </div>
+        <!-- Busqueda por ciudad -->
     <div class="titulos">
         <h2 id="titulos">¿En qué ciudad buscas?</h2>
     </div>
     <div class="seccion">
-        <div class="box-ciudades" onclick="window.open('buscar.php?ciudad=León', '_self');">
+        <div class="box-ciudades" onclick="window.open('buscar.php?Ciudad=León', '_self');">
             <div>
                 <button class="button">Enseñame que hay</button>
             </div>
@@ -85,7 +118,7 @@
             </div>
             <img src="img/ciudades/catedral-leon.jpg" alt="" srcset="">
         </div>
-        <div class="box-ciudades"  onclick="window.open('buscar.php?ciudad=Ponferrada', '_self');">
+        <div class="box-ciudades"  onclick="window.open('buscar.php?Ciudad=Ponferrada', '_self');">
             <div>
                 <button class="button">Enseñame que hay</button>
             </div>
@@ -95,14 +128,18 @@
             <img src="img/ciudades/castillo-ponferrada.jpg" alt="" srcset="">
         </div>
     </div>
+    </div>
+<!--Footer-->
     <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
+<!--Scripts-->
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/menu.js"></script>
 <script>
     /**
      * Función para mostrar valor del slider del precio
      */
     $(document).ready(function() {
-        //Posiición incial
+        //Posición incial
         $('#slider').val(0);
         //Acción de cambio
         $('#slider').on("input change", function() {
@@ -111,6 +148,120 @@
             //Lo mostramos
             $('#preciospan').html(valor)
         });
+        //
     });
+    //Inicializamos contados
+    var contador = 0;
+    /**
+     * Función para ver los siguientes 3 pisos/habitaciones en el index
+     *
+     * @constructor
+     */
+    function PaginadoSiguiente( )
+    {
+        //Incrementamos contador
+        var c =  contador+=3
+        //Ponemos un tope
+        if(contador > 3)
+        {
+            c = 3;
+        }
+        //
+        //Formamos Json
+        var oDatosJson = {paginado: c };
+        //
+        //Enviamos la peticion
+        $.ajax({
+            url: '/the-connect-house/peticiones/ajax/a_PaginadoInicio.php',
+            type: 'POST',
+            data: JSON.stringify(oDatosJson)
+        })
+            .done(function(oJson) {
+                //Parseamos la respuesta
+                var oRespuesta = JSON.parse(oJson);
+                //Array de los pisos
+                var BoxHabi = [];
+                //Recorremos la respuesta
+                for (let i = 0 ; i < oRespuesta.length; i++)
+                {
+                    //Formamos el hmtl
+                    var stri = '<div class="box-pisos-habitacones">';
+                    stri += '<img src="'+oRespuesta[i].Imagen+'" alt="habitación">';
+                    stri += '<div class="descripcion">';
+                    stri += '<h3>'+oRespuesta[i].Calle+'</h3>';
+                    stri += '<p><i class="fas fa-map-marker-alt"></i>'+oRespuesta[i].Ciudad+'</p>';
+                    stri += '<div class="precio">'+oRespuesta[i].Precio+' €/mes</div>';
+                    stri += '</div>';
+                    stri +=  '<button class="button">Me interesa</button>';
+                    stri += '</div>';
+                    stri += '<div id="contador" style="display: none">'+c+'</div>';
+                    //Guardamos en el array
+                    BoxHabi.push( stri );
+                }
+                //Añadimos a la sección
+                var seccion = $('.seccion');
+                $(seccion[0]).fadeOut(200, function ()
+                {
+                    //Mostramos los pisos/habitaciones
+                    $(seccion[0]).html(BoxHabi).fadeIn(200);
+                });
+            });
+    }
+    /**
+     * Función para ver los anteriores 3 pisos/habitaciones en el index
+     *
+     * @constructor
+     */
+    function PaginadoAnterior( )
+    {
+        //Cogemos el contador
+        var cont = $('#contador').text()
+        var c =  cont-=3
+        //Ponemos un tope mimo
+        if(cont <= 0)
+        {
+            c = 0;
+        }
+        //
+        //Formamos Json
+        var oDatosJson = {paginado: c }
+        //
+        //Enviamos la peticion
+        $.ajax({
+            url: '/the-connect-house/peticiones/ajax/a_PaginadoInicio.php',
+            type: 'POST',
+            data: JSON.stringify(oDatosJson)
+        })
+            .done(function(oJson) {
+                //Parseamos la respuesta
+                var oRespuesta = JSON.parse(oJson);
+                //Array de los pisos
+                var BoxHabi = [];
+                //Recorremos la respuesta
+               for (let i = 0 ; i < oRespuesta.length; i++)
+                {
+                    //Formamos el hmtl
+                    var stri = '<div class="box-pisos-habitacones">';
+                    stri += '<img src="'+oRespuesta[i].Imagen+'" alt="habitación">';
+                    stri += '<div class="descripcion">';
+                    stri += '<h3>'+oRespuesta[i].Calle+'</h3>';
+                    stri += '<p><i class="fas fa-map-marker-alt"></i>'+oRespuesta[i].Ciudad+'</p>';
+                    stri += '<div class="precio">'+oRespuesta[i].Precio+' €/mes</div>';
+                    stri += '</div>';
+                    stri +=  '<button class="button">Me interesa</button>';
+                    stri += '</div>';
+                    stri += '<div id="contador" style="display: none">'+c+'</div>';
+                    //Guardamos el array
+                    BoxHabi.push( stri );
+                }
+                //Añadimos a la sección
+                var seccion = $('.seccion');
+                $(seccion[0]).fadeOut(200, function ()
+                {
+                    //Mostramos los pisos/habitaciones
+                    $(seccion[0]).html(BoxHabi).fadeIn(200);
+                });
+            });
+    }
 </script>
 </html>

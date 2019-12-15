@@ -1,0 +1,10 @@
+.flechas
+{
+    text-align: center;
+}
+.izquierda
+{
+    float: left;
+    position: relative;
+    left: 47%;
+}

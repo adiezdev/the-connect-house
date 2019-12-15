@@ -15,6 +15,7 @@
     define("ESTILOS_REGISTRAR_PISO","estilos-registrar-piso-habitacion");
     define("ESTILOS_VENTANA","ventana");
     define("ESTILOS_MENU","menu");
+    define("ESTILOS_SLIDER_INICIO","slider-inicio");
     //
     define("INCLUD_SLIDE","slider");
     define("FRASE_ADD_REGISTRO","Elige que vas a querar añadir");

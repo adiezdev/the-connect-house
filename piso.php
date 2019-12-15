@@ -66,17 +66,6 @@
     //Sacamos el perfil del Vendedor
 
 ?>
-<style>
-    /*Para maquetar las caracteristicas del piso o habitacion*/
-    .contenedor-izquierdo
-    {
-        height: 971px;
-    }
-    .contenedor-centro
-    {
-        margin: 0% 10% 0% 36%;
-    }
-</style>
 <body>
 <?php
     //
@@ -94,10 +83,15 @@
         <div class="atras" onclick="window.history.back()">
             <div class="flecha">&#8592; Atrás</div>
         </div>
-        <div class="likein">
-            <?php echo '<div class="likeinpiso">'.file_get_contents("img/iconos-materiales/like.svg").'</div>'; ?>
-        </div>
-                <?php
+        <?php
+        //Si la idAsignada del piso/habitacion es diferente a la de la sessiión entonces dejar hacer like
+        if($aDatosPisosHabitaciones[0]->idUsuario != $_SESSION['idUsuario'])
+           {
+              $Html = '<div class="likein">';
+              $Html .=  '<div class="likeinpiso">'.file_get_contents("img/iconos-materiales/like.svg").'</div>';
+              $Html .= '</div>';
+              echo $Html;
+           }
                     //Incializamos estas varbles, necesitaremos la latitud y longitud fuera del foreach, para darselo al mapa
                 $lt = 0.00;
                 $lg = 0.00;
@@ -111,29 +105,24 @@
                     //Accedemos al usuario del piso
                     $aDbUsuarios = $oDbUsuarios->getById( $aDatosPisosHabitacion->idUsuario );
                     //
-                    //Permiso de edición
-	                $Permiso = false;
-                    if($aDatosPisosHabitacion->idUsuario == $_SESSION['idUsuario'])
-                    {
-	                    $Permiso = true;
-                    }
-                    //
                     //Recorremos sus datos
                     foreach( $aDbUsuarios as $aDbUsuario)
                     {
 	                    $Html = ' <div class="contenedor-izquierdo">';
+	                    $Html .= ' <div class="into-izquierdo">';
 	                    $Html .=    '<div id="perfil">';
 	                    $Html .=        '<img id="user" src="'.$aDbUsuario->Imgperfil.'" alt="">';
 	                    $Html .=        '<h3>'.$aDbUsuario->Nombre.'</h3>';
 	                    $Html .=        '<h2>'.$aDatosPisosHabitacion->Precio.' €/Mes</h2>';
 	                    $Html .=        '<button class="button">Me interesa</button>';
 	                    //
-                        //Si es true podemos editar el piso
-	                    if( $Permiso == true )
+                        //Si conincide podemos editar piso
+	                    if( $aDbUsuario->idUsuario == $_SESSION['idUsuario'])
                         {
-	                        $Html1 .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar</div>';
+	                        $Html .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar Piso</div>';
                         }
-	                    $Html .=    '</div>';
+                        $Html .= '</div>';
+	                    $Html .=  '</div>';
 	                    $Html .= '</div>';
                     }
 	                //
@@ -142,6 +131,7 @@
                         $Html .= '<div class="into-centro">';
                         $Html .= '<h1>'.$aDatosPisosHabitacion->Calle.'</h1>';
                         $Html .= '<p><i class="fas fa-map-marker-alt"></i> '.$aDatosPisosHabitacion->Calle.','.$aDatosPisosHabitacion->Ciudad.'</p><br>';
+                        $Html .= '<hr>';
                         $Html .= '<div class="caracteristicas">';
                         $Html .= '<h3> Características </h3>';
                         $Html .= '<p><i class="fas fa-bath"></i>  '.$aDatosPisosHabitacion->NBanos.' Baños</p>';
@@ -172,8 +162,10 @@
                         //
                         $Html .= '</div>';
                         $Html .= '<br>';
+                        $Html .= '<hr>';
                         $Html .= '<h3 class="title">Descripción</h3>';
-                        $Html .= '<p>'.$aDatosPisosHabitacion->Descripcion.'</p>';
+                        $Html .= '<p>'.$aDatosPisosHabitacion->Descripcion.'</p><br>';
+                        $Html .= '<hr>';
                         //
                         //Si hay comodidades asignadas
                         if($oComodidades != null)
@@ -233,26 +225,5 @@
     mymap.panTo([<?php echo $lt ?> , <?php echo $lg ?>]);
     //Ponemos una marca en el mapa con las coordenadas
     L.marker([<?php echo $lt ?> , <?php echo $lg ?>]).addTo(mymap);
-    //
-    //Scroll del vendedOr
-    $(document).scroll(function()
-    {
-        //Cuando el contenedor llega al footer queda quieto para no sobrepasarlo
-        if($('#perfil').offset().top + $('#perfil').height() > $('footer').offset().top )
-        {
-            $('#perfil').css('position', 'absolute');
-            $('#perfil').css('left', '110px');
-            $('#perfil').css('top', '110%');
-        }
-        //Si la altura de la pantalla mas el scroll es menos que el footer el perfil y el presio se moverá
-        if($(document).scrollTop() + window.innerHeight < $('footer').offset().top)
-        {
-            $('#perfil').css('position', 'fixed');
-            $('#perfil').css('left', '110px');
-            $('#perfil').css('top', '');
-        }
-        var height = $(window).height();
-        $('#div2').height(height);
-    });
 </script>
 </html>

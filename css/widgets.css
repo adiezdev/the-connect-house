@@ -99,6 +99,7 @@ svg {
 }
 
 .box-pisos-habitacones img {
+    height: 200px;
     width: 320px;
     border-radius: 5px 5px 0px 0px;
 }
@@ -108,45 +109,15 @@ svg {
 }
 
 .box-pisos-habitacones .precio {
-    color: #558264;
+    color: #aac759;
+    text-align: center;
+    font-size: 16pt;
+    padding-top: 5%;
 }
 
 .box-pisos-habitacones button {
     cursor: pointer;
     left: 32%;
-}
-
-
-/*Estilos box ciudades*/
-
-.box-ciudades {
-    display: inline-block;
-    height: 300px;
-    -webkit-box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.55);
-    box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.55);
-    border-radius: 5px;
-    margin-right: 35px;
-    cursor: pointer;
-}
-
-.box-ciudades img {
-    width: 450px;
-    border-radius: 5px;
-}
-
-.box-ciudades .descripcion {
-    position: absolute;
-}
-
-.box-ciudades .descripcion h1 {
-    color: #ffffff;
-    text-shadow: 2px 1px #000000;
-}
-
-.box-ciudades button {
-    position: absolute;
-    width: 250px;
-    transform: translate(-90px, 250px);
 }
 /*Estilos del slider range*/
 
@@ -185,6 +156,39 @@ svg {
     border-radius: 5px;
     background: #4BC988;
     cursor: pointer;
+}
+
+
+/*Estilos box ciudades*/
+
+.box-ciudades {
+    display: inline-block;
+    height: 300px;
+    -webkit-box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.55);
+    box-shadow: 0px 0px 50px -21px rgba(0, 0, 0, 0.55);
+    border-radius: 5px;
+    margin-right: 35px;
+    cursor: pointer;
+}
+
+.box-ciudades img {
+    width: 450px;
+    border-radius: 5px;
+}
+
+.box-ciudades .descripcion {
+    position: absolute;
+}
+
+.box-ciudades .descripcion h1 {
+    color: #ffffff;
+    text-shadow: 2px 1px #000000;
+}
+
+.box-ciudades button {
+    position: absolute;
+    width: 250px;
+    transform: translate(-90px, 250px);
 }
 
 /*Estilos box mas visitados*/
