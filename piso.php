@@ -128,7 +128,7 @@
 	                //
                     //Datelles del piso
                     $Html .= '<div class="contenedor-centro">';
-                        $Html .= '<div class="into-centro">';
+                        $Html .= '<div class="into-centro seccioncentro">';
                         $Html .= '<h1>'.$aDatosPisosHabitacion->Calle.'</h1>';
                         $Html .= '<p><i class="fas fa-map-marker-alt"></i> '.$aDatosPisosHabitacion->Calle.','.$aDatosPisosHabitacion->Ciudad.'</p><br>';
                         $Html .= '<hr>';

@@ -15,7 +15,6 @@
 .contenedor-izquierdo
 {
     width: 430px;
-    height: 91vh;
     float: left;
 }
 .contenedor-izquierdo .into-izquierdo
@@ -41,7 +40,7 @@
     height: 250px !important;
     margin-bottom: 20px;
 }
-.into-centro
+.into-centro.seccioncentro
 {
     margin: 0% 10% 0% 30%;
 }
@@ -84,6 +83,10 @@
 #vacio
 {
     text-align: center;
+}
+#vacio img
+{
+    width: 30%;
 }
 /*Previsualizacion del piso margenes*/
 .box-mas-visitados

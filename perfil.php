@@ -84,14 +84,36 @@
 		                    $Html .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar Perfil</div>';
 
 	                    }
-                        echo $Html;
+
                     }
+                    if(!empty($aDbPisosHabitaciones))
+                    {
+                        $Html .= '<div id="vacio">';
+                        $Html .= '<img src="img/key.png" alt="llaves">';
+                        $Html .= '<h3>Añade más pisos o habitaciones, que quieras poner en alquiler</h3>';
+                        $Html .= '<button class="button" id="buttonVentana" >Empezar</button>';
+                        $Html .= '</div>';
+                        //
+                        //Array botones que aparecen en la ventana
+                        $btones = array(
+                            "Añadir Habitación",
+                            "Añadir Piso"
+                        );
+                        $btonesfuncion = array(
+                            "addPisoHabitacion(2)",
+                            "addPisoHabitacion(1)"
+                        );
+                        //
+                        //Generamos la ventana
+                        getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
+                    }
+                    echo $Html;
                     ?>
                 </div>
             </div>
         </div>
         <div class="contenedor-centro">
-            <div class="into-centro">
+            <div class="into-centro seccioncentro">
                 <?php
                 //
                 //Si no tenemos piso en la base de datos , te aparecerá para agregarlo
@@ -156,12 +178,12 @@
                         $Html .= '</div>';
                         $Html .= '<div class="precio">'.$aDbPisosHabitacion->Precio.' €/mes</div>';
                         //
-                        $Html .= '</div>';
                         if(  $aDbPisosHabitacion->idUsuario == $_SESSION['idUsuario'])
                         {
                             $Html .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar</div>';
 
                         }
+                        $Html .= '</div>';
                         echo $Html;
                     }
 
@@ -169,37 +191,6 @@
                 ?>
             </div>
         </div>
-                <?php
-                    //
-                    //Contenedor de la derecha
-                if(!empty($aDbPisosHabitaciones))
-                {
-                    $Html  = '<div class="contenedor-derecho">';
-                    $Html .= '<div class="into-derecho">';
-                    $Html .= '<div id="vacio">';
-                    $Html .= '<img src="img/key.png" alt="llaves" style="width: 40%">';
-                    $Html .= '<h2>Añade más pisos o habitaciones, que quieras alquilar</h2>';
-                    $Html .= '<button class="button" id="buttonVentana" >Empezar</button>';
-                    $Html .= '</div>';
-                    //
-                    //Array botones que aparecen en la ventana
-                    $btones = array(
-                        "Añadir Habitación",
-                        "Añadir Piso"
-                    );
-                    $btonesfuncion = array(
-                        "addPisoHabitacion(2)",
-                        "addPisoHabitacion(1)"
-                    );
-                    //
-                    //Generamos la ventana
-                    getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
-
-                    $Html .= '</div>
-                    </div>';
-                echo $Html;
-                }
-                ?>
     </div>
     <!--Footer-->
     <?php  require_once(__DIR__."/includes/footer.php"); ?>

@@ -9,9 +9,8 @@
     });
     //
     //Click en la X
-    $('#close').click(function ()
+    $('.close').click(function ()
     {
         //cerramos la ventana
         $('#miVentana').css('display', 'none');
-        alert('d')
     });
