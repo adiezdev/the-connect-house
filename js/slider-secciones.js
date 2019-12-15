@@ -41,6 +41,6 @@
             //Las ocultamos
             x[index].style.display = "none";
         });
-        x[n].style.display = "table"; //por defecto mostramos la primera seccion
+        x[n].style.display = "block"; //por defecto mostramos la primera seccion
     }
 

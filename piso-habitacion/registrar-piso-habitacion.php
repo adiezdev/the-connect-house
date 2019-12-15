@@ -77,8 +77,7 @@ ini_set( 'display_startup_errors' , true );
             <?php include("includes/seccion-5.php"); ?>
             <!--Guardemos-->
             <div class="guardardatos">
-                <input type="button"  class="button" value="Guardar"  onclick="validarDatos()">
-                <input type="button"  class="button"  value="Cancelar" onclick="window.history.back()" >
+                <input type="button"  class="button" value="Guardar"  onclick="validarDatos()"> <input type="button"  class="button"  value="Cancelar" onclick="window.history.back()" >
             </div>
         </form>
     </div>
@@ -92,6 +91,7 @@ ini_set( 'display_startup_errors' , true );
 <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/validar-piso-habitacion.js"></script>
 <script>
     $(document).ready(function(){
+        mymap.scrollWheelZoom.disable();
         //
         //FUNCIÓN PARA MOSTRAR LOS CARACTERES DE LA DESCRIPCIÓN
         //

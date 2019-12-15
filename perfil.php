@@ -177,13 +177,13 @@
                         $Html .= '</div>';
                         $Html .= '</div>';
                         $Html .= '<div class="precio">'.$aDbPisosHabitacion->Precio.' €/mes</div>';
+                        $Html .= '</div>';
                         //
                         if(  $aDbPisosHabitacion->idUsuario == $_SESSION['idUsuario'])
                         {
                             $Html .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar</div>';
 
                         }
-                        $Html .= '</div>';
                         echo $Html;
                     }
 

@@ -109,57 +109,61 @@
                 //Si el buscador está iniicializado
                 if(isset($aDbPisosHabitaciones))
                 {
-                    //Hacemos un array para la latiitud u longitus
-                    $ltlgs = array();
-                    //Hacemos otro array para las ciudades de cada uno
-                    $ciudades = array();
-                    //
-                    //Recorremos los datos de la petición
-                    foreach ( $aDbPisosHabitaciones as $aDbPisosHabitacion )
-                    {
-                        //Guardamos la latitud y longitud en un array
-                        $ltlgs[] = array( "Latitud" => $aDbPisosHabitacion->Latitud , "Longitud" => $aDbPisosHabitacion->Longitud , "Calle" => $aDbPisosHabitacion->Calle);
-                        //Guardamos las ciudades en un array
-                        $ciudades[] = array( $aDbPisosHabitacion->Ciudad);
+                    if( $aDbPisosHabitaciones != null || $aDbPisosHabitaciones != 0 ) {
+                        //Hacemos un array para la latiitud u longitus
+                        $ltlgs = array();
+                        //Hacemos otro array para las ciudades de cada uno
+                        $ciudades = array();
                         //
-                        //Formamos las tarjetas
-                        $Html  = '<div class="box-mas-visitados" onclick="" >';
-                        //
-                        //Comprobamos si el usuario del piso/habitación es diferen de la sesión
-                        if( $aDbPisosHabitacion->idUsuario != $_SESSION['idUsuario'])
-                        {
-                            //Si es así mostramos el like
-                            $Html .= '<div class="likeit">'.file_get_contents("img/iconos-materiales/like.svg").'</div>';
+                        //Recorremos los datos de la petición
+                        foreach ($aDbPisosHabitaciones as $aDbPisosHabitacion) {
+                            //Guardamos la latitud y longitud en un array
+                            $ltlgs[] = array("Latitud" => $aDbPisosHabitacion->Latitud, "Longitud" => $aDbPisosHabitacion->Longitud, "Calle" => $aDbPisosHabitacion->Calle);
+                            //Guardamos las ciudades en un array
+                            $ciudades[] = array($aDbPisosHabitacion->Ciudad);
+                            //
+                            //Formamos las tarjetas
+                            $Html = '<div class="box-mas-visitados" onclick="" >';
+                            //
+                            //Comprobamos si el usuario del piso/habitación es diferen de la sesión
+                            if ($aDbPisosHabitacion->idUsuario != $_SESSION['idUsuario']) {
+                                //Si es así mostramos el like
+                                $Html .= '<div class="likeit">' . file_get_contents("img/iconos-materiales/like.svg") . '</div>';
+                            }
+                            //
+                            //Accedemos a la imagen del piso/habitaciion
+                            $aDbImagen = new Imagenes();
+                            //Sacamos los datos
+                            $ImagenDestacada = $aDbImagen->getByIdPisoPrimeraFoto($aDbPisosHabitacion->idPiso);
+                            //
+                            //Recorremos la respuesta
+                            foreach ($ImagenDestacada as $ImagenDestacad) {
+                                $Html .= '<img src="' . $ImagenDestacad->Url . '" alt="habitación">';
+                            }
+                            //Formamos las tarjetas
+                            $Html .= '<div class="contenido">';
+                            $Html .= '<h2 >' . $aDbPisosHabitacion->Calle . '</h2>';
+                            $Html .= '<div class="descripcion">';
+                            $Html .= '<p><i class="fas fa-map-marker-alt"></i><span id="ciudad">' . $aDbPisosHabitacion->Ciudad . '</span> , ' . $aDbPisosHabitacion->Calle . '</p><br>';
+                            $Html .= '<p id="descripcionPH">' . $aDbPisosHabitacion->Descripcion . '</p><br>';
+                            $Html .= '</div>';
+                            $Html .= '<div class="datos">';
+                            $Html .= '<p><i class="fas fa-bed"></i> Habitaciones ' . $aDbPisosHabitacion->NHabitaciones . ' |</p>';
+                            $Html .= '<p><i class="fas fa-bath"></i> Baños ' . $aDbPisosHabitacion->NBanos . '</p>';
+                            $Html .= '</div>';
+                            $Html .= '</div>';
+                            $Html .= '<div class="precio">' . $aDbPisosHabitacion->Precio . ' €/mes</div>';
+                            $Html .= '</div>';
+                            //
+                            //Mostramos en pantalla
+                            echo $Html;
                         }
-                        //
-                        //Accedemos a la imagen del piso/habitaciion
-                        $aDbImagen = new Imagenes();
-                        //Sacamos los datos
-                        $ImagenDestacada =  $aDbImagen->getByIdPisoPrimeraFoto( $aDbPisosHabitacion->idPiso );
-                        //
-                        //Recorremos la respuesta
-                        foreach ($ImagenDestacada as $ImagenDestacad)
-                        {
-                            $Html .= '<img src="'.$ImagenDestacad->Url.'" alt="habitación">';
-                        }
-                        //Formamos las tarjetas
-                        $Html .= '<div class="contenido">';
-                        $Html .= '<h2 >'.$aDbPisosHabitacion->Calle.'</h2>';
-                        $Html .= '<div class="descripcion">';
-                        $Html .= '<p><i class="fas fa-map-marker-alt"></i><span id="ciudad">'.$aDbPisosHabitacion->Ciudad.'</span> , '.$aDbPisosHabitacion->Calle.'</p><br>';
-                        $Html .= '<p id="descripcionPH">'.$aDbPisosHabitacion->Descripcion.'</p><br>';
-                        $Html .= '</div>';
-                        $Html .= '<div class="datos">';
-                        $Html .= '<p><i class="fas fa-bed"></i> Habitaciones '.$aDbPisosHabitacion->NHabitaciones.' |</p>';
-                        $Html .= '<p><i class="fas fa-bath"></i> Baños '.$aDbPisosHabitacion->NBanos.'</p>';
-                        $Html .= '</div>';
-                        $Html .= '</div>';
-                        $Html .= '<div class="precio">'.$aDbPisosHabitacion->Precio.' €/mes</div>';
-                        $Html .= '</div>';
-                        //
-                        //Mostramos en pantalla
-                        echo $Html;
                     }
+                }
+                else
+                {
+                    $Html = '<h2>No se ha encontrado ningun resultado</h2>';
+                    echo $Html;
                 }
             ?>
         </div>

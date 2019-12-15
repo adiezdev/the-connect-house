@@ -7,39 +7,36 @@ Proyecto: the-connect-house
 Nombre del archivo: seccion-3.php
 -------------------------------------
 */?>
-<table class="seccion 3">
-	<tbody >
-	<tr>
-		<th colspan="6" ><h2 style="color: #aac759">Comodidiades</h2></th>
-	</tr>
-	<tr>
+<div class="seccion 3">
+
+		<div class="cabeceras"><h2 style="color: #aac759">Comodidiades</h2></div>
+         <div class="comodidad">
 		<?php
 			//Mostramos todos los registros
 			foreach ( $oComodidades as $oComodidad)
 			{
-				$cSecciones  = '<td colspan="1"><label class="checkeable">';
+				$cSecciones  = '<div class="comodidades"><label class="checkeable">';
 				$cSecciones .= '<input type="checkbox" class="comodidad" name="comodidad" value="'.$oComodidad->idComodidad.'"/>';
 				$cSecciones .= '<img id="cimagen" src="'.$oComodidad->Imagen.'" >';
-				$cSecciones .= '</label></td>';
+                $cSecciones .= '<p>'.$oComodidad->Nombre.'</p>';
+				$cSecciones .= '</label></div>';
 				echo $cSecciones;
 			}
 		?>
-	</tr>
-	<tr>
-		<th colspan="6" ><h2 style="color: #aac759">Normas</h2></th>
-	</tr>
-	<tr>
+         </div>
+		<div class="cabeceras" ><h2 style="color: #aac759">Normas</h2></div>
+        <div class="norma">
 		<?php
 			//Mostramos todos los registros
 			foreach ($oNormas as $oNorma)
 			{
-				$cSecciones  = '<td colspan="2"><label class="checkeable">';
+				$cSecciones  = '<div class="normas" ><label class="checkeable">';
 				$cSecciones .= '<input type="checkbox" class="norma" name="norma" value="'.$oNorma->idNorma.'"/>';
 				$cSecciones .= '<img id="cimagen" src="'.$oNorma->Imagen.'" >';
-				$cSecciones .= '</label></td>';
+                $cSecciones .= '<p>'.$oNorma->Nombre.'</p>';
+				$cSecciones .= '</label></div>';
 				echo $cSecciones;
 			}
 		?>
-	</tr>
-	</tbody>
-</table>
+        </div>
+</div>

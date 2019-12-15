@@ -369,3 +369,10 @@ label[for=inputperfil] {
     position: relative;
     bottom: 162px;
 }
+/*editar-piso*/
+.editar-piso
+{
+    color: #ffffff;
+    background-color: #aac759;
+    padding: 4px;
+}

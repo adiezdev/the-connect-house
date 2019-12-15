@@ -7,37 +7,30 @@ Proyecto: the-connect-house
 Nombre del archivo: seccion-1.php
 -------------------------------------
 */?>
-<table class="seccion 1">
-	<tbody>
-	<tr>
-		<th colspan="6" ><h2>¿Dónde está?</h2></th>
-	</tr>
-	<tr>
-		<td><label for="calle">Calle (*): </label></td>
-		<td><input type="text" id="calle" name="calle" class="credential"  placeholder="Calle donde está..."></td>
-		<td><label for="numero">Portal Nº (*): </label></td>
-		<td><input type="text" id="numero" name="numero" class="credential" placeholder="Número..."></td>
-		<td><label for="cp">CP (*): </label></td>
-		<td><input type="text" id="cp" name="cp" class="credential" placeholder="Codigo Postal..." ></td>
-	</tr>
-	<tr>
-		<td ><label for="ciudad">Ciudad (*): </label></td>
-		<td>
-			<select name="ciudad" id="selector" class="credential">
-				<option value="León" selected>León</option>
-				<option value="Ponferrada" >Ponferrada</option>
-			</select>
-		</td>
-		<td><label for="descripcion">Descripción (*): </label></td>
-		<td ><textarea class="credential" id="descripcion" name="user_post_textarea" maxlength="320" placeholder="Pon una descripción" style="height: 125px !important;">
-                    </textarea><br><p>600\<span id="contador"> 600</span></p>
-		</td>
-	</tr>
-    <tr>
-        <td>* Campos obligatorios</td>
-    </tr>
-	</tbody>
-</table>
-<script>
+<div class="seccion 1">
+		<div class="cabeceras"><h2>¿Dónde está?</h2></div>
+         <div class="comodidad">
+            <div class="comodidades" ><label for="calle">Calle (*): </label></div>
+            <div class="comodidades" ><input type="text" id="calle" name="calle" class="credential"  placeholder="Calle donde está..."></div>
+            <div class="comodidades" ><label for="numero">Portal Nº y piso (*): </label></div>
+            <div class="comodidades" ><input type="text" id="numero" name="numero" class="credential" placeholder="Número..."></div>
+            <div class="comodidades" ><label for="cp">Codigo Postal (*): </label></div>
+             <div class="comodidades"><input type="text" id="cp" name="cp" class="credential" placeholder="Codigo Postal..." ></div>
+         </div>
+    <br>
+        <div class="comodidad">
+            <div class="comodidades"><label for="ciudad">Ciudad (*): </label></div>
+            <div class="comodidades">
+                <select name="ciudad" id="selector" class="credential">
+                    <option value="León" selected>León</option>
+                    <option value="Ponferrada" >Ponferrada</option>
+                </select>
+            </div>
+            <div class="comodidades"><label for="descripcion">Descripción (*): </label></div>
+            <div class="comodidades"><textarea  class="credential" id="descripcion" name="user_post_textarea" maxlength="320" placeholder="Pon una descripción" style="height: 125px !important;" ></textarea>
+                <br><p>600\<span id="contador"> 600</span></p>
+            </div>
+        </div>
 
-</script>
+        <div>* Campos obligatorios</div>
+</div>
