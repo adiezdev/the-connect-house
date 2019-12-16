@@ -38,7 +38,7 @@
                 <img id="imgperfil" src="img/isset/isset-user.png"><br><br>
                 <label for="inputperfil">Subir Imagen</label>
                 <input type="file" name="archivos" id="inputperfil"/><br><br>
-                <form id="campos-isset" action="peticiones/ajax/a_Completaperfil.php" method="POST" >
+                <form id="campos-isset">
                     <div id="plus" style="cursor: pointer">+ Otro numero de teléfono</div>
                     <label for="telefono">Número de telefono (opcional):</label><br><br>
                     <input type="text" class="credential" id="telefono" name="telefono[]" placeholder="Numero de telefono"><br>
@@ -47,7 +47,7 @@
                     <textarea  class="credential" id="descripcion" name="user_post_textarea" maxlength="320" placeholder="Pon una descripción" style="height: 125px !important;" ></textarea>
                     <br><p>600\<span id="contador"> 600</span></p>
                     <div id="hiddens"></div>
-                    <input type="button" value="Siguiente" name="siguiente" class="button">
+                    <input type="button" value="Siguiente" name="siguiente" class="button" onclick="completaPerfil()">
                 </form>
             </div>
         </div>
@@ -55,6 +55,7 @@
     <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/precarga-imagen-perfil.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/validaciones/completa-perfil.js"></script>
 <script>
     $(document).ready(function(){
         //Máixmo de caracteres en la descripción

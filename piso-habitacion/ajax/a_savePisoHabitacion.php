@@ -17,7 +17,7 @@
     require_once(__DIR__ . '/../../bd/bd_imagenespiso.php');
 	require_once(__DIR__ . '/../../bd/bd_ocupado.php');
     //
-    // Inicalizamos variables.
+    // Inicalizamos Respuesta.
     $oRespuesta = new stdClass();
     //
     // Obtenemos los datos del JSON.
@@ -142,6 +142,10 @@
             }
         }
         //
+        //
+        $oDbUsuario = new Usuario();
+        $aUsuarios = $oDbUsuario->getById( $_SESSION['idUsuario'] );
+        //
 	    //Recorremos las imagenes
         foreach($oDatosJson["Imagenes"] as $imagen=>$value)
         {
@@ -152,7 +156,7 @@
             $nom = md5(rand());
             //
 	        //URL que se guarda en la bbd
-            $filesave = 'uploads/'.$_SESSION['Carpeta'].'/'.$carpeta.'/'.$nom.'.jpg';
+            $filesave = 'uploads/'.$aUsuarios[0]->Carpeta.'/'.$carpeta.'/'.$nom.'.jpg';
             //
 	        //URL completa
             $root = $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/'.$filesave;

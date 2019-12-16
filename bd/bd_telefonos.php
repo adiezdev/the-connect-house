@@ -62,11 +62,11 @@ class Telefonos extends Conexion
      */
     public function addTelf( $nNumero , $idUsario )
     {
-        $cSql = 'INSERT INTO '.$this->sTabla.' ( Numero , idUsuario) VALUES ( ?, ? )';
+        $cSql = 'INSERT INTO '.$this->sTabla.' ( Numero , idUsuario) VALUES ( ? , ? )';
         $stmt = $this->prepare( $cSql );
-        $stmt->bind_param('ii', $sURL , $idPiso );
+        $stmt->bind_param('ii', $nNumero , $idUsario );
         $bResultado = $stmt->execute();
-        //return $stmt->error;
+        // $stmt->error;
         if(!$bResultado)
         {
             return false;

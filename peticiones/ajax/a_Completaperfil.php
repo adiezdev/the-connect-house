@@ -16,45 +16,85 @@
     require_once(__DIR__ . '/../../bd/bd_telefonos.php');
     require_once(__DIR__ . '/../../includes/sesion.php');
     //
+    // Inicalizamos Respuesta.
+    $oRespuesta = new stdClass();
+    //
     $nId = $_SESSION['idUsuario'];
     //
     $oDatosJson = json_decode( file_get_contents( "php://input" ), true );
     //
-    $Imagenes = $oDatosJson["img"];
-    $telefonos = $oDatosJson["telefono"];
-    $Imagenes = $oDatosJson["descripcion"];
+    $aTelefonos = $oDatosJson["telefono"];
+    $sDescripcion = $oDatosJson["descripcion"];
     //
     $oDbUsuario = new Usuario();
     $aUsuarios = $oDbUsuario->getById( $nId );
-    foreach ( $aUsuarios as $aUsuario)
-    {
-            //
-            //Debug
-            //echo $value . "<br />";
-            //Cojo la iimagen
-            $value = $_POST['imagen'];//Cogemos la imagen
-            //Comprobamos si está inicializado la variable
-            if(isset($_POST['imagen']))
-            {
-                //Sacamos la imagen y la decodificamos
-                $datos = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $value));
-                //generamos un nombre para la imagen
-                $nom = md5(rand());
-                //Marco la ruta
-                $filepathsql = "uploads/".$aUsuario->Carpeta."/".$nom.".jpg";
-                $archivoRuta = __DIR__ . "/../the-connect-house/" .$filepathsql;
-                //Paso la imagen a la ruta
-                file_put_contents( $archivoRuta , $datos);
-                //Permisos al archivo
-                chmod($archivoRuta, 0777);
-            }
-            $sDescripcion = $_POST['descripcion'];
-            //
-            $lResult = $oDbUsuario->updateCampos( $nId , $sDescripcion , $filepathsql); //Actualizamos los campos
-            //
-            if($lResult)
-            {
-                header("Location: ../../perfil.php?correo=".$aUsuario->Correo);
-            }
+    //
 
+    //Comprobamos si está inicializado la variable
+    if(isset( $oDatosJson["imagenper"] ))
+    {
+        $sImagenes = $oDatosJson["imagenper"];
+        //Sacamos la imagen y la decodificamos
+        $datos = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $sImagenes));
+        //generamos un nombre para la imagen
+        $nom = md5(rand());
+        //Marco la ruta
+        $filepathsql = "uploads/".$aUsuarios[0]->Carpeta."/".$nom.".jpg";
+        $archivoRuta = $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/'.$filepathsql;
+        //Paso la imagen a la ruta
+        file_put_contents( $archivoRuta , $datos);
+        //Permisos al archivo
+        chmod($archivoRuta, 0777);
+        //
+        $lResult = $oDbUsuario->updateCampos( $nId , $sDescripcion , $filepathsql); //Actualizamos los campos
     }
+    else
+    {
+        //
+        $lResult = $oDbUsuario->updateCampos( $nId , $sDescripcion); //Actualizamos los campos
+    }
+    //
+    if(!$lResult)
+    {
+        $oRespuesta->Estado = "KO";
+        $oRespuesta->Mensaje = "Por favor vuelve a intentarlo";
+        echo json_encode( $oRespuesta );
+        return;
+    }
+    else
+    {
+        //
+        if(isset($aTelefonos))
+        {
+            foreach ( $aTelefonos as $aTelefono)
+            {
+                $oDbTelefonos = new Telefonos();
+                if(strlen($aTelefono) == 10 )
+                {
+                    $oRespuesta->Estado = "KO";
+                    $oRespuesta->Mensaje = "Introduce un número correcto";
+                    echo json_encode( $oRespuesta );
+                    return;
+                }
+                else
+                {
+                    $lResultt = $oDbTelefonos->addTelf( $aTelefono , $nId );
+                    //
+                    if(!$lResultt)
+                    {
+                        $oRespuesta->Estado = "KO";
+                        $oRespuesta->Mensaje = "Por favor vuelve a intentarlo";
+                        echo json_encode( $oRespuesta );
+                        return;
+                    }
+                }
+            }
+        }
+        $oRespuesta->Estado = "OK";
+        $oRespuesta->Mensaje = "Guardado";
+        $oRespuesta->Correo = $aUsuarios[0]->Correo;
+        json_encode($oRespuesta);
+    }
+    //
+    //Enviamos la respuesta
+    echo json_encode($oRespuesta);

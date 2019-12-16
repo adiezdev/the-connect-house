@@ -34,7 +34,6 @@
 	  foreach ($lResultados as $lResultado)
 	  {
 		  $_SESSION['idUsuario']  = $lResultado->idUsuario; //Extraemos el idUsuario que nos devuelve, se lo damos a la sesión
-		  $_SESSION['Carpeta'] = $lResultado->Carpeta; //Gaurdamos la carpeta del usuario la necesitaremos
 	  }
       //Valor del tiempo
       $_SESSION['tiempo']= time();

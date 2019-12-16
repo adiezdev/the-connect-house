@@ -84,13 +84,13 @@ function validarDatos()
     if( metros.trim() == '' || isNaN(metros))
     {
         alert("Metros cuadrados del piso que sea válidos");
-        $('#metros').val();
+        $('#metros').focus();
         return false;
     }
     if( precio.trim() == '' || isNaN(precio))
     {
         alert("Indique un precio válido");
-        $('#precio').val();
+        $('#precio').focus();
         return false;
     }
     if(id == 2)
@@ -104,7 +104,7 @@ function validarDatos()
     if( toilet.trim() == '' || isNaN(toilet))
     {
         alert("Indique un precio válido");
-        $('#toilet').val();
+        $('#toilet').focus();
         return false;
     }
     if(latitud == '' || longitud == '')
