@@ -46,7 +46,7 @@
                     }
                     //
                     //Si es así mostramos el like
-                    $Html .= '<div class="likeit"><label><input type="checkbox" class="corazon" value="'.$aDbPisosHabitacion->idPiso.'" '.$check.' style="display:none">' . file_get_contents("img/iconos-materiales/like.svg") . '</label></div>';
+                    $Html .= '<div class="likeit derecha"><label><input type="checkbox" class="corazon" value="'.$aDbPisosHabitacion->idPiso.'" '.$check.' style="display:none">' . file_get_contents("img/iconos-materiales/like.svg") . '</label></div>';
                 }
             }
             //
@@ -91,6 +91,11 @@
             echo $Html;
         }
     }
+    /**
+     * Función que devuelve una tarjeta de pisos de manera vertical
+     *
+     * @param $aDbPisosHabitaciones
+     */
     function getPisosHabitacionesVertical($aDbPisosHabitaciones)
     {
         foreach( $aDbPisosHabitaciones as $aDbPisosHabitacion)

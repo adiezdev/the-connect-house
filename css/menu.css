@@ -74,11 +74,21 @@
     body {
         overflow-x: hidden!important;
     }
+
+}
+@media screen and (max-width: 840px){
+    .menucabecera a
+    {
+        display: none;
+    }
+    .menucabecera form
+    {
+        display: none;
+    }
 }
 @media screen and ( max-width: 1180px) {
     .menucabecera div
     {
         display: block;
     }
-
 }
