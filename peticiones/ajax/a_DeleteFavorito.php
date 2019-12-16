@@ -19,23 +19,27 @@
     // Obtenemos los datos del JSON.
     $oDatosJson = json_decode( file_get_contents( "php://input" ), true );
     //
+    //Guardamos el id
     $nFavorito = $oDatosJson["fav"];
     //
+    //Accedemos a la tabla favorito
     $oDbFavorito = new Favoritos();
     //
+    //Eliminamos de favorito
     $lResultado = $oDbFavorito->deleteFav( $nFavorito );
     //
+    //Si ha fallado retornamos un KO
     if(!$lResultado)
     {
         $oRespuesta->Estado = "KO";
-        $oRespuesta->Mensaje = "No se ha add";
+        $oRespuesta->Mensaje = "No se ha eliminado";
         echo json_encode( $lResultado );
         return;
     }
-    else
+    else //Si es correcto
     {
         $oRespuesta->Estado = "OK";
-        $oRespuesta->Mensaje = "add";
+        $oRespuesta->Mensaje = "delete";
         json_encode($oRespuesta);
     }
     //

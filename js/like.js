@@ -1,17 +1,12 @@
 $(document).ready(function() {
-   /* var x = document.getElementsByClassName("likeit");
-    for (let i = 0; i < x.length; i++) {
-        $(x).click(function(e) {
-            //alert(1);
-            $(this).find("path").attr('fill', 'red');
-        });
 
-    }*/
     $('.likeit').change( ':checked' , function ()
     {
         //
         var favorito = $(this).find('.corazon').val();
         var corason = $(this).find("path");
+        //
+        //Guardamos el dato
         oDatosJson = {fav: favorito };
         //
         //Comprueba si está quecheckeado
@@ -35,7 +30,7 @@ $(document).ready(function() {
         }
         else //Revertimos el check
         {
-            //
+            //Lo eliminamos
             $.ajax({
                 url: '/the-connect-house/peticiones/ajax/a_DeleteFavorito.php',
                 type: 'POST',

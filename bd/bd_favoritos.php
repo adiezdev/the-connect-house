@@ -19,6 +19,25 @@ class Favoritos extends Conexion
     //Nombre de la tabla
     private $sTabla = 'favoritos';
     /**
+     * funcion que devuelve los fav de un usuario
+     *
+     * @return array
+     */
+    public function getById( $nIdUsuario )
+    {
+        $aFavUser = array();
+        $cSql = 'SELECT * FROM '.$this->sTabla.' WHERE idUsuario = ?';
+        $stmt = $this->prepare($cSql);
+        $stmt->bind_param('i', $nIdUsuario );
+        $stmt->execute();
+        $oResultado = $stmt->get_result();
+        while( $oRecord = $oResultado->fetch_object())
+        {
+            $aFavUser[] =  $oRecord;
+        }
+        return $aFavUser;
+    }
+    /**
      * Función para agregar un piso a favoritos
      *
      * @param $nIdPiso

@@ -22,12 +22,16 @@
     // Obtenemos los datos del JSON.
     $oDatosJson = json_decode( file_get_contents( "php://input" ), true );
     //
+    //Guardamos la variable
     $nFavorito = $oDatosJson["fav"];
     //
+    //Accedemos a la tabla Favoritos
     $oDbFavorito = new Favoritos();
     //
+    //Añadimos a favorito
     $lResultado = $oDbFavorito->addFav( $_SESSION["idUsuario"] , $nFavorito );
     //
+    //Si ha fallado retornamos un KO
     if(!$lResultado)
     {
         $oRespuesta->Estado = "KO";
@@ -35,7 +39,7 @@
         echo json_encode( $lResultado );
         return;
     }
-   else
+   else //Si ha sido correcto
     {
         $oRespuesta->Estado = "OK";
         $oRespuesta->Mensaje = "add";

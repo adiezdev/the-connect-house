@@ -379,3 +379,8 @@ label[for=inputperfil] {
     background-color: #aac759;
     padding: 4px;
 }
+/*Like*/
+.corazon:checked + svg
+{
+    fill: red !important;
+}

@@ -16,6 +16,7 @@
     //Accedemos a datos
     require_once(__DIR__."/bd/bd_usuario.php" );
 	require_once(__DIR__."/bd/bd_pisos.php" );
+    require_once(__DIR__."/bd/bd_favoritos.php" );
     require_once(__DIR__."/bd/bd_imagenespiso.php");
     session_start();
     //
@@ -127,7 +128,8 @@
                         $ciudades = array();
                         //
                         //Recorremos los datos de la petición
-                        foreach ($aDbPisosHabitacione as $aDbPisosHabitacion) {
+                        foreach ($aDbPisosHabitacione as $aDbPisosHabitacion)
+                        {
                             //Guardamos la latitud y longitud en un array
                             $ltlgs[] = array("Latitud" => $aDbPisosHabitacion->Latitud, "Longitud" => $aDbPisosHabitacion->Longitud, "Calle" => $aDbPisosHabitacion->Calle);
                             //Guardamos las ciudades en un array
@@ -137,9 +139,22 @@
                             $Html = '<div class="box-mas-visitados" onclick="" >';
                             //
                             //Comprobamos si el usuario del piso/habitación es diferen de la sesión
-                            if ($aDbPisosHabitacion->idUsuario != $_SESSION['idUsuario']) {
+                            if ($aDbPisosHabitacion->idUsuario != $_SESSION['idUsuario'])
+                            {
+                                $oDbFavoritos = new Favoritos();
+                                $aDbFavoritos = $oDbFavoritos->getById( $_SESSION['idUsuario']);
+                                //
+                                $check = '';
+                                foreach ( $aDbFavoritos as $aDbFavorito )
+                                {
+                                   if($aDbFavorito->idPiso == $aDbPisosHabitacion->idPiso )
+                                   {
+                                       $check = 'checked';
+                                   }
+                                }
+                                //
                                 //Si es así mostramos el like
-                                $Html .= '<div class="likeit"><label><input type="checkbox" class="corazon" style="display: none;" value="'.$aDbPisosHabitacion->idPiso.'">' . file_get_contents("img/iconos-materiales/like.svg") . '</label></div>';
+                                $Html .= '<div class="likeit"><label><input type="checkbox" class="corazon" value="'.$aDbPisosHabitacion->idPiso.'" '.$check.' style="display:none">' . file_get_contents("img/iconos-materiales/like.svg") . '</label></div>';
                             }
                             //
                             //Accedemos a la imagen del piso/habitaciion
