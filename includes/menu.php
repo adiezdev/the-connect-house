@@ -32,6 +32,7 @@
             $oDatosUsuarios = $aDbUsuarios->getById($_SESSION['idUsuario']);
             //
             echo ' <a href="'.get_root_uri().'/the-connect-house/perfil.php?correo='.$oDatosUsuarios[0]->Correo.'">Perfil</a>';
+            echo ' <a href="'.get_root_uri().'/the-connect-house/cerrar-session.php">Cerrar Sesión</a>';
         }
         else
         {

@@ -23,6 +23,23 @@
     //
     //Se lo envíamos al metodo
     cabecera(TITULO_INDEX, $estilos, false);
+    //Hacemos ésto para sí solo poder entrar una manera segura
+    //si tenemos una respuesta GET
+    if( $_GET)
+    {
+        //Cogemos la url por si la encriptación iinterpresta mal
+        $url= $_SERVER["REQUEST_URI"];
+        //Cogemos el string a partir de la interrogación
+        $urls = explode("?", $url);
+        //decodificamos
+        $decofificados = base64_decode($urls[1]);
+        echo $decofificados;
+    }
+    else
+    {
+        header( "location:/the-connect-house/index.php" );
+        return;
+    }
 ?>
 <body>
     <div class="content">

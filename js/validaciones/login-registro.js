@@ -86,8 +86,11 @@ function validarCamposRegistro()
         })
         .done(function(oJson) {
             var oRespuesta = JSON.parse(oJson);
-        if (oRespuesta.Estado == "OK") {
-            window.open("/the-connect-house/completa-perfil.php?Usuario="+oRespuesta.IdUsuario , "_self");
+        if (oRespuesta.Estado == "OK")
+        {
+            var id = btoa("Usuario="+oRespuesta.IdUsuario);
+            location.href = '/the-connect-house/completa-perfil.php?'+id+'';
+            //window.open('/the-connect-house/completa-perfil.php?'+id+'' , '_self' );
         } else {
             alert(oRespuesta.Mensaje);
         }
