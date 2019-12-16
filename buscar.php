@@ -93,6 +93,26 @@
   <div class="content">
       <div class="contenedor-centro">
         <div class="into-centro busqueda">
+            <!--Buscador-->
+            <div class="buscador2">
+                <form action="buscar.php" method="get">
+                    <input type="checkbox" name="Pisos" id="piso" value="1" >
+                    <label for="">Pisos</label>
+                    <input type="checkbox" name="Habitaciones" id="piso" value="2" >
+                    <label for="">Habitaciones</label>
+                    <div class="slidercontenedor">
+                        <h3>Precio: <span id="preciospan">0</span> €</h3>
+                        <input type="range" name="Precio" id="slider" min="0" max="1000" value="0" step="10">
+                    </div>
+                    <select name="Ciudad" id="selector" >
+                        <option value="0">¿Qué ciudad?</option>
+                        <option value="León">León</option>
+                        <option value="Ponferrada">Ponferrada</option>
+                    </select>
+                    <input type="search" name="Buscar" id="search" placeholder="Busca la calle que deseas">
+                    <button class="button">Buscar <img src="img/iconos-materiales/lupa.png" alt="Buscar"></button>
+                </form>
+            </div>
             <h2 class="title">Resultados</h2>
             <?php
                 //
@@ -119,7 +139,7 @@
                             //Comprobamos si el usuario del piso/habitación es diferen de la sesión
                             if ($aDbPisosHabitacion->idUsuario != $_SESSION['idUsuario']) {
                                 //Si es así mostramos el like
-                                $Html .= '<div class="likeit">' . file_get_contents("img/iconos-materiales/like.svg") . '</div>';
+                                $Html .= '<div class="likeit"><label><input type="checkbox" class="corazon" style="display: none;" value="'.$aDbPisosHabitacion->idPiso.'">' . file_get_contents("img/iconos-materiales/like.svg") . '</label></div>';
                             }
                             //
                             //Accedemos a la imagen del piso/habitaciion

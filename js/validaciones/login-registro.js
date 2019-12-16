@@ -95,7 +95,7 @@ function validarCamposRegistro()
             alert(oRespuesta.Mensaje);
         }
         //console.log(oJson); //Debug
-    });;
+    });
 }
 
 /**

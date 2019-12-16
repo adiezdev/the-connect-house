@@ -189,7 +189,7 @@ class Pisos extends Conexion
 	    {
 	    	$bindArray[] = &$valores[$key];
 	    }
-	    $cSql = 'SELECT * FROM '.$this->sTabla.' WHERE Precio >= ? '.$sFiltro;
+	    $cSql = 'SELECT * FROM '.$this->sTabla.' WHERE Precio >= ? '.$sFiltro.'ORDER BY idPiso DESC';
 	    //
 	    $stmt = $this->prepare( $cSql );
         //

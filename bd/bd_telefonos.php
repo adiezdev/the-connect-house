@@ -1,4 +1,7 @@
 <?php
+//error_reporting( E_ALL );
+//ini_set( 'display_errors' , true );
+//ini_set( 'display_startup_errors' , true );
 /*
     -------------------------------------
     Archivo de: Alejandro Díez
@@ -7,7 +10,9 @@
     Nombre del archivo: bd_telefonos.php
     -------------------------------------
 */
-
+//
+require_once( __DIR__.'/bd_conexion.php' );
+//
 class Telefonos extends Conexion
 {
     //

@@ -10,6 +10,9 @@
 		Nombre del archivo: bd_ocupado.php
 		-------------------------------------
 	*/
+    require_once( __DIR__.'/bd_conexion.php' );
+    //
+    //
 	class Ocupado extends Conexion
 	{
 		//
