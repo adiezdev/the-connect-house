@@ -35,7 +35,7 @@
         <div class="contenedor-centro">
             <div class="into-centro seccioncasi">
                 <label for="imgperfil">Imagen de perfil (opcional):</label><br><br>
-                <img id="imgperfil" src="img/isset/isset-user.png"><br><br>
+                <img id="imgperfil" class="user" src="img/isset/isset-user.png"><br><br>
                 <label for="inputperfil">Subir Imagen</label>
                 <input type="file" name="archivos" id="inputperfil"/><br><br>
                 <form id="campos-isset">

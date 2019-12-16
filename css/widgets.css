@@ -278,12 +278,11 @@ svg {
     margin-bottom: 30px;
 }
 
-#user {
+.user {
     width: 120px;
     height: 120px;
     object-fit: cover;
     border-radius: 500px;
-
 }
 /*Input file*/
 input[type=file]#inputperfil {

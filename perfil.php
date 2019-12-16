@@ -73,7 +73,7 @@
                     foreach ( $oDatosUsuario as $oDatoUsuario )
                     {
                         $idUsuario = $oDatoUsuario->idUsuario;
-                        $Html = '<img id="user" src="'.$oDatoUsuario->Imgperfil.'" alt="imgen-perfil" srcset="">';
+                        $Html = '<img class="user" src="'.$oDatoUsuario->Imgperfil.'" alt="imgen-perfil" srcset="">';
                         $Html .= '<h3>'.$oDatoUsuario->Nombre.' '.$oDatoUsuario->Apellidos.'</h3><br>';
                         $Html .= '<div class="titleciudad"><p><i class="fas fa-map-pin"></i>'.$oDatoUsuario->Ciudad.'</p></div><br>';
                         $Html .= '<fieldset><legend>Descripción :</legend>';

@@ -62,8 +62,6 @@
     $odbNormas = new Secciones(2);
     //Sacamos todos los registros
     $oNormas = $odbNormas->getById($idPisoHabitacion);
-    //
-    //Sacamos el perfil del Vendedor
 
 ?>
 <body>
@@ -111,7 +109,7 @@
 	                    $Html = ' <div class="contenedor-izquierdo">';
 	                    $Html .= ' <div class="into-izquierdo">';
 	                    $Html .=    '<div id="perfil">';
-	                    $Html .=        '<img id="user" src="'.$aDbUsuario->Imgperfil.'" alt="">';
+	                    $Html .=        '<img class="user" src="'.$aDbUsuario->Imgperfil.'" alt="">';
 	                    $Html .=        '<h3>'.$aDbUsuario->Nombre.'</h3>';
 	                    $Html .=        '<h2>'.$aDatosPisosHabitacion->Precio.' €/Mes</h2>';
 	                    $Html .=        '<button class="button">Me interesa</button>';
