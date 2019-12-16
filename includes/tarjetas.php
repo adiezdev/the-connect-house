@@ -82,10 +82,13 @@
             $Html .= '</div>';
             //
             //Botón editar piso/habitación
-            if(  $aDbPisosHabitacion->idUsuario == isset($_SESSION['idUsuario'] ))
+            if(isset($_SESSION['idUsuario']))
             {
-                $Html .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar</div>';
+                if(  $aDbPisosHabitacion->idUsuario ==$_SESSION['idUsuario'] )
+                {
+                    $Html .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar</div>';
 
+                }
             }
             //Mostramos el resultado
             echo $Html;

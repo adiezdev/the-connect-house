@@ -65,6 +65,7 @@
     //
 ?>
 <body>
+<!--Menu-->
 <?php require_once(__DIR__ . '/includes/menu.php'); ?>
     <div class="content">
         <div class="contenedor-izquierdo">
