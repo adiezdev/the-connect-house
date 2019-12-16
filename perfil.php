@@ -30,6 +30,7 @@
     //
     //Generamos la cabecera
     cabecera(TITULO_PERFIIL , $estilos , false);
+    //
     //Respuesta del GET
     if( $_GET )
     {
@@ -44,7 +45,7 @@
         return;
     }
     //
-    //Sacar los datos del usuario
+    //Sacar los datos del usuario de la peticón
     $aDbUsuario = new Usuario();
     //
     //Accedemos a datos mediante el correo
@@ -58,7 +59,7 @@
     }
     //
     //
-    //Sacar los pisos/Habitaciones del usuario
+    //Sacar los pisos/Habitaciones del usuario de la peticiión get
     $aDbPisosHabitaciones = new Pisos();
     $aDbPisosHabitaciones = $aDbPisosHabitaciones->getByUsuario( $oDatosUsuario[0]->idUsuario );
 ?>
@@ -79,34 +80,42 @@
                         $Html .= '<fieldset><legend>Descripción :</legend>';
                         $Html .= '<div id="descripcion"><p>'.$oDatoUsuario->Descripcion.'</p></div><br>';
                         $Html .= '</fieldset>';
+                        //
+                        //Si el usuario es el mismo que sessón
 	                    if( $idUsuario == $_SESSION['idUsuario'])
 	                    {
 		                    $Html .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar Perfil</div>';
 
 	                    }
-
                     }
-                    if(!empty($aDbPisosHabitaciones))
+                    //
+                    //Si el usuario es el mismo que sessón
+                    if( $idUsuario == $_SESSION['idUsuario'])
                     {
-                        $Html .= '<div id="vacio">';
-                        $Html .= '<img src="img/key.png" alt="llaves">';
-                        $Html .= '<h3>Añade más pisos o habitaciones, que quieras poner en alquiler</h3>';
-                        $Html .= '<button class="button" id="buttonVentana" >Empezar</button>';
-                        $Html .= '</div>';
-                        //
-                        //Array botones que aparecen en la ventana
-                        $btones = array(
-                            "Añadir Habitación",
-                            "Añadir Piso"
-                        );
-                        $btonesfuncion = array(
-                            "addPisoHabitacion(2)",
-                            "addPisoHabitacion(1)"
-                        );
-                        //
-                        //Generamos la ventana
-                        getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
+                        //Si si estña inicializado el array pisos habitaciones aparecerá debajo para insertar más
+                        if(!empty($aDbPisosHabitaciones))
+                        {
+                            $Html .= '<div id="vacio">';
+                            $Html .= '<img src="img/key.png" alt="llaves">';
+                            $Html .= '<h3>Añade más pisos o habitaciones, que quieras poner en alquiler</h3>';
+                            $Html .= '<button class="button" id="buttonVentana" >Empezar</button>';
+                            $Html .= '</div>';
+                            //
+                            //Array botones que aparecen en la ventana
+                            $btones = array(
+                                "Añadir Habitación",
+                                "Añadir Piso"
+                            );
+                            $btonesfuncion = array(
+                                "addPisoHabitacion(2)",
+                                "addPisoHabitacion(1)"
+                            );
+                            //
+                            //Generamos la ventana
+                            getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
+                        }
                     }
+                    //Mostramos
                     echo $Html;
                     ?>
                 </div>
@@ -117,10 +126,10 @@
                 <?php
                 //
                 //Si no tenemos piso en la base de datos , te aparecerá para agregarlo
-                if(!isset($aDbPisosHabitaciones))
+                if(empty($aDbPisosHabitaciones))
                 {
 	                $Html  = '<div id="vacio">';
-	                if( $aDbPisosHabitaciones->idUsuario == $_SESSION['idUsuario'] )
+	                if( $oDatosUsuario[0]->idUsuario == $_SESSION['idUsuario'] )
 	                {
 		                $Html .= '<img src="img/key.png" alt="llaves" style="width: 40%">';
 		                $Html .= '<h2>A parte de buscar piso o habitación</h2><br>';
@@ -139,17 +148,24 @@
 		                //
 		                //Generamos la ventana
 		                getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
+                        echo $Html;
 	                }
 	                else
                     {
+                        //Si viisitas un usuario y no tiene pisos aparecerá este mensaje
 	                    $Html .= '<h2>Este usuario no tiene ningún piso</h2><br>';
+                        echo $Html;
                     }
+	                //
                     $Html  = '</div>';
+	                //Lo mostramos
 	                echo $Html;
                 }else
                 {
+                    //Si si hay pisos habitaciones los recorremos
                     foreach ( $aDbPisosHabitaciones as $aDbPisosHabitacion )
                     {
+                        //Formamos la tarjeta
                         $Html  = '<div class="box-mas-visitados" onclick="window.open(\'/the-connect-house/piso.php?'.base64_encode('idPiso='.$aDbPisosHabitacion->idPiso).'\', \'_self\');">';
                         //
                         if(  $aDbPisosHabitacion->idUsuario != $_SESSION['idUsuario'] )
@@ -184,6 +200,7 @@
                             $Html .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar</div>';
 
                         }
+                        //Mostramos el resultado
                         echo $Html;
                     }
 

@@ -87,7 +87,7 @@ function validarCamposRegistro()
         .done(function(oJson) {
             var oRespuesta = JSON.parse(oJson);
         if (oRespuesta.Estado == "OK") {
-            window.open("/the-connect-house/completa-perfil.php", "_self");
+            window.open("/the-connect-house/completa-perfil.php?Usuario="+oRespuesta.IdUsuario , "_self");
         } else {
             alert(oRespuesta.Mensaje);
         }

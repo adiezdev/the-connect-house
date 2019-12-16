@@ -1,15 +1,15 @@
 <?php
-//error_reporting( E_ALL );
-//ini_set( 'display_errors' , true );
-//ini_set( 'display_startup_errors' , true );
-/*
-    -------------------------------------
-    Archivo de: Alejandro Díez
-    GitHub: @adilosa95
-    Proyecto: the-connect-house
-    Nombre del archivo: buscar.php
-    -------------------------------------
-*/
+    //error_reporting( E_ALL );
+    //ini_set( 'display_errors' , true );
+    //ini_set( 'display_startup_errors' , true );
+    /*
+        -------------------------------------
+        Archivo de: Alejandro Díez
+        GitHub: @adilosa95
+        Proyecto: the-connect-house
+        Nombre del archivo: buscar.php
+        -------------------------------------
+    */
     require_once(__DIR__."/includes/header.php");
     require_once(__DIR__."/includes/constantes.php");
     //
@@ -29,7 +29,7 @@
     //Generamos la cabecera
     cabecera(TITULO_BUSQUEDA , $estilos ,true);
     //
-	//Respuesta del GET
+	//Respuesta del GET si no la hay aparecerá un mensaje de que no se ha hecho busqueda
 	if( $_GET )
 	{
 	    //Si alguno de los datos está sin inicializar los incialiazamos
@@ -79,24 +79,13 @@
 		//Buscamos por filtro
         try
         {
-            $aDbPisosHabitaciones = $oDbPisosHabitaciones->buscarPiso( $sPrecio , $sBuscar , $sPisos , $sHabitaciones , $sCiudad );
+            $aDbPisosHabitacione = $oDbPisosHabitaciones->buscarPiso( $sPrecio , $sBuscar , $sPisos , $sHabitaciones , $sCiudad );
         }
         catch( ReflectionException $e )
         {
             $e;
         }
 	}
-	//
-    //Comprobamos si la sesión está existe
-    if(isset($_SESSION['idUsuario']))
-    {
-        //
-        //Accedemos a la base de datos
-        $aDbUsuario = new Usuario();
-        //
-        //Accedemos a datos del usuario
-        $oDatosUsuario = $aDbUsuario->getById($_SESSION['idUsuario']);
-    }
 ?>
 <body>
     <!--Menu-->
@@ -106,17 +95,19 @@
         <div class="into-centro busqueda">
             <h2 class="title">Resultados</h2>
             <?php
+                //
                 //Si el buscador está iniicializado
-                if(isset($aDbPisosHabitaciones))
+                if(isset($aDbPisosHabitacione))
                 {
-                    if( $aDbPisosHabitaciones != null || $aDbPisosHabitaciones != 0 ) {
+                    if(!empty($aDbPisosHabitacione))
+                    {
                         //Hacemos un array para la latiitud u longitus
                         $ltlgs = array();
                         //Hacemos otro array para las ciudades de cada uno
                         $ciudades = array();
                         //
                         //Recorremos los datos de la petición
-                        foreach ($aDbPisosHabitaciones as $aDbPisosHabitacion) {
+                        foreach ($aDbPisosHabitacione as $aDbPisosHabitacion) {
                             //Guardamos la latitud y longitud en un array
                             $ltlgs[] = array("Latitud" => $aDbPisosHabitacion->Latitud, "Longitud" => $aDbPisosHabitacion->Longitud, "Calle" => $aDbPisosHabitacion->Calle);
                             //Guardamos las ciudades en un array
@@ -159,9 +150,16 @@
                             echo $Html;
                         }
                     }
+                    else
+                    {
+                        //Si no lo está aparecerá éste mensaje
+                        $Html = '<h2>No se ha encontrado ningun resultado</h2>';
+                        echo $Html;
+                    }
                 }
                 else
                 {
+                    //Si no lo está aparecerá éste mensaje
                     $Html = '<h2>No se ha encontrado ningun resultado</h2>';
                     echo $Html;
                 }

@@ -69,6 +69,7 @@
         //Devolvemos una respuesta correcta
         $oRespuesta->Estado = "OK";
         $oRespuesta->Mensaje = "Usuario no encontrado";
+        $oRespuesta->IdUsuario = $_SESSION['idUsuario'];
         json_encode( $oRespuesta );
     }
     //

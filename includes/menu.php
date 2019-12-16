@@ -22,9 +22,16 @@
     <div><i class="fa fa-bars"></i></div>
     <?php
         echo '<a href="'.get_root_uri().'/the-connect-house/index.php">Incio</a>';
-        if(isset($oDatosUsuario))
+        if(isset($_SESSION['idUsuario']))
         {
-            echo ' <a href="'.get_root_uri().'/the-connect-house/perfil.php?correo='.$oDatosUsuario[0]->Correo.'">Perfil</a>';
+            //
+            //Accedemos a la base de datos
+            $aDbUsuarios = new Usuario();
+            //
+            //Accedemos a datos del usuario
+            $oDatosUsuarios = $aDbUsuarios->getById($_SESSION['idUsuario']);
+            //
+            echo ' <a href="'.get_root_uri().'/the-connect-house/perfil.php?correo='.$oDatosUsuarios[0]->Correo.'">Perfil</a>';
         }
         else
         {

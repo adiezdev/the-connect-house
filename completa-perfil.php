@@ -26,21 +26,25 @@
 ?>
 <body>
     <div class="content">
+        <!--Lado izquierdo-->
     <div class="contenedor-izquierdo">
         <div class="into-izquierdo">
             <h1 class="cabeceras">¡YA CASI HEMOS ACABADO!</h1>
             <img id="imgpertefl"  src="img/hand-cell.png" title="movil">
         </div>
     </div>
+        <!--Lado izquierdo-->
         <div class="contenedor-centro">
             <div class="into-centro seccioncasi">
+                <!--Imagen del perfil-->
                 <label for="imgperfil">Imagen de perfil (opcional):</label><br><br>
                 <img id="imgperfil" class="user" src="img/isset/isset-user.png"><br><br>
                 <label for="inputperfil">Subir Imagen</label>
+                <!--Formulario-->
                 <input type="file" name="archivos" id="inputperfil"/><br><br>
                 <form id="campos-isset">
                     <div id="plus" style="cursor: pointer">+ Otro numero de teléfono</div>
-                    <label for="telefono">Número de telefono (opcional):</label><br><br>
+                    <label for="telefono">Número de telefono:</label><br><br>
                     <input type="text" class="credential" id="telefono" name="telefono[]" placeholder="Numero de telefono"><br>
                     <div id="telefono2"></div>
                     <label for="">Descripción (opcional):</label><br><br>
@@ -52,8 +56,10 @@
             </div>
         </div>
     </div>
+    <!--Footer-->
     <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
+<!--Scripts necesarios-->
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/precarga-imagen-perfil.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/validaciones/completa-perfil.js"></script>
 <script>
