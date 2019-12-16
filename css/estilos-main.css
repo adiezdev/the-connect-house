@@ -40,7 +40,7 @@
 /*Contenido del Centro*/
 .contenedor-centro .likeit svg {
     position: relative;
-    stroke: #000;
+    stroke: rgba(0, 0, 0, 0.14);
     stroke-width: 2;
     fill: #f7f7f7;
 }
@@ -52,7 +52,11 @@
 }
 .into-centro.seccioncentro
 {
-    margin: 0% 10% 0% 30%;
+    margin: 0% -20% 0% 30%;
+}
+.into-centro.pisodescripcion
+{
+    margin: 0% 13% 0% 30%;
 }
 .into-centro.seccioncasi
 {
@@ -113,7 +117,51 @@
     margin-top: 30px !important;
     margin-bottom: 10px !important;
 }
-/*Sección de busqueda del inicio*/
+/*Like en la tarjeta del piso*/
+.likeit {
+    margin: 4px;
+    right: 70px;
+    top: 15px;
+    position: absolute;
+}
+/*Line in piso*/
+.likein
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+.likeinpiso
+{
+    padding: 13px;
+}
+.likeinpiso svg
+{
+    width: 50px;
+}
+/*Comodidades*/
+.comodidad
+{
+    display: inline-block;
+}
+.comodidades
+{
+    text-align: center;
+    float: left;
+    color: #aac759;
+}
+/*Normas*/
+.norma
+{
+    display: inline-block;
+}
+.normas
+{
+    text-align: center;
+    float: left;
+    color: #aac759;
+}
 
 /*Pagina piso*/
 @media screen and ( max-width: 1180px) {

@@ -16,6 +16,7 @@
     require_once(__DIR__ . '/../../bd/bd_secciones.php');
     require_once(__DIR__ . '/../../bd/bd_imagenespiso.php');
 	require_once(__DIR__ . '/../../bd/bd_ocupado.php');
+    require_once(__DIR__ . '/../../bd/bd_usuario.php');
     //
     // Inicalizamos Respuesta.
     $oRespuesta = new stdClass();
@@ -64,13 +65,17 @@
     $fLatitud = $oDatosJson["Latitud"];
     $fLongitud = $oDatosJson["Longitud"];
     //
+    //Accedemos a los datos del usuario
+    $oDbUsuario = new Usuario();
+    $aDbUsuario = $oDbUsuario->getById( $_SESSION['idUsuario']);
+    //
     //Creamos la carpeta
     $carpeta = md5(rand( ));
     //Añadimos la carpeta
-    mkdir( $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/uploads/'.$_SESSION['Carpeta'].'/'.$carpeta.'/' , 0755 , true);
+    mkdir( $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/uploads/'.$aDbUsuario[0]->Carpeta.'/'.$carpeta.'/' , 0755 , true);
     //
     //El método mkdir da errores con los permisos, pasamos la carpeta por chmod asi damos todos los permisos para porder guardar ahí
-    chmod(  $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/uploads/'.$_SESSION['Carpeta'].'/'.$carpeta.'/' , 0777);
+    chmod(  $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/uploads/'.$aDbUsuario[0]->Carpeta.'/'.$carpeta.'/' , 0777);
     //
     //Llamamos a la clase Pisos/Habitacionex
     $oDbPisosHabitaciones = new Pisos();
@@ -88,7 +93,6 @@
 		//
 		//Accedemos a la tabla Ocupado
 		$oDbOcupado = new Ocupado();
-		echo $aOcupados;
 		//
 		//Recorremos los chicos y las chicas que hay en el piso
 		foreach($aOcupados as $aOcupado )

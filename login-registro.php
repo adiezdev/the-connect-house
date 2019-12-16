@@ -26,20 +26,28 @@
     //Configuramos los estilos que necesitamos
     $estilos = array(
         ESTILOS_WIDGETS,
-        ESTILOS_LOGIN
+        ESTILOS_LOGIN,
+        ESTILOS_MENU
     );
     //
     //Generamos la cabecera
     cabecera(TITULO_LOGIN , $estilos ,false);
 ?>
     <body>
+    <!--Menu-->
+    <?php require_once(__DIR__ . '/includes/menu.php'); ?>
      <div class="content">
          <div class="contenedor-centro">
              <img src="img/img-modelo.jpg" alt="Habitacion" srcset="">
          </div>
          <div class="contenedor-izquierdo">
              <div class="into-contenedor">
-                 <?php echo '<div id="marca">'.file_get_contents("img/marca/banner.svg").'</div>'; ?>
+                 <?php echo '<div id="marca">'.file_get_contents("img/marca/banner.svg").'</div>';
+                 if(isset($_GET['Sesion']) == true)
+                 {
+                     echo '<p class="spanred">Por favor regístrate o inicia sesión para ir más allá</p>';
+                 }
+                 ?>
                  <!--Login-->
                  <form  method="post" id="login">
                      <label for="email">Correo electrónico</label><br>
@@ -86,6 +94,7 @@
     <?php  require_once(__DIR__."/includes/footer.php" );?>
     </body>
     <script src="<?php echo get_root_uri() ?>/the-connect-house/js/validaciones/login-registro.js"></script>
+    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/menu.js"></script>
     <script>
         //Nicializamos la pantalla de login
         $("#registro").css("display", "none");

@@ -4,13 +4,13 @@
 }
 
 .contenedor-izquierdo {
-    top: 0px;
+    top: 40px;
     width: 500px;
     bottom: 0px;
 }
 
 .contenedor-centro {
-    top: 0px;
+    top: 53px;
     left: 501px;
     right: 0;
     bottom: 0px;
@@ -23,7 +23,7 @@
 }
 
 .into-contenedor {
-    margin: 110px 160px;
+    margin: 65px 160px;
 }
 
 .into-contenedor #acciones span {

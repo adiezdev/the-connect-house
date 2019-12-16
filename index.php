@@ -15,6 +15,7 @@
     //
     require_once(__DIR__."/includes/header.php");
     require_once(__DIR__."/includes/constantes.php");
+    require_once(__DIR__."/includes/tarjetas.php");
     //
     //Accedemos a datos
     require_once(__DIR__."/bd/bd_pisos.php");
@@ -69,31 +70,7 @@
         <?php
             //
             //Recorremos los datos de los pisos
-            foreach( $aDbPisosHabitaciones as $aDbPisosHabitacion)
-            {
-                $Html  = '<div class="box-pisos-habitacones">';
-                //
-                //Accedemos a la imagen del piso
-                $aDbImagen = new Imagenes();
-                $ImagenDestacada =  $aDbImagen->getByIdPisoPrimeraFoto( $aDbPisosHabitacion->idPiso );
-                //
-                //Recorremos la imagen
-                foreach ($ImagenDestacada as $ImagenDestacad)
-                {
-                    $Html .= '<img src="'.$ImagenDestacad->Url.'" alt="habitación">';
-                }
-                //
-                $Html .= '<div class="descripcion">';
-                $Html .= '<h3>'.$aDbPisosHabitacion->Calle.'</h3>';
-                $Html .= '<p><i class="fas fa-map-marker-alt"></i>'.$aDbPisosHabitacion->Ciudad.'</p>';
-                $Html .= '<div class="precio">'.$aDbPisosHabitacion->Precio.' €/mes</div>';
-                $Html .= '</div>';
-                $Html .= '<button class="button">Me interesa</button>';
-                $Html .= '</div>';
-                //
-                //Lo mostramos
-                echo $Html;
-            }
+            getPisosHabitacionesVertical( $aDbPisosHabitaciones );
         ?>
         <!--Flechas de siguientes y anteriores pisos/habitaciones-->
     </div>

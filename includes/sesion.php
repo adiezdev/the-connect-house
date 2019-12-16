@@ -10,7 +10,7 @@ if( !isset( $_SESSION['idUsuario'] ))
 {
     //
     // No logueado
-    header( "location:/the-connect-house/login-registro.php" );
+    header( "location:/the-connect-house/login-registro.php?Sesion=true" );
     return;
 }
 //Comprobar la sesión

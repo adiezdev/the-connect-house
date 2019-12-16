@@ -21,6 +21,7 @@
     require_once(__DIR__."/bd/bd_imagenespiso.php");
     require_once(__DIR__."/bd/bd_secciones.php");
 	require_once(__DIR__."/bd/bd_ocupado.php");
+    require_once(__DIR__."/bd/bd_favoritos.php");
 	//
     //Configuramos los estilos que necesitamos
     $estilos = array(
@@ -82,19 +83,30 @@
             <div class="flecha">&#8592; Atrás</div>
         </div>
         <?php
-        //Si la idAsignada del piso/habitacion es diferente a la de la sessiión entonces dejar hacer like
-        if($aDatosPisosHabitaciones[0]->idUsuario != $_SESSION['idUsuario'])
-           {
-              $Html = '<div class="likein">';
-              $Html .=  '<div class="likeinpiso">'.file_get_contents("img/iconos-materiales/like.svg").'</div>';
-              $Html .= '</div>';
-              echo $Html;
-           }
-                    //Incializamos estas varbles, necesitaremos la latitud y longitud fuera del foreach, para darselo al mapa
+        //Incializamos estas varbles, necesitaremos la latitud y longitud fuera del foreach, para darselo al mapa
                 $lt = 0.00;
                 $lg = 0.00;
                 foreach ( $aDatosPisosHabitaciones as $aDatosPisosHabitacion)
                 {
+                    //Si la idAsignada del piso/habitacion es diferente a la de la sessiión entonces dejar hacer like
+                    if($aDatosPisosHabitaciones[0]->idUsuario != $_SESSION['idUsuario'])
+                    {
+                        $oDbFavoritos = new Favoritos();
+                        $aDbFavoritos = $oDbFavoritos->getById( $_SESSION['idUsuario']);
+                        //
+                        $check = '';
+                        foreach ( $aDbFavoritos as $aDbFavorito )
+                        {
+                            if($aDbFavorito->idPiso == $aDatosPisosHabitacion->idPiso )
+                            {
+                                $check = 'checked';
+                            }
+                        }
+                        //
+                        //Si es así mostramos el like
+                        $Html1 = '<div class="likeit"><label><input type="checkbox" class="corazon" value="'.$aDatosPisosHabitacion->idPiso.'" '.$check.' style="display:none">' . file_get_contents("img/iconos-materiales/like.svg") . '</label></div>';
+                        echo $Html1;
+                    }
                     //Asignamos datos
                     $lt = $aDatosPisosHabitacion->Latitud;
                     $lg = $aDatosPisosHabitacion->Longitud;
@@ -126,7 +138,7 @@
 	                //
                     //Datelles del piso
                     $Html .= '<div class="contenedor-centro">';
-                        $Html .= '<div class="into-centro seccioncentro">';
+                        $Html .= '<div class="into-centro pisodescripcion">';
                         $Html .= '<h1>'.$aDatosPisosHabitacion->Calle.'</h1>';
                         $Html .= '<p><i class="fas fa-map-marker-alt"></i> '.$aDatosPisosHabitacion->Calle.','.$aDatosPisosHabitacion->Ciudad.'</p><br>';
                         $Html .= '<hr>';
@@ -210,6 +222,7 @@
 </body>
 <!-- Script necesarios -->
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/like.js"></script>
 <script>var touch = false;</script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
 <script>

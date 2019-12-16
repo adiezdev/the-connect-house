@@ -14,11 +14,11 @@
     require_once(__DIR__."/includes/constantes.php");
     require_once(__DIR__."/includes/sesion.php");
     require_once(__DIR__."/includes/crearventana.php");
+    require_once(__DIR__."/includes/tarjetas.php");
     //
     //Acceso a datos
     require_once(__DIR__."/bd/bd_usuario.php");
     require_once(__DIR__."/bd/bd_pisos.php");
-    require_once(__DIR__."/bd/bd_imagenespiso.php");
     //
     //Configuramos los estilos que necesitamos
     $estilos = array(
@@ -62,6 +62,7 @@
     //Sacar los pisos/Habitaciones del usuario de la peticiión get
     $aDbPisosHabitaciones = new Pisos();
     $aDbPisosHabitaciones = $aDbPisosHabitaciones->getByUsuario( $oDatosUsuario[0]->idUsuario );
+    //
 ?>
 <body>
 <?php require_once(__DIR__ . '/includes/menu.php'); ?>
@@ -162,47 +163,7 @@
 	                echo $Html;
                 }else
                 {
-                    //Si si hay pisos habitaciones los recorremos
-                    foreach ( $aDbPisosHabitaciones as $aDbPisosHabitacion )
-                    {
-                        //Formamos la tarjeta
-                        $Html  = '<div class="box-mas-visitados" onclick="window.open(\'/the-connect-house/piso.php?'.base64_encode('idPiso='.$aDbPisosHabitacion->idPiso).'\', \'_self\');">';
-                        //
-                        if(  $aDbPisosHabitacion->idUsuario != $_SESSION['idUsuario'] )
-                        {
-                        $Html .= '<div class="likeit">'.file_get_contents("img/iconos-materiales/like.svg").'</div>';
-                        }
-                        //
-                        //Accedemos a la imagen del piso
-                        $aDbImagen = new Imagenes();
-                        $ImagenDestacada =  $aDbImagen->getByIdPisoPrimeraFoto( $aDbPisosHabitacion->idPiso );
-                        //
-                        foreach ($ImagenDestacada as $ImagenDestacad)
-                        {
-                            $Html .= '<img src="'.$ImagenDestacad->Url.'" alt="habitación">';
-                        }
-                        $Html .= '<div class="contenido">';
-                        $Html .= '<h2 >'.$aDbPisosHabitacion->Calle.'</h2>';
-                        $Html .= '<div class="descripcion">';
-                        $Html .= '<p><i class="fas fa-map-marker-alt"></i><span id="ciudad">'.$aDbPisosHabitacion->Ciudad.'</span> , '.$aDbPisosHabitacion->Calle.'</p><br>';
-                        $Html .= '<p id="descripcionPH">'.$aDbPisosHabitacion->Descripcion.'</p><br>';
-                        $Html .= '</div>';
-                        $Html .= '<div class="datos">';
-                        $Html .= '<p><i class="fas fa-bed"></i> Habitaciones '.$aDbPisosHabitacion->NHabitaciones.' |</p>';
-                        $Html .= '<p><i class="fas fa-bath"></i> Baños '.$aDbPisosHabitacion->NBanos.'</p>';
-                        $Html .= '</div>';
-                        $Html .= '</div>';
-                        $Html .= '<div class="precio">'.$aDbPisosHabitacion->Precio.' €/mes</div>';
-                        $Html .= '</div>';
-                        //
-                        if(  $aDbPisosHabitacion->idUsuario == $_SESSION['idUsuario'])
-                        {
-                            $Html .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar</div>';
-
-                        }
-                        //Mostramos el resultado
-                        echo $Html;
-                    }
+                    getPisosHabitacionesHorizontal( $aDbPisosHabitaciones );
 
                 }
                 ?>
@@ -213,6 +174,7 @@
     <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/crearventana.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/like.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/menu.js"></script>
 <script>
     /**

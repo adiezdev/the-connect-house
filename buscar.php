@@ -12,6 +12,7 @@
     */
     require_once(__DIR__."/includes/header.php");
     require_once(__DIR__."/includes/constantes.php");
+    require_once(__DIR__."/includes/tarjetas.php");
     //
     //Accedemos a datos
     require_once(__DIR__."/bd/bd_usuario.php" );
@@ -126,63 +127,13 @@
                         $ltlgs = array();
                         //Hacemos otro array para las ciudades de cada uno
                         $ciudades = array();
+                        getPisosHabitacionesHorizontal($aDbPisosHabitacione , $ciudades , $ltlgs);
                         //
-                        //Recorremos los datos de la petición
+                        //Como dentro de la funcion no podemos recorremos para añadir a los array las ciudades y las latitudes y longitudes
                         foreach ($aDbPisosHabitacione as $aDbPisosHabitacion)
                         {
-                            //Guardamos la latitud y longitud en un array
                             $ltlgs[] = array("Latitud" => $aDbPisosHabitacion->Latitud, "Longitud" => $aDbPisosHabitacion->Longitud, "Calle" => $aDbPisosHabitacion->Calle);
-                            //Guardamos las ciudades en un array
                             $ciudades[] = array($aDbPisosHabitacion->Ciudad);
-                            //
-                            //Formamos las tarjetas
-                            $Html = '<div class="box-mas-visitados" onclick="" >';
-                            //
-                            //Comprobamos si el usuario del piso/habitación es diferen de la sesión
-                            if ($aDbPisosHabitacion->idUsuario != $_SESSION['idUsuario'])
-                            {
-                                $oDbFavoritos = new Favoritos();
-                                $aDbFavoritos = $oDbFavoritos->getById( $_SESSION['idUsuario']);
-                                //
-                                $check = '';
-                                foreach ( $aDbFavoritos as $aDbFavorito )
-                                {
-                                   if($aDbFavorito->idPiso == $aDbPisosHabitacion->idPiso )
-                                   {
-                                       $check = 'checked';
-                                   }
-                                }
-                                //
-                                //Si es así mostramos el like
-                                $Html .= '<div class="likeit"><label><input type="checkbox" class="corazon" value="'.$aDbPisosHabitacion->idPiso.'" '.$check.' style="display:none">' . file_get_contents("img/iconos-materiales/like.svg") . '</label></div>';
-                            }
-                            //
-                            //Accedemos a la imagen del piso/habitaciion
-                            $aDbImagen = new Imagenes();
-                            //Sacamos los datos
-                            $ImagenDestacada = $aDbImagen->getByIdPisoPrimeraFoto($aDbPisosHabitacion->idPiso);
-                            //
-                            //Recorremos la respuesta
-                            foreach ($ImagenDestacada as $ImagenDestacad) {
-                                $Html .= '<img src="' . $ImagenDestacad->Url . '" alt="habitación">';
-                            }
-                            //Formamos las tarjetas
-                            $Html .= '<div class="contenido">';
-                            $Html .= '<h2 >' . $aDbPisosHabitacion->Calle . '</h2>';
-                            $Html .= '<div class="descripcion">';
-                            $Html .= '<p><i class="fas fa-map-marker-alt"></i><span id="ciudad">' . $aDbPisosHabitacion->Ciudad . '</span> , ' . $aDbPisosHabitacion->Calle . '</p><br>';
-                            $Html .= '<p id="descripcionPH">' . $aDbPisosHabitacion->Descripcion . '</p><br>';
-                            $Html .= '</div>';
-                            $Html .= '<div class="datos">';
-                            $Html .= '<p><i class="fas fa-bed"></i> Habitaciones ' . $aDbPisosHabitacion->NHabitaciones . ' |</p>';
-                            $Html .= '<p><i class="fas fa-bath"></i> Baños ' . $aDbPisosHabitacion->NBanos . '</p>';
-                            $Html .= '</div>';
-                            $Html .= '</div>';
-                            $Html .= '<div class="precio">' . $aDbPisosHabitacion->Precio . ' €/mes</div>';
-                            $Html .= '</div>';
-                            //
-                            //Mostramos en pantalla
-                            echo $Html;
                         }
                     }
                     else
@@ -241,7 +192,6 @@
             }
             else
             {
-                //Mostramos la ciudad en el mapa
                 mymap.panTo(['42.598287' , '-5.567038']);
             }
         });
