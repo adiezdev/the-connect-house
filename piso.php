@@ -22,6 +22,7 @@
     require_once(__DIR__."/bd/bd_secciones.php");
 	require_once(__DIR__."/bd/bd_ocupado.php");
     require_once(__DIR__."/bd/bd_favoritos.php");
+    require_once(__DIR__."/bd/bd_telefonos.php");
 	//
     //Configuramos los estilos que necesitamos
     $estilos = array(
@@ -118,26 +119,40 @@
                     //Recorremos sus datos
                     foreach( $aDbUsuarios as $aDbUsuario)
                     {
-	                    $Html = ' <div class="contenedor-izquierdo">';
-	                    $Html .= ' <div class="into-izquierdo">';
-	                    $Html .=    '<div id="perfil">';
-	                    $Html .=        '<img class="user" src="'.$aDbUsuario->Imgperfil.'" alt="">';
-	                    $Html .=        '<h3>'.$aDbUsuario->Nombre.'</h3>';
-	                    $Html .=        '<h2>'.$aDatosPisosHabitacion->Precio.' €/Mes</h2>';
-	                    $Html .=        '<button class="button">Me interesa</button>';
+	                    $Html2 = ' <div class="contenedor-izquierdo">';
+	                    $Html2 .= ' <div class="into-izquierdo">';
+	                    $Html2 .=    '<div id="perfil">';
+	                    //Click en el perfil
+	                    $Html2 .=        '<div style="cursor: pointer;" onclick="window.open(\'/the-connect-house/perfil.php?correo='.$aDbUsuario->Correo.'\', \'_self\');">';
+	                    //Datos del usuario que pone en alquiker
+	                    $Html2 .=        '<img class="user" src="'.$aDbUsuario->Imgperfil.'" alt="">';
+	                    $Html2 .=        '<h3>'.$aDbUsuario->Nombre.'</h3>';
+	                    $Html2 .=        '<h2>'.$aDatosPisosHabitacion->Precio.' €/Mes</h2>';
 	                    //
-                        //Si conincide podemos editar piso
+	                    //Sacamos el telelfono del usuario
+	                    $oDbTelefono = new Telefonos();
+	                    $aDbTelefonos = $oDbTelefono->getByIdUsuario($aDbUsuario->idUsuario );
+	                    //
+                        foreach ( $aDbTelefonos as $key=>$aDbTelefono)
+                        {
+                            $Html2 .= '<h2>Num '.($key+1).': '.$aDbTelefono->Numero.'</h2>';
+	                    }
+                        $Html2 .=     '</div>';
+	                    $Html2 .='<button class="button">Me interesa</button>';
+	                    //
+                        //Si conincide el usuario podemos editar piso
 	                    if( $aDbUsuario->idUsuario == $_SESSION['idUsuario'])
                         {
-	                        $Html .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar Piso</div>';
+	                        $Html2 .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar Piso</div>';
                         }
-                        $Html .= '</div>';
-	                    $Html .=  '</div>';
-	                    $Html .= '</div>';
+                        $Html2 .='</div>';
+	                    $Html2 .=  '</div>';
+	                    $Html2 .= '</div>';
+	                    echo $Html2;
                     }
 	                //
                     //Datelles del piso
-                    $Html .= '<div class="contenedor-centro">';
+                       $Html = '<div class="contenedor-centro">';
                         $Html .= '<div class="into-centro pisodescripcion">';
                         $Html .= '<h1>'.$aDatosPisosHabitacion->Calle.'</h1>';
                         $Html .= '<p><i class="fas fa-map-marker-alt"></i> '.$aDatosPisosHabitacion->Calle.','.$aDatosPisosHabitacion->Ciudad.'</p><br>';

@@ -77,8 +77,7 @@
                     if( $idUsuario == $_SESSION['idUsuario'])
                     {
                         //Si si estña inicializado el array pisos habitaciones aparecerá debajo para insertar más
-                        if(!empty($aDbPisosHabitaciones))
-                        {
+
                             $Html .= '<div id="vacio">';
                             $Html .= '<img src="img/key.png" alt="llaves">';
                             $Html .= '<h3>Añade más pisos o habitaciones, que quieras poner en alquiler</h3>';
@@ -97,7 +96,7 @@
                             //
                             //Generamos la ventana
                             getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
-                        }
+
                     }
                     //Mostramos
                     echo $Html;

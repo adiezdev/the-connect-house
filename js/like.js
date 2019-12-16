@@ -25,7 +25,6 @@ $(document).ready(function() {
                     {
                         $(corason).attr('fill', 'red');
                     }
-
                 });
         }
         else //Revertimos el check
@@ -42,6 +41,7 @@ $(document).ready(function() {
                     if (oRespuesta.Estado == "OK")
                     {
                         $(corason).attr('fill', 'white');
+                        location.reload();
                     }
 
                 });

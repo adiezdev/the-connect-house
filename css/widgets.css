@@ -327,3 +327,8 @@ label[for=inputperfil] {
 {
     fill: red !important;
 }
+/*Corazon*/
+.likeit label svg
+{
+    fill: #ffffff;
+}

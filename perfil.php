@@ -19,6 +19,7 @@
     //Acceso a datos
     require_once(__DIR__."/bd/bd_usuario.php");
     require_once(__DIR__."/bd/bd_pisos.php");
+    require_once(__DIR__."/bd/bd_telefonos.php");
     //
     //Configuramos los estilos que necesitamos
     $estilos = array(
@@ -75,13 +76,27 @@
                     //Datos perfil
                     foreach ( $oDatosUsuario as $oDatoUsuario )
                     {
+                        //Rescatamos la id
                         $idUsuario = $oDatoUsuario->idUsuario;
+                        //Mostramos la imagen de perfil
                         $Html = '<img class="user" src="'.$oDatoUsuario->Imgperfil.'" alt="imgen-perfil" srcset="">';
+                        //Mostamos datos
                         $Html .= '<h3>'.$oDatoUsuario->Nombre.' '.$oDatoUsuario->Apellidos.'</h3><br>';
                         $Html .= '<div class="titleciudad"><p><i class="fas fa-map-pin"></i>'.$oDatoUsuario->Ciudad.'</p></div><br>';
                         $Html .= '<fieldset><legend>Descripción :</legend>';
                         $Html .= '<div id="descripcion"><p>'.$oDatoUsuario->Descripcion.'</p></div><br>';
+                        //
                         $Html .= '</fieldset>';
+                        //
+                        //Sacamos el telelfono del usuario
+                        $oDbTelefono = new Telefonos();
+                        $aDbTelefonos = $oDbTelefono->getByIdUsuario($oDatoUsuario->idUsuario );
+                        //
+                        $Html .= '<h3>Números de telefono</h3>';
+                        foreach ( $aDbTelefonos as $key=>$aDbTelefono)
+                        {
+                            $Html .= '<h3>Num '.($key+1).': '.$aDbTelefono->Numero.'</h3>';
+                        }
                         //
                         //Si el usuario es el mismo que sessón
 	                    if( $idUsuario == $_SESSION['idUsuario'])
@@ -117,7 +132,7 @@
                             getVentana( FRASE_ADD_REGISTRO , $btones , $btonesfuncion);
                         }
                     }
-                    //Mostramos
+                    //Mostramos todo
                     echo $Html;
                     ?>
                 </div>
