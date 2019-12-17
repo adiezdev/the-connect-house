@@ -10,7 +10,7 @@
 }
 
 .contenedor-centro {
-    top: 53px;
+    top: 53px !important;
     left: 501px;
     right: 0;
     bottom: 0px;

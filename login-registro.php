@@ -1,18 +1,18 @@
 <?php
-//error_reporting( E_ALL );
-//ini_set( 'display_errors' , true );
-//ini_set( 'display_startup_errors' , true );
-/*
-    -------------------------------------
-    Archivo de: Alejandro Díez
-    GitHub: @adilosa95
-    Proyecto: the-connect-house
-    Nombre del archivo: login-registro.php
-    -------------------------------------
-*/
+    //error_reporting( E_ALL );
+    //ini_set( 'display_errors' , true );
+    //ini_set( 'display_startup_errors' , true );
+    /*
+        -------------------------------------
+        Archivo de: Alejandro Díez
+        GitHub: @adilosa95
+        Proyecto: the-connect-house
+        Nombre del archivo: login-registro.php
+        -------------------------------------
+    */
+    session_start();
     require_once(__DIR__."/includes/header.php" );
     require_once(__DIR__."/includes/constantes.php" );
-    session_start();
     //
     //Si estamos logueados nos redirige index
    if(isset( $_SESSION['idUsuario'] ))

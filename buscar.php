@@ -10,7 +10,9 @@
         Nombre del archivo: buscar.php
         -------------------------------------
     */
+    session_start();
     require_once(__DIR__."/includes/header.php");
+    //
     require_once(__DIR__."/includes/constantes.php");
     require_once(__DIR__."/includes/tarjetas.php");
     //
@@ -19,7 +21,6 @@
 	require_once(__DIR__."/bd/bd_pisos.php" );
     require_once(__DIR__."/bd/bd_favoritos.php" );
     require_once(__DIR__."/bd/bd_imagenespiso.php");
-    session_start();
     //
     //Configuramos los estilos que necesitamos
     $estilos = array(

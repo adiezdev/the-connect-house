@@ -10,9 +10,24 @@
         Nombre del archivo: perfil.php
         -------------------------------------
     */
+    session_start();
+    require_once(__DIR__."/includes/sesion.php");
+    //
+    //Respuesta del GET
+    if( $_GET )
+    {
+        //Sacar el valor del correo
+        $sCorreo =  $_GET["correo"];
+    }
+    else
+    {
+        //
+        //Si intentamos entrar sin una petición get nos redirecciona
+        header( "location:/the-connect-house/index.php" );
+        return;
+    }
     require_once(__DIR__."/includes/header.php");
     require_once(__DIR__."/includes/constantes.php");
-    require_once(__DIR__."/includes/sesion.php");
     require_once(__DIR__."/includes/crearventana.php");
     require_once(__DIR__."/includes/tarjetas.php");
     //
@@ -31,20 +46,6 @@
     //
     //Generamos la cabecera
     cabecera(TITULO_PERFIIL , $estilos , false);
-    //
-    //Respuesta del GET
-    if( $_GET )
-    {
-        //Sacar el valor del correo
-	   $sCorreo =  $_GET["correo"];
-    }
-    else
-    {
-        //
-        //Si intentamos entrar sin una petición get nos redirecciona
-        header( "location:/the-connect-house/index.php" );
-        return;
-    }
     //
     //Sacar los datos del usuario de la peticón
     $aDbUsuario = new Usuario();

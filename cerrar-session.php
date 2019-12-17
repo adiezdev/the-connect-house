@@ -7,14 +7,14 @@
     Nombre del archivo: cerrar-session.php
     -------------------------------------
 */
-
+//Inciamos sesión
 session_start();
-
+//Recorremos todo lo que tenemos guardado
 foreach ($_SESSION as $key => $value)
 {
 $_SESSION[$key] = NULL;
 }
-
+//Lo destruimos
 session_destroy();
-
+//Redirigimos
 header( "location:/the-connect-house/login-registro.php" );

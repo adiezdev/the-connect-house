@@ -10,8 +10,9 @@
         Nombre del archivo: favoritos.php
         -------------------------------------
     */
-    require_once(__DIR__."/includes/header.php");
+    session_start();
     require_once(__DIR__."/includes/sesion.php");
+    require_once(__DIR__."/includes/header.php");
     require_once(__DIR__."/includes/constantes.php");
     require_once(__DIR__."/includes/crearventana.php");
     require_once(__DIR__."/includes/tarjetas.php");
@@ -152,3 +153,14 @@
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/like.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/menu.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/crearventana.js"></script>
+<script>
+    /**
+     * Función para ir a registrar tu piso o habitacion
+     *
+     * @param tipo
+     */
+    function addPisoHabitacion( tipo )
+    {
+        window.open('/the-connect-house/piso-habitacion/registrar-piso-habitacion.php?Tipo='+tipo,'_self');
+    }
+</script>

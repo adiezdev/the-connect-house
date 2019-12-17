@@ -1,9 +1,4 @@
 <?php
-if( session_status() == PHP_SESSION_NONE )
-{
-    ob_start();
-    session_start();
-}
 //
 // Comprobar que el usuario está logueado (que hay una sesión iniciada)
 if( !isset( $_SESSION['idUsuario'] ))

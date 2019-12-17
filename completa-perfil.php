@@ -1,28 +1,18 @@
 <?php
-//error_reporting( E_ALL );
-//ini_set( 'display_errors' , true );
-//ini_set( 'display_startup_errors' , true );
-/*
-    -------------------------------------
-    Archivo de: Alejandro Díez
-    GitHub: @adilosa95
-    Proyecto: the-connect-house
-    Nombre del archivo: completa-perfil.php
-    -------------------------------------
-*/
-    require_once(__DIR__."/includes/header.php");
-    require_once(__DIR__."/includes/constantes.php");
+    //error_reporting( E_ALL );
+    //ini_set( 'display_errors' , true );
+    //ini_set( 'display_startup_errors' , true );
+    /*
+        -------------------------------------
+        Archivo de: Alejandro Díez
+        GitHub: @adilosa95
+        Proyecto: the-connect-house
+        Nombre del archivo: completa-perfil.php
+        -------------------------------------
+    */
+    session_start();
     require_once(__DIR__."/includes/sesion.php");
     //
-    //Cogemos los estilos
-    $estilos = array(
-        ESTILOS_WIDGETS,
-        ESTILOS_MAIN,
-        ESTILOS_REGISTRAR_PISO
-    );
-    //
-    //Se lo envíamos al metodo
-    cabecera(TITULO_INDEX, $estilos, false);
     //Hacemos ésto para sí solo poder entrar una manera segura
     //si tenemos una respuesta GET
     if( $_GET)
@@ -40,6 +30,19 @@
         header( "location:/the-connect-house/index.php" );
         return;
     }
+    //
+    require_once(__DIR__."/includes/header.php");
+    require_once(__DIR__."/includes/constantes.php");
+    //
+    //Cogemos los estilos
+    $estilos = array(
+        ESTILOS_WIDGETS,
+        ESTILOS_MAIN,
+        ESTILOS_REGISTRAR_PISO
+    );
+    //
+    //Se lo envíamos al metodo
+    cabecera(TITULO_INDEX, $estilos, false);
 ?>
 <body>
     <div class="content">

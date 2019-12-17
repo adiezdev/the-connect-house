@@ -1,18 +1,20 @@
 <?php
-error_reporting( E_ALL );
-ini_set( 'display_errors' , true );
-ini_set( 'display_startup_errors' , true );
-/*
-    -------------------------------------
-    Archivo de: Alejandro Díez
-    GitHub: @adilosa95
-    Proyecto: the-connect-house
-    Nombre del archivo: registrar-piso-habitacion.php
-    -------------------------------------
-*/
+    //error_reporting( E_ALL );
+    //ini_set( 'display_errors' , true );
+    //ini_set( 'display_startup_errors' , true );
+    /*
+        -------------------------------------
+        Archivo de: Alejandro Díez
+        GitHub: @adilosa95
+        Proyecto: the-connect-house
+        Nombre del archivo: registrar-piso-habitacion.php
+        -------------------------------------
+    */
+    session_start();
+    require_once(__DIR__ . "/../includes/sesion.php");
+    //
     require_once(__DIR__ . "/../includes/header.php");
     require_once(__DIR__ . "/../includes/constantes.php");
-    require_once(__DIR__ . "/../includes/sesion.php");
 	//
 	//Acceso a datos
     require_once(__DIR__ . "/../bd/bd_pisos.php");
@@ -21,6 +23,7 @@ ini_set( 'display_startup_errors' , true );
     //Configuramos los estilos que necesitamos
     $estilos = array(
         ESTILOS_WIDGETS ,
+        ESTILOS_MAIN ,
         ESTILOS_REGISTRAR_PISO ,
         INCLUD_SLIDE
     );

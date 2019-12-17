@@ -1,19 +1,37 @@
 <?php
-//error_reporting( E_ALL );
-//ini_set( 'display_errors' , true );
-//ini_set( 'display_startup_errors' , true );
-/*
-    -------------------------------------
-    Archivo de: Alejandro Díez
-    GitHub: @adilosa95
-    Proyecto: the-connect-house
-    Nombre del archivo: piso.php
-    -------------------------------------
-*/
+    //error_reporting( E_ALL );
+    //ini_set( 'display_errors' , true );
+    //ini_set( 'display_startup_errors' , true );
+    /*
+        -------------------------------------
+        Archivo de: Alejandro Díez
+        GitHub: @adilosa95
+        Proyecto: the-connect-house
+        Nombre del archivo: piso.php
+        -------------------------------------
+    */
+    session_start();
+    require_once(__DIR__."/includes/sesion.php");
+    //
+    //Respuesta del GET
+    if( $_GET )
+    {
+        //Decodificamos la URL
+        $urldecode = base64_decode( $_SERVER['REQUEST_URI'] );
+        //Sacar el valor de la ID
+        $get = explode( 'idPiso=', $urldecode );
+        $idPisoHabitacion = $get[1];
+    }
+    else
+    {
+        //
+        //Si intentamos entrar sin una petición get nos redirecciona
+        header( "location:/the-connect-house/perfil.php" );
+        return;
+    }
 	require_once(__DIR__."/includes/header.php" );
 	require_once(__DIR__."/includes/constantes.php" );
 	require_once(__DIR__."/includes/carrusel-de-img.php");
-	require_once(__DIR__."/includes/sesion.php");
     //
     //Acceso a datos
     require_once(__DIR__."/bd/bd_usuario.php");
@@ -33,24 +51,6 @@
     //
     //Generamos la cabecera
 	cabecera( TITULO_LOGIN , $estilos , true );
-	//
-    //Respuesta del GET
-    if( $_GET )
-    {
-        //Decodificamos la URL
-        $urldecode = base64_decode( $_SERVER['REQUEST_URI'] );
-        //Sacar el valor de la ID
-        $get = explode( 'idPiso=', $urldecode );
-        $idPisoHabitacion = $get[1];
-    }
-    else
-    {
-        //
-        //Si intentamos entrar sin una petición get nos redirecciona
-        header( "location:/the-connect-house/perfil.php" );
-        return;
-    }
-
     //
     //Accedemos a los datos del piso o Habitacion
     $oDbPisoHabitacion = new Pisos();
