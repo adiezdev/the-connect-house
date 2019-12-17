@@ -32,7 +32,8 @@ function precarfarImagens(evt)
                     span.setAttribute("class", "contenedor");
                     //Añadimos la imagen
                     span.innerHTML = [
-                        '<img style="width: 280px; margin: 5px" src="',
+                        '<p  style="position: relative; top: 20px; line-height: normal; background: red; width: 31px; border-radius: 500px; height: 31px;">X</p>' +
+                        '<img id="imgpre" style="width: 280px; margin: 5px" src="',
                         e.target.result,
                         '" title="', escape(theFile.name),
                         '"/><br><span class="delete">Eliminar</span>'

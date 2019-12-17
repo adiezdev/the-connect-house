@@ -86,7 +86,7 @@
             {
                 if(  $aDbPisosHabitacion->idUsuario ==$_SESSION['idUsuario'] )
                 {
-                    $Html .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar</div>';
+                    $Html .= '<div class="editar-piso" onclick="window.open(\'/the-connect-house/piso-habitacion/editar-piso-habitacion.php?idPiso='.$aDbPisosHabitacion->idPiso.'&Tipo='.$aDbPisosHabitacion->Tipo.'\', \'_self\');" ><i class="fas fa-pen"></i> Editar</div>';
 
                 }
             }

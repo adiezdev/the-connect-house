@@ -83,7 +83,7 @@ class Imagenes extends Conexion
     public function getByIdPiso( $idPiso )
     {
         $aImgId = array();
-        $cSql = 'SELECT Url FROM '.$this->sTabla.' WHERE idPiso = ?';
+        $cSql = 'SELECT * FROM '.$this->sTabla.' WHERE idPiso = ?';
         $stmt = $this->prepare($cSql);
         $stmt->bind_param('i', $idPiso );
         $stmt->execute();

@@ -171,7 +171,7 @@
                             foreach( $aOcupados as $aOcupado)
                             {
                                 $sSexo = '';
-                                if( $aOcupado->Num == 'M' )
+                                if( $aOcupado->Sexo == 'M' )
                                 {
                                     $sSexo = 'Chicos';
                                 }

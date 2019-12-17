@@ -147,6 +147,7 @@ function validarDatos()
         data: JSON.stringify(oDatosJson)
     })
         .done(function(oJson) {
+            //console.log(oJson);
             var oRespuesta = JSON.parse(oJson);
             if (oRespuesta.Estado == "OK")
             {
@@ -154,6 +155,5 @@ function validarDatos()
             } else {
                 alert(oRespuesta.Mensaje);
             }
-           //console.log(oJson);
         });
 }

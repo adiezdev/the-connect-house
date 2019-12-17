@@ -28,9 +28,9 @@ Nombre del archivo: seccion-2.php
             $Html  = '<div class="cabeceras"><h2>Persinas que ya hay en el piso</h2></div>';
             $Html  .= '<div class="comodidad">';
             $Html .=  '<div class="comodidades"><label for="chicos">Chicos: </label></div>';
-            $Html .=  '<div class="comodidades"><input type="text" id="chicos" name="chicos" class="credential" ></div>';
+            $Html .=  '<div class="comodidades"><input type="text" id="chicos" name="chicos" class="credential" value="0" ></div>';
             $Html .=  '<div class="comodidades"><label for="chicas">Chicas: </label></div>';
-            $Html .=  '<div class="comodidades"><input type="text"  id="chicas" name="chicas" class="credential" ></div>';
+            $Html .=  '<div class="comodidades"><input type="text"  id="chicas" name="chicas" class="credential" value="0" ></div>';
             $Html .= '</div>';
             echo $Html;
         }

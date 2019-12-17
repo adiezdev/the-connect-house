@@ -33,8 +33,7 @@ input[type="checkbox"]{
 /**/
 .contenedor{
     float: left;
-    width: 280px;
-    height: 350px;
+    height: 180px;
     object-fit: cover;
 }
 .guardardatos
