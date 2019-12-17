@@ -49,12 +49,12 @@
 		 INCLUD_SLIDE
 	);
     //
-    //Generamos la cabecera
-	cabecera( TITULO_LOGIN , $estilos , true );
-    //
     //Accedemos a los datos del piso o Habitacion
     $oDbPisoHabitacion = new Pisos();
     $aDatosPisosHabitaciones  = $oDbPisoHabitacion->getById($idPisoHabitacion);
+    //
+    //Generamos la cabecera
+	cabecera( $aDatosPisosHabitaciones[0]->Calle , $estilos , true );
     //
     //Accedemos al 1 que son las comodidades
     $odbComodidades = new Secciones(1);
