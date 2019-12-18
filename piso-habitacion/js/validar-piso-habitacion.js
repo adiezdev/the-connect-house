@@ -5,6 +5,7 @@
  */
 function validarDatos()
 {
+    //Cogemos todos los valores
     var id = $('#IdTipo').val();
     var calle = $('#calle').val();
     var numero = $('#numero').val();
@@ -18,35 +19,40 @@ function validarDatos()
     var toilet = $('#toilet').val();
     var habitaciones = $('#habitaciones').val();
     //
+    //Para guardar en base de datos remplacamos la coma por el punto
     metros = metros.replace(',','.');
     precio = precio.replace(',','.');
     //
-    //
+    //Array de comodidades
     var comodididades = [];
-    //
+    //Recorremos las comodidades
     var c = $('.comodidad');
     c.each(function(index)
     {
+        //Aquellas que tienen check las añadimos
         if ($(c[index]).prop('checked') == true)
         {
             comodididades.push($(c[index]).val());
         }
     });
     //
+    //Array de normas
     var normas = [];
-    //
+    //Recorremos las normas
     var n = $('.norma');
     n.each(function(index)
     {
+        //Aquellas que tiene check las añadimos
         if ($(n[index]).prop('checked') == true)
         {
             normas.push($(n[index]).val());
         }
     });
     //
+    //Recogemos la latitud y  longitud
     var latitud = $('#latitud').val();
     var longitud = $('#longitud').val();
-    //
+    //Array de imagenes
     var imagenes  = [];
     //
     //Guardamos las imagenes en un array

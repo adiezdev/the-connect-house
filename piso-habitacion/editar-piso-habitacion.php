@@ -102,6 +102,7 @@
     <div id="todassecciones"></div>
     <form method="post" >
         <input type="hidden" value="<?php echo $nTipo ?>" id="IdTipo">
+        <input type="hidden" value="<?php echo $aDbPisoHabitacion[0]->idPiso ?>" id="IdPiso">
         <!--Seccion1 -->
         <?php include("includes/editar/seccion-1.php"); ?>
         <!--Seccion2-->
@@ -112,7 +113,7 @@
         <?php include("includes/editar/seccion-5.php"); ?>
         <!--Guardemos-->
         <div class="guardardatos">
-            <input type="button"  class="button" value="Guardar"  onclick="validarDatos()"> <input type="button"  class="button"  value="Cancelar" onclick="window.history.back()" >
+            <input type="button"  class="button" value="Guardar"  onclick="validarDatosEditados()"> <input type="button"  class="button"  value="Cancelar" onclick="window.history.back()" >
         </div>
     </form>
 </div>
@@ -120,9 +121,10 @@
 </body>
 <!-- Scripts necesarios -->
     <script src="<?php echo get_root_uri() ?>/the-connect-house/js/eliminar-precargada.js"></script>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/precarga-imagenes.js"></script>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
-<script>
+    <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/precarga-imagenes.js"></script>
+    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
+    <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/validar-edicion-piso-habitacion.js"></script>
+    <script>
      var maximo = 600;
     //Si detecta el teclado
 

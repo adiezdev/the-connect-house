@@ -64,4 +64,29 @@
 			}
 			return $aOcupado;
 		}
+        /**
+         * Actualiza la gente que hay en el piso
+         *
+         * @param $Num
+         * @param $Sexo
+         * @param $idPiso
+         * @return bool
+         */
+		function updateOcupados( $Num , $Sexo , $idPiso )
+        {
+            $cSql = 'UPDATE '.$this->sTabla.' SET
+                Num = ? , Sexo = ?
+                WHERE idPiso = ?';
+            $stmt = $this->prepare( $cSql );
+            $stmt->bind_param('isi' , $Num , $Sexo   , $idPiso  );
+            $bResultado = $stmt->execute();
+            if(!$bResultado)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 	}

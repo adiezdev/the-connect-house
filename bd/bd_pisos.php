@@ -204,40 +204,22 @@ class Pisos extends Conexion
 	    }
 	    return $aPisoHabitacion;
     }
+
     /**
-     * Actualiza un nuevo piso o habitacion
-     *
-     * @param $nHabitaciones
-     * @param $nToiles
-     * @param $fMetros
-     * @param $sCalle
-     * @param $nNumero
-     * @param $nCp
-     * @param $sCiudad
+     * Actualiza el piso o la habitación
      * @param $sDescripcion
-     * @param $fLatitud
-     * @param $fLogintud
      * @param $fPrecio
-     * @param $nVisitas
      * @param $nTipo
-     * @param $idPiso
+     * @param $nIdPiso
      * @return bool
      */
-    public function updatePisoHabitacion( $nHabitaciones , $nToiles , $fMetros , $sCalle , $nNumero , $nCp , $sCiudad , $sDescripcion
-        , $fLatitud , $fLogintud , $fPrecio , $nVisitas , $nTipo , $nIdPiso )
+    public function updatePisoHabitacion(  $sDescripcion , $fPrecio   , $nIdPiso )
     {
         $cSql = 'UPDATE '.$this->sTabla.' SET
-                 NHabitaciones = ? , NBanos = ? ,
-                 Metros = ? , Calle = ? ,
-                 Numero = ? , CP = ? ,
-                 Ciudad = ? , Descripcion = ? , 
-                 Latitud = ? , Longitud = ? , 
-                 Preciio = ? , Tipo = ? 
-                 WHERE idPiso = ?';
+                Descripcion = ? , Precio = ?
+                WHERE idPiso = ?';
         $stmt = $this->prepare( $cSql );
-        $stmt = $this->prepare( $cSql );
-        $stmt->bind_param('iidssissdddiii' ,  $nHabitaciones , $nToiles , $fMetros , $sCalle , $nNumero , $nCp , $sCiudad , $sDescripcion
-            , $fLatitud , $fLogintud , $fPrecio , $nVisitas , $nTipo , $nIdPiso );
+        $stmt->bind_param('sdi' , $sDescripcion , $fPrecio   , $nIdPiso  );
         $bResultado = $stmt->execute();
         if(!$bResultado)
         {
