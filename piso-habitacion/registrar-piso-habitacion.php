@@ -92,6 +92,7 @@
 <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/precarga-imagenes.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/validar-piso-habitacion.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/eliminar-precargada.js"></script>
 <script>
     $(document).ready(function(){
         mymap.scrollWheelZoom.disable();

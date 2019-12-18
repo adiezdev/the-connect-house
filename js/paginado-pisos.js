@@ -10,7 +10,7 @@ function PaginadoSiguiente()
     //Incrementamos contador
     var c =  contador+=3
     //Ponemos un tope
-    if(contador > 3)
+    if(contador > 6)
     {
         c = 3;
     }

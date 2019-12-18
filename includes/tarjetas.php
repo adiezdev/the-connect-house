@@ -56,11 +56,18 @@
                 //Accedemos a la imagen del piso
                 $aDbImagen = new Imagenes();
                 $ImagenDestacada =  $aDbImagen->getByIdPisoPrimeraFoto( $aDbPisosHabitacion->idPiso );
-                //
-                //Recorremos la imagen destacada
-                foreach ($ImagenDestacada as $ImagenDestacad)
+                if($ImagenDestacada == null)
                 {
-                    $Html .= '<img src="'.$ImagenDestacad->Url.'" alt="habitación">';
+                    $Html .= '<img src="/the-connect-house/img/img-modelo.jpg" alt="habitación">';
+                }
+                else
+                {
+                    //
+                    //Recorremos la imagen
+                    foreach ($ImagenDestacada as $ImagenDestacad)
+                    {
+                        $Html .= '<img src="'.$ImagenDestacad->Url.'" alt="habitación">';
+                    }
                 }
                 //
                 //Contenido a mostrar en la tarjeta
@@ -109,10 +116,18 @@
             $aDbImagen = new Imagenes();
             $ImagenDestacada =  $aDbImagen->getByIdPisoPrimeraFoto( $aDbPisosHabitacion->idPiso );
             //
-            //Recorremos la imagen
-            foreach ($ImagenDestacada as $ImagenDestacad)
+            if($ImagenDestacada == null)
             {
-                $Html .= '<img src="'.$ImagenDestacad->Url.'" alt="habitación">';
+                $Html .= '<img src="/the-connect-house/img/img-modelo.jpg" alt="habitación">';
+            }
+            else
+            {
+                //
+                //Recorremos la imagen
+                foreach ($ImagenDestacada as $ImagenDestacad)
+                {
+                    $Html .= '<img src="'.$ImagenDestacad->Url.'" alt="habitación">';
+                }
             }
             //
             $Html .= '<div class="descripcion">';

@@ -119,10 +119,11 @@
 <?php require_once(__DIR__ . "/../includes/footer.php"); ?>
 </body>
 <!-- Scripts necesarios -->
+    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/eliminar-precargada.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/precarga-imagenes.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
 <script>
-    var maximo = 600;
+     var maximo = 600;
     //Si detecta el teclado
 
         //Congemos de la descipcion la longitud del valor
@@ -219,7 +220,8 @@
     }
     ?>
     });
-    $('.contenedor').click(function ()
+    //Elimina la imagen que ya hay en la base de datos
+    $('.contenedores').click(function ()
     {
         var cont = $(this);
         //Cogemos la URL
@@ -236,7 +238,6 @@
         })
             .done(function(oJson )
             {
-
                 console.log(oJson);
                 var oRespuesta = JSON.parse(oJson);
                 if (oRespuesta.Estado == "OK")

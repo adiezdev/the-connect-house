@@ -36,6 +36,11 @@ input[type="checkbox"]{
     height: 180px;
     object-fit: cover;
 }
+.contenedores{
+    float: left;
+    height: 180px;
+    object-fit: cover;
+}
 .guardardatos
 {
     text-align: center;

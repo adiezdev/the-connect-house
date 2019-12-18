@@ -36,7 +36,7 @@ function precarfarImagens(evt)
                         '<img id="imgpre" style="width: 280px; margin: 5px" src="',
                         e.target.result,
                         '" title="', escape(theFile.name),
-                        '"/><br><span class="delete">Eliminar</span>'
+                        '"/><br>'
                     ].join('');
                     //Añadimos las imagenes cantes de acabar la etiqueta de gallery
                     document.getElementById('gallery').insertBefore(span, null);

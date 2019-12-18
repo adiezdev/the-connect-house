@@ -14,9 +14,10 @@ Nombre del archivo: seccion-5.php
         <div id="galeria" style="border: dashed 8px #aac759; height: 350px; margin: 30px;">
             <output id="gallery">
                 <?php
+                //Mostramos imagenes si el piso tiene
                 foreach ($aDbImagenesPisoH  as $aDbImagenesPiso )
                 {
-                    $Img = '<div class="contenedor" >';
+                    $Img = '<div class="contenedores" >';
                     $Img .= '<p style="position: relative; top: 20px; line-height: normal; background: red; width: 31px; border-radius: 500px; height: 31px;">X</p>';
                     $Img .= '<img id="imgeliminar" title="'.$aDbImagenesPiso->idImagen.'" style="width: 280px; margin: 5px" src="/the-connect-house/'.$aDbImagenesPiso->Url.'">';
                     $Img .= '</div>';
