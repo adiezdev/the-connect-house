@@ -153,7 +153,7 @@
         }
         //
         $oRespuesta->Estado = "OK";
-        $oRespuesta->Mensaje = "Guardado";
+        $oRespuesta->Mensaje = "Editado";
         json_encode($oRespuesta);
     }
     echo  json_encode($oRespuesta);

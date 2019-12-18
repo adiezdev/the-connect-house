@@ -9,8 +9,8 @@ function validarDatosEditados()
     var idpiso = $('#IdPiso').val();
     var descripcion = $('#descripcion').val();
     var precio = $('#precio').val();
-    var chicos = $('#chicos').val();
-    var chicas = $('#chicas').val();
+    var chicos = $('#Chicos').val();
+    var chicas = $('#Chicas').val();
     //
     precio = precio.replace(',','.');
     //
@@ -90,7 +90,7 @@ function validarDatosEditados()
             var oRespuesta = JSON.parse(oJson);
             if (oRespuesta.Estado == "OK")
             {
-                window.open("/the-connect-house/perfil.php", "_self");
+                window.open("/the-connect-house/index.php", "_self");
             } else {
                 alert(oRespuesta.Mensaje);
             }

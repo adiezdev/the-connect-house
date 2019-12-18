@@ -146,7 +146,7 @@
                 //Si no tenemos piso en la base de datos , te aparecerá para agregarlo
                 if(empty($aDbPisosHabitaciones))
                 {
-	                $Html  = '<div id="vacio">';
+	                $Html  = '<div id="vacio" class="centro">';
 	                if( $oDatosUsuario[0]->idUsuario == $_SESSION['idUsuario'] )
 	                {
 		                $Html .= '<img src="img/key.png" alt="llaves" style="width: 40%">';

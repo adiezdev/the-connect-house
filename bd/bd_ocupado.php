@@ -89,4 +89,24 @@
                 return true;
             }
         }
+        /**
+         * Elimina por id del piso
+         * @param $nIdPiso
+         * @return bool
+         */
+        public function deleteOcupadoPiso( $nIdPiso )
+        {
+            $cSql = 'DELETE FROM '.$this->sTabla.' WHERE idPiso = ?';
+            $stmt = $this->prepare($cSql);
+            $stmt->bind_param('i' , $nIdPiso);
+            $bResultado = $stmt->execute();
+            if(!$bResultado)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 	}

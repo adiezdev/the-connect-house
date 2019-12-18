@@ -114,16 +114,18 @@
         <!--Guardemos-->
         <div class="guardardatos">
             <input type="button"  class="button" value="Guardar"  onclick="validarDatosEditados()"> <input type="button"  class="button"  value="Cancelar" onclick="window.history.back()" >
-        </div>
     </form>
+    <input type="button"  class="eliminarpiso" value="ELIMINAR"  onclick="eliminarDatos()">
+</div>
 </div>
 <?php require_once(__DIR__ . "/../includes/footer.php"); ?>
 </body>
 <!-- Scripts necesarios -->
-    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/eliminar-precargada.js"></script>
-    <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/precarga-imagenes.js"></script>
     <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
+    <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/precarga-imagenes.js"></script>
+    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/eliminar-precargada.js"></script>
     <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/validar-edicion-piso-habitacion.js"></script>
+    <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/validar-eliminacion-piso-habitacion.js"></script>
     <script>
      var maximo = 600;
     //Si detecta el teclado
@@ -136,6 +138,7 @@
         $('#contador').html(restantes);
     //
     $(document).ready(function(){
+
         //FUNCIÓN PARA MOSTRAR LOS CARACTERES DE LA DESCRIPCIÓN
         //
         //Máixmo de caracteres en la descripción

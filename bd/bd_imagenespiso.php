@@ -138,4 +138,24 @@ class Imagenes extends Conexion
             return true;
         }
     }
+    /**
+     * Elimna imagenes de un piso
+     * @param $nIdPiso
+     * @return bool
+     */
+    public function deleteImagePiso( $nIdPiso )
+    {
+        $cSql = 'DELETE FROM '.$this->sTabla.' WHERE idPiso = ?';
+        $stmt = $this->prepare($cSql);
+        $stmt->bind_param('i' , $nIdPiso);
+        $bResultado = $stmt->execute();
+        if(!$bResultado)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }
