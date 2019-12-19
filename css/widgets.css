@@ -69,6 +69,14 @@ svg {
     border-radius: 5px;
     background-color: #ffffff;
 }
+#selectorciudad {
+    margin-right: 5px;
+    height: 35px;
+    font-size: 11pt;
+    color: #558264;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
 .seccion
 {
     text-align: center;
@@ -313,6 +321,15 @@ label[for=inputperfil] {
     padding: 7px;
     font-size: 15pt;
 }
+.eliminarpiso:hover
+{
+    color: white;
+    background-color: red;
+    border: 1px solid  red;
+    border-radius: 5px;
+    padding: 7px;
+    font-size: 15pt;
+}
 /*Delete de la imagenes*/
 .delete
 {
@@ -339,4 +356,26 @@ label[for=inputperfil] {
 .likeit label svg
 {
     fill: #ffffff;
+}
+/*Botón eliminar foto y editar foto*/
+.editar-foto
+{
+    position: relative;
+    cursor: pointer;
+    padding: 4px;
+    width: 168px;
+    color: #ffffff;
+    background-color: #aac759;
+    border-radius: 5px;
+}
+.eliminar-foto
+{
+    position: relative;
+    left: 32%;
+    cursor: pointer;
+    padding: 4px;
+    width: 168px;
+    color: #ffffff;
+    background-color: red;
+    border-radius: 5px;
 }

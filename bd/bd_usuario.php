@@ -155,11 +155,16 @@ class Usuario extends Conexion
      *
      * @return bool
      */
-    public function updateUsuario( $nIdUsuario, $sCorreo, $sNombre, $sApellidos, $sDescripcion) 
+    public function updateUsuario( $nIdUsuario, $sCorreo, $sNombre, $sApellidos, $sCiudad ,$sDescripcion , $sImgperfil)
     {
-        $cSql = 'UPDATE '.$this->sTabla.' SET Correo = ?, Nombre = ?, Apellidos = ?, Descripciion = ? WHERE idUsuario = ?';
+        $cSql = 'UPDATE '.$this->sTabla.' SET 
+                Correo = ?, Nombre = ?, 
+                Apellidos = ?, Ciudad = ?,
+                Descripcion = ? , Imgperfil = ? 
+                WHERE idUsuario = ?';
+        //
         $stmt = $this->prepare($cSql);
-        $stmt->bind_param('ssssi', $sCorreo, $sNombre, $sApellidos, $sDescripcion , $nIdUsuario);
+        $stmt->bind_param('ssssssi', $sCorreo, $sNombre, $sApellidos, $sCiudad, $sDescripcion, $sImgperfil , $nIdUsuario);
         $bResultado = $stmt->execute();
         if(!$bResultado)
         {
@@ -170,7 +175,35 @@ class Usuario extends Conexion
             return true;
         }
     }
-
+    /**
+     * @param $nIdUsuario
+     * @param $sCorreo
+     * @param $sNombre
+     * @param $sApellidos
+     * @param $sCiudad
+     * @param $sDescripcion
+     * @return bool
+     */
+    public function updateUsuarioSinImg( $nIdUsuario, $sCorreo, $sNombre, $sApellidos, $sCiudad ,$sDescripcion)
+    {
+        $cSql = 'UPDATE '.$this->sTabla.' SET 
+                Correo = ?, Nombre = ?, 
+                Apellidos = ?, Ciudad = ?,
+                Descripcion = ? 
+                WHERE idUsuario = ?';
+        //
+        $stmt = $this->prepare($cSql);
+        $stmt->bind_param('sssssi', $sCorreo, $sNombre, $sApellidos, $sCiudad, $sDescripcion , $nIdUsuario);
+        $bResultado = $stmt->execute();
+        if(!$bResultado)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
     /**
      * Actualiza la descripcion y la imagen por su id
      *

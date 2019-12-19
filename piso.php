@@ -146,7 +146,7 @@
                         //Si conincide el usuario podemos editar piso
 	                    if( $aDbUsuario->idUsuario != $_SESSION['idUsuario'])
                         {
-                            $Html2 .='<button class="button" id="buttonVentana" >Me interesa</button>';
+                            $Html2 .='<button class="button" id="buttonVentana">Me interesa</button>';
                             //
                             //Array botones que aparecen en la ventana
                             $btones = array(
@@ -161,7 +161,7 @@
                         }
 	                    else
                         {
-                            $Html2 .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar Piso</div>';
+                            $Html2 .= '<div class="editar-piso"  onclick="window.open(\'/the-connect-house/piso-habitacion/editar-piso-habitacion.php?idPiso='.$aDatosPisosHabitacion->idPiso.'&Tipo='.$aDatosPisosHabitacion->Tipo.'\', \'_self\');" ><i class="fas fa-pen"></i> Editar Piso</div>';
                         }
                         $Html2 .='</div>';
 	                    $Html2 .=  '</div>';

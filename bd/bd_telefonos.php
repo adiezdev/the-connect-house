@@ -81,4 +81,23 @@ class Telefonos extends Conexion
             return true;
         }
     }
+    /**
+     * @param $nIdUsuario
+     * @return bool
+     */
+    public function deleteTelfs( $nIdUsuario )
+    {
+        $cSql = 'DELETE FROM '.$this->sTabla.' WHERE IdUsuario = ?';
+        $stmt = $this->prepare($cSql);
+        $stmt->bind_param('i' , $nIdUsuario);
+        $bResultado = $stmt->execute();
+        if(!$bResultado)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }

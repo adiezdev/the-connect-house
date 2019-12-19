@@ -46,3 +46,9 @@ input[type="checkbox"]{
     text-align: center;
     margin: 10px;
 }
+.izquierdo-perfil
+{
+    float: left;
+    width: 35%;
+    height: 417px;
+}

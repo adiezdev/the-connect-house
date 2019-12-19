@@ -117,7 +117,6 @@
     </form>
     <input type="button"  class="eliminarpiso" value="ELIMINAR"  onclick="eliminarDatos()">
 </div>
-</div>
 <?php require_once(__DIR__ . "/../includes/footer.php"); ?>
 </body>
 <!-- Scripts necesarios -->
