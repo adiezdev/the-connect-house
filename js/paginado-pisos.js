@@ -33,7 +33,7 @@ function PaginadoSiguiente()
             for (let i = 0 ; i < oRespuesta.length; i++)
             {
                 //Formamos el hmtl
-                var stri = '<div class="box-pisos-habitacones">';
+                var stri = '<div class="box-pisos-habitacones" onclick="window.open(\'/the-connect-house/piso.php?'+btoa('idPiso='+oRespuesta[i].Id)+'\', \'_self\');" >';
                 stri += '<img src="'+oRespuesta[i].Imagen+'" alt="habitación">';
                 stri += '<div class="descripcion">';
                 stri += '<h3>'+oRespuesta[i].Calle+'</h3>';
@@ -60,7 +60,7 @@ function PaginadoSiguiente()
  *
  * @constructor
  */
-function PaginadoAnterior( )
+function PaginadoAnterior()
 {
     //Cogemos el contador
     var cont = $('#contador').text()
@@ -89,7 +89,7 @@ function PaginadoAnterior( )
             for (let i = 0 ; i < oRespuesta.length; i++)
             {
                 //Formamos el hmtl
-                var stri = '<div class="box-pisos-habitacones">';
+                var stri = '<div class="box-pisos-habitacones" onclick="window.open(\'/the-connect-house/piso.php?'+btoa('idPiso='+oRespuesta[i].Id)+'\', \'_self\');" >';
                 stri += '<img src="'+oRespuesta[i].Imagen+'" alt="habitación">';
                 stri += '<div class="descripcion">';
                 stri += '<h3>'+oRespuesta[i].Calle+'</h3>';

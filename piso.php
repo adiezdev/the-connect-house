@@ -30,6 +30,7 @@
         return;
     }
 	require_once(__DIR__."/includes/header.php" );
+    require_once(__DIR__."/includes/crearventana.php" );
 	require_once(__DIR__."/includes/constantes.php" );
 	require_once(__DIR__."/includes/carrusel-de-img.php");
     //
@@ -46,7 +47,8 @@
     $estilos = array(
 		 ESTILOS_WIDGETS ,
 		 ESTILOS_MAIN ,
-		 INCLUD_SLIDE
+		 INCLUD_SLIDE,
+        ESTILOS_VENTANA
 	);
     //
     //Accedemos a los datos del piso o Habitacion
@@ -64,7 +66,10 @@
     $odbNormas = new Secciones(2);
     //Sacamos todos los registros
     $oNormas = $odbNormas->getById($idPisoHabitacion);
-
+    //
+    $oDbUsuarios = new Usuario();
+    //Sacamos los datos del usuario logue
+    $aDBUser = $oDbUsuarios->getById( $_SESSION['idUsuario']);
 ?>
 <body>
 <?php
@@ -111,8 +116,6 @@
                     //Asignamos datos
                     $lt = $aDatosPisosHabitacion->Latitud;
                     $lg = $aDatosPisosHabitacion->Longitud;
-                    //Mostramos el usuario
-                    $oDbUsuarios = new Usuario();
                     //Accedemos al usuario del piso
                     $aDbUsuarios = $oDbUsuarios->getById( $aDatosPisosHabitacion->idUsuario );
                     //
@@ -138,12 +141,27 @@
                             $Html2 .= '<h2>Num '.($key+1).': '.$aDbTelefono->Numero.'</h2>';
 	                    }
                         $Html2 .=     '</div>';
-	                    $Html2 .='<button class="button">Me interesa</button>';
+
 	                    //
                         //Si conincide el usuario podemos editar piso
-	                    if( $aDbUsuario->idUsuario == $_SESSION['idUsuario'])
+	                    if( $aDbUsuario->idUsuario != $_SESSION['idUsuario'])
                         {
-	                        $Html2 .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar Piso</div>';
+                            $Html2 .='<button class="button" id="buttonVentana" >Me interesa</button>';
+                            //
+                            //Array botones que aparecen en la ventana
+                            $btones = array(
+                                "Enviar Correo",
+                            );
+                            $btonesfuncion = array(
+                                "enviarcorreo(2)",
+                            );
+                            //
+                            //Generamos la ventana
+                            getVentana( '¿Te interesa? Díselo tú mismo' , $btones , $btonesfuncion , true);
+                        }
+	                    else
+                        {
+                            $Html2 .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar Piso</div>';
                         }
                         $Html2 .='</div>';
 	                    $Html2 .=  '</div>';
@@ -238,6 +256,7 @@
 <!-- Script necesarios -->
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider.js"></script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/like.js"></script>
+<script src="<?php echo get_root_uri() ?>/the-connect-house/js/crearventana.js"></script>
 <script>var touch = false;</script>
 <script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
 <script>
@@ -251,5 +270,35 @@
     mymap.panTo([<?php echo $lt ?> , <?php echo $lg ?>]);
     //Ponemos una marca en el mapa con las coordenadas
     L.marker([<?php echo $lt ?> , <?php echo $lg ?>]).addTo(mymap);
+    //
+    //Función para enviar correo
+    function enviarcorreo() {
+        var descripciondada = $('#descripcion').val();
+        var maildelcasero = '<?php echo $aDbUsuarios[0]->Correo ?>';
+        var usuarioinquilino = '<?php echo $aDBUser[0]->Correo ?>';
+        //
+        //Formamos el JSON
+        var oDatosJson = {descripcion: descripciondada , mail: maildelcasero , usuario: usuarioinquilino }
+        //Enviamos los ddatos para que sean enviados por email
+        $.ajax({
+            url: '/the-connect-house/mail/enviarpeticion.php',
+            type: 'POST',
+            data: JSON.stringify(oDatosJson)
+        })
+            .done(function(oJson)
+            {
+                console.log(oJson);
+                var oRespuesta = JSON.parse(oJson);
+                if (oRespuesta.Estado == "OK")
+                {
+                    //Cerramos la ventana
+                    $('#miVentana').css('display', 'none');
+                    //Limipiamos el text area
+                    $('#descripcion').val('');
+                } else {
+                    alert(oRespuesta.Mensaje);
+                }
+            });
+    }
 </script>
 </html>

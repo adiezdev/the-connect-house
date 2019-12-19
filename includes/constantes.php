@@ -23,4 +23,10 @@
 	//Acceder a la tabla
 	define("TIPO_NORMAS", 2 );
 	define("TIPO_COMODIDADES" , 1);
+	//
+    //
+    //Archivo de constantes del correo
+    define("SIMPLE_MAIL", 'theconnecthouse2020@gmail.com');
+    define("USER_NAME", 'The Connect House');
+    define("PASSWORD_CORREO",'holamundo22');
 ?>

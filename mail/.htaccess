@@ -1,0 +1,3 @@
+#No permitimos el acceso a listar el directorio
+Options -Indexes
+#No permitimos el acceso a ese directorio

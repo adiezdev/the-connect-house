@@ -34,7 +34,7 @@
         foreach ($adbImagenes as $adbImagen)
         {
             //Guardamos los datos
-            $datos[] = array( "Imagen" => $adbImagen->Url , "Calle" => $aDbPiso->Calle , "Ciudad"=> $aDbPiso->Ciudad , "Precio"=> $aDbPiso->Precio);
+            $datos[] = array( "Imagen" => $adbImagen->Url , "Id" => $aDbPiso->idPiso  ,"Calle" => $aDbPiso->Calle , "Ciudad"=> $aDbPiso->Ciudad , "Precio"=> $aDbPiso->Precio);
         }
     }
     //
