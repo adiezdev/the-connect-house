@@ -80,4 +80,24 @@ class Favoritos extends Conexion
             return true;
         }
     }
+    /**
+     * Funcion para eliminar un piso de favoritos
+     * @param $nIdPiso
+     * @return bool
+     */
+    public function deleteFavUsuer( $nIdUser )
+    {
+        $cSql = 'DELETE FROM '.$this->sTabla.' WHERE idUsuario = ?';
+        $stmt = $this->prepare($cSql);
+        $stmt->bind_param('i' , $nIdUser);
+        $bResultado = $stmt->execute();
+        if(!$bResultado)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }

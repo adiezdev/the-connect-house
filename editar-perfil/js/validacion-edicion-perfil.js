@@ -1,11 +1,9 @@
 
 function validarEdicionPerfi()
 {
-    var imga = '';
-    if( imga != '')
+    if( $('input[name=imagen]').val() !== 'undefined')
     {
-        imga = $('input[name=imagen]').val();
-        var res = imga.replace('/the-connect-house/' , '');
+        var imga = $('input[name=imagen]').val();
     }
     //
     var correo = $('#correo').val();
@@ -17,7 +15,7 @@ function validarEdicionPerfi()
     var telefonos = [];
     //
     //Guardamos las los telefonos en un array
-    var telf = $('input[name="telefono[]"]');
+    var telf = $('input[name="telefono"]');
     if( telf.val() == '' || isNaN(telf.val()))
     {
         alert("Indique un teléfono válido");
@@ -37,7 +35,7 @@ function validarEdicionPerfi()
             Apellidos: apellidos,
             Ciudad: ciudad,
             Descripcion: textarea ,
-            Imagen: res,
+            Imagen: imga,
             Telf: telefonos
         };
     //

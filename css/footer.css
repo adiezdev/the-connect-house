@@ -6,8 +6,15 @@ footer
 {
     background: #aac759;
     flex-shrink: 0;
-    height: 230px;
+    height: 130px;
+    text-align: center;
+    color: #ffffff;
+
 }
 #marca  {
     width: 300px;
+}
+.iconos
+{
+    font-size: 22pt;
 }

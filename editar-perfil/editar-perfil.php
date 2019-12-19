@@ -63,7 +63,7 @@
                         //
                         foreach ( $aDbTelefonos as $key=>$aDbTelefono)
                         {
-                            $Html .= '<div><h3>Num '.($key+1).':</h3><input id="num" class="credential" name="telefono[]" type="text" value="'.$aDbTelefono->Numero.'"><div style="cursor: pointer" id="cross"><i class="fas fa-times" style="color: red"></i></div></div>';
+                            $Html .= '<div><h3>Num '.($key+1).':</h3><input id="num" class="credential" name="telefono" type="text" value="'.$aDbTelefono->Numero.'"><div style="cursor: pointer" id="cross"><i class="fas fa-times" style="color: red"></i></div></div>';
                         }
                         $Html .= ' <div id="telefono2"></div>';
                         //
@@ -91,7 +91,7 @@
                 <input type="button"  class="button" value="Guardar"  onclick="validarEdicionPerfi()">
                     <input type="button"  class="button"  value="Cancelar" onclick="window.history.back()" >
                 </form>
-                <input type="button"  class="eliminarpiso" value="ELIMINAR"  onclick="eliminarDatos()">
+                <input type="button"  class="eliminarpiso" value="ELIMINAR CUENTA"  onclick="eliminarCuenta()">
         </div>
     </div>
     <!--Footer-->
@@ -104,7 +104,7 @@
     //Añadir un segundo telefono
     $('#plus').click(function ()
     {
-        var tlf = '<h3>Número nuevo</h3><input type="text" class="credential" id="telefono" name="telefono[]" placeholder="Numero de telefono">';
+        var tlf = '<h3>Número nuevo</h3><input type="text" class="credential" id="telefono" name="telefono" placeholder="Numero de telefono">';
         $('#telefono2').html(tlf);
         $(this).hide();
     });
@@ -125,5 +125,21 @@
     function eliminarImg() {
         $('#imgperfil').attr('src' , '/the-connect-house/img/isset/isset-user.png');
         $('#hiddens').html('<input type="hidden" name="imagen" id="key.png" value="/the-connect-house/img/isset/isset-user.png">')
+    }
+    function eliminarCuenta() {
+        $.ajax({
+            url: '/the-connect-house/editar-perfil/ajax/a_eliminarUsuario.php',
+            type: 'POST'
+        })
+            .done(function(oJson) {
+                console.log(oJson);
+                var oRespuesta = JSON.parse(oJson);
+                if (oRespuesta.Estado == "OK")
+                {
+                    window.location.href = '/the-connect-house/cerrar-session.php';
+                } else {
+                    alert(oRespuesta.Mensaje);
+                }
+            });
     }
 </script>

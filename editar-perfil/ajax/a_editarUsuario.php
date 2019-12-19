@@ -30,24 +30,47 @@
     $sImagen = '';
     //
     $oDbUsuarios = new Usuario();
-    if(isset($oDatosJson['Imagen']))
+    $aUsuarios = $oDbUsuarios->getById( $_SESSION['idUsuario'] );
+    //
+    //Si es diferente a la inicializada
+    if(isset($oDatosJson['Imagen']) && $oDatosJson['Imagen'] != '/the-connect-house/img/isset/isset-user.png')
     {
-        $sImagen = $oDatosJson['Imagen'];
+            $sImagen = str_replace('/the-connect-house/' , '' , $oDatosJson['Imagen'] );
+            //
+            //Sacamos la imagen y la decodificamos
+            $datos = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $sImagen));
+            //generamos un nombre para la imagen
+            $nom = md5(rand());
+            //Marco la ruta
+            $filepathsql = "uploads/".$aUsuarios[0]->Carpeta."/".$nom.".jpg";
+            $archivoRuta = $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/'.$filepathsql;
+            //Paso la imagen a la ruta
+            file_put_contents( $archivoRuta , $datos);
+            //Permisos al archivo
+            chmod($archivoRuta, 0777);
+            //
+            $lResult = $oDbUsuarios->updateUsuario( $_SESSION['idUsuario'] , $sCorreo , $sNombre , $sApellidos , $sCiudad , $sDescripcion , $filepathsql);
+    }
+    //Si es la inicializada
+    if( isset($oDatosJson['Imagen']) && $oDatosJson['Imagen'] == '/the-connect-house/img/isset/isset-user.png' )
+    {
+        $sImagen = str_replace('/the-connect-house/' , '' , $oDatosJson['Imagen'] );
         //
         $lResult = $oDbUsuarios->updateUsuario( $_SESSION['idUsuario'] , $sCorreo , $sNombre , $sApellidos , $sCiudad , $sDescripcion , $sImagen);
     }
-    else
+    else //Sino hay
     {
         $lResult = $oDbUsuarios->updateUsuarioSinImg( $_SESSION['idUsuario'] , $sCorreo , $sNombre , $sApellidos , $sCiudad , $sDescripcion );
     }
     //
     //
     $aTelefonos = $oDatosJson['Telf'];
+    $oDbTelefonos = new Telefonos();
+    $oDbTelefonos->deleteTelfs(  $_SESSION['idUsuario'] );
     //
     //Guardamos los telefonos
     foreach ( $aTelefonos as $aTelefono)
     {
-        $oDbTelefonos = new Telefonos();
         if(strlen($aTelefono) == 10 )
         {
             $oRespuesta->Estado = "KO";
@@ -57,7 +80,7 @@
         }
         else
         {
-            $oDbTelefonos->deleteTelfs(  $_SESSION['idUsuario'] );
+
             //
             $lResultt = $oDbTelefonos->addTelf( $aTelefono , $_SESSION['idUsuario']  );
             //

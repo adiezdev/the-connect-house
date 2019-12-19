@@ -23,7 +23,6 @@
         $urls = explode("?", $url);
         //decodificamos
         $decofificados = base64_decode($urls[1]);
-        echo $decofificados;
     }
     else
     {

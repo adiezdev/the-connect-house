@@ -102,7 +102,7 @@
                         //Si el usuario es el mismo que sessón
 	                    if( $idUsuario == $_SESSION['idUsuario'])
 	                    {
-		                    $Html .= '<div class="editar-piso"><i class="fas fa-pen"></i> Editar Perfil</div>';
+		                    $Html .= '<div class="editar-piso"  onclick="window.open(\'/the-connect-house/editar-perfil/editar-perfil.php?\', \'_self\');"><i class="fas fa-pen" ></i> Editar Perfil</div>';
 
 	                    }
                     }
