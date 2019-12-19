@@ -40,3 +40,10 @@
     width: 130%;
     font-size: 12pt;
 }
+@media screen and ( max-width: 658px)
+{
+    .contenedor-izquierdo, .contenedor-centro {
+        position: static;
+        margin-left: -68px;
+    }
+}

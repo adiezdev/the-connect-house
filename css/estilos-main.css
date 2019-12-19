@@ -117,7 +117,7 @@
 /*Previsualizacion del piso margenes*/
 .box-mas-visitados
 {
-    margin-left: 60px !important;
+    margin-left: 40px !important;
     margin-top: 30px !important;
     margin-bottom: 10px !important;
 }
@@ -201,7 +201,25 @@
     }
 }
 
-@media screen and ( max-width: 658px) {
+@media screen and ( max-width: 658px)
+{
+    .contenedor-izquierdo .into-izquierdo {
+        padding: 0;
+    }
+    #vacio
+    {
+        padding-right: 60px;
+    }
+    .into-centro.seccioncentro
+    {
+        margin: 0;
+    }
+    #vacio.centro {
+        margin: 0 0 0 48px;
+    }
+    .contenedor-izquierdo #perfil {
+        padding: 0px;
+    }
     .buscador {
         width: 91%;
         transform: none;
