@@ -33,17 +33,17 @@
     $aUsuarios = $oDbUsuarios->getById( $_SESSION['idUsuario'] );
     //
     //Si es diferente a la inicializada
-    if(isset($oDatosJson['Imagen']) && $oDatosJson['Imagen'] != '/the-connect-house/img/isset/isset-user.png')
+    if(isset($oDatosJson['Imagen']) && $oDatosJson['Imagen'] != '/img/isset/isset-user.png')
     {
-            $sImagen = str_replace('/the-connect-house/' , '' , $oDatosJson['Imagen'] );
+            $sImagen =  $oDatosJson['Imagen'];
             //
             //Sacamos la imagen y la decodificamos
             $datos = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $sImagen));
             //generamos un nombre para la imagen
             $nom = md5(rand());
             //Marco la ruta
-            $filepathsql = "uploads/".$aUsuarios[0]->Carpeta."/".$nom.".jpg";
-            $archivoRuta = $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/'.$filepathsql;
+            $filepathsql = "/uploads/".$aUsuarios[0]->Carpeta."/".$nom.".jpg";
+            $archivoRuta = $_SERVER['DOCUMENT_ROOT'].'/'.$filepathsql;
             //Paso la imagen a la ruta
             file_put_contents( $archivoRuta , $datos);
             //Permisos al archivo
@@ -52,9 +52,9 @@
             $lResult = $oDbUsuarios->updateUsuario( $_SESSION['idUsuario'] , $sCorreo , $sNombre , $sApellidos , $sCiudad , $sDescripcion , $filepathsql);
     }
     //Si es la inicializada
-    if( isset($oDatosJson['Imagen']) && $oDatosJson['Imagen'] == '/the-connect-house/img/isset/isset-user.png' )
+    if( isset($oDatosJson['Imagen']) && $oDatosJson['Imagen'] == '/img/isset/isset-user.png' )
     {
-        $sImagen = str_replace('/the-connect-house/' , '' , $oDatosJson['Imagen'] );
+        $sImagen =  $oDatosJson['Imagen'];
         //
         $lResult = $oDbUsuarios->updateUsuario( $_SESSION['idUsuario'] , $sCorreo , $sNombre , $sApellidos , $sCiudad , $sDescripcion , $sImagen);
     }

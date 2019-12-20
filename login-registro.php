@@ -19,7 +19,7 @@
     {
         //
         // logueado
-        header( "location:/the-connect-house/perfil.php" );
+        header( "location:/perfil.php" );
         return;
     }
     //
@@ -73,7 +73,7 @@
                          <option value="m">Mujer</option>
                          <option value="h">Hombre</option>
                      </select><br>
-                     <label for="ciudad">¿De donde eres <span class="spanred">*</span></label>
+                     <label for="ciudad">¿De donde eres?<span class="spanred">*</span></label>
                      <select name="ciudad" id="selectorciudad">
                          <option value="null">Seleccionar <span class="spanred">*</span></option>
                          <option value="Leon">León</option>
@@ -93,8 +93,8 @@
      </div>
     <?php  require_once(__DIR__."/includes/footer.php" );?>
     </body>
-    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/validaciones/login-registro.js"></script>
-    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/menu.js"></script>
+    <script src="<?php echo get_root_uri() ?>/js/validaciones/login-registro.js"></script>
+    <script src="<?php echo get_root_uri() ?>/js/menu.js"></script>
     <script>
         //Nicializamos la pantalla de login
         $("#registro").css("display", "none");

@@ -232,6 +232,29 @@ class Usuario extends Conexion
         }
     }
     /**
+     * @param $nId
+     * @param $sDescripcion
+     * @return bool
+     */
+    public function updatePass( $nId , $sPassword )
+    {
+        $cSql = 'UPDATE '.$this->sTabla.' SET 
+                    Password = ? 
+                    WHERE idUsuario = ?';
+        //
+        $stmt = $this->prepare($cSql);
+        $stmt->bind_param('si', $sPassword, $nId);
+        $bResultado = $stmt->execute();
+        if(!$bResultado)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    /**
      * Elimina un usuarip
      *
      * @param $nIdUsuario

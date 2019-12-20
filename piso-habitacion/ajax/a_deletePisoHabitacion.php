@@ -55,7 +55,7 @@
     {
         unlink( $_SERVER['DOCUMENT_ROOT'].$value);
     }
-    rmdir( $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/uploads/'.$aDbUsuario[0]->Carpeta.'/'.$aDbPisos[0]->Carpeta.'/');
+    rmdir( $_SERVER['DOCUMENT_ROOT'].'/uploads/'.$aDbUsuario[0]->Carpeta.'/'.$aDbPisos[0]->Carpeta.'/');
     //
     //Eliminamos el piso o la habitacion
      $lResut = $oDbPisos->deletePisoHabitacion( $nidPiso );

@@ -48,21 +48,21 @@ function validarDatosEditados()
     //
     if( descripcion.trim() == '')
     {
-        alert("Indica la descripción");
+        $.notify("Indica la descripción" , 'error');
         $('#descripcion').focus();
         return false;
     }
     if( precio.trim() == '' || isNaN(precio))
     {
-        alert("Indique un precio válido");
+        $.notify("Indique un precio válido" , 'error');
         $('#precio').focus();
         return false;
     }
     if(id == 2)
     {
-        if( chicos.trim() == '' || chicas.trim() == '')
+        if( chicos == '' || chicas == '')
         {
-            alert("Indique si hay gente en el piso");
+            $.notify("Indique si hay gente en el piso");
             return false;
         }
     }
@@ -81,7 +81,7 @@ function validarDatosEditados()
         };
     //
     $.ajax({
-        url: '/the-connect-house/piso-habitacion/ajax/a_editarPisoHabitacion.php',
+        url: '/piso-habitacion/ajax/a_editarPisoHabitacion.php',
         type: 'POST',
         data: JSON.stringify(oDatosJson),
         beforeSend: function ()
@@ -90,13 +90,14 @@ function validarDatosEditados()
         }
     })
         .done(function(oJson) {
-            console.log(oJson);
+            //console.log(oJson);
             var oRespuesta = JSON.parse(oJson);
             if (oRespuesta.Estado == "OK")
             {
-                window.open("/the-connect-house/index.php", "_self");
+                window.open("/index.php", "_self");
             } else {
-                alert(oRespuesta.Mensaje);
+                //alert(oRespuesta.Mensaje);
+                $.notify(oRespuesta.Mensaje , 'error')
             }
         });
 }

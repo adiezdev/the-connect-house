@@ -162,12 +162,30 @@
   <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
 <!--Scripts-->
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/like.js"></script>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/menu.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/like.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/menu.js"></script>
 <!--Inicializamos a false para no dejar hacer click en el mapa y añadir marca-->
 <script>var touch = false;</script>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/mapa.js"></script>
 <script>
+    /**
+     * Función para mostrar valor del slider del precio
+     */
+    $(document).ready(function() {
+        //Posición incial
+        $('#slider').val(0);
+        //Acción de cambio
+        $('#slider').on("input change", function() {
+            //Capturamos el valor actual
+            var valor = $(this).val();
+            //Lo mostramos
+            $('#preciospan').html(valor)
+        });
+        //
+        $('#btbuscador').click(function () {
+            $(this).notify('Buscando...' , 'success')
+        });
+    });
     <?php
             //Recorremos el array de latitud longitud
             foreach ($ltlgs as $key=>$ltlg)

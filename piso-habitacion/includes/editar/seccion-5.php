@@ -19,7 +19,7 @@ Nombre del archivo: seccion-5.php
                 {
                     $Img = '<div class="contenedores" >';
                     $Img .= '<p style="position: relative; top: 20px; line-height: normal; background: red; width: 31px; border-radius: 500px; height: 31px;">X</p>';
-                    $Img .= '<img id="imgeliminar" title="'.$aDbImagenesPiso->idImagen.'" style="width: 280px; margin: 5px" src="/the-connect-house/'.$aDbImagenesPiso->Url.'">';
+                    $Img .= '<img id="imgeliminar" title="'.$aDbImagenesPiso->idImagen.'" style="width: 280px; margin: 5px" src="/'.$aDbImagenesPiso->Url.'">';
                     $Img .= '</div>';
                     echo $Img;
                 }

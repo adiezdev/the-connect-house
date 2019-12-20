@@ -10,7 +10,7 @@ function completaPerfil()
     var telf = $('input[name="telefono[]"]');
     if( telf.val() == '' || isNaN(telf.val()))
     {
-        alert("Indique un teléfono válido");
+        $(telf).notify("Indique un teléfono válido" , 'error');
         $(this).focus();
         return false;
     }
@@ -27,7 +27,7 @@ function completaPerfil()
     //
     //Accedemos a la petición
     $.ajax({
-        url: '/the-connect-house/peticiones/ajax/a_Completaperfil.php',
+        url: '/peticiones/ajax/a_Completaperfil.php',
         type: 'POST',
         data: JSON.stringify(oDatosJson)
     })
@@ -37,9 +37,9 @@ function completaPerfil()
             var oRespuesta = JSON.parse(oJson);
             if (oRespuesta.Estado == "OK")
             {
-                window.open("/the-connect-house/perfil.php?correo="+oRespuesta.Correo , "_self");
+                window.open("/perfil.php?correo="+oRespuesta.Correo , "_self");
             } else {
-                alert(oRespuesta.Mensaje);
+                $.notify(oRespuesta.Mensaje , 'error')
             }
         });
 }

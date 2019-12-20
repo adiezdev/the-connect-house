@@ -5,7 +5,7 @@ if( !isset( $_SESSION['idUsuario'] ))
 {
     //
     // No logueado
-    header( "location:/the-connect-house/login-registro.php?Sesion=true" );
+    header( "location:/login-registro.php?Sesion=true" );
     return;
 }
 //Comprobar la sesión
@@ -14,6 +14,6 @@ if (time() - $_SESSION['tiempo'] > 12000)
     //La sesión se destruye
     session_destroy();
 
-    header("location:/the-connect-house/login-registro.php");
+    header("location:/login-registro.php");
     die();
 }

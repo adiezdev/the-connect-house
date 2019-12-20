@@ -20,7 +20,7 @@ function PaginadoSiguiente()
     //
     //Enviamos la peticion
     $.ajax({
-        url: '/the-connect-house/peticiones/ajax/a_PaginadoInicio.php',
+        url: '/peticiones/ajax/a_PaginadoInicio.php',
         type: 'POST',
         data: JSON.stringify(oDatosJson)
     })
@@ -33,7 +33,7 @@ function PaginadoSiguiente()
             for (let i = 0 ; i < oRespuesta.length; i++)
             {
                 //Formamos el hmtl
-                var stri = '<div class="box-pisos-habitacones" onclick="window.open(\'/the-connect-house/piso.php?'+btoa('idPiso='+oRespuesta[i].Id)+'\', \'_self\');" >';
+                var stri = '<div class="box-pisos-habitacones" onclick="window.open(\'/piso.php?'+btoa('idPiso='+oRespuesta[i].Id)+'\', \'_self\');" >';
                 stri += '<img src="'+oRespuesta[i].Imagen+'" alt="habitación">';
                 stri += '<div class="descripcion">';
                 stri += '<h3>'+oRespuesta[i].Calle+'</h3>';
@@ -76,7 +76,7 @@ function PaginadoAnterior()
     //
     //Enviamos la peticion
     $.ajax({
-        url: '/the-connect-house/peticiones/ajax/a_PaginadoInicio.php',
+        url: '/peticiones/ajax/a_PaginadoInicio.php',
         type: 'POST',
         data: JSON.stringify(oDatosJson)
     })
@@ -89,7 +89,7 @@ function PaginadoAnterior()
             for (let i = 0 ; i < oRespuesta.length; i++)
             {
                 //Formamos el hmtl
-                var stri = '<div class="box-pisos-habitacones" onclick="window.open(\'/the-connect-house/piso.php?'+btoa('idPiso='+oRespuesta[i].Id)+'\', \'_self\');" >';
+                var stri = '<div class="box-pisos-habitacones" onclick="window.open(\'/piso.php?'+btoa('idPiso='+oRespuesta[i].Id)+'\', \'_self\');" >';
                 stri += '<img src="'+oRespuesta[i].Imagen+'" alt="habitación">';
                 stri += '<div class="descripcion">';
                 stri += '<h3>'+oRespuesta[i].Calle+'</h3>';

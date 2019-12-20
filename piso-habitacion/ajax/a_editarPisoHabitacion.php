@@ -136,7 +136,7 @@
             $filesave = 'uploads/'.$aUsuarios[0]->Carpeta.'/'.$aDbPisoHabitacion[0]->Carpeta.'/'.$nom.'.jpg';
             //
             //URL completa
-            $root = $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/'.$filesave;
+            $root = $_SERVER['DOCUMENT_ROOT'].'/'.$filesave;
             //
             //Llamamos a las imagenes
             $oDdImagenes = new Imagenes();

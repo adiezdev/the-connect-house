@@ -44,9 +44,10 @@
                     {
                         $Html = '<div class="izquierdo-perfil" >';
                         //Mostramos la imagen de perfil
-                        $Html .= '<img id="imgperfil" class="user" src="/the-connect-house/'.$oDatoUsuario->Imgperfil.'" alt="imgen-perfil" srcset="">';
+                        $Html .= '<img id="imgperfil" class="user" src="'.$oDatoUsuario->Imgperfil.'" alt="imgen-perfil" srcset="">';
                         $Html .= '<div><label for="inputperf" class="editar-foto"><i class="fas fa-pen"></i>Subir Imagen</label><input type="file" name="archivos" id="inputperf"  style="display: none"/></div>';
-                        $Html .= '<div class="eliminar-foto" onclick="eliminarImg()"><i class="fas fa-pen"></i>Eliminar fotpgrafía</div>';
+                        $Html .= '<div class="eliminar-foto" onclick="eliminarImg()"><i class="fas fa-pen"></i>Eliminar fotografía</div>';
+                        $Html .= '<div class="editar-foto" onclick="window.open(\'/editar-perfil/cambiar-password.php\', \'_self\');"   style=" left: 160px;margin-top: 3px; "><i class="fas fa-key"></i>Cambiar Contraseña</div>';
                         $Html .= '<h3>Correo</h3><input id="correo" name="correo" class="credential" type="text" value="'.$oDatoUsuario->Correo.'"><br>';
                         $Html .= '</div>';
                         //
@@ -97,8 +98,8 @@
     <!--Footer-->
     <?php require_once(__DIR__ . "/../includes/footer.php"); ?>
 </body>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/editar-perfil/js/precarga-imagen-perfil.js"></script>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/editar-perfil/js/validacion-edicion-perfil.js"></script>
+<script src="<?php echo get_root_uri() ?>/editar-perfil/js/precarga-imagen-perfil.js"></script>
+<script src="<?php echo get_root_uri() ?>/editar-perfil/js/validacion-edicion-perfil.js"></script>
 <script>
     //
     //Añadir un segundo telefono
@@ -121,14 +122,20 @@
         {
             $(this).attr('selected', 'selected');
         }
-    })
+    });
+    /**
+     * Elimina la imagen de perfil
+     * */
     function eliminarImg() {
-        $('#imgperfil').attr('src' , '/the-connect-house/img/isset/isset-user.png');
-        $('#hiddens').html('<input type="hidden" name="imagen" id="key.png" value="/the-connect-house/img/isset/isset-user.png">')
+        $('#imgperfil').attr('src' , '/img/isset/isset-user.png');
+        $('#hiddens').html('<input type="hidden" name="imagen" id="key.png" value="/img/isset/isset-user.png">')
     }
+    /**
+     * Funcion elimina cuenta
+     */
     function eliminarCuenta() {
         $.ajax({
-            url: '/the-connect-house/editar-perfil/ajax/a_eliminarUsuario.php',
+            url: '/editar-perfil/ajax/a_eliminarUsuario.php',
             type: 'POST',
             beforeSend: function ()
             {
@@ -140,9 +147,10 @@
                 var oRespuesta = JSON.parse(oJson);
                 if (oRespuesta.Estado == "OK")
                 {
-                    window.location.href = '/the-connect-house/cerrar-session.php';
+                    window.location.href = '/cerrar-session.php';
                 } else {
-                    alert(oRespuesta.Mensaje);
+                   //alert(oRespuesta.Mensaje);
+                    $.notify(oRespuesta.Mensaje , 'error')
                 }
             });
     }

@@ -39,8 +39,8 @@
         //generamos un nombre para la imagen
         $nom = md5(rand());
         //Marco la ruta
-        $filepathsql = "uploads/".$aUsuarios[0]->Carpeta."/".$nom.".jpg";
-        $archivoRuta = $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/'.$filepathsql;
+        $filepathsql = "/uploads/".$aUsuarios[0]->Carpeta."/".$nom.".jpg";
+        $archivoRuta = $_SERVER['DOCUMENT_ROOT'].'/'.$filepathsql;
         //Paso la imagen a la ruta
         file_put_contents( $archivoRuta , $datos);
         //Permisos al archivo

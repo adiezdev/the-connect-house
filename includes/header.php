@@ -18,10 +18,10 @@
     {
         $m_cGetTheConnect = get_root_uri();
         $cabecera = '<title>'.$stitulo.'</title>';
-        $cabecera .= '<link rel="stylesheet" href="/the-connect-house/css/footer.css">'; //Siempre va estar el footer
+        $cabecera .= '<link rel="stylesheet" href="/css/footer.css">'; //Siempre va estar el footer
         foreach( $sCss as $css)
         {
-            $cabecera .= '<link rel="stylesheet" href="'.$m_cGetTheConnect.'/the-connect-house/css/'.$css.'.css">';
+            $cabecera .= '<link rel="stylesheet" href="'.$m_cGetTheConnect.'/css/'.$css.'.css">';
         }
         //Si le pasamos un true agregamos las dependencia del mapa
         if($apiMapa == true)
@@ -39,6 +39,6 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="/the-connect-house/js/notify.js"></script>
+    <script src="/js/notify.js"></script>
     <?php require_once(__DIR__ . "/funciones.php"); ?>
 </head>

@@ -27,7 +27,7 @@ function eliminarDatos()
         };
     //
     $.ajax({
-        url: '/the-connect-house/piso-habitacion/ajax/a_deletePisoHabitacion.php',
+        url: '/piso-habitacion/ajax/a_deletePisoHabitacion.php',
         type: 'POST',
         data: JSON.stringify(oDatosJson),
         beforeSend: function ()
@@ -40,9 +40,9 @@ function eliminarDatos()
             var oRespuesta = JSON.parse(oJson);
             if (oRespuesta.Estado == "OK")
             {
-                window.open("/the-connect-house/index.php", "_self");
+                window.open("/index.php", "_self");
             } else {
-                alert(oRespuesta.Mensaje);
+                $.notify(oRespuesta.Mensaje , 'error')
             }
         });
 }

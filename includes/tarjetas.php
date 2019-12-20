@@ -51,14 +51,14 @@
             }
             //
             //Div de datos
-            $Html .= '<div onclick="window.open(\'/the-connect-house/piso.php?'.base64_encode('idPiso='.$aDbPisosHabitacion->idPiso).'\', \'_self\');" >';
+            $Html .= '<div onclick="window.open(\'/piso.php?'.base64_encode('idPiso='.$aDbPisosHabitacion->idPiso).'\', \'_self\');" >';
                 //
                 //Accedemos a la imagen del piso
                 $aDbImagen = new Imagenes();
                 $ImagenDestacada =  $aDbImagen->getByIdPisoPrimeraFoto( $aDbPisosHabitacion->idPiso );
                 if($ImagenDestacada == null)
                 {
-                    $Html .= '<img src="/the-connect-house/img/img-modelo.jpg" alt="habitación">';
+                    $Html .= '<img src="/img/img-modelo.jpg" alt="habitación">';
                 }
                 else
                 {
@@ -93,7 +93,7 @@
             {
                 if(  $aDbPisosHabitacion->idUsuario ==$_SESSION['idUsuario'] )
                 {
-                    $Html .= '<div class="editar-piso" onclick="window.open(\'/the-connect-house/piso-habitacion/editar-piso-habitacion.php?idPiso='.$aDbPisosHabitacion->idPiso.'&Tipo='.$aDbPisosHabitacion->Tipo.'\', \'_self\');" ><i class="fas fa-pen"></i> Editar</div>';
+                    $Html .= '<div class="editar-piso" onclick="window.open(\'/piso-habitacion/editar-piso-habitacion.php?idPiso='.$aDbPisosHabitacion->idPiso.'&Tipo='.$aDbPisosHabitacion->Tipo.'\', \'_self\');" ><i class="fas fa-pen"></i> Editar</div>';
 
                 }
             }
@@ -110,7 +110,7 @@
     {
         foreach( $aDbPisosHabitaciones as $aDbPisosHabitacion)
         {
-            $Html  = '<div class="box-pisos-habitacones"  onclick="window.open(\'/the-connect-house/piso.php?'.base64_encode('idPiso='.$aDbPisosHabitacion->idPiso).'\', \'_self\');" >';
+            $Html  = '<div class="box-pisos-habitacones"  onclick="window.open(\'/piso.php?'.base64_encode('idPiso='.$aDbPisosHabitacion->idPiso).'\', \'_self\');" >';
             //
             //Accedemos a la imagen del piso
             $aDbImagen = new Imagenes();
@@ -118,7 +118,7 @@
             //
             if($ImagenDestacada == null)
             {
-                $Html .= '<img src="/the-connect-house/img/img-modelo.jpg" alt="habitación">';
+                $Html .= '<img src="/img/img-modelo.jpg" alt="habitación">';
             }
             else
             {

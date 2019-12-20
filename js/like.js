@@ -14,7 +14,7 @@ $(document).ready(function() {
         {
             //
             $.ajax({
-                url: '/the-connect-house/peticiones/ajax/a_SaveFavorito.php',
+                url: '/peticiones/ajax/a_SaveFavorito.php',
                 type: 'POST',
                 data: JSON.stringify(oDatosJson)
             })
@@ -32,7 +32,7 @@ $(document).ready(function() {
         {
             //Lo eliminamos
             $.ajax({
-                url: '/the-connect-house/peticiones/ajax/a_DeleteFavorito.php',
+                url: '/peticiones/ajax/a_DeleteFavorito.php',
                 type: 'POST',
                 data: JSON.stringify(oDatosJson)
             })

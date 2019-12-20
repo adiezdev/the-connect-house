@@ -18,7 +18,7 @@ function validarEdicionPerfi()
     var telf = $('input[name="telefono"]');
     if( telf.val() == '' || isNaN(telf.val()))
     {
-        alert("Indique un teléfono válido");
+        $.notify("Indique un teléfono válido" , 'error');
         $(this).focus();
         return false;
     }
@@ -40,7 +40,7 @@ function validarEdicionPerfi()
         };
     //
     $.ajax({
-        url: '/the-connect-house/editar-perfil/ajax/a_editarUsuario.php',
+        url: '/editar-perfil/ajax/a_editarUsuario.php',
         type: 'POST',
         data: JSON.stringify(oDatosJson),
         beforeSend: function ()
@@ -53,9 +53,10 @@ function validarEdicionPerfi()
             var oRespuesta = JSON.parse(oJson);
             if (oRespuesta.Estado == "OK")
             {
-                window.open("/the-connect-house/index.php", "_self");
+                window.open("/index.php", "_self");
             } else {
-                alert(oRespuesta.Mensaje);
+                //alert(oRespuesta.Mensaje);
+                $.notify(oRespuesta.Mensaje , 'error')
             }
         });
 }

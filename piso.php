@@ -26,7 +26,7 @@
     {
         //
         //Si intentamos entrar sin una petición get nos redirecciona
-        header( "location:/the-connect-house/perfil.php" );
+        header( "location:/perfil.php" );
         return;
     }
 	require_once(__DIR__."/includes/header.php" );
@@ -129,7 +129,7 @@
 	                    $Html2 .= ' <div class="into-izquierdo">';
 	                    $Html2 .=    '<div id="perfil">';
 	                    //Click en el perfil
-	                    $Html2 .=        '<div style="cursor: pointer;" onclick="window.open(\'/the-connect-house/perfil.php?correo='.$aDbUsuario->Correo.'\', \'_self\');">';
+	                    $Html2 .=        '<div style="cursor: pointer;" onclick="window.open(\'/perfil.php?correo='.$aDbUsuario->Correo.'\', \'_self\');">';
 	                    //Datos del usuario que pone en alquiker
 	                    $Html2 .=        '<img class="user" src="'.$aDbUsuario->Imgperfil.'" alt="">';
 	                    $Html2 .=        '<h3>'.$aDbUsuario->Nombre.'</h3>';
@@ -163,7 +163,7 @@
                         }
 	                    else
                         {
-                            $Html2 .= '<div class="editar-piso"  onclick="window.open(\'/the-connect-house/piso-habitacion/editar-piso-habitacion.php?idPiso='.$aDatosPisosHabitacion->idPiso.'&Tipo='.$aDatosPisosHabitacion->Tipo.'\', \'_self\');" ><i class="fas fa-pen"></i> Editar Piso</div>';
+                            $Html2 .= '<div class="editar-piso"  onclick="window.open(\'/piso-habitacion/editar-piso-habitacion.php?idPiso='.$aDatosPisosHabitacion->idPiso.'&Tipo='.$aDatosPisosHabitacion->Tipo.'\', \'_self\');" ><i class="fas fa-pen"></i> Editar Piso</div>';
                         }
                         $Html2 .='</div>';
 	                    $Html2 .=  '</div>';
@@ -256,11 +256,11 @@
 <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
 <!-- Script necesarios -->
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider.js"></script>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/like.js"></script>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/crearventana.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/slider.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/like.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/crearventana.js"></script>
 <script>var touch = false;</script>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/mapa.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/mapa.js"></script>
 <script>
     //Quitamos el scroll del mapa
     mymap.scrollWheelZoom.disable();
@@ -284,7 +284,7 @@
         var oDatosJson = {descripcion: descripciondada , mail: maildelcasero , telefono: telefonos , usuario: usuarioinquilino }
         //Enviamos los ddatos para que sean enviados por email
         $.ajax({
-            url: '/the-connect-house/mail/enviarpeticion.php',
+            url: '/mail/enviarpeticion.php',
             type: 'POST',
             data: JSON.stringify(oDatosJson)
         })
@@ -301,7 +301,7 @@
                     //
                     $('#buttonVentana').notify('Enviado. Se pondrá en contacto contido', 'info')
                 } else {
-                    alert(oRespuesta.Mensaje);
+                    //alert(oRespuesta.Mensaje);
                     $('#buttonVentana').notify('Ha sucedido un error', 'error')
                 }
             });

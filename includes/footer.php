@@ -10,7 +10,7 @@
 ?>
 <footer>
     <div>
-        <?php echo '<img id="marca" src="'.get_root_uri().'/the-connect-house/img/marca/banner-w.png">'; ?>
+        <?php echo '<img id="marca" src="'.get_root_uri().'/img/marca/banner-w.png">'; ?>
     </div>
     <div class="iconos">
         <i class="fab fa-facebook-square"></i>

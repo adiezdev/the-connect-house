@@ -71,7 +71,7 @@
     $lResut = $oDbTelefonoes->deleteTelfs( $IdUsuario );
     //
     //Eliminan Imagen de perfil
-    $eliminar = $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/uploads/'.$aDbUsuario[0]->Carpeta;
+    $eliminar = $_SERVER['DOCUMENT_ROOT'].'/uploads/'.$aDbUsuario[0]->Carpeta;
     deleteDirectory($eliminar);
     //
     $lResut = $oDbUsuario->deleteUsuario( $IdUsuario );

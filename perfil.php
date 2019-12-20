@@ -23,7 +23,7 @@
     {
         //
         //Si intentamos entrar sin una petición get nos redirecciona
-        header( "location:/the-connect-house/index.php" );
+        header( "location:/index.php" );
         return;
     }
     require_once(__DIR__."/includes/header.php");
@@ -56,7 +56,7 @@
     //Sino existe nos redirigimos al index
     if(!$oDatosUsuario)
     {
-        header( "location:/the-connect-house/index.php" );
+        header( "location:/index.php" );
         return;
     }
     //
@@ -102,7 +102,7 @@
                         //Si el usuario es el mismo que sessón
 	                    if( $idUsuario == $_SESSION['idUsuario'])
 	                    {
-		                    $Html .= '<div class="editar-piso"  onclick="window.open(\'/the-connect-house/editar-perfil/editar-perfil.php?\', \'_self\');"><i class="fas fa-pen" ></i> Editar Perfil</div>';
+		                    $Html .= '<div class="editar-piso"  onclick="window.open(\'/editar-perfil/editar-perfil.php?\', \'_self\');"><i class="fas fa-pen" ></i> Editar Perfil</div>';
 
 	                    }
                     }
@@ -190,9 +190,9 @@
     <!--Footer-->
     <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/crearventana.js"></script>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/like.js"></script>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/menu.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/crearventana.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/like.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/menu.js"></script>
 <script>
     /**
      * Función para ir a registrar tu piso o habitacion
@@ -201,7 +201,7 @@
      */
     function addPisoHabitacion( tipo )
     {
-        window.open('/the-connect-house/piso-habitacion/registrar-piso-habitacion.php?Tipo='+tipo,'_self');
+        window.open('/piso-habitacion/registrar-piso-habitacion.php?Tipo='+tipo,'_self');
     }
 </script>
 </html>

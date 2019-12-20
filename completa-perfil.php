@@ -26,7 +26,7 @@
     }
     else
     {
-        header( "location:/the-connect-house/index.php" );
+        header( "location:/index.php" );
         return;
     }
     //
@@ -79,8 +79,8 @@
     <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
 <!--Scripts necesarios-->
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/precarga-imagen-perfil.js"></script>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/validaciones/completa-perfil.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/precarga-imagen-perfil.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/validaciones/completa-perfil.js"></script>
 <script>
     $(document).ready(function(){
         //Máixmo de caracteres en la descripción

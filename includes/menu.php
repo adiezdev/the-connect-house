@@ -14,7 +14,7 @@
 <div id="menumovil" class="navmovil">
     <a href="javascript:void(0)" class="botoncerrar">&times;</a>
     <?php
-    echo '<a href="'.get_root_uri().'/the-connect-house/index.php">Incio</a>';
+    echo '<a href="'.get_root_uri().'/index.php">Incio</a>';
     if(isset($_SESSION['idUsuario']))
     {
         //
@@ -24,13 +24,13 @@
         //Accedemos a datos del usuario
         $oDatosUsuarios = $aDbUsuarios->getById($_SESSION['idUsuario']);
         //
-        echo ' <a href="'.get_root_uri().'/the-connect-house/perfil.php?correo='.$oDatosUsuarios[0]->Correo.'">Perfil</a>';
-        echo ' <a href="'.get_root_uri().'/the-connect-house/favoritos.php">Mis favoritos</a>';
-        echo ' <a href="'.get_root_uri().'/the-connect-house/cerrar-session.php">Cerrar Sesión</a>';
+        echo ' <a href="'.get_root_uri().'/perfil.php?correo='.$oDatosUsuarios[0]->Correo.'">Perfil</a>';
+        echo ' <a href="'.get_root_uri().'/favoritos.php">Mis favoritos</a>';
+        echo ' <a href="'.get_root_uri().'/cerrar-session.php">Cerrar Sesión</a>';
     }
     else
     {
-        echo '<a href="'.get_root_uri().'/the-connect-house/login-registro.php">Inciar sesión</a>';
+        echo '<a href="'.get_root_uri().'/login-registro.php">Inciar sesión</a>';
     }
     ?>
 </div>
@@ -38,7 +38,7 @@
 <nav class="menucabecera">
     <div><i class="fa fa-bars"></i></div>
         <?php
-        echo '<a href="'.get_root_uri().'/the-connect-house/index.php">Incio</a>';
+        echo '<a href="'.get_root_uri().'/index.php">Incio</a>';
         if(isset($_SESSION['idUsuario']))
         {
             //
@@ -48,16 +48,16 @@
             //Accedemos a datos del usuario
             $oDatosUsuarios = $aDbUsuarios->getById($_SESSION['idUsuario']);
             //
-            echo ' <a href="'.get_root_uri().'/the-connect-house/perfil.php?correo='.$oDatosUsuarios[0]->Correo.'">Perfil</a>';
-            echo ' <a href="'.get_root_uri().'/the-connect-house/favoritos.php">Mis favoritos</a>';
-            echo ' <a href="'.get_root_uri().'/the-connect-house/cerrar-session.php">Cerrar Sesión</a>';
+            echo ' <a href="'.get_root_uri().'/perfil.php?correo='.$oDatosUsuarios[0]->Correo.'">Perfil</a>';
+            echo ' <a href="'.get_root_uri().'/favoritos.php">Mis favoritos</a>';
+            echo ' <a href="'.get_root_uri().'/cerrar-session.php">Cerrar Sesión</a>';
         }
         else
         {
-            echo '<a href="'.get_root_uri().'/the-connect-house/login-registro.php">Inciar sesión</a>';
+            echo '<a href="'.get_root_uri().'/login-registro.php">Inciar sesión</a>';
         }
         ?>
-        <form method="get" action="<?php get_root_uri()?>/the-connect-house/buscar.php">
+        <form method="get" action="<?php get_root_uri()?>/buscar.php">
             <input type="search" name="Buscar" id="search" placeholder="Buscar por calle ...">
         </form>
 </nav>

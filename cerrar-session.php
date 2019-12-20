@@ -17,4 +17,4 @@ $_SESSION[$key] = NULL;
 //Lo destruimos
 session_destroy();
 //Redirigimos
-header( "location:/the-connect-house/login-registro.php" );
+header( "location:/login-registro.php" );

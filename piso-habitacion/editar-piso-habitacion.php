@@ -1,101 +1,100 @@
-    <?php
-    //error_reporting( E_ALL );
-    //ini_set( 'display_errors' , true );
-    //ini_set( 'display_startup_errors' , true );
-    error_reporting(0);
-    /*
-        -------------------------------------
-        Archivo de: Alejandro Díez
-        GitHub: @adilosa95
-        Proyecto: the-connect-house
-        Nombre del archivo: editar-piso-habitacion.php
-        -------------------------------------
-    */
-    session_start();
-    require_once(__DIR__ . "/../includes/sesion.php");
-    //
-    require_once(__DIR__ . "/../includes/header.php");
-    require_once(__DIR__ . "/../includes/constantes.php");
-    //
-    //Acceso a datos
-    require_once(__DIR__ . "/../bd/bd_pisos.php");
-    require_once(__DIR__ . "/../bd/bd_ocupado.php");
-    require_once(__DIR__ . "/../bd/bd_secciones.php");
-    require_once(__DIR__ . "/../bd/bd_imagenespiso.php");
-    //
-    //Configuramos los estilos que necesitamos
-    $estilos = array(
-        ESTILOS_WIDGETS ,
-        ESTILOS_MAIN ,
-        ESTILOS_REGISTRAR_PISO ,
-        INCLUD_SLIDE
-    );
-    //
-    //Lo cogemos el tipo que vamos añadir
-    $titulo = '';
-    if($_GET)
-    {
-        $nTipo = $_GET['Tipo'];
-        $nidPiso = $_GET['idPiso'];
-    }
-    //
-    //Titulo dependiendo de lo que sea
-    if( $nTipo == 1)
-    {
-        $titulo = 'Editar piso';
-    }
-    else if($nTipo == 2)
-    {
-        $titulo = 'Editar habitación';
-    }
-    else //Sino está inicializamo vuelve al perfil
-    {
-        header( "location:/the-connect-house/perfil.php" );
-        return;
-    }
-    //
-    //Generamos la cabecera
-    cabecera( $titulo , $estilos , false );
-    //
-    $oDbPisoHabitacion = new Pisos();
-    $aDbPisoHabitacion = $oDbPisoHabitacion->getById($nidPiso);
-    //
-    if($aDbPisoHabitacion[0]->idUsuario != $_SESSION['idUsuario'])
-    {
-        header( "location:/the-connect-house/perfil.php" );
-        return;
-    }
-    //
-    //Accedemos al 1 que son las comodidades
-    $odbComodidades = new Secciones(1);
-    //Sacamos todos los registros
-    $oComodidades = $odbComodidades->getAll();
-    //
-    $oComodidadesId = $odbComodidades->getById($nidPiso);
-    //
-    //Comprobamos si los dos arrays coinciden
-    $array = json_decode(json_encode($oComodidadesId), true);
-    $array1 = json_decode(json_encode($oComodidades), true);
-    //Con el resultado hacemos uno
-    $arrayMacth = array_intersect_assoc($array , $array1);
-    //
-    //Sacamos las normas
-    $odbComodidades = new Secciones(2);
-    //Sacamos todos los registros
-    $oNormas = $odbComodidades->getAll();
-    //
-    $oNormasId = $odbComodidades->getById($nidPiso);
-    //
-    //Comprobamos si los dos arrays coinciden
-    $array2 = json_decode(json_encode($oNormasId), true);
-    $array3 = json_decode(json_encode($oNormas), true);
-    //Con el resultado hacemos uno
-    $arrayMacthN = array_intersect_assoc($array2 , $array3);
-    //
-    //
-    $oDbImagenesPisoH  = new Imagenes();
-    $aDbImagenesPisoH  = $oDbImagenesPisoH->getByIdPiso($nidPiso)
-    ?>
+<?php
+//error_reporting( E_ALL );
+//ini_set( 'display_errors' , true );
+//ini_set( 'display_startup_errors' , true );
+error_reporting(0);
+/*
+    -------------------------------------
+    Archivo de: Alejandro Díez
+    GitHub: @adilosa95
+    Proyecto: the-connect-house
+    Nombre del archivo: editar-piso-habitacion.php
+    -------------------------------------
+*/
+session_start();
+//
+//Lo cogemos el tipo que vamos añadir
+$titulo = '';
+if($_GET)
+{
+    $nTipo = $_GET['Tipo'];
+    $nidPiso = $_GET['idPiso'];
+}
+//
+if($aDbPisoHabitacion[0]->idUsuario != $_SESSION['idUsuario'])
+{
+    header( "location:/perfil.php" );
+    return;
+}
+//
+require_once(__DIR__ . "/../includes/header.php");
+require_once(__DIR__ . "/../includes/constantes.php");
+//
+//Acceso a datos
+require_once(__DIR__ . "/../bd/bd_pisos.php");
+require_once(__DIR__ . "/../bd/bd_ocupado.php");
+require_once(__DIR__ . "/../bd/bd_secciones.php");
+require_once(__DIR__ . "/../bd/bd_imagenespiso.php");
+//
+//Configuramos los estilos que necesitamos
+$estilos = array(
+    ESTILOS_WIDGETS ,
+    ESTILOS_MAIN ,
+    ESTILOS_REGISTRAR_PISO ,
+    INCLUD_SLIDE
+);
+//
+//Titulo dependiendo de lo que sea
+if( $nTipo == 1)
+{
+    $titulo = 'Editar piso';
+}
+else if($nTipo == 2)
+{
+    $titulo = 'Editar habitación';
+}
+else //Sino está inicializamo vuelve al perfil
+{
+    header( "location:/perfil.php" );
+    return;
+}
+//
+//Generamos la cabecera
+cabecera( $titulo , $estilos , false );
+//
+$oDbPisoHabitacion = new Pisos();
+$aDbPisoHabitacion = $oDbPisoHabitacion->getById($nidPiso);
+//
+//Accedemos al 1 que son las comodidades
+$odbComodidades = new Secciones(1);
+//Sacamos todos los registros
+$oComodidades = $odbComodidades->getAll();
+//
+$oComodidadesId = $odbComodidades->getById($nidPiso);
+//
+//Comprobamos si los dos arrays coinciden
+$array = json_decode(json_encode($oComodidadesId), true);
+$array1 = json_decode(json_encode($oComodidades), true);
+//Con el resultado hacemos uno
+$arrayMacth = array_intersect_assoc($array , $array1);
+//
+//Sacamos las normas
+$odbComodidades = new Secciones(2);
+//Sacamos todos los registros
+$oNormas = $odbComodidades->getAll();
+//
+$oNormasId = $odbComodidades->getById($nidPiso);
+//
+//Comprobamos si los dos arrays coinciden
+$array2 = json_decode(json_encode($oNormasId), true);
+$array3 = json_decode(json_encode($oNormas), true);
+//Con el resultado hacemos uno
+$arrayMacthN = array_intersect_assoc($array2 , $array3);
+//
+//
+$oDbImagenesPisoH  = new Imagenes();
+$aDbImagenesPisoH  = $oDbImagenesPisoH->getByIdPiso($nidPiso)
+?>
 <body>
 <div class="content">
     <h1 class="title" style="text-align: center"><?php echo $titulo; ?></h1><br>
@@ -120,21 +119,21 @@
 <?php require_once(__DIR__ . "/../includes/footer.php"); ?>
 </body>
 <!-- Scripts necesarios -->
-    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/slider-secciones.js"></script>
-    <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/precarga-imagenes.js"></script>
-    <script src="<?php echo get_root_uri() ?>/the-connect-house/js/eliminar-precargada.js"></script>
-    <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/validar-edicion-piso-habitacion.js"></script>
-    <script src="<?php echo get_root_uri() ?>/the-connect-house/piso-habitacion/js/validar-eliminacion-piso-habitacion.js"></script>
-    <script>
-     var maximo = 600;
+<script src="<?php echo get_root_uri() ?>/js/slider-secciones.js"></script>
+<script src="<?php echo get_root_uri() ?>/piso-habitacion/js/precarga-imagenes.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/eliminar-precargada.js"></script>
+<script src="<?php echo get_root_uri() ?>/piso-habitacion/js/validar-edicion-piso-habitacion.js"></script>
+<script src="<?php echo get_root_uri() ?>/piso-habitacion/js/validar-eliminacion-piso-habitacion.js"></script>
+<script>
+    var maximo = 600;
     //Si detecta el teclado
 
-        //Congemos de la descipcion la longitud del valor
-        var caracteres = $('#descripcion').val().length;
-        //se lo restamos al maximo
-        var restantes = maximo - caracteres;
-        //lo mostramos
-        $('#contador').html(restantes);
+    //Congemos de la descipcion la longitud del valor
+    var caracteres = $('#descripcion').val().length;
+    //se lo restamos al maximo
+    var restantes = maximo - caracteres;
+    //lo mostramos
+    $('#contador').html(restantes);
     //
     $(document).ready(function(){
 
@@ -199,30 +198,30 @@
         //Sacamos la url de la imagen
         var imgsrc  = idimg.attr('src');
         var imgsrcrem = '';
-    <?php
+        <?php
         //Recorremos el array y si es igual al valor se chekea
-    foreach ( $arrayMacth as $arrayMact)
-    {
-        $arrayMact["idComodidad"];
-        echo  "if( $(checks[index]).find('.comodidad').val() == ".$arrayMact["idComodidad"].")
+        foreach ( $arrayMacth as $arrayMact)
+        {
+            $arrayMact["idComodidad"];
+            echo  "if( $(checks[index]).find('.comodidad').val() == ".$arrayMact["idComodidad"].")
                 {
                      $(checks[index]).find('.comodidad').attr('checked', true);
                      imgsrcrem = imgsrc.replace('808080', '000000');
                      idimg.attr('src', imgsrcrem );
                 }";
-    }
-    //Aquellos que tengan de valor el mismo que el del array se checkea
-    foreach ( $arrayMacthN as $arrayMacth )
-    {
-        $arrayMacth["idNorma"];
+        }
+        //Aquellos que tengan de valor el mismo que el del array se checkea
+        foreach ( $arrayMacthN as $arrayMacth )
+        {
+            $arrayMacth["idNorma"];
             echo  "if( $(checks[index]).find('.norma').val() == ".$arrayMacth["idNorma"].")
                 {
                      $(checks[index]).find('.norma').attr('checked', true);
                      imgsrcrem = imgsrc.replace('808080', '000000');
                      idimg.attr('src', imgsrcrem );
              }";
-    }
-    ?>
+        }
+        ?>
     });
     //Elimina la imagen que ya hay en la base de datos
     $('.contenedores').click(function ()
@@ -236,7 +235,7 @@
         var oDatosJson = {imagedelete: imageliminar , src: imageliminarsrc };
         //Se lo mandamos a eliminar
         $.ajax({
-            url: '/the-connect-house/piso-habitacion/ajax/a_deleteImg.php',
+            url: '/piso-habitacion/ajax/a_deleteImg.php',
             type: 'POST',
             data: JSON.stringify(oDatosJson)
         })

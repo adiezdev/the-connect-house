@@ -78,7 +78,7 @@ function validarCamposRegistro()
     //
     //Procesamos los datos
     $.ajax({
-        url: '/the-connect-house/peticiones/ajax/a_UsuarioRegistro.php',
+        url: '/peticiones/ajax/a_UsuarioRegistro.php',
         type: 'POST',
         data: JSON.stringify(oDatosJson),
         beforeSend: function ()
@@ -91,10 +91,11 @@ function validarCamposRegistro()
         if (oRespuesta.Estado == "OK")
         {
             var id = btoa("Usuario="+oRespuesta.IdUsuario);
-            location.href = '/the-connect-house/completa-perfil.php?'+id+'';
+            location.href = '/completa-perfil.php?'+id+'';
             //window.open('/the-connect-house/completa-perfil.php?'+id+'' , '_self' );
         } else {
-            alert(oRespuesta.Mensaje);
+            //alert(oRespuesta.Mensaje);
+            $.notify(oRespuesta.Mensaje , 'error')
         }
         //console.log(oJson); //Debug
     });
@@ -129,7 +130,7 @@ function validarCamposLogin()
     //
     //Procesamos los datos
     $.ajax({
-            url: '/the-connect-house/peticiones/ajax/a_UsuarioLogin.php',
+            url: '/peticiones/ajax/a_UsuarioLogin.php',
             type: 'POST',
             data: JSON.stringify(oDatosJson) ,
             beforeSend: function ()
@@ -141,9 +142,10 @@ function validarCamposLogin()
             var oRespuesta = JSON.parse(oJson);
             if (oRespuesta.Estado == "OK")
             {
-                window.open("/the-connect-house/perfil.php?correo="+sCorreo , "_self");
+                window.open("/perfil.php?correo="+sCorreo , "_self");
             } else {
-                alert(oRespuesta.Mensaje);
+                //alert(oRespuesta.Mensaje);
+                $.notify(oRespuesta.Mensaje , 'error')
             }
             //console.log(oJson);
         });

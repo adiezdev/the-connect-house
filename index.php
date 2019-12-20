@@ -106,8 +106,8 @@
     <?php  require_once(__DIR__."/includes/footer.php"); ?>
 </body>
 <!--Scripts-->
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/menu.js"></script>
-<script src="<?php echo get_root_uri() ?>/the-connect-house/js/paginado-pisos.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/menu.js"></script>
+<script src="<?php echo get_root_uri() ?>/js/paginado-pisos.js"></script>
 <script>
     /**
      * Función para mostrar valor del slider del precio

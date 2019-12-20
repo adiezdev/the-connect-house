@@ -72,10 +72,10 @@
     //Creamos la carpeta
     $carpeta = md5(rand( ));
     //Añadimos la carpeta
-    mkdir( $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/uploads/'.$aDbUsuario[0]->Carpeta.'/'.$carpeta.'/' , 0755 , true);
+    mkdir( $_SERVER['DOCUMENT_ROOT'].'/uploads/'.$aDbUsuario[0]->Carpeta.'/'.$carpeta.'/' , 0755 , true);
     //
     //El método mkdir da errores con los permisos, pasamos la carpeta por chmod asi damos todos los permisos para porder guardar ahí
-    chmod(  $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/uploads/'.$aDbUsuario[0]->Carpeta.'/'.$carpeta.'/' , 0777);
+    chmod(  $_SERVER['DOCUMENT_ROOT'].'/uploads/'.$aDbUsuario[0]->Carpeta.'/'.$carpeta.'/' , 0777);
     //
     //Llamamos a la clase Pisos/Habitacionex
     $oDbPisosHabitaciones = new Pisos();
@@ -163,7 +163,7 @@
             $filesave = 'uploads/'.$aUsuarios[0]->Carpeta.'/'.$carpeta.'/'.$nom.'.jpg';
             //
 	        //URL completa
-            $root = $_SERVER['DOCUMENT_ROOT'].'/the-connect-house/'.$filesave;
+            $root = $_SERVER['DOCUMENT_ROOT'].'/'.$filesave;
             //
             //Llamamos a las imagenes
             $oDdImagenes = new Imagenes();

@@ -65,62 +65,62 @@ function validarDatos()
     //VALIDACIONES
    if( calle.trim() == '')
     {
-        alert("Indica por favor la calle donde está");
+        $.notify("Indica por favor la calle donde está" , 'error');
         $('#calle').focus();
         return false;
     }
     if( numero.trim() == '' )
     {
-        alert("Indica por favor el numero del por tal");
+        $.notify("Indica por favor el numero del por tal" , 'error');
         $('#numero').focus();
         return false;
     }
     if( cp.trim() == '' || isNaN(toilet) )
     {
-        alert("Indica el codigo postal");
+        $.notify("Indica el codigo postal",'error');
         $('#cp').focus();
         return false;
     }
     if( descripcion.trim() == '')
     {
-        alert("Indica la descripción");
+        $.notify("Indica la descripción",'error');
         $('#descripcion').focus();
         return false;
     }
     if( metros.trim() == '' || isNaN(metros))
     {
-        alert("Metros cuadrados del piso que sea válidos");
+        $.notify("Metros cuadrados del piso que sea válidos",'error');
         $('#metros').focus();
         return false;
     }
     if( precio.trim() == '' || isNaN(precio))
     {
-        alert("Indique un precio válido");
+        $.notify("Indique un precio válido",'error');
         $('#precio').focus();
         return false;
     }
     if(id == 2)
     {
-        if( chicos.trim() == '' || chicas.trim() == '')
+        if( chicos == '' || chicas == '')
         {
-            alert("Indique si hay gente en el piso");
+            $.notify("Indique si hay gente en el piso" , 'error');
             return false;
         }
     }
     if( toilet.trim() == '' || isNaN(toilet))
     {
-        alert("Indique un precio válido");
+        $.notify("Indique un precio válido" , 'error');
         $('#toilet').focus();
         return false;
     }
     if(latitud == '' || longitud == '')
     {
-        alert("Indique donde está en el mapa");
+        $.notify("Indique donde está en el mapa" , 'error');
         return false;
     }
     if(imagenes == '' )
     {
-        alert("Inserte alguna imagen");
+        $.notify("Inserte alguna imagen" , 'error');
         return false;
     }
     //Formamos el JSON
@@ -148,7 +148,7 @@ function validarDatos()
     //
     //Procesamos los datos
     $.ajax({
-        url: '/the-connect-house/piso-habitacion/ajax/a_savePisoHabitacion.php',
+        url: '/piso-habitacion/ajax/a_savePisoHabitacion.php',
         type: 'POST',
         data: JSON.stringify(oDatosJson),
         beforeSend: function ()
@@ -161,9 +161,10 @@ function validarDatos()
             var oRespuesta = JSON.parse(oJson);
             if (oRespuesta.Estado == "OK")
             {
-                window.open("/the-connect-house/index.php", "_self");
+                window.open("/index.php", "_self");
             } else {
-                alert(oRespuesta.Mensaje);
+                //alert(oRespuesta.Mensaje);
+                $.notify(oRespuesta.Mensaje , 'error')
             }
         });
 }

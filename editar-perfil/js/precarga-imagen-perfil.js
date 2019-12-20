@@ -34,7 +34,7 @@ function precarfarImagenPerfil(evt)
                 }
                 else
                     {
-                    alert("No pueden pesar mas de 16MB"); //Si es mayor a 16 MB
+                    alert("No pueden pesar mas de 7MB"); //Si es mayor a 16 MB
                 }
             };
         })(f);
