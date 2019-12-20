@@ -57,7 +57,7 @@
                 <option value="Ponferrada">Ponferrada</option>
             </select>
             <input type="search" name="Buscar" id="search" placeholder="Busca la calle que deseas">
-            <button class="button">Buscar <img src="img/iconos-materiales/lupa.png" alt="Buscar"></button>
+            <button class="button" id="btbuscador">Buscar <img src="img/iconos-materiales/lupa.png" alt="Buscar"></button>
         </form>
     </div>
         <!--Pisos/habitaciones añadidos reciente mente solo se ven 9 ultimos-->
@@ -123,6 +123,9 @@
             $('#preciospan').html(valor)
         });
         //
+        $('#btbuscador').click(function () {
+            $(this).notify('Buscando...' , 'success')
+        });
     });
 </script>
 </html>

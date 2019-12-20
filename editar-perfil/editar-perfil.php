@@ -129,7 +129,11 @@
     function eliminarCuenta() {
         $.ajax({
             url: '/the-connect-house/editar-perfil/ajax/a_eliminarUsuario.php',
-            type: 'POST'
+            type: 'POST',
+            beforeSend: function ()
+            {
+                $.notify("Eliminando todo. Espere...", 'info' ,{position: 'bottom center'});
+            }
         })
             .done(function(oJson) {
                 console.log(oJson);

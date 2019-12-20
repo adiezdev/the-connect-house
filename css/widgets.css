@@ -379,3 +379,9 @@ label[for=inputperfil] {
     background-color: red;
     border-radius: 5px;
 }
+@media screen and ( max-width: 658px)
+{
+    .editar-piso {
+        margin-left: 150px;
+    }
+}

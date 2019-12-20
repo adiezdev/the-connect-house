@@ -24,6 +24,7 @@ $(document).ready(function() {
                     if (oRespuesta.Estado == "OK")
                     {
                         $(corason).attr('fill', 'red');
+                       $.notify('Se ha añadido a favoritos' , 'info', {position: 'left top'});
                     }
                 });
         }

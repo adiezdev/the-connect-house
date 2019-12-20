@@ -14,55 +14,53 @@ function validarCamposRegistro()
     var contrasena = $('#registro #password').val().trim();
     var contrasena2 = $('#registro #password2').val().trim();
     //Nombre
-    if (nombre == '' || nombre.indexOf(" ") > -1) {
-        alert("Indica el nombre");
-        $('#registro #nombre').focus();
+    if (nombre == '' || nombre.indexOf(" ") > -1)
+    {
+        $('#registro #nombre').notify("Indica el nombre" , "error");
         return false;
     }
     //Apellidos
-    if (apellidos == '') {
-        alert("Indica los Apellidos");
-        $('#registro #apellidos').focus();
+    if (apellidos == '')
+    {
+        $('#registro #apellidos').notify("Indica los Apellidos" , "error");
         return false;
     }
     //Correo
-    if (correo == '' || correo.indexOf(" ") > -1) {
-        alert("Indica el correo");
-        $('#registro #email').focus();
+    if (correo == '' || correo.indexOf(" ") > -1)
+    {
+        $('#registro #email').notify("Indica el correo" , "error");
         return false;
     }
     //Sexo
-    if (selector == null) {
-        alert("Indica los el Sexo");
-        $('#registro #selector').focus();
+    if (selector == null)
+    {
+        $('#registro #selector').notify("Indica el Sexo" , "error");
         return false;
     }
     //ciudad
-    if (ciudad == null) {
-        alert("Indica la ciudad");
-        $('#registro #selectorciudad').focus();
+    if (ciudad == null)
+    {
+        $('#registro #selectorciudad').notify("Indica de donde eres" , "error");
         return false;
     }
     //Contraseña
-    if (contrasena == '' || contrasena == '') {
-        alert("No puedes dejar el campo vacío");
-        $('#registro #password').focus();
+    if (contrasena == '' || contrasena == '')
+    {
+        $('#registro #password').notify("No puedes dejar el campo vacío" , "error");
         return false;
     }
-    if (contrasena.length < 8) {
-        alert("Tiene que constar con mas de 8 caracteres");
-        e.preventDefault();
+    if (contrasena.length < 8)
+    {
+        $('#registro #password').notify("Debe de tener más de 8 caracteres" , "error");
         return false;
     }
     if (contrasena.indexOf(" ") > -1) {
-        alert("No puede contener espocios");
-        e.preventDefault();
+        $('#registro #password').notify("No puedes contener espacion" , "error");
         contrasena.focus();
         return false;
     } else {
         if (contrasena != contrasena2) {
-            alert("Los dos campos no coinciden");
-            e.preventDefault();
+            $('#registro #password').notify("No coinciden las contraseñas" , "error");
             return false;
         } else {
 
@@ -82,7 +80,11 @@ function validarCamposRegistro()
     $.ajax({
         url: '/the-connect-house/peticiones/ajax/a_UsuarioRegistro.php',
         type: 'POST',
-        data: JSON.stringify(oDatosJson)
+        data: JSON.stringify(oDatosJson),
+        beforeSend: function ()
+        {
+            $('#bnLogin').notify("Entrando..", 'info' ,{position: 'bottom center'});
+        }
         })
         .done(function(oJson) {
             var oRespuesta = JSON.parse(oJson);
@@ -104,18 +106,19 @@ function validarCamposRegistro()
  * @param e
  * @returns {boolean}
  */
-function validarCamposLogin() {
+function validarCamposLogin()
+{
     var sCorreo = $('#login #email').val().trim();
     var sContrasena = $('#login #pass').val().trim();
     //Correo
-    if (sCorreo == '' || sCorreo.indexOf(" ") > -1) {
-        alert("Por favor indica el correo");
-        $('#login #email').focus();
+    if (sCorreo == '' || sCorreo.indexOf(" ") > -1)
+    {
+        $('#login #email').notify("Por favor indica el correo" , "error");
         return false;
     }
-    if (sContrasena == '' || sContrasena == '') {
-        alert("Por favor introduce una contraseña");
-        $('#login #pass').focus();
+    if (sContrasena == '' || sContrasena == '')
+    {
+        $('#login #pass').notify("Por favor introduce una contraseña" , "error");
         return false;
     }
     //Formamos el array
@@ -128,7 +131,11 @@ function validarCamposLogin() {
     $.ajax({
             url: '/the-connect-house/peticiones/ajax/a_UsuarioLogin.php',
             type: 'POST',
-            data: JSON.stringify(oDatosJson)
+            data: JSON.stringify(oDatosJson) ,
+            beforeSend: function ()
+            {
+                $('#bnLogin').notify("Entrando...", 'info' ,{position: 'bottom center'});
+            }
         })
         .done(function(oJson) {
             var oRespuesta = JSON.parse(oJson);

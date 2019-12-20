@@ -150,7 +150,11 @@ function validarDatos()
     $.ajax({
         url: '/the-connect-house/piso-habitacion/ajax/a_savePisoHabitacion.php',
         type: 'POST',
-        data: JSON.stringify(oDatosJson)
+        data: JSON.stringify(oDatosJson),
+        beforeSend: function ()
+        {
+            $.notify("Se está guardando. Espere...", 'info' ,{position: 'bottom center'});
+        }
     })
         .done(function(oJson) {
             //console.log(oJson);

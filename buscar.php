@@ -113,7 +113,7 @@
                         <option value="Ponferrada">Ponferrada</option>
                     </select>
                     <input type="search" name="Buscar" id="search" placeholder="Busca la calle que deseas">
-                    <button class="button">Buscar <img src="img/iconos-materiales/lupa.png" alt="Buscar"></button>
+                    <button class="button" id="btbuscador">Buscar <img src="img/iconos-materiales/lupa.png" alt="Buscar"></button>
                 </form>
             </div>
             <h2 class="title">Resultados</h2>
@@ -197,5 +197,8 @@
             }
         });
        });
+    $('#btbuscador').click(function () {
+        $(this).notify('Buscando...' , 'success')
+    });
 </script>
 </html>

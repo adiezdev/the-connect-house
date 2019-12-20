@@ -70,6 +70,9 @@
     $oDbUsuarios = new Usuario();
     //Sacamos los datos del usuario logue
     $aDBUser = $oDbUsuarios->getById( $_SESSION['idUsuario']);
+    //
+    $oDbTelefono = new Telefonos();
+    $aDBUsertel =  $oDbTelefono->getByIdUsuario( $_SESSION['idUsuario'] );
 ?>
 <body>
 <?php
@@ -133,7 +136,6 @@
 	                    $Html2 .=        '<h2>'.$aDatosPisosHabitacion->Precio.' €/Mes</h2>';
 	                    //
 	                    //Sacamos el telelfono del usuario
-	                    $oDbTelefono = new Telefonos();
 	                    $aDbTelefonos = $oDbTelefono->getByIdUsuario($aDbUsuario->idUsuario );
 	                    //
                         foreach ( $aDbTelefonos as $key=>$aDbTelefono)
@@ -153,7 +155,7 @@
                                 "Enviar Correo",
                             );
                             $btonesfuncion = array(
-                                "enviarcorreo(2)",
+                                "enviarcorreo()",
                             );
                             //
                             //Generamos la ventana
@@ -276,9 +278,10 @@
         var descripciondada = $('#descripcion').val();
         var maildelcasero = '<?php echo $aDbUsuarios[0]->Correo ?>';
         var usuarioinquilino = '<?php echo $aDBUser[0]->Correo ?>';
+        var telefonos = '<?php echo $aDBUsertel[0]->Numero ?>';
         //
         //Formamos el JSON
-        var oDatosJson = {descripcion: descripciondada , mail: maildelcasero , usuario: usuarioinquilino }
+        var oDatosJson = {descripcion: descripciondada , mail: maildelcasero , telefono: telefonos , usuario: usuarioinquilino }
         //Enviamos los ddatos para que sean enviados por email
         $.ajax({
             url: '/the-connect-house/mail/enviarpeticion.php',
@@ -295,8 +298,11 @@
                     $('#miVentana').css('display', 'none');
                     //Limipiamos el text area
                     $('#descripcion').val('');
+                    //
+                    $('#buttonVentana').notify('Enviado. Se pondrá en contacto contido', 'info')
                 } else {
                     alert(oRespuesta.Mensaje);
+                    $('#buttonVentana').notify('Ha sucedido un error', 'error')
                 }
             });
     }

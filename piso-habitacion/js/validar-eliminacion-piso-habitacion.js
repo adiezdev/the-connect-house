@@ -29,7 +29,11 @@ function eliminarDatos()
     $.ajax({
         url: '/the-connect-house/piso-habitacion/ajax/a_deletePisoHabitacion.php',
         type: 'POST',
-        data: JSON.stringify(oDatosJson)
+        data: JSON.stringify(oDatosJson),
+        beforeSend: function ()
+        {
+            $.notify("Se está eliminando. Espere...", 'info' ,{position: 'bottom center'});
+        }
     })
         .done(function(oJson) {
             console.log(oJson);

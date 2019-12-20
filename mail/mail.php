@@ -130,6 +130,7 @@ class Correo{
             $mensaje .= '<img class="icono" src="https://theconecthouse.000webhostapp.com/img/marca/banner.png" width="200" height="40"><br>';
             $mensaje .= '</header>';
             $mensaje .= '<p>Al usuario '.$datos['mail'].', le interesa tú alquiler.<p><br>';
+            $mensaje .= '<p>Su número de teléfono '.$datos['telefono'].' ¡Contacta con él!<p><br>';
             $mensaje .= '<p>Respues al alquiler:</p>';
             $mensaje .= '<p>'.$datos['descripcion'].'</p>';
             $mensaje .= '</div>';

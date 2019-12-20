@@ -26,13 +26,26 @@
 .left {
     float: left;
     cursor: pointer;
-    color: #ffffff;
+    color: #000;
+    background: #ffffff;
+    padding: 5px;
+    border-radius: 200px;
+    width: 17px;
+    cursor: pointer;
+    font-size: 14pt;
+    margin-bottom: 22px;
 }
 
 .right {
     float: right;
     cursor: pointer;
-    color: #ffffff;
+    color: #000;
+    background: #ffffff;
+    padding: 5px;
+    border-radius: 200px;
+    width: 17px;
+    cursor: pointer;
+    font-size: 14pt;
 }
 #todassecciones
 {

@@ -18,11 +18,13 @@
     $mail = $oDatosJson['mail'];
     //A quien le interesa
     $user = $oDatosJson['usuario'];
+    //Telefono
+    $telefono = $oDatosJson['telefono'];
     //
     //Descripcion
     $descripcion = $oDatosJson['descripcion'];
     //
-    $datos = array("mail" => $user , "descripcion" => $descripcion );
+    $datos = array("mail" => $user , "descripcion" => $descripcion , "telefono" => $telefono );
     //
     //Formamos le correo
     $correo = new Correo();

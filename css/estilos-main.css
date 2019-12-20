@@ -166,7 +166,14 @@
     float: left;
     color: #aac759;
 }
-
+.izquierda
+{
+    cursor: pointer;
+}
+.derecha
+{
+    cursor: pointer;
+}
 /*Pagina piso*/
 @media screen and ( max-width: 1180px) {
     .contenedor-derecho
@@ -185,6 +192,13 @@
     .likeit.derecha
     {
         left: 0;
+    }
+}
+@media screen and (max-width: 1356px)
+{
+    .contenedor-izquierdo {
+        float: none;
+        width: 100%;
     }
 }
 /*Resposinve del inicio*/
@@ -208,11 +222,11 @@
     }
     #vacio
     {
-        padding-right: 60px;
+        padding-right: 15px;
     }
     .into-centro.seccioncentro
     {
-        margin: 0;
+        margin: 22px;
     }
     #vacio.centro {
         margin: 0 0 0 48px;
@@ -245,6 +259,7 @@
     .box-ciudades
     {
         height: 250px;
+        margin-left: 15px;
     }
     .box-ciudades img {
         width: 380px;
@@ -253,5 +268,8 @@
     .box-ciudades button
     {
         transform: translate(-90px, 200px);
+    }
+    .into-centro.pisodescripcion {
+        margin: 0% 13% 0% 5%;
     }
 }

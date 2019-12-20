@@ -39,5 +39,6 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/the-connect-house/js/notify.js"></script>
     <?php require_once(__DIR__ . "/funciones.php"); ?>
 </head>
